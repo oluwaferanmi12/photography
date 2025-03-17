@@ -48,6 +48,7 @@
   --font-grotesk-medium: "grotesk-medium";
   --font-grotesk-semi-bold: "grotesk-semi-bold";
   --font-grotesk-extra-bold: "grotesk-extra-bold";
+  --font-geist-mono: var(--font-geist-mono);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -59,6 +60,10 @@
 
 body {
   font-family: "grotesk-medium", sans-serif;
+}
+
+a{
+  color: inherit !important;
 }
 
 .navBg {
@@ -76,3 +81,11 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+/* .section-three-underlayBg {
+  background-image: url("../assets//svgs/third-section-icon1.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  width: 100%;
+} */

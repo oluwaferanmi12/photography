@@ -34,7 +34,7 @@ export default function RootLayout({
   });
   return (
     <html lang="en">
-      <body className={`antialiased bg-[#F4F3EA]`}>
+      <body className={`antialiased ${geistMono.variable}  bg-[#F4F3EA]`}>
         <AntdRegistry>
           <HomeNav />
           {children}

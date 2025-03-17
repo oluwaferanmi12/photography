@@ -5,22 +5,74 @@
   --foreground: #171717;
 }
 
+@font-face {
+  font-family: "grotesk-light";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Light.ttf");
+}
+
+@font-face {
+  font-family: "grotesk-bold";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Bold.ttf");
+}
+
+@font-face {
+  font-family: "grotesk-regular";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Regular.ttf");
+}
+
+@font-face {
+  font-family: "grotesk-medium";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Medium.ttf");
+}
+
+@font-face {
+  font-family: "grotesk-semi-bold";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "grotesk-extra-bold";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-ExtraBold.ttf");
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Fonts  */
+  --font-grotesk-light: "grotesk-light";
+  --font-grotesk-bold: "grotesk-bold";
+  --font-grotesk-regular: "grotesk-regular";
+  --font-grotesk-medium: "grotesk-medium";
+  --font-grotesk-semi-bold: "grotesk-semi-bold";
+  --font-grotesk-extra-bold: "grotesk-extra-bold";
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "grotesk-medium", sans-serif;
+}
+
+.navBg {
+  backdrop-filter: blur(100px);
+  background: #FFFFFF1A;
+}
+
+.landingBg {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.8  )
+    ),
+    url("../assets/images/landingImage.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }

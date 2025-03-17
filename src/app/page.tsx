@@ -15,6 +15,12 @@ import { ServicesAccordian } from "@/components/services/services-accordian";
 import fifthSectionImg from "@/assets/images/fifthSectionImg.png";
 import placeholderImg from "@/assets/images/placeholderImg.png";
 import { Footer } from "@/components/footer/footer";
+import sixthImage1 from "@/assets/images/sixth-section-image1.png";
+import sixthImage2 from "@/assets/images/sixth-section-image2.png";
+import sixthImage3 from "@/assets/images/sixth-section-image3.png";
+import sixthImage4 from "@/assets/images/sixth-section-image3.png";
+import sixthImage5 from "@/assets/images/sixth-section-image5.png";
+import sixthImage6 from "@/assets/images/sixth-section-image6.png";
 
 const servicesData = [
   {
@@ -169,7 +175,7 @@ export default function Home() {
       <div className="p-7 my-20">
         <Row>
           <Col xs={24}>
-            <Row align={"middle"} justify={'center'} gutter={[42, 42]}>
+            <Row align={"middle"} justify={"center"} gutter={[42, 42]}>
               <Col xs={12}>
                 <div className="flex flex-col gap-10 ">
                   <h2 className="text-7xl tracking-[-3%]">
@@ -197,21 +203,91 @@ export default function Home() {
         </Row>
       </div>
 
+      {/* Sixth Section */}
+      <div className="px-7 pt-7 my-20 bg-[#0A0909]">
+        <Row justify={"center"} gutter={[32, 32]}>
+          <Col xs={6}>
+            <div className="grid grid-cols-2 gap-4 pb-7">
+              <Image className="w-full object-cover" src={sixthImage1} alt="" />
+              <div></div>
+              <div></div>
+              <Image className="w-full object-cover" src={sixthImage2} alt="" />
+              <Image className="w-full object-cover" src={sixthImage3} alt="" />
+              <div></div>
+              <div></div>
+              <Image className="w-full object-cover" src={sixthImage4} alt="" />
+            </div>
+          </Col>
+          <Col xs={12} className="relative">
+            <div className="flex items-center justify-center">
+              <span>
+                <Image
+                  className="w-full object-cover"
+                  src={sixthImage5}
+                  alt=""
+                />
+              </span>
+            </div>
+
+
+            {/* <div className="flex justify-center items-center">
+              <div className="lg:text-5xl text-3xl text-center text-white ">
+                <p>Wherever You Go, I’ll Be </p>{" "}
+                <p className="my-3">There to Shoot!</p>{" "}
+              </div>
+            </div> */}
+
+            <div className="flex justify-center xl:mt-10">
+              <div>
+                <div className="text-4xl lg:text-5xl text-center text-white ">
+                  <p>Wherever You Go, I’ll Be</p>{" "}
+                  <p className="my-3"> There to Shoot!</p>{" "}
+                </div>
+              </div>
+            </div>
+
+
+            <div className="flex justify-center">
+              <span className="absolute bottom-0 ">
+                <Image
+                  className="w-full object-cover"
+                  src={sixthImage6}
+                  alt=""
+                />
+              </span>
+            </div>
+          </Col>
+          <Col xs={6}>
+            <div className="grid grid-cols-2 gap-4 pb-7">
+              <div></div>
+              <Image className="w-full object-cover" src={sixthImage1} alt="" />
+              <Image className="w-full object-cover" src={sixthImage2} alt="" />
+              <div></div>
+              <div></div>
+              <Image className="w-full object-cover" src={sixthImage3} alt="" />
+              <Image className="w-full object-cover" src={sixthImage4} alt="" />
+              <div></div>
+            </div>
+          </Col>
+        </Row>
+      </div>
+
       {/* Seventh Section */}
       <div className="p-7 my-20">
         <Row>
           <Col xs={24}>
-            <Row align={"middle"} justify={'center'} gutter={[42, 42]}>
+            <Row align={"middle"} justify={"center"} gutter={[42, 42]}>
               <Col xs={12}>
                 <Image src={placeholderImg} className="" alt="img" />
               </Col>
               <Col xs={12}>
                 <div className="flex flex-col gap-10 ">
-                  <h2 className="text-6xl tracking-[-3%]">
-                  Event videos
-                  </h2>
+                  <h2 className="text-6xl tracking-[-3%]">Event videos</h2>
                   <p className="text-xl text-[#583101]">
-                  We capture the best moments of your events with stunning visuals and storytelling. Whether it’s a corporate gathering, wedding, concert, or cultural event, we create videos that bring your memories to life.
+                    We capture the best moments of your events with stunning
+                    visuals and storytelling. Whether it’s a corporate
+                    gathering, wedding, concert, or cultural event, we create
+                    videos that bring your memories to life.
                   </p>
                   <div className="flex justify-normal my-5">
                     <button className="px-8 py-3 cursor-pointer focus:border-[#DDD9CF] flex justify-center items-center border border-[#3C3C3B] rounded-full text-[#060605] backdrop-blur-2xl  text-base font-geist-mono">

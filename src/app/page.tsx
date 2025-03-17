@@ -21,6 +21,8 @@ import sixthImage3 from "@/assets/images/sixth-section-image3.png";
 import sixthImage4 from "@/assets/images/sixth-section-image3.png";
 import sixthImage5 from "@/assets/images/sixth-section-image5.png";
 import sixthImage6 from "@/assets/images/sixth-section-image6.png";
+import photography from "@/assets/svgs/base-photography.svg";
+import photography2 from "@/assets/svgs/base-photography-2.svg";
 import Button from "@/components/button/button";
 
 const servicesData = [
@@ -77,8 +79,8 @@ export default function Home() {
         </div>
       </div>
       {/* Second section  */}
-      <div className="p-7 my-20 h-screen min-h-screen">
-        <Row justify={"center"} align={"middle"}>
+      <div className="mt-20 pt-7 px-7 h-[125vh] min-h-screen relative">
+        <Row justify={"center"} align={"middle"} className="">
           <Col xs={6}>
             <div>
               <Image src={sImage1} alt="" />
@@ -97,12 +99,18 @@ export default function Home() {
             </div>
           </Col>
           <Col xs={6}>
-            <div>
+            <div className="z-50">
               <Image src={sImage3} alt="" />
               <Image src={sImage4} alt="" />
             </div>
           </Col>
         </Row>
+        <span className="absolute bottom-0 left-7 z-10">
+          <Image src={photography} className="w-40" alt="icon"/>
+        </span>
+        <span className="absolute bottom-0 right-7 z-10">
+          <Image src={photography2} className="w-40" alt="icon"/>
+        </span>
       </div>
 
       {/* third section  */}

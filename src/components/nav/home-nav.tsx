@@ -12,7 +12,7 @@ export const HomeNav = () => {
         <Col xs={12}>
           <div className="rounded-full navBg  py-2 px-2 flex justify-between items-center">
             <div className="w-full justify-around items-center flex">
-              {navItems.map((item, index) => {
+              {navItems.map((item) => {
                 return (
                   <div className="relative" key={item}>
                     <p

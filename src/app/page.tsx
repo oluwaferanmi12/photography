@@ -21,6 +21,7 @@ import sixthImage3 from "@/assets/images/sixth-section-image3.png";
 import sixthImage4 from "@/assets/images/sixth-section-image3.png";
 import sixthImage5 from "@/assets/images/sixth-section-image5.png";
 import sixthImage6 from "@/assets/images/sixth-section-image6.png";
+import Button from "@/components/button/button";
 
 const servicesData = [
   {
@@ -136,9 +137,9 @@ export default function Home() {
                     create magic? Let’s shoot!
                   </p>
                   <div className="mt-6">
-                    <button className="bg-white z-50 px-6 py-2 rounded-full cursor-pointer text-[#FB5711] font-grotesk-medium text-base">
+                    <Button variant="filled" size="small">
                       Book a session
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </Col>
@@ -165,9 +166,9 @@ export default function Home() {
           ))}
         </div>
         <div className="flex justify-center mb-5">
-          <button className="px-10 py-2 cursor-pointer focus:border-[#DDD9CF] flex justify-center items-center border border-[#CFCFCF] rounded-full text-[#3C3C3B] backdrop-blur-2xl  text-base">
+          <Button variant="bordered" size="large" borderVariant="light">
             View all work
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -189,9 +190,14 @@ export default function Home() {
                     and passion.
                   </p>
                   <div className="flex justify-normal my-5">
-                    <button className="px-8 py-3 cursor-pointer focus:border-[#DDD9CF] flex justify-center items-center border border-[#3C3C3B] rounded-full text-[#060605] backdrop-blur-2xl  text-base uppercase font-geist-mono">
+                    <Button
+                      variant="bordered"
+                      size="medium"
+                      borderVariant="dark"
+                    >
+                      {" "}
                       Book your session
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </Col>
@@ -229,14 +235,6 @@ export default function Home() {
               </span>
             </div>
 
-
-            {/* <div className="flex justify-center items-center">
-              <div className="lg:text-5xl text-3xl text-center text-white ">
-                <p>Wherever You Go, I’ll Be </p>{" "}
-                <p className="my-3">There to Shoot!</p>{" "}
-              </div>
-            </div> */}
-
             <div className="flex justify-center xl:mt-10">
               <div>
                 <div className="text-4xl lg:text-5xl text-center text-white ">
@@ -245,7 +243,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
 
             <div className="flex justify-center">
               <span className="absolute bottom-0 ">
@@ -289,10 +286,15 @@ export default function Home() {
                     gathering, wedding, concert, or cultural event, we create
                     videos that bring your memories to life.
                   </p>
-                  <div className="flex justify-normal my-5">
-                    <button className="px-8 py-3 cursor-pointer focus:border-[#DDD9CF] flex justify-center items-center border border-[#3C3C3B] rounded-full text-[#060605] backdrop-blur-2xl  text-base font-geist-mono">
+                  <div className="flex justify-normal my-5 ">
+                    <Button
+                      variant="bordered"
+                      size="medium"
+                      borderVariant="dark"
+                    >
+                      {" "}
                       Book a video session
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </Col>

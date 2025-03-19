@@ -2,10 +2,32 @@ import { Row, Col } from "antd";
 import { useState } from "react";
 import bottomActive from "@/assets/svgs/nav-rectangle.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const HomeNav = () => {
   const [activeItem, setActiveItem] = useState("Home");
-  const navItems = ["Home", "About", "Catalogue", "Pricing", "Contact"];
+  const navItems = [
+    {
+      navTitle: "Home",
+      navLink: "/",
+    },
+    {
+      navTitle: "About",
+      navLink: "/about",
+    },
+    {
+      navTitle: "Catalogue",
+      navLink: "/catalogue",
+    },
+    {
+      navTitle: "Pricing",
+      navLink: "/pricing",
+    },
+    {
+      navTitle: "Contact",
+      navLink: "/contact",
+    },
+  ];
   return (
     <div className="w-full z-10 fixed top-0 py-12">
       <Row justify={"center"}>
@@ -14,18 +36,30 @@ export const HomeNav = () => {
             <div className="w-full justify-around items-center flex">
               {navItems.map((item) => {
                 return (
-                  <div className="relative" key={item}>
-                    <p
-                      onClick={() => setActiveItem(item)}
+                  <div className="relative" key={item.navTitle}>
+                    <Link href={item.navLink}>
+                      <p
+                        onClick={() => setActiveItem(item.navTitle)}
+                        className={`cursor-pointer font-grotesk-medium text-base ${
+                          activeItem === item.navTitle
+                            ? "text-[#FB5711]"
+                            : "text-[#FAFAFA]"
+                        }`}
+                      >
+                        {item.navTitle}
+                      </p>
+                    </Link>
+                    {/* <p
+                      onClick={() => setActiveItem(item.navTitle); }
                       className={`cursor-pointer font-grotesk-medium text-base ${
-                        activeItem === item
+                        activeItem === item.navTitle
                           ? "text-[#FB5711]"
                           : "text-[#FAFAFA]"
                       }`}
                     >
-                      {item}
-                    </p>
-                    {item === activeItem && (
+                      <Link href={item.navLink}>{item.navTitle}</Link>
+                    </p> */}
+                    {item.navTitle === activeItem && (
                       <div className="absolute flex justify-center w-full">
                         <Image src={bottomActive} alt="" />
                       </div>

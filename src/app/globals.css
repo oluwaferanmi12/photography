@@ -84,14 +84,15 @@ a{
 }
 
 
-.aboutLandingBG {
+.aboutLandingBG,
+.catalogueBG {
   background-image: url("../assets/images/about-secondImg--cropped.png");
   filter: grayscale(100%) contrast(1.1);
   border-radius: 32px;
-
 }
 
-.aboutLandingBG::before {
+.aboutLandingBG::before,
+.catalogueBG::before {
   content: "";
   position: absolute;
   top: 0;
@@ -104,7 +105,8 @@ a{
 
 
 .landingBg, 
-.aboutLandingBG {
+.aboutLandingBG,
+.catalogueBG {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

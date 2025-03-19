@@ -15,7 +15,7 @@ import { Footer } from "@/components/footer/footer";
 const page = () => {
   return (
     <div>
-      <HeaderWrapper headerTitle="About Portable hub" />
+      <HeaderWrapper headerTitle="About Portable hub" landingBg="aboutLandingBG" />
       {/* SECOND SECTION */}
       <div>
         <Row>

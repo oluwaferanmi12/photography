@@ -29,14 +29,15 @@ export const GalleryBox = () => {
             <div className="flex items-center justify-center">
               <span>
                 <Image
-                  className="w-full object-cover"
+                  className="w-full h-[200px] object-cover"
                   src={sixthImage5}
+
                   alt=""
                 />
               </span>
             </div>
 
-            <div className="flex justify-center xl:mt-10">
+            <div className="flex justify-center items-end xl:mt-10">
               <div>
                 <div className="text-4xl lg:text-5xl text-center text-white ">
                   <p>Wherever You Go, I’ll Be</p>{" "}
@@ -48,7 +49,7 @@ export const GalleryBox = () => {
             <div className="flex justify-center">
               <span className="absolute bottom-0 ">
                 <Image
-                  className="w-full object-cover"
+                  className="w-full object-cover h-auto"
                   src={sixthImage6}
                   alt=""
                 />

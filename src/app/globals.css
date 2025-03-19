@@ -71,21 +71,41 @@ a{
   background: #FFFFFF1A;
 }
 
+
+
+
+
 .landingBg {
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0.8  )
     ),
     url("../assets/images/landingImage.jpeg");
+}
+
+
+.aboutLandingBG {
+  background-image: url("../assets/images/about-secondImg--cropped.png");
+  filter: grayscale(100%) contrast(1.1);
+  border-radius: 32px;
+
+}
+
+.aboutLandingBG::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); /* Grayish overlay */
+  border-radius: 32px;
+}
+
+
+.landingBg, 
+.aboutLandingBG {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
-
-/* .section-three-underlayBg {
-  background-image: url("../assets//svgs/third-section-icon1.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 500px;
-  width: 100%;
-} */

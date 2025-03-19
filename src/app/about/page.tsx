@@ -6,9 +6,11 @@ import aboutPageImg from "@/assets/images/about-page-img1.png";
 import image2 from "@/assets/images/about-secondImg.png";
 import image3 from "@/assets/images/about-thirdImg.png";
 import customersIcon from "@/assets/svgs/customers-icon.svg";
-import webIcon from "@/assets/svgs/customers-icon.svg";
-import experienceIcon from "@/assets/svgs/customers-icon.svg";
+import webIcon from "@/assets/svgs/satisfaction-icon.svg";
+import experienceIcon from "@/assets/svgs/experience-icon.svg";
 import { AboutCards } from "@/components/about-cards/aboutCards";
+import { GalleryBox } from "@/components/galleryBox/gallery-box";
+import { Footer } from "@/components/footer/footer";
 
 const page = () => {
   return (
@@ -42,7 +44,7 @@ const page = () => {
         <div>
           <div className="flex justify-between items-stretch gap-4">
             {/* Large Image */}
-            <span className="w-[60%]">
+            <span className="w-[75%]">
               <Image
                 src={image2}
                 alt="img"
@@ -81,23 +83,47 @@ const page = () => {
           </div>
 
           <span className="text-[#6B7280]">
-            <p className="text-xl">Whatever your customers&apos; payment preferences</p>
-            <p className="text-xl">we’ll help you find
-            the right solution for </p>
+            <p className="text-xl">
+              Whatever your customers&apos; payment preferences
+            </p>
+            <p className="text-xl">
+              we’ll help you find the right solution for{" "}
+            </p>
             <p className="text-xl">your business.</p>
           </span>
         </div>
       </div>
 
       {/* FIFTH SECTION */}
-      <div className="p-7 flex justify-between items-center">
-        <AboutCards tagText="Customers" iconSrc={customersIcon} numberCount="20" cardText="In 38 countries, we work as one global team to help clients" />
-       
-        <AboutCards tagText="Customers" iconSrc={webIcon} numberCount="98%" cardText="In 38 countries, we work as one global team to help clients" />
+      <div className="p-7 flex justify-between items-start">
+        <AboutCards
+          tagText="Customers"
+          iconSrc={customersIcon}
+          numberCount="20K"
+          numberAttribute="+"
+          cardText="In 38 countries, we work as one global team to help clients"
+        />
 
-        <AboutCards tagText="Satisfaction" iconSrc={experienceIcon} numberCount="89" cardText="We started with a ebellious mindset and set ourselves the challange" />
+        <AboutCards
+          tagText="Satisfaction"
+          iconSrc={webIcon}
+          numberCount="98"
+          numberAttribute="%"
+          cardText="In 38 countries, we work as one global team to help clients"
+        />
 
+        <AboutCards
+          tagText="Experience"
+          iconSrc={experienceIcon}
+          numberCount="89"
+          numberAttribute="%"
+          cardText="We started with a ebellious mindset and set ourselves the challange"
+        />
       </div>
+
+      {/* SIXTH SECTION */}
+      <GalleryBox />
+      <Footer />
     </div>
   );
 };

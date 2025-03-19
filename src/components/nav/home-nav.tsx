@@ -1,11 +1,14 @@
+"use client"
 import { Row, Col } from "antd";
-import { useState } from "react";
 import bottomActive from "@/assets/svgs/nav-rectangle.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from 'next/navigation'
 
 export const HomeNav = () => {
-  const [activeItem, setActiveItem] = useState("Home");
+  const pathname = usePathname();
+
+
   const navItems = [
     {
       navTitle: "Home",
@@ -39,9 +42,8 @@ export const HomeNav = () => {
                   <div className="relative" key={item.navTitle}>
                     <Link href={item.navLink}>
                       <p
-                        onClick={() => setActiveItem(item.navTitle)}
                         className={`cursor-pointer font-grotesk-medium text-base ${
-                          activeItem === item.navTitle
+                          item.navLink === pathname
                             ? "text-[#FB5711]"
                             : "text-[#FAFAFA]"
                         }`}
@@ -49,17 +51,8 @@ export const HomeNav = () => {
                         {item.navTitle}
                       </p>
                     </Link>
-                    {/* <p
-                      onClick={() => setActiveItem(item.navTitle); }
-                      className={`cursor-pointer font-grotesk-medium text-base ${
-                        activeItem === item.navTitle
-                          ? "text-[#FB5711]"
-                          : "text-[#FAFAFA]"
-                      }`}
-                    >
-                      <Link href={item.navLink}>{item.navTitle}</Link>
-                    </p> */}
-                    {item.navTitle === activeItem && (
+                    
+                    {pathname === item.navLink && (
                       <div className="absolute flex justify-center w-full">
                         <Image src={bottomActive} alt="" />
                       </div>

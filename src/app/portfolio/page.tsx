@@ -27,7 +27,7 @@ const Portfolio = () => {
     {
       portfolioName: "Ceremony",
       portfolioDescription:
-        "There’s something peaceful about hitting the waves and getting away from the screen. There’s something peaceful about hitting the waves and getting away from the screen.",
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus deserunt adipisci magnam.",
     },
     {
       portfolioName: "Events",
@@ -37,7 +37,7 @@ const Portfolio = () => {
     {
       portfolioName: "Engagement",
       portfolioDescription:
-        "There’s something peaceful about hitting the waves and getting away from the screen. There’s something peaceful about hitting the waves and getting away from the screen.",
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus deserunt adipisci magnam.",
     },
     {
       portfolioName: "Branding",
@@ -62,7 +62,7 @@ const Portfolio = () => {
                         className={`w-1 h-10 rounded-lg cursor-pointer ${
                           portfolioIndex === index
                             ? "bg-[#FB5711]"
-                            : "bg-[#DCDCDC] "
+                            : "bg-[#DCDCDC] cursor-pointer "
                         } `}
                         onClick={() => setPortfolioIndex(index)}
                       ></div>
@@ -85,7 +85,7 @@ const Portfolio = () => {
               </Col>
               <Col xs={12}>
                 <div className="w-full">
-                  <div className="w-full bg-yellow-800">
+                  <div className="w-full rounded-xl">
                     <Image src={imgBig} className="w-full" alt="portfolioImg" />
                   </div>
                   <div className="flex mt-5 justify-between ">

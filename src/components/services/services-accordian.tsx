@@ -12,7 +12,7 @@ export const ServicesAccordian = ({
     <>
       <div className="flex justify-between items-center border-b border-[#CFCFCF] mb-5 pb-4">
         <div className="flex gap-5 items-center">
-          <span className="text-[#635E5E] text-xl">{num}</span>
+          <span className="text-[#635E5E] text-xl ">{num}</span>
           <p className=" text-[#74787A] text-4xl font-grotesk-medium "> {serviceTitle} </p>
         </div>
         <div>

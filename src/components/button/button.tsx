@@ -28,7 +28,7 @@ const Button = ({
       borderVariant === "light"
         ? "border-[#CFCFCF] text-[#3C3C3B]"
         : "border-[#3C3C3B] text-[#060605] "
-    } backdrop-blur-2xl text-base uppercase font-geist-mono`,
+    } backdrop-blur-2xl text-base uppercase font-mono`,
   };
 
   return (

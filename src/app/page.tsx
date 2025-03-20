@@ -87,7 +87,7 @@ export default function Home() {
               <div>
                 <div className="text-4xl text-center text-[#635E5E] ">
                   <p>BRANDING PHOTOS</p>{" "}
-                  <p className="my-3"> AND HEADSHOTS TO HELP STAND OUT</p>{" "}
+                  <p className="my-3"> AND HEADSHOTS TO HELP <span className="text-[#FB5711]">STAND OUT</span></p>{" "}
                   <p>FROM THE CROWD</p>
                 </div>
               </div>
@@ -124,9 +124,9 @@ export default function Home() {
                   <h3 className="font-grotesk-medium text-4xl mb-10">
                     BASED IN BARRIE, ONTARIO
                   </h3>
-                  <p className="text-lg leading-relaxed text-[#3C3C3B] ">
+                  <p className="text-lg  leading-relaxed text-[#3C3C3B] ">
                     Hey, I’m{" "}
-                    <span className="font-semibold">[Photographer’s Name]</span>
+                   [Photographer’s Name]
                     —a passionate photographer based in Barrie, Ontario. 📸 From
                     capturing raw emotions to creating stunning brand visuals, I
                     believe every shot should tell a story. Whether it’s a
@@ -157,7 +157,7 @@ export default function Home() {
       {/* fourth section */}
       <div className="p-7 my-20">
         <div>
-          <h2 className="text-center text-5xl text-[#3C3C3B]  ">My SERVICES</h2>
+          <h2 className="text-center text-5xl text-[#3C3C3B] font-valentiamo-reg ">My services</h2>
         </div>
         <div className="py-10">
           {servicesData.map((service) => (
@@ -182,7 +182,7 @@ export default function Home() {
             <Row align={"middle"} justify={"center"} gutter={[42, 42]}>
               <Col xs={12}>
                 <div className="flex flex-col gap-10 ">
-                  <h2 className="text-7xl tracking-[-3%]">
+                  <h2 className="text-7xl  tracking-[-3%]">
                     Wherever You Go, I’ll Be There to{" "}
                     <span className="text-[#734004]">Shoot!</span>{" "}
                   </h2>
@@ -225,7 +225,7 @@ export default function Home() {
               </Col>
               <Col xs={12}>
                 <div className="flex flex-col gap-10 ">
-                  <h2 className="text-6xl tracking-[-3%]">Event videos</h2>
+                  <h2 className="text-[64px] font-valentiamo-reg tracking-[-3%]">Event videos</h2>
                   <p className="text-xl text-[#583101]">
                     We capture the best moments of your events with stunning
                     visuals and storytelling. Whether it’s a corporate

@@ -3,6 +3,7 @@ import { Col, Row } from "antd";
 import React from "react";
 import Image from "next/image";
 import aboutPageImg from "@/assets/images/about-page-img1.png";
+import lineImg from "@/assets/svgs/Line 601.svg";
 import image2 from "@/assets/images/about-secondImg.png";
 import image3 from "@/assets/images/about-thirdImg.png";
 import customersIcon from "@/assets/svgs/customers-icon.svg";
@@ -15,7 +16,10 @@ import { Footer } from "@/components/footer/footer";
 const page = () => {
   return (
     <div>
-      <HeaderWrapper headerTitle="About Portable hub" landingBg="aboutLandingBG" />
+      <HeaderWrapper
+        headerTitle="About Portable hub"
+        landingBg="aboutLandingBG"
+      />
       {/* SECOND SECTION */}
       <div>
         <Row>
@@ -74,28 +78,28 @@ const page = () => {
       </div>
 
       {/* FOURTH SECTION */}
-      <div className="p-7 py-28   ">
+      <div className="p-7 py-12  ">
         <div className="flex justify-between items-center w-full">
           <div>
-            <p className="text-7xl w-1/2 uppercase">
+            <p className="text-7xl w-1/2 uppercase font-valentiamo-reg">
               Key Reasons to Work with me
             </p>
           </div>
 
           <span className="text-[#6B7280]">
-            <p className="text-xl">
+            <p className="text-2xl">
               Whatever your customers&apos; payment preferences
             </p>
-            <p className="text-xl">
+            <p className="text-2xl">
               we’ll help you find the right solution for{" "}
             </p>
-            <p className="text-xl">your business.</p>
+            <p className="text-2xl">your business.</p>
           </span>
         </div>
       </div>
 
       {/* FIFTH SECTION */}
-      <div className="p-7 flex justify-between items-start">
+      <div className="p-7 flex justify-between items-center">
         <AboutCards
           tagText="Customers"
           iconSrc={customersIcon}
@@ -104,6 +108,10 @@ const page = () => {
           cardText="In 38 countries, we work as one global team to help clients"
         />
 
+        <span>
+          <Image src={lineImg} alt="img" />
+        </span>
+
         <AboutCards
           tagText="Satisfaction"
           iconSrc={webIcon}
@@ -111,6 +119,10 @@ const page = () => {
           numberAttribute="%"
           cardText="In 38 countries, we work as one global team to help clients"
         />
+
+        <span>
+          <Image src={lineImg} alt="img" />
+        </span>
 
         <AboutCards
           tagText="Experience"

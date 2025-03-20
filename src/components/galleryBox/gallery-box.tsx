@@ -39,7 +39,7 @@ export const GalleryBox = () => {
 
             <div className="flex justify-center items-end xl:mt-10">
               <div>
-                <div className="text-4xl lg:text-5xl text-center text-white ">
+                <div className="text-4xl lg:text-5xl font-valentiamo-reg text-center text-white ">
                   <p>Wherever You Go, I’ll Be</p>{" "}
                   <p className="my-3"> There to Shoot!</p>{" "}
                 </div>

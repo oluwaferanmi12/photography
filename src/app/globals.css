@@ -35,6 +35,11 @@
   src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-ExtraBold.ttf");
 }
 
+@font-face {
+  font-family: "valentiamo-regular";
+  src: url("../assets/fonts/Valentiamo/Valentiamo-Regular.ttf");
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -48,7 +53,7 @@
   --font-grotesk-medium: "grotesk-medium";
   --font-grotesk-semi-bold: "grotesk-semi-bold";
   --font-grotesk-extra-bold: "grotesk-extra-bold";
-  --font-geist-mono: var(--font-geist-mono);
+  --font-valentiamo-reg: "valentiamo-regular";
 }
 
 /* @media (prefers-color-scheme: dark) {

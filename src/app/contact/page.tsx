@@ -35,7 +35,7 @@ const Contact = () => {
             <div className="flex flex-col gap-5">
               <div className="flex gap-5 items-center">
                 <div className="w-[50%]">
-                  <label className="text-xl" htmlFor="firstname">First name</label>
+                  <label className="text-lg" htmlFor="firstname">First name</label>
                   <input
                     type="text"
                     id="firstname"
@@ -44,7 +44,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className="w-[50%]">
-                  <label className="text-xl" htmlFor="lastname">Last name</label>
+                  <label className="text-lg" htmlFor="lastname">Last name</label>
                   <input
                     type="text"
                     id="lastname"
@@ -54,7 +54,7 @@ const Contact = () => {
                 </div>
               </div>
               <div>
-                <label className="text-xl" htmlFor="email">Email</label>
+                <label className="text-lg" htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -63,7 +63,7 @@ const Contact = () => {
                 />
               </div>
               <div>
-                <label className="text-xl" htmlFor="phone">Phone number</label>
+                <label className="text-lg" htmlFor="phone">Phone number</label>
                 <input
                   type="text"
                   id="phone"
@@ -71,7 +71,7 @@ const Contact = () => {
                   className="w-full p-2 border mt-3 bg-[#F5F5F5] border-gray-300 rounded-md"/>
               </div>
               <div>
-                <label className="text-xl" htmlFor="message">Message</label>
+                <label className="text-lg" htmlFor="message">Message</label>
                 <textarea
                   id="message"
                   placeholder="Message"

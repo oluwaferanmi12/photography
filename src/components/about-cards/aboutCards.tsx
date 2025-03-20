@@ -12,7 +12,7 @@ interface AboutCardsProps {
 export const AboutCards = ({ iconSrc, tagText, numberCount, cardText, numberAttribute }: AboutCardsProps) => {
   return (
     <>
-      <div className="bg-white rounded-lg p-5 w-[350px] ">
+      <div className="bg-white rounded-lg p-5 w-[400px] h-[250px] ">
         <div className="flex gap-3 items-center px-5 py-2 w-40 bg-[#FF5F5F14] text-[#FF5F5F] text-base rounded-lg font-bold">
           <span>
             <Image src={iconSrc} alt="img" />

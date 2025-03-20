@@ -44,7 +44,7 @@ export const Footer = () => {
       <Row>
         <Col xs={24}>
           <h3 className="text-center text-6xl pb-12 border-b border-[#EDEDED66]  ">
-            hello@Shotbyportable.com
+            Hello@Shotbyportable.Com
           </h3>
         </Col>
         <Col xs={12}>

@@ -28,119 +28,46 @@ const catalogueData = [
   {
     catalogueName: "BEST OF",
     catalogueImage: [
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      image6,
-      image7,
-      image8,
-      image9,
-      image10,
-      image11,
-      image12,
-      image13,
-      image14,
-      image15,
-      image16,
-      image17,
-      image18,
+      image1, image2, image3, image4, image5, image6,
+      image7, image8, image9, image10, image11, image12,
+      image13, image14, image15, image16, image17, image18,
     ],
   },
   {
     catalogueName: "ARCHITECTUAL",
     catalogueImage: [
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      image6,
-      image7,
-      image8,
-      image9,
-      image10,
-      image11,
-      image12,
-      image13,
-      image14,
-      image15,
-      image16,
-      image17,
-      image18,
+      image8, image4, image7, image12, image15, image1,
+      image9, image5, image3, image18, image6, image16,
+      image2, image10, image13, image17, image11, image14,
     ],
   },
   {
     catalogueName: "LIFESTYLE",
     catalogueImage: [
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      image6,
-      image7,
-      image8,
-      image9,
-      image10,
-      image11,
-      image12,
-      image13,
-      image14,
-      image15,
-      image16,
-      image17,
-      image18,
+      image10, image18, image2, image16, image7, image5,
+      image13, image1, image9, image15, image3, image8,
+      image12, image14, image6, image11, image4, image17,
     ],
   },
   {
     catalogueName: "AERIAL",
     catalogueImage: [
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      image6,
-      image7,
-      image8,
-      image9,
-      image10,
-      image11,
-      image12,
-      image13,
-      image14,
-      image15,
-      image16,
-      image17,
-      image18,
+      image14, image6, image17, image3, image1, image9,
+      image12, image8, image5, image18, image15, image2,
+      image7, image10, image11, image4, image13, image16,
     ],
   },
   {
     catalogueName: "FOOD & BEVERAGE",
     catalogueImage: [
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      image6,
-      image7,
-      image8,
-      image9,
-      image10,
-      image11,
-      image12,
-      image13,
-      image14,
-      image15,
-      image16,
-      image17,
-      image18,
+      image5, image13, image9, image2, image17, image6,
+      image12, image10, image4, image15, image3, image1,
+      image8, image18, image7, image16, image14, image11,
     ],
   },
 ];
+
+
 
 const Catalogue = () => {
   const [catalogueTab, setCatalogueTab] = useState('BEST OF');
@@ -152,7 +79,7 @@ const Catalogue = () => {
 
   return (
     <div>
-      <HeaderWrapper headerTitle="About Portable hub" landingBg="catalogueBG" />
+      <HeaderWrapper headerTitle="Catalogue" landingBg="catalogueBG" />
       <div className="p-7">
         <div className="bg-white rounded-2xl py-3 px-8 flex gap-5 justify-center items-center h-[200px] ">
           {catalogueData.map((item) => (
@@ -160,7 +87,7 @@ const Catalogue = () => {
               <button
               key={item.catalogueName}
               onClick={() => setCatalogueTab(item.catalogueName)}
-              className={` xl:w-56 flex justify-center items-center text-base font-grotesk-medium rounded-full py-2 px-8 transition-all ${
+              className={` xl:w-56 cursor-pointer flex justify-center items-center text-base font-grotesk-medium rounded-full py-2 px-8 transition-all ${
                 catalogueTab === item.catalogueName
                   ? "bg-white text-black border border-black"
                   : "bg-black text-white"

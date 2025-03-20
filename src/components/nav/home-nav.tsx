@@ -23,8 +23,8 @@ export const HomeNav = () => {
       navLink: "/catalogue",
     },
     {
-      navTitle: "Pricing",
-      navLink: "/pricing",
+      navTitle: "Portfolio",
+      navLink: "/portfolio",
     },
     {
       navTitle: "Contact",

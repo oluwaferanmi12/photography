@@ -78,21 +78,27 @@ a{
 .landingBg {
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.6),
-      rgba(0, 0, 0, 0.8  )
+      rgba(0, 0, 0, 0.6)
     ),
     url("../assets/images/landingImage.jpeg");
 }
 
 
-.aboutLandingBG,
-.catalogueBG {
+.aboutLandingBG{
   background-image: url("../assets/images/about-secondImg--cropped.png");
-  filter: grayscale(100%) contrast(1.1);
-  border-radius: 32px;
+}
+
+.catalogueBG{
+  background-image: url("../assets/images/catalogue-header.jpeg");
+}
+
+.contactBG{
+  background-image: url("../assets/images/catalogue-header.jpeg");
 }
 
 .aboutLandingBG::before,
-.catalogueBG::before {
+.catalogueBG::before,
+.contactBG::before {
   content: "";
   position: absolute;
   top: 0;
@@ -106,7 +112,10 @@ a{
 
 .landingBg, 
 .aboutLandingBG,
-.catalogueBG {
+.catalogueBG,
+.contactBG {
+  filter: grayscale(100%) contrast(1.1);
+  border-radius: 32px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

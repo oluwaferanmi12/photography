@@ -79,7 +79,7 @@ const Catalogue = () => {
 
   return (
     <div>
-      <HeaderWrapper headerTitle="Catalogue" landingBg="catalogueBG" />
+      <HeaderWrapper headerTitle="Gallery" landingBg="catalogueBG" />
       <div className="p-7">
         <div className="bg-white rounded-2xl py-3 px-8 flex gap-5 justify-center items-center h-[200px] ">
           {catalogueData.map((item) => (

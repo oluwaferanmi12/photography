@@ -19,8 +19,8 @@ export const HomeNav = () => {
       navLink: "/about",
     },
     {
-      navTitle: "Catalogue",
-      navLink: "/catalogue",
+      navTitle: "Gallery",
+      navLink: "/gallery",
     },
     {
       navTitle: "Portfolio",

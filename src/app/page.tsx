@@ -110,9 +110,9 @@ export default function Home() {
 
       {/* third section  */}
       <div className="bg-[#FAF3E9] py-12 px-7 relative">
-        <Row>
-          <Col xs={24}>
-            <Row gutter={[42, 42]}>
+        <Row justify={'center'}>
+          <Col xs={18}>
+            <Row justify={'center'} gutter={[42, 42]}>
               <Col xs={22} md={12}>
                 <span>
                   <Image src={framedImage} alt="" />
@@ -120,7 +120,7 @@ export default function Home() {
               </Col>
 
               <Col xs={22} md={12}>
-                <div className="text-center z-50 md:text-left">
+                <div className="text-center relative z-50 md:text-left">
                   <h3 className="font-grotesk-medium text-4xl mb-10">
                     BASED IN BARRIE, ONTARIO
                   </h3>
@@ -149,7 +149,7 @@ export default function Home() {
             </Row>
           </Col>
         </Row>
-        <span className="absolute bottom-0 z-1 right-0">
+        <span className="absolute bottom-0 right-0">
           <Image src={underlayImg} alt="img" />
         </span>
       </div>

@@ -64,7 +64,7 @@ export default function Home() {
                 </div>
                 <div className="mt-12 ">
                   <p className="text-[#E6EAEE] text-xl font-grotesk-regular w-4/5">
-                    Hey, I’m Victoria Ajala—a passionate photographer based in
+                    Hey, I’m Victoria Akinade —a passionate photographer based in
                     Barrie, Ontario. 📸{" "}
                   </p>
                 </div>
@@ -122,12 +122,11 @@ export default function Home() {
               <Col xs={22} md={12}>
                 <div className="text-center relative z-50 md:text-left">
                   <h3 className="font-grotesk-medium text-4xl mb-10">
-                    BASED IN BARRIE, ONTARIO
+                    BASED IN ONTARIO
                   </h3>
                   <p className="text-lg  leading-relaxed text-[#3C3C3B] ">
-                    Hey, I’m{" "}
-                   [Photographer’s Name]
-                    —a passionate photographer based in Barrie, Ontario. 📸 From
+                    Hey, I’m{" "} Victoria Akinade
+                    —a passionate photographer based in Ontario. 📸 From
                     capturing raw emotions to creating stunning brand visuals, I
                     believe every shot should tell a story. Whether it’s a
                     dreamy portrait, a bold commercial shoot, or a candid

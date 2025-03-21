@@ -62,9 +62,9 @@ export const HomeNav = () => {
               })}
             </div>
             <div className="min-w-[200px] flex justify-end">
-              <button className="bg-white px-6 py-2 rounded-full cursor-pointer text-[#FB5711] font-grotesk-medium text-base">
+              {/* <button className="bg-white px-6 py-2 rounded-full cursor-pointer text-[#FB5711] font-grotesk-medium text-base">
                 Book a session
-              </button>
+              </button> */}
             </div>
           </div>
         </Col>

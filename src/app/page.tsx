@@ -1,3 +1,5 @@
+"use client";
+
 import { Row, Col } from "antd";
 import Image from "next/image";
 import image1 from "@/assets/svgs/home-image-1.svg";
@@ -19,35 +21,79 @@ import photography from "@/assets/svgs/base-photography.svg";
 import photography2 from "@/assets/svgs/base-photography-2.svg";
 import Button from "@/components/button/button";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { useState } from "react";
+import HomeSecondSection from "@/components/home-section/secondSection";
+import hoverEffectImg from "@/assets/images/hoverEffectPic.png";
 
 const servicesData = [
   {
     num: "01",
     title: "Wedding Photography",
+    media: hoverEffectImg,
+    isVideo: false,
   },
   {
     num: "02",
     title: "Lifestyle Photography",
+    media: hoverEffectImg,
+    isVideo: false,
   },
   {
     num: "03",
     title: "Videography",
+    media: hoverEffectImg,
+    isVideo: true,
   },
   {
     num: "04",
     title: "Birthdays",
+    media: hoverEffectImg,
+    isVideo: false,
   },
   {
     num: "05",
     title: "Professional Shoots",
+    media: hoverEffectImg,
+    isVideo: false,
   },
 ];
 
 export default function Home() {
+  const { scrollY } = useScroll();
+  const [scrolled, setScrolled] = useState(false);
+
+  // Listen for scroll changes and update state
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 10); // Apply padding on first scroll
+  });
+
+
+  // THIRD SECTION
+
+  const [hoveredMedia, setHoveredMedia] = useState<string | null>(null);
+  const [isVideo, setIsVideo] = useState(false);
+
+  const handleHover = (mediaSrc: string, isVideo: boolean) => {
+    setHoveredMedia(mediaSrc);
+    setIsVideo(isVideo);
+  };
+
   return (
     <div>
-      <div className="h-screen min-h-screen  p-7">
-        <div className=" h-full min-h-full landingBg rounded-4xl flex justify-center items-center ">
+      <motion.div
+        className="h-screen min-h-screen transition-all"
+        animate={{
+          padding: scrolled ? "28px" : "0px", // p-7 = 1.75rem
+        }}
+      >
+        <motion.div
+          className="h-full min-h-full landingBg  flex justify-center items-center"
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          animate={{
+            borderRadius: scrolled ? "32px" : "0px",
+          }}
+        >
           <Row className="w-full px-20">
             <Col xs={12}>
               <div>
@@ -62,19 +108,20 @@ export default function Home() {
                   <p>Picture Perfect</p>
                   <p>Shotbyportable</p>
                 </div>
-                <div className="mt-12 ">
+                <div className="mt-12">
                   <p className="text-[#E6EAEE] text-xl font-grotesk-regular w-4/5">
-                    Hey, I’m Victoria Akinade —a passionate photographer based in
-                    Barrie, Ontario. 📸{" "}
+                    Hey, I’m Victoria Akinade — a passionate photographer based
+                    in Barrie, Ontario. 📸
                   </p>
                 </div>
               </div>
             </Col>
           </Row>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       {/* Second section  */}
-      <div className="mt-20 pt-7 px-7 h-[125vh] min-h-screen relative">
+      <HomeSecondSection />
+      {/* <div className="mt-20 pt-7 px-7 h-[125vh] min-h-screen relative">
         <Row justify={"center"} align={"middle"} className="">
           <Col xs={6}>
             <div>
@@ -87,7 +134,11 @@ export default function Home() {
               <div>
                 <div className="text-4xl text-center text-[#635E5E] ">
                   <p>BRANDING PHOTOS</p>{" "}
-                  <p className="my-3"> AND HEADSHOTS TO HELP <span className="text-[#FB5711]">STAND OUT</span></p>{" "}
+                  <p className="my-3">
+                    {" "}
+                    AND HEADSHOTS TO HELP{" "}
+                    <span className="text-[#FB5711]">STAND OUT</span>
+                  </p>{" "}
                   <p>FROM THE CROWD</p>
                 </div>
               </div>
@@ -106,13 +157,13 @@ export default function Home() {
         <span className="absolute bottom-0 right-7 z-10">
           <Image src={photography2} className="w-40" alt="icon" />
         </span>
-      </div>
+      </div> */}
 
       {/* third section  */}
       <div className="bg-[#FAF3E9] py-12 px-7 relative">
-        <Row justify={'center'}>
+        <Row justify={"center"}>
           <Col xs={18}>
-            <Row justify={'center'} gutter={[42, 42]}>
+            <Row justify={"center"} gutter={[42, 42]}>
               <Col xs={22} md={12}>
                 <span>
                   <Image src={framedImage} alt="" />
@@ -125,12 +176,12 @@ export default function Home() {
                     BASED IN ONTARIO
                   </h3>
                   <p className="text-lg  leading-relaxed text-[#3C3C3B] ">
-                    Hey, I’m{" "} Victoria Akinade
-                    —a passionate photographer based in Ontario. 📸 From
-                    capturing raw emotions to creating stunning brand visuals, I
-                    believe every shot should tell a story. Whether it’s a
-                    dreamy portrait, a bold commercial shoot, or a candid
-                    moment, I make sure each frame reflects your unique vibe.
+                    Hey, I’m Victoria Akinade —a passionate photographer based
+                    in Ontario. 📸 From capturing raw emotions to creating
+                    stunning brand visuals, I believe every shot should tell a
+                    story. Whether it’s a dreamy portrait, a bold commercial
+                    shoot, or a candid moment, I make sure each frame reflects
+                    your unique vibe.
                   </p>
                   <p className="mt-3 text-lg leading-relaxed text-[#3C3C3B]">
                     With years of experience behind the lens, I bring
@@ -138,11 +189,11 @@ export default function Home() {
                     Let’s turn moments into timeless memories. 💡 Ready to
                     create magic? Let’s shoot!
                   </p>
-                  <div className="mt-6">
+                  {/* <div className="mt-6">
                     <Button variant="filled" size="small">
                       Book a session
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </Col>
             </Row>
@@ -156,16 +207,46 @@ export default function Home() {
       {/* fourth section */}
       <div className="p-7 my-20">
         <div>
-          <h2 className="text-center text-5xl text-[#3C3C3B] font-valentiamo-reg ">My services</h2>
+          <h2 className="text-center text-5xl text-[#3C3C3B] font-valentiamo-reg ">
+            My services
+          </h2>
         </div>
-        <div className="py-10">
+        <div className="py-10 relative">
           {servicesData.map((service) => (
             <ServicesAccordian
               key={service.num}
               num={service.num}
               serviceTitle={service.title}
+              mediaSrc={service.media}
+              isVideo={service.isVideo}
+              onHover={handleHover}
             />
           ))}
+
+          {/* Media Display */}
+          {hoveredMedia && (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300">
+              {isVideo ? (
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  className="w-60 rounded-lg shadow-lg"
+                >
+                  <source src={hoveredMedia} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <Image
+                  src={hoveredMedia}
+                  width={240}
+                  height={360}
+                  className="rounded-lg shadow-lg"
+                  alt="service preview"
+                />
+              )}
+            </div>
+          )}
         </div>
         <div className="flex justify-center mb-5">
           <Button variant="bordered" size="large" borderVariant="light">
@@ -191,7 +272,7 @@ export default function Home() {
                     me. I’m ready always to capture every moment with artistry
                     and passion.
                   </p>
-                  <div className="flex justify-normal my-5">
+                  {/* <div className="flex justify-normal my-5">
                     <Button
                       variant="bordered"
                       size="medium"
@@ -200,7 +281,7 @@ export default function Home() {
                       {" "}
                       Book your session
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </Col>
               <Col xs={12}>
@@ -224,7 +305,9 @@ export default function Home() {
               </Col>
               <Col xs={12}>
                 <div className="flex flex-col gap-10 ">
-                  <h2 className="text-[64px] font-valentiamo-reg tracking-[-3%]">Event videos</h2>
+                  <h2 className="text-[64px] font-valentiamo-reg tracking-[-3%]">
+                    Event videos
+                  </h2>
                   <p className="text-xl text-[#583101]">
                     We capture the best moments of your events with stunning
                     visuals and storytelling. Whether it’s a corporate

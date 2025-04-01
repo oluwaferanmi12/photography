@@ -47,13 +47,13 @@
   --font-mono: var(--font-geist-mono);
 
   /* Fonts  */
-  --font-grotesk-light: "grotesk-light";
-  --font-grotesk-bold: "grotesk-bold";
-  --font-grotesk-regular: "grotesk-regular";
-  --font-grotesk-medium: "grotesk-medium";
-  --font-grotesk-semi-bold: "grotesk-semi-bold";
-  --font-grotesk-extra-bold: "grotesk-extra-bold";
-  --font-valentiamo-reg: "valentiamo-regular";
+  --font-grotesk-light: grotesk-light;
+  --font-grotesk-bold: grotesk-bold;
+  --font-grotesk-regular: grotesk-regular;
+  --font-grotesk-medium: grotesk-medium;
+  --font-grotesk-semi-bold: grotesk-semi-bold;
+  --font-grotesk-extra-bold: grotesk-extra-bold;
+  --font-valentiamo-reg: valentiamo-regular;
 }
 
 /* @media (prefers-color-scheme: dark) {

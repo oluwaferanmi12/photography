@@ -36,7 +36,7 @@ export const HomeNav = () => {
       <Row justify={"center"}>
         <Col xs={12}>
           <div className="rounded-full navBg  py-2 px-2 flex justify-between items-center">
-            <div className="w-full justify-around items-center flex">
+            <div className="w-full justify-center gap-20 items-center flex">
               {navItems.map((item) => {
                 return (
                   <div className="relative" key={item.navTitle}>
@@ -61,11 +61,11 @@ export const HomeNav = () => {
                 );
               })}
             </div>
-            <div className="min-w-[200px] flex justify-end">
-              {/* <button className="bg-white px-6 py-2 rounded-full cursor-pointer text-[#FB5711] font-grotesk-medium text-base">
+            {/* <div className="min-w-[200px] flex justify-end">
+              <button className="bg-white px-6 py-2 rounded-full cursor-pointer text-[#FB5711] font-grotesk-medium text-base">
                 Book a session
-              </button> */}
-            </div>
+              </button>
+            </div> */}
           </div>
         </Col>
       </Row>

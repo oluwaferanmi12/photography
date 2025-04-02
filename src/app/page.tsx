@@ -77,51 +77,37 @@ export default function Home() {
     setIsVideo(isVideo);
   };
 
-  // Seventh Section - Event Videos with Parallax
+  // SEVENTH SECTION - Event Videos with Parallax
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [isSectionInView, setIsSectionInView] = useState(false);
+  const footerRef = useRef<HTMLDivElement>(null);
   const [sectionOffset, setSectionOffset] = useState(0);
+  const [footerOffset, setFooterOffset] = useState(0);
 
-  // Set up transform hooks unconditionally
+  // Set up transform hook for parallax effect
   const contentY = useTransform(
     scrollY,
-    [sectionOffset, sectionOffset + window.innerHeight],
-    [0, -100] // Adjust these values for stronger/weaker parallax
+    [sectionOffset, footerOffset],
+    [0, -100] // Adjust for stronger/weaker effect
   );
 
-  // Track when section enters viewport and get its offset
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsSectionInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-      // Set the initial offset
-      setSectionOffset(sectionRef.current.offsetTop);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
-
-  // Update offset on resize
+  // Get section & footer offsets on mount and resize
   useEffect(() => {
     const handleResize = () => {
-      if (sectionRef.current) {
+      if (sectionRef.current && footerRef.current) {
         setSectionOffset(sectionRef.current.offsetTop);
+        setFooterOffset(
+          sectionRef.current.offsetTop + sectionRef.current.offsetHeight
+        );
       }
     };
+
+    // Set initial values
+    handleResize();
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   return (
     <div>
       <motion.div
@@ -343,12 +329,12 @@ export default function Home() {
       {/* Seventh Section */}
       <div
         ref={sectionRef}
-        className="relative overflow-x-hidden"
+        className="relative overflow-hidden"
         id="event-videos-section"
       >
         {/* Content with parallax effect */}
         <motion.div
-          className="w-full min-h-[500px] flex items-center justify-center relative"
+          className="w-full min-h-[500px] flex items-center justify-center relative z-10"
           style={{ y: contentY }}
         >
           <div className="p-7 w-full">
@@ -367,7 +353,7 @@ export default function Home() {
                   </h2>
                   <p className="text-lg text-[#583101]">
                     We capture the best moments of your events with stunning
-                    visuals and storytelling. Whether it's a corporate
+                    visuals and storytelling. Whether it&apos;s a corporate
                     gathering, wedding, concert, or cultural event, we create
                     videos that bring your memories to life.
                   </p>
@@ -386,8 +372,11 @@ export default function Home() {
           </div>
         </motion.div>
 
+        {/* Spacer to push footer down */}
+        <div className="h-[20%]" />
+
         {/* Footer */}
-        <div className="relative z-20 w-full h-[100vh]">
+        <div className="relative z-20 w-full h-[100%]">
           <Footer />
         </div>
       </div>

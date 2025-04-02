@@ -125,3 +125,24 @@ a{
   background-size: cover;
   background-position: center;
 }
+
+
+/* Parallax container */
+.parallax-container {
+  position: relative;
+  z-index: 1;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 500px;
+}
+
+/* Sticky footer */
+.sticky-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: #fff; /* Adjust background color to match your design */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}

@@ -7,18 +7,12 @@ import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
-import sImage1 from "@/assets/svgs/second-section-img-1.svg";
-import sImage2 from "@/assets/svgs/second-section-img-2.svg";
-import sImage3 from "@/assets/svgs/second-section-img-3.svg";
-import sImage4 from "@/assets/svgs/second-section-img-4.svg";
 import framedImage from "@/assets/images/home-framed-image.png";
 import underlayImg from "@/assets/svgs/third-section-icon1.svg";
 import { ServicesAccordian } from "@/components/services/services-accordian";
 import fifthSectionImg from "@/assets/images/fifthSectionImg.png";
 import placeholderImg from "@/assets/images/placeholderImg.png";
 import { Footer } from "@/components/footer/footer";
-import photography from "@/assets/svgs/base-photography.svg";
-import photography2 from "@/assets/svgs/base-photography-2.svg";
 import Button from "@/components/button/button";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
@@ -67,7 +61,6 @@ export default function Home() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 10); // Apply padding on first scroll
   });
-
 
   // THIRD SECTION
 

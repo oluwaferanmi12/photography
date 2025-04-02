@@ -77,12 +77,19 @@ export default function Home() {
     setIsVideo(isVideo);
   };
 
-  // Seventh Section - Event Videos with Conditional Parallax
-  // const { scrollY } = useScroll();
+  // Seventh Section - Event Videos with Parallax
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isSectionInView, setIsSectionInView] = useState(false);
+  const [sectionOffset, setSectionOffset] = useState(0);
 
-  // Track when section enters viewport
+  // Set up transform hooks unconditionally
+  const contentY = useTransform(
+    scrollY,
+    [sectionOffset, sectionOffset + window.innerHeight],
+    [0, -100] // Adjust these values for stronger/weaker parallax
+  );
+
+  // Track when section enters viewport and get its offset
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -93,6 +100,8 @@ export default function Home() {
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
+      // Set the initial offset
+      setSectionOffset(sectionRef.current.offsetTop);
     }
 
     return () => {
@@ -102,18 +111,17 @@ export default function Home() {
     };
   }, []);
 
-  // Only apply parallax effect when section is in view
-  const footerY = useTransform(
-    scrollY,
-    isSectionInView
-      ? [
-          sectionRef.current?.offsetTop || 0,
-          (sectionRef.current?.offsetTop || 0) + window.innerHeight,
-        ]
-      : [0, 0],
-    isSectionInView ? ["100vh", "0vh"] : ["100vh", "100vh"]
-  );
+  // Update offset on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (sectionRef.current) {
+        setSectionOffset(sectionRef.current.offsetTop);
+      }
+    };
 
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div>
       <motion.div
@@ -341,19 +349,7 @@ export default function Home() {
         {/* Content with parallax effect */}
         <motion.div
           className="w-full min-h-[500px] flex items-center justify-center relative"
-          style={{
-            y: isSectionInView
-              ? useTransform(
-                  scrollY,
-                  [
-                    sectionRef.current?.offsetTop || 0,
-                    (sectionRef.current?.offsetTop || 0) + window.innerHeight,
-                  ],
-                  [0, -100]
-                )
-              : 0,
-            zIndex: 10,
-          }}
+          style={{ y: contentY }}
         >
           <div className="p-7 w-full">
             <Row align="middle" justify="center" gutter={[42, 42]}>
@@ -390,19 +386,10 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Spacer to push footer down initially */}
-        <div className="h-screen" />
-
-        {/* Footer with conditional parallax */}
-        <motion.div
-          className="relative z-20 w-full h-[100vh]"
-          // style={{
-          //   y: footerY,
-          //   zIndex: isSectionInView ? 20 : "auto",
-          // }}
-        >
+        {/* Footer */}
+        <div className="relative z-20 w-full h-[100vh]">
           <Footer />
-        </motion.div>
+        </div>
       </div>
 
       {/* <div className="p-7 my-20 parallax-container ">

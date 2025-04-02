@@ -20,17 +20,19 @@ export const ServicesAccordian = ({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div
-      className="flex justify-between cursor-pointer items-center border-b border-[#CFCFCF] mb-5 pb-4 relative"
-      onMouseEnter={() => {
-        onHover(mediaSrc, isVideo);
-        setHovered(true);
-      }}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <div className="flex justify-between cursor-pointer items-center border-b border-[#CFCFCF] mb-5 pb-4 relative">
       <div className="flex gap-5 items-center">
         <span className="text-[#635E5E] text-xl">{num}</span>
-        <p className="text-[#74787A] text-4xl font-grotesk-medium">{serviceTitle}</p>
+        <p
+          className="text-[#74787A] text-4xl font-grotesk-medium"
+          onMouseEnter={() => {
+            onHover(mediaSrc, isVideo);
+            setHovered(true);
+          }}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {serviceTitle}
+        </p>
       </div>
       <div>
         {hovered ? (

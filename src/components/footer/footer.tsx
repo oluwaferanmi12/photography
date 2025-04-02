@@ -40,7 +40,7 @@ export const Footer = () => {
   ];
 
   return (
-    <div className="w-full sticky-footer px-7 pt-20 bg-[#D9C9AE] text-[#3C3C3B] h-full ">
+    <div className="w-full  px-7 pt-20 bg-[#D9C9AE] text-[#3C3C3B] h-full ">
       <Row>
         <Col xs={24}>
           <h3 className="text-center text-6xl pb-12 border-b border-[#EDEDED66]  ">

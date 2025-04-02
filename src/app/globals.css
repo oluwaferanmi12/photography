@@ -129,13 +129,24 @@ a{
 
 /* Parallax container */
 .parallax-container {
-  position: relative;
+  /* position: relative;
   z-index: 1;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 500px;
+  min-height: 500px; */
+
+  
+  /* Set a specific height */
+  min-height: 500px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
 }
 
 /* Sticky footer */

@@ -15,8 +15,13 @@ import placeholderImg from "@/assets/images/placeholderImg.png";
 import { Footer } from "@/components/footer/footer";
 import Button from "@/components/button/button";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useState } from "react";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import HomeSecondSection from "@/components/home-section/secondSection";
 import hoverEffectImg from "@/assets/images/hoverEffectPic.png";
 
@@ -37,7 +42,7 @@ const servicesData = [
     num: "03",
     title: "Videography",
     media: hoverEffectImg,
-    isVideo: true,
+    isVideo: false,
   },
   {
     num: "04",
@@ -71,6 +76,43 @@ export default function Home() {
     setHoveredMedia(mediaSrc);
     setIsVideo(isVideo);
   };
+
+  // Seventh Section - Event Videos with Conditional Parallax
+  // const { scrollY } = useScroll();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isSectionInView, setIsSectionInView] = useState(false);
+
+  // Track when section enters viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSectionInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  // Only apply parallax effect when section is in view
+  const footerY = useTransform(
+    scrollY,
+    isSectionInView
+      ? [
+          sectionRef.current?.offsetTop || 0,
+          (sectionRef.current?.offsetTop || 0) + window.innerHeight,
+        ]
+      : [0, 0],
+    isSectionInView ? ["100vh", "0vh"] : ["100vh", "100vh"]
+  );
 
   return (
     <div>
@@ -217,7 +259,7 @@ export default function Home() {
           ))}
 
           {/* Media Display */}
-          {hoveredMedia && (
+          {hoveredMedia ? (
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300">
               {isVideo ? (
                 <video
@@ -239,6 +281,8 @@ export default function Home() {
                 />
               )}
             </div>
+          ) : (
+            ""
           )}
         </div>
         <div className="flex justify-center mb-5">
@@ -289,7 +333,79 @@ export default function Home() {
       <GalleryBox />
 
       {/* Seventh Section */}
-      <div className="p-7 my-20">
+      <div
+        ref={sectionRef}
+        className="relative overflow-x-hidden"
+        id="event-videos-section"
+      >
+        {/* Content with parallax effect */}
+        <motion.div
+          className="w-full min-h-[500px] flex items-center justify-center relative"
+          style={{
+            y: isSectionInView
+              ? useTransform(
+                  scrollY,
+                  [
+                    sectionRef.current?.offsetTop || 0,
+                    (sectionRef.current?.offsetTop || 0) + window.innerHeight,
+                  ],
+                  [0, -100]
+                )
+              : 0,
+            zIndex: 10,
+          }}
+        >
+          <div className="p-7 w-full">
+            <Row align="middle" justify="center" gutter={[42, 42]}>
+              <Col xs={24} md={12}>
+                <Image
+                  src={placeholderImg}
+                  alt="Event video"
+                  className="w-full h-auto rounded-lg"
+                />
+              </Col>
+              <Col xs={24} md={12}>
+                <div className="flex flex-col gap-6 lg:gap-10">
+                  <h2 className="text-4xl md:text-6xl font-valentiamo-reg tracking-tight">
+                    Event videos
+                  </h2>
+                  <p className="text-lg text-[#583101]">
+                    We capture the best moments of your events with stunning
+                    visuals and storytelling. Whether it's a corporate
+                    gathering, wedding, concert, or cultural event, we create
+                    videos that bring your memories to life.
+                  </p>
+                  <div className="mt-4">
+                    <Button
+                      variant="bordered"
+                      size="medium"
+                      borderVariant="dark"
+                    >
+                      Book a video session
+                    </Button>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </motion.div>
+
+        {/* Spacer to push footer down initially */}
+        <div className="h-screen" />
+
+        {/* Footer with conditional parallax */}
+        <motion.div
+          className="relative z-20 w-full h-[100vh]"
+          // style={{
+          //   y: footerY,
+          //   zIndex: isSectionInView ? 20 : "auto",
+          // }}
+        >
+          <Footer />
+        </motion.div>
+      </div>
+
+      {/* <div className="p-7 my-20 parallax-container ">
         <Row>
           <Col xs={24}>
             <Row align={"middle"} justify={"center"} gutter={[42, 42]}>
@@ -323,7 +439,7 @@ export default function Home() {
           </Col>
         </Row>
       </div>
-      <Footer />
+      <Footer /> */}
     </div>
   );
 }

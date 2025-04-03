@@ -6,6 +6,10 @@ import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
+import sImage1 from "@/assets/svgs/second-section-img-1.svg";
+import sImage2 from "@/assets/svgs/second-section-img-2.svg";
+import sImage3 from "@/assets/svgs/second-section-img-3.svg";
+import sImage4 from "@/assets/svgs/second-section-img-4.svg";
 import bgImage1 from "@/assets/images/portfolioBig1.png";
 import bgImage2 from "@/assets/images/about-secondImg--cropped.png";
 import bgImage3 from "@/assets/images/landingImage.jpeg";
@@ -19,6 +23,8 @@ import placeholderImg from "@/assets/images/placeholderImg.png";
 import { Footer } from "@/components/footer/footer";
 import Button from "@/components/button/button";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
+import photography from "@/assets/svgs/base-photography.svg";
+import photography2 from "@/assets/svgs/base-photography-2.svg";
 import {
   motion,
   useMotionValueEvent,
@@ -26,7 +32,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import HomeSecondSection from "@/components/home-section/secondSection";
+// import HomeSecondSection from "@/components/home-section/secondSection";
 import hoverEffectImg from "@/assets/images/hoverEffectPic.png";
 
 const servicesData = [
@@ -189,8 +195,8 @@ export default function Home() {
       </motion.div>
 
       {/* Second section  */}
-      <HomeSecondSection />
-      {/* <div className="mt-20 pt-7 px-7 h-[125vh] min-h-screen relative">
+      {/* <HomeSecondSection /> */}
+      <div className="mt-20 pt-7 px-7 h-[125vh] min-h-screen relative">
         <Row justify={"center"} align={"middle"} className="">
           <Col xs={6}>
             <div>
@@ -226,7 +232,7 @@ export default function Home() {
         <span className="absolute bottom-0 right-7 z-10">
           <Image src={photography2} className="w-40" alt="icon" />
         </span>
-      </div> */}
+      </div>
 
       {/* third section  */}
       <div className="bg-[#FAF3E9] py-12 px-7 relative">

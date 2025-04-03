@@ -1,12 +1,16 @@
 "use client";
 
 import { Row, Col } from "antd";
-import Image from "next/image";
-import image1 from "@/assets/svgs/home-image-1.svg";
+import Image, { StaticImageData } from "next/image";
 import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
+import bgImage1 from "@/assets/images/portfolioBig1.png";
+import bgImage2 from "@/assets/images/about-secondImg--cropped.png";
+import bgImage3 from "@/assets/images/landingImage.jpeg";
+import bgImage4 from "@/assets/images/about-page-img1.png";
+import bgImage5 from "@/assets/images/catalogue-header.jpeg";
 import framedImage from "@/assets/images/home-framed-image.png";
 import underlayImg from "@/assets/svgs/third-section-icon1.svg";
 import { ServicesAccordian } from "@/components/services/services-accordian";
@@ -61,19 +65,37 @@ const servicesData = [
 export default function Home() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(2);
+  const [currentBg, setCurrentBg] = useState(bgImage3);
 
   // Listen for scroll changes and update state
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 10); // Apply padding on first scroll
   });
 
+  // CAROUSEL
+  // Map thumbnails to background images
+  const imageMap = [
+    { thumbnail: image5, background: bgImage1 },
+    { thumbnail: image2, background: bgImage2 },
+    { thumbnail: image3, background: bgImage3 },
+    { thumbnail: image4, background: bgImage4 },
+    { thumbnail: image5, background: bgImage5 },
+  ];
+
+  const handleImageClick = (bgImg: StaticImageData, index: number) => {
+    setCurrentBg(bgImg);
+    setActiveIndex(index);
+  };
+
   // THIRD SECTION
 
   const [hoveredMedia, setHoveredMedia] = useState<string | null>(null);
   const [isVideo, setIsVideo] = useState(false);
 
-  const handleHover = (mediaSrc: string, isVideo: boolean) => {
-    setHoveredMedia(mediaSrc);
+  const handleHover = (mediaSrc: string | StaticImageData, isVideo: boolean) => {
+    const src = typeof mediaSrc === 'string' ? mediaSrc : mediaSrc.src;
+    setHoveredMedia(src);
     setIsVideo(isVideo);
   };
 
@@ -113,25 +135,42 @@ export default function Home() {
       <motion.div
         className="h-screen min-h-screen transition-all"
         animate={{
-          padding: scrolled ? "28px" : "0px", // p-7 = 1.75rem
+          padding: scrolled ? "28px" : "0px",
         }}
       >
         <motion.div
-          className="h-full min-h-full landingBg  flex justify-center items-center"
+          className="h-full min-h-full landingBg flex justify-center items-center"
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
             borderRadius: scrolled ? "32px" : "0px",
+          }}
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${currentBg.src})`,
           }}
         >
           <Row className="w-full px-20">
             <Col xs={12}>
               <div>
                 <div className="flex items-center gap-2">
-                  <Image src={image1} alt="" />
-                  <Image src={image2} alt="" />
-                  <Image src={image3} alt="" />
-                  <Image src={image4} alt="" />
-                  <Image src={image5} alt="" />
+                  {imageMap.map((img, index) => (
+                    <div
+                      key={index}
+                      className={`p-1 ${
+                        activeIndex === index
+                          ? "border-2 border-primary-orange"
+                          : "border-2 border-transparent"
+                      } rounded-full transition-all`}
+                    >
+                      <Image
+                        src={img.thumbnail}
+                        alt=""
+                        onClick={() => handleImageClick(img.background, index)}
+                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                        width={50}
+                        height={50}
+                      />
+                    </div>
+                  ))}
                 </div>
                 <div className="my-6 text-white text-8xl font-grotesk-regular">
                   <p>Picture Perfect</p>
@@ -139,8 +178,8 @@ export default function Home() {
                 </div>
                 <div className="mt-12">
                   <p className="text-[#E6EAEE] text-xl font-grotesk-regular w-4/5">
-                    Hey, I’m Victoria Akinade — a passionate photographer based
-                    in Barrie, Ontario. 📸
+                    Hey, I&apos;m Victoria Akinade — a passionate photographer
+                    based in Barrie, Ontario. 📸
                   </p>
                 </div>
               </div>
@@ -148,6 +187,7 @@ export default function Home() {
           </Row>
         </motion.div>
       </motion.div>
+
       {/* Second section  */}
       <HomeSecondSection />
       {/* <div className="mt-20 pt-7 px-7 h-[125vh] min-h-screen relative">

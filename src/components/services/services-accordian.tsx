@@ -13,9 +13,9 @@ export const ServicesAccordian = ({
 }: {
   num: string;
   serviceTitle: string;
-  mediaSrc: StaticImageData;
+  mediaSrc: StaticImageData | string;
   isVideo: boolean;
-  onHover: (src: string, isVideo: boolean) => void;
+  onHover: (src: StaticImageData | string, isVideo: boolean) => void;
 }) => {
   const [hovered, setHovered] = useState(false);
 

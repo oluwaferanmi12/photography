@@ -54,6 +54,8 @@
   --font-grotesk-semi-bold: grotesk-semi-bold;
   --font-grotesk-extra-bold: grotesk-extra-bold;
   --font-valentiamo-reg: valentiamo-regular;
+
+  --color-primary-orange: #FB5711;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -80,13 +82,13 @@ a{
 
 
 
-.landingBg {
+/* .landingBg {
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0.6)
     ),
     url("../assets/images/landingImage.jpeg");
-}
+} */
 
 
 .aboutLandingBG{
@@ -115,7 +117,7 @@ a{
 }
 
 
-.landingBg, 
+/* .landingBg,  */
 .aboutLandingBG,
 .catalogueBG,
 .contactBG {
@@ -156,4 +158,14 @@ a{
   z-index: 2;
   background: #fff; /* Adjust background color to match your design */
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.landingBg {
+  /* filter: grayscale(100%) contrast(1.1); */
+  border-radius: 32px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out;
 }

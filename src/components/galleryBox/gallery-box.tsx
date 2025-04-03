@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Col, Row } from "antd";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import sixthImage1 from "@/assets/images/sixth-section-image1.png";
 import sixthImage2 from "@/assets/images/sixth-section-image2.png";
 import sixthImage3 from "@/assets/images/sixth-section-image3.png";
@@ -11,7 +11,17 @@ import sixthImage4 from "@/assets/images/sixth-section-image3.png";
 import sixthImage5 from "@/assets/images/sixth-section-image5.png";
 import sixthImage6 from "@/assets/images/sixth-section-image6.png";
 
-const ParallaxImage = ({ src, alt, position, index, isVisible }) => {
+
+interface ParallaxImageProps {
+  src: StaticImageData;
+  alt: string;
+  position: { x: number; y: number };
+  index: number;
+  isVisible: boolean;
+}
+
+
+const ParallaxImage = ({ src, alt, position, index, isVisible }: ParallaxImageProps) => {
   const multipliers = [0.03, 0.05, 0.04, 0.06, 0.02, 0.05];
   const multiplier = multipliers[index % multipliers.length];
   
@@ -42,7 +52,7 @@ const ParallaxImage = ({ src, alt, position, index, isVisible }) => {
 export const GalleryBox = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [imagesVisible, setImagesVisible] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -64,7 +74,7 @@ export const GalleryBox = () => {
     [0, 1]
   );
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
     
     const containerRect = containerRef.current.getBoundingClientRect();
@@ -130,7 +140,7 @@ export const GalleryBox = () => {
                 transition={{ delay: 0.3 }}
               >
                 <div className="text-4xl lg:text-5xl font-valentiamo-reg text-center text-white">
-                  <p>Wherever You Go, I'll Be</p>
+                  <p>Wherever You Go, I&apos;ll Be</p>
                   <p className="my-3">There to Shoot!</p>
                 </div>
               </motion.div>

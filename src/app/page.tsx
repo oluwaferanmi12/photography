@@ -7,6 +7,8 @@ import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
+import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
+import circleIcon from "@/assets/svgs/circle-stroke.svg";
 import bgImage1 from "@/assets/images/portfolioBig1.png";
 import bgImage2 from "@/assets/images/about-secondImg--cropped.png";
 import bgImage3 from "@/assets/images/homeHeaderImage--cropped.jpeg";
@@ -22,6 +24,7 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import ImageMasonry from "@/components/imageMasonry/imageMasonry";
 import Button from "@/components/button/button";
 import { Banner } from "@/components/banner/banner";
+import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -144,7 +147,7 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col gap-14">
+      <div className="flex flex-col gap-28 pt-28 pb-56">
         {/* Second section  */}
         <div className="flex flex-col gap-10 justify-center items-center">
           <h3 className="text-center w-1/2  leading-20 text-white text-8xl ">
@@ -205,41 +208,49 @@ export default function Home() {
         <Banner />
 
         {/* SIXTH SECTION */}
-        <div className="flex flex-col justify-center items-center">
-          <div className="text-white text-6xl  flex flex-col gap-10 justify-center items-center">
-            <h2>Meet Victoria</h2>
-            <div>
+        <div className="flex flex-col gap-28 justify-center items-center">
+          <div className="text-white relative flex flex-col gap-10 justify-center items-center text-center">
+            <h2 className="text-6xl">Meet Victoria</h2>
+
+            <div className="relative">
+              {/* Circle Background */}
+              <span className="absolute -left-40 top-0 -z-10">
+                <Image
+                  src={circleIcon}
+                  alt="circle-stroke"
+                  className="w-[300px] h-[350px] opacity-60"
+                />
+              </span>
+
+              {/* Main Image */}
               <Image
                 src={victoria}
-                className="w-[450px] h-[350px] rounded-2xl object-cover"
+                className="w-[450px] h-[350px] rounded-2xl object-cover relative z-10"
                 alt="victoria"
               />
             </div>
+
             <p className="w-[450px] text-light-brown text-lg">
               From polished headshots to soulful lifestyle captures, I craft
-              images that do more than just “look good” . They speak volumes.
+              images that do more than just “look good”. They speak volumes.
               Whether for personal branding, professional needs, or intimate
               memories, every photo session is a curated experience.
             </p>
           </div>
+
           <div>
             <div className="grid grid-cols-2 gap-4 px-10">
               <div className="flex flex-col gap-4 w-full ">
-                <div className="border p-5">
-                  <p className="text-5xl">5 years+ Experience</p>
-                </div>
-                <div className="border p-5">
-                  <p className="text-5xl">5 years+ Experience</p>
-                </div>
+                <ServiceWrapperCard
+                  text="5 years+ Experience"
+                  icon={briefIcon}
+                />
+                <ServiceWrapperCard text="300+ Clientele" icon={briefIcon} />
               </div>
               {/*  */}
               <div className="flex flex-col gap-4 w-full mt-6 ">
-                <div className="border p-5">
-                  <p className="text-5xl">5 years+ Experience</p>
-                </div>
-                <div className="border p-5">
-                  <p className="text-5xl">5 years+ Experience</p>
-                </div>
+                <ServiceWrapperCard text="100% Satisfaction" icon={briefIcon} />
+                <ServiceWrapperCard text="Humber certified!" icon={briefIcon} />
               </div>
             </div>
           </div>
@@ -248,8 +259,7 @@ export default function Home() {
 
       {/* Sixth Section */}
       <GalleryBox />
-
-      <Footer sticky />
+      <Footer />
     </div>
   );
 }

@@ -8,7 +8,7 @@ const Gallery = () => {
 
   return (
     <div>
-      <div className="flex flex-col  gap-14 justify-center items-center mt-32">
+      <div className="flex flex-col gap-14 justify-center items-center mt-32">
         <div className="max-w-[1350px] flex flex-col  gap-14 w-full">
           <div className="galleryBg border-4 border-light-brown w-full flex items-center">
             <div className="my-6 text-white text-8xl flex flex-col gap-5 font-grotesk-regular">
@@ -16,93 +16,69 @@ const Gallery = () => {
             </div>
           </div>
 
-          <div className="bg-black p-4 rounded-lg max-w-6xl mx-auto">
-            <div className="grid grid-cols-3 grid-rows-4 gap-3">
-              {/* Top-left */}
-              <div className="row-span-1 col-span-1 rounded-lg overflow-hidden">
+          <div className="space-y-4">
+            {/* Top Section */}
+            <div className="grid grid-cols-3 gap-4">
+              {/* Left column (2 small stacked images) */}
+              <div className="flex flex-col gap-4">
+                <span>
+                  <Image
+                    src={HS4}
+                    className="w-full h-[300px] object-cover rounded-3xl"
+                    alt="img"
+                  />
+                </span>
+                <span>
+                  <Image
+                    src={HS4}
+                    className="w-full h-[300px] object-cover rounded-3xl"
+                    alt="img"
+                  />
+                </span>
+              </div>
+
+              {/* Middle column (1 tall image) */}
+              <div>
                 <Image
-                  src={images[0]}
-                  alt="img1"
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full"
+                  src={HS4}
+                  className="w-full h-[624px] object-cover rounded-3xl"
+                  alt="img"
                 />
               </div>
 
-              {/* Center large image */}
-              <div className="row-span-2 col-span-2 rounded-lg overflow-hidden">
+              {/* Right column (2 small stacked images) */}
+              <div className="flex flex-col gap-4">
+                <span>
+                  <Image
+                    src={HS4}
+                    className="w-full h-[300px] object-cover rounded-3xl"
+                    alt="img"
+                  />
+                </span>
+                <span>
+                  <Image
+                    src={HS4}
+                    className="w-full h-[300px] object-cover rounded-3xl"
+                    alt="img"
+                  />
+                </span>
+              </div>
+            </div>
+
+            {/* Bottom Section */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
                 <Image
-                  src={images[1]}
-                  alt="img2"
-                  width={1000}
-                  height={1000}
-                  className="object-cover w-full h-full"
+                  src={HS4}
+                  className="w-full h-[300px] object-cover rounded-3xl"
+                  alt="img"
                 />
               </div>
-
-              {/* Top-right */}
-              <div className="row-start-1 col-start-3 row-span-1 col-span-1 rounded-lg overflow-hidden">
+              <div>
                 <Image
-                  src={images[2]}
-                  alt="img3"
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-
-              {/* Right-middle */}
-              <div className="row-start-2 col-start-3 row-span-1 col-span-1 rounded-lg overflow-hidden">
-                <Image
-                  src={images[3]}
-                  alt="img4"
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-
-              {/* Bottom-right */}
-              <div className="row-start-3 col-start-3 row-span-1 col-span-1 rounded-lg overflow-hidden">
-                <Image
-                  src={images[4]}
-                  alt="img5"
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-
-              {/* Bottom-middle-left */}
-              <div className="row-start-3 col-start-2 row-span-1 col-span-1 rounded-lg overflow-hidden">
-                <Image
-                  src={images[5]}
-                  alt="img6"
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-
-              {/* Bottom-left */}
-              <div className="row-start-3 col-start-1 row-span-1 col-span-1 rounded-lg overflow-hidden">
-                <Image
-                  src={images[6]}
-                  alt="img7"
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-
-              {/* Bottom full image (beneath large image) */}
-              <div className="row-start-4 col-span-3 rounded-lg overflow-hidden">
-                <Image
-                  src={images[7]}
-                  alt="img8"
-                  width={1500}
-                  height={500}
-                  className="object-cover w-full h-full"
+                  src={HS4}
+                  className="w-full h-[300px] object-cover rounded-3xl"
+                  alt="img"
                 />
               </div>
             </div>

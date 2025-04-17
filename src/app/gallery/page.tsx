@@ -1,10 +1,9 @@
-import { Banner } from "@/components/banner/banner";
 import Image from "next/image";
 import React from "react";
 import HS4 from "@/assets/images/HS4.png";
+import { PlanCards } from "@/components/plans-card/PlanCards";
 
 const Gallery = () => {
-  const images = [HS4, HS4, HS4, HS4, HS4, HS4, HS4];
 
   return (
     <div>
@@ -87,6 +86,7 @@ const Gallery = () => {
           {/* SECOND SECTION */}
           <div>
             <h3 className="w-[25%] text-7xl">Wedding Packages</h3>
+            <PlanCards />
 
           </div>
         </div>

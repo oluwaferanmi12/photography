@@ -9,7 +9,7 @@ const Gallery = () => {
   return (
     <div>
       <div className="flex flex-col gap-14 justify-center items-center mt-32">
-        <div className="max-w-[1350px] flex flex-col  gap-14 w-full">
+        <div className="max-w-[1350px] flex flex-col  gap-14 w-full p-14">
           <div className="galleryBg border-4 border-light-brown w-full flex items-center">
             <div className="my-6 text-white text-8xl flex flex-col gap-5 font-grotesk-regular">
               <p>Weddings</p>
@@ -82,6 +82,12 @@ const Gallery = () => {
                 />
               </div>
             </div>
+          </div>
+
+          {/* SECOND SECTION */}
+          <div>
+            <h3 className="w-[25%] text-7xl">Wedding Packages</h3>
+
           </div>
         </div>
       </div>

@@ -72,6 +72,7 @@
 body {
   font-family: "grotesk-medium", sans-serif;
   background-color: #101010;
+  color: white;
 }
 
 a{
@@ -101,17 +102,27 @@ a{
 }
 
 .catalogueBG{
-  background-image: url("../assets/images/catalogue-header.jpeg");
+  background-image: url("../assets/images/homeHeaderImage--cropped.jpeg");
 }
 
 .contactBG{
   background-image: url("../assets/images/catalogue-header.jpeg");
 }
 
+.galleryBg{
+  background: url("../assets/images/homeHeaderImage--cropped.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 500px;
+  width: 100%;
+}
+
 .aboutLandingBG::before,
 .catalogueBG::before,
 .contactBG::before,
-.landingBg::before {
+.landingBg::before,
+.galleryBg::before {
   content: "";
   position: absolute;
   top: 0;
@@ -125,9 +136,9 @@ a{
 
 /* .landingBg,  */
 .aboutLandingBG,
-.catalogueBG,
 .contactBG,
-.landingBg {
+.landingBg,
+.galleryBg {
   filter: grayscale(90%) contrast(1.0);
   border-radius: 32px;
   background-repeat: no-repeat;
@@ -226,6 +237,10 @@ a{
   border-radius: 20px;
   height: 650px;
 }
+
+
+
+
 
 
 

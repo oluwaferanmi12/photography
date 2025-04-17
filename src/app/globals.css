@@ -56,6 +56,9 @@
   --font-valentiamo-reg: valentiamo-regular;
 
   --color-primary-orange: #FB5711;
+  --color-light-brown: #D9C9AE;
+
+  --breakpoint-3xl: 1400px;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -67,6 +70,7 @@
 
 body {
   font-family: "grotesk-medium", sans-serif;
+  background-color: #101010;
 }
 
 a{
@@ -105,7 +109,8 @@ a{
 
 .aboutLandingBG::before,
 .catalogueBG::before,
-.contactBG::before {
+.contactBG::before,
+.landingBg::before {
   content: "";
   position: absolute;
   top: 0;
@@ -120,8 +125,9 @@ a{
 /* .landingBg,  */
 .aboutLandingBG,
 .catalogueBG,
-.contactBG {
-  filter: grayscale(100%) contrast(1.1);
+.contactBG,
+.landingBg {
+  filter: grayscale(90%) contrast(1.0);
   border-radius: 32px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -169,3 +175,62 @@ a{
   background-position: center;
   transition: background-image 0.5s ease-in-out;
 }
+
+
+.parallax-bg {
+  position: relative;
+  min-height: 500px; 
+  background: url("../assets/images/catalogue-header.jpeg");
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} 
+
+.parallax-content{
+  z-index: 10;
+  position: relative;
+  min-height: 500px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.footer {
+  z-index: 999;
+  background-color: #D9C9AE;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.homeBanner{
+  /* background: url("../assets/images/homeHeaderImage--cropped.jpeg"); */
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("../assets/images/homeHeaderImage--cropped.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  height: 650px;
+}
+
+
+
+@media (min-width: 1400px) {
+  .footer {
+    height: 100dvh !important;
+  } 
+}
+

@@ -1,72 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import { Row, Col } from "antd";
 import Image, { StaticImageData } from "next/image";
 import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
-import sImage1 from "@/assets/svgs/second-section-img-1.svg";
-import sImage2 from "@/assets/svgs/second-section-img-2.svg";
-import sImage3 from "@/assets/svgs/second-section-img-3.svg";
-import sImage4 from "@/assets/svgs/second-section-img-4.svg";
 import bgImage1 from "@/assets/images/portfolioBig1.png";
 import bgImage2 from "@/assets/images/about-secondImg--cropped.png";
-import bgImage3 from "@/assets/images/landingImage.jpeg";
+import bgImage3 from "@/assets/images/homeHeaderImage--cropped.jpeg";
 import bgImage4 from "@/assets/images/about-page-img1.png";
 import bgImage5 from "@/assets/images/catalogue-header.jpeg";
-import framedImage from "@/assets/images/home-framed-image.png";
-import underlayImg from "@/assets/svgs/third-section-icon1.svg";
-import { ServicesAccordian } from "@/components/services/services-accordian";
-import fifthSectionImg from "@/assets/images/fifthSectionImg.png";
-import placeholderImg from "@/assets/images/placeholderImg.png";
+import HS4 from "@/assets/images/HS4.png";
+import HS1 from "@/assets/images/HS1.png";
+import HS6 from "@/assets/images/HS6.png";
+import victoria from "@/assets/images/victoria.jpeg";
 import { Footer } from "@/components/footer/footer";
-import Button from "@/components/button/button";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
-import photography from "@/assets/svgs/base-photography.svg";
-import photography2 from "@/assets/svgs/base-photography-2.svg";
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-// import HomeSecondSection from "@/components/home-section/secondSection";
-import hoverEffectImg from "@/assets/images/hoverEffectPic.png";
-
-const servicesData = [
-  {
-    num: "01",
-    title: "Wedding Photography",
-    media: hoverEffectImg,
-    isVideo: false,
-  },
-  {
-    num: "02",
-    title: "Lifestyle Photography",
-    media: hoverEffectImg,
-    isVideo: false,
-  },
-  {
-    num: "03",
-    title: "Videography",
-    media: hoverEffectImg,
-    isVideo: false,
-  },
-  {
-    num: "04",
-    title: "Birthdays",
-    media: hoverEffectImg,
-    isVideo: false,
-  },
-  {
-    num: "05",
-    title: "Professional Shoots",
-    media: hoverEffectImg,
-    isVideo: false,
-  },
-];
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import ImageMasonry from "@/components/imageMasonry/imageMasonry";
+import Button from "@/components/button/button";
+import { Banner } from "@/components/banner/banner";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -94,47 +49,40 @@ export default function Home() {
     setActiveIndex(index);
   };
 
-  // THIRD SECTION
-
-  const [hoveredMedia, setHoveredMedia] = useState<string | null>(null);
-  const [isVideo, setIsVideo] = useState(false);
-
-  const handleHover = (mediaSrc: string | StaticImageData, isVideo: boolean) => {
-    const src = typeof mediaSrc === 'string' ? mediaSrc : mediaSrc.src;
-    setHoveredMedia(src);
-    setIsVideo(isVideo);
-  };
-
-  // SEVENTH SECTION - Event Videos with Parallax
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const footerRef = useRef<HTMLDivElement>(null);
-  const [sectionOffset, setSectionOffset] = useState(0);
-  const [footerOffset, setFooterOffset] = useState(0);
-
-  // Set up transform hook for parallax effect
-  const contentY = useTransform(
-    scrollY,
-    [sectionOffset, footerOffset],
-    [0, -100] // Adjust for stronger/weaker effect
-  );
-
-  // Get section & footer offsets on mount and resize
-  useEffect(() => {
-    const handleResize = () => {
-      if (sectionRef.current && footerRef.current) {
-        setSectionOffset(sectionRef.current.offsetTop);
-        setFooterOffset(
-          sectionRef.current.offsetTop + sectionRef.current.offsetHeight
-        );
-      }
-    };
-
-    // Set initial values
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const services = [
+    {
+      title: "Weddings",
+      image: HS4,
+      bg: "#EFFBF9",
+      description:
+        "Elegant and timeless wedding photography that captures the love, joy, and unforgettable moments of your special day.",
+      cta: "View Weddings",
+    },
+    {
+      title: "Birthdays",
+      image: HS1,
+      bg: "#FFF5E5",
+      description:
+        "Celebrate another trip around the sun with vibrant, fun, and candid shots that showcase the energy and excitement of the moment.",
+      cta: "View Birthdays",
+    },
+    {
+      title: "Kids",
+      image: HS6,
+      bg: "#F5F0FF",
+      description:
+        "Playful and tender portraits of your little ones — capturing their personalities and milestones as they grow.",
+      cta: "View Kids",
+    },
+    {
+      title: "Lifestyle and Others",
+      image: HS6,
+      bg: "#F0F9FF",
+      description:
+        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
+      cta: "View Lifestyle",
+    },
+  ];
 
   return (
     <div>
@@ -152,10 +100,11 @@ export default function Home() {
           }}
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${currentBg.src})`,
+            backgroundSize: "center",
           }}
         >
           <Row className="w-full px-20">
-            <Col xs={12}>
+            <Col xs={22} xl={12}>
               <div>
                 <div className="flex items-center gap-2">
                   {imageMap.map((img, index) => (
@@ -178,14 +127,15 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                <div className="my-6 text-white text-8xl font-grotesk-regular">
-                  <p>Picture Perfect</p>
-                  <p>Shotbyportable</p>
+                <div className="my-6 text-white text-8xl flex flex-col gap-5 font-grotesk-regular">
+                  <p>Picture Perfect.</p>
+                  <p>Shotbyportable.</p>
                 </div>
                 <div className="mt-12">
-                  <p className="text-[#E6EAEE] text-xl font-grotesk-regular w-4/5">
-                    Hey, I&apos;m Victoria Akinade — a passionate photographer
-                    based in Barrie, Ontario. 📸
+                  <p className="text-[#E6EAEE] text-xl font-grotesk-regular w-3/4 min[1400px]-[60%]">
+                    Hey, I’m Victoria Ajala. A luxury lifestyle and portrait
+                    photographer based in Barrie, Ontario. I tell compelling
+                    visual stories through every frame.
                   </p>
                 </div>
               </div>
@@ -194,274 +144,112 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      {/* Second section  */}
-      {/* <HomeSecondSection /> */}
-      <div className="mt-20 pt-7 px-7 h-[125vh] min-h-screen relative">
-        <Row justify={"center"} align={"middle"} className="">
-          <Col xs={6}>
-            <div>
-              <Image src={sImage1} alt="" />
-              <Image src={sImage2} alt="" />
+      <div className="flex flex-col gap-14">
+        {/* Second section  */}
+        <div className="flex flex-col gap-10 justify-center items-center">
+          <h3 className="text-center w-1/2  leading-20 text-white text-8xl ">
+            Photography that leaves a lasting impression
+          </h3>
+          <p className="text-center text-light-brown text-lg w-1/2 3xl:w-[30%]">
+            From polished headshots to soulful lifestyle captures, I craft
+            images that do more than just “look good” . They speak volumes.
+            Whether for personal branding, professional needs, or intimate
+            memories, every photo session is a curated experience.
+          </p>
+        </div>
+
+        {/* THIRD SECTION */}
+        <div>
+          <ImageMasonry />
+        </div>
+
+        {/* FOURTH SECTION */}
+        <div className="flex items-center justify-between pl-14 py-10  mx-auto w-full">
+          {/* Title */}
+          <h2 className="text-3xl font-semibold text-white whitespace-nowrap pr-6">
+            My Services
+          </h2>
+
+          {/* Scrollable cards */}
+          <div className="w-full overflow-x-auto scrollbar-hide">
+            <div className="flex gap-4 min-w-max pl-6 pr-0">
+              {services.map((service, i) => (
+                <div
+                  key={i}
+                  className="min-w-[260px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-xl shadow-md"
+                  style={{ backgroundColor: service.bg }}
+                >
+                  <span className="">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      className="rounded-full h-[130px] w-[80%] object-cover"
+                    />
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-semibold">{service.title}</h3>
+                    <p className="text-sm mt-2 text-gray-700 leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
+                  <div>
+                    <Button variant="filled" text={service.cta} />
+                  </div>
+                </div>
+              ))}
             </div>
-          </Col>
-          <Col xs={12}>
-            <div className="flex justify-center">
-              <div>
-                <div className="text-4xl text-center text-[#635E5E] ">
-                  <p>BRANDING PHOTOS</p>{" "}
-                  <p className="my-3">
-                    {" "}
-                    AND HEADSHOTS TO HELP{" "}
-                    <span className="text-[#FB5711]">STAND OUT</span>
-                  </p>{" "}
-                  <p>FROM THE CROWD</p>
+          </div>
+        </div>
+
+        {/* FIFTH SECTION */}
+        <Banner />
+
+        {/* SIXTH SECTION */}
+        <div className="flex flex-col justify-center items-center">
+          <div className="text-white text-6xl  flex flex-col gap-10 justify-center items-center">
+            <h2>Meet Victoria</h2>
+            <div>
+              <Image
+                src={victoria}
+                className="w-[450px] h-[350px] rounded-2xl object-cover"
+                alt="victoria"
+              />
+            </div>
+            <p className="w-[450px] text-light-brown text-lg">
+              From polished headshots to soulful lifestyle captures, I craft
+              images that do more than just “look good” . They speak volumes.
+              Whether for personal branding, professional needs, or intimate
+              memories, every photo session is a curated experience.
+            </p>
+          </div>
+          <div>
+            <div className="grid grid-cols-2 gap-4 px-10">
+              <div className="flex flex-col gap-4 w-full ">
+                <div className="border p-5">
+                  <p className="text-5xl">5 years+ Experience</p>
+                </div>
+                <div className="border p-5">
+                  <p className="text-5xl">5 years+ Experience</p>
+                </div>
+              </div>
+              {/*  */}
+              <div className="flex flex-col gap-4 w-full mt-6 ">
+                <div className="border p-5">
+                  <p className="text-5xl">5 years+ Experience</p>
+                </div>
+                <div className="border p-5">
+                  <p className="text-5xl">5 years+ Experience</p>
                 </div>
               </div>
             </div>
-          </Col>
-          <Col xs={6}>
-            <div className="z-50">
-              <Image src={sImage3} alt="" />
-              <Image src={sImage4} alt="" />
-            </div>
-          </Col>
-        </Row>
-        <span className="absolute bottom-0 left-7 z-10">
-          <Image src={photography} className="w-40" alt="icon" />
-        </span>
-        <span className="absolute bottom-0 right-7 z-10">
-          <Image src={photography2} className="w-40" alt="icon" />
-        </span>
-      </div>
-
-      {/* third section  */}
-      <div className="bg-[#FAF3E9] py-12 px-7 relative">
-        <Row justify={"center"}>
-          <Col xs={18}>
-            <Row justify={"center"} gutter={[42, 42]}>
-              <Col xs={22} md={12}>
-                <span>
-                  <Image src={framedImage} alt="" />
-                </span>
-              </Col>
-
-              <Col xs={22} md={12}>
-                <div className="text-center relative z-50 md:text-left">
-                  <h3 className="font-grotesk-medium text-4xl mb-10">
-                    BASED IN ONTARIO
-                  </h3>
-                  <p className="text-lg  leading-relaxed text-[#3C3C3B] ">
-                    Hey, I’m Victoria Akinade —a passionate photographer based
-                    in Ontario. 📸 From capturing raw emotions to creating
-                    stunning brand visuals, I believe every shot should tell a
-                    story. Whether it’s a dreamy portrait, a bold commercial
-                    shoot, or a candid moment, I make sure each frame reflects
-                    your unique vibe.
-                  </p>
-                  <p className="mt-3 text-lg leading-relaxed text-[#3C3C3B]">
-                    With years of experience behind the lens, I bring
-                    creativity, precision, and a touch of fun to every session.
-                    Let’s turn moments into timeless memories. 💡 Ready to
-                    create magic? Let’s shoot!
-                  </p>
-                  {/* <div className="mt-6">
-                    <Button variant="filled" size="small">
-                      Book a session
-                    </Button>
-                  </div> */}
-                </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-        <span className="absolute bottom-0 right-0">
-          <Image src={underlayImg} alt="img" />
-        </span>
-      </div>
-
-      {/* fourth section */}
-      <div className="p-7 my-20">
-        <div>
-          <h2 className="text-center text-5xl text-[#3C3C3B] font-valentiamo-reg ">
-            My services
-          </h2>
+          </div>
         </div>
-        <div className="py-10 relative">
-          {servicesData.map((service) => (
-            <ServicesAccordian
-              key={service.num}
-              num={service.num}
-              serviceTitle={service.title}
-              mediaSrc={service.media}
-              isVideo={service.isVideo}
-              onHover={handleHover}
-            />
-          ))}
-
-          {/* Media Display */}
-          {hoveredMedia ? (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300">
-              {isVideo ? (
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  className="w-60 rounded-lg shadow-lg"
-                >
-                  <source src={hoveredMedia} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <Image
-                  src={hoveredMedia}
-                  width={240}
-                  height={360}
-                  className="rounded-lg shadow-lg"
-                  alt="service preview"
-                />
-              )}
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="flex justify-center mb-5">
-          <Button variant="bordered" size="large" borderVariant="light">
-            View all work
-          </Button>
-        </div>
-      </div>
-
-      {/* Fifth Section */}
-      <div className="p-7 my-20">
-        <Row>
-          <Col xs={24}>
-            <Row align={"middle"} justify={"center"} gutter={[42, 42]}>
-              <Col xs={12}>
-                <div className="flex flex-col gap-10 ">
-                  <h2 className="text-7xl  tracking-[-3%]">
-                    Wherever You Go, I’ll Be There to{" "}
-                    <span className="text-[#734004]">Shoot!</span>{" "}
-                  </h2>
-                  <p className="text-xl text-[#3C3C3B]">
-                    From the bustling streets of Canada to breathtaking
-                    destinations across the globe, I go where your story takes
-                    me. I’m ready always to capture every moment with artistry
-                    and passion.
-                  </p>
-                  {/* <div className="flex justify-normal my-5">
-                    <Button
-                      variant="bordered"
-                      size="medium"
-                      borderVariant="dark"
-                    >
-                      {" "}
-                      Book your session
-                    </Button>
-                  </div> */}
-                </div>
-              </Col>
-              <Col xs={12}>
-                <Image src={fifthSectionImg} className="" alt="img" />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
       </div>
 
       {/* Sixth Section */}
       <GalleryBox />
 
-      {/* Seventh Section */}
-      <div
-        ref={sectionRef}
-        className="relative overflow-hidden"
-        id="event-videos-section"
-      >
-        {/* Content with parallax effect */}
-        <motion.div
-          className="w-full min-h-[500px] flex items-center justify-center relative z-10"
-          style={{ y: contentY }}
-        >
-          <div className="p-7 w-full">
-            <Row align="middle" justify="center" gutter={[42, 42]}>
-              <Col xs={24} md={12}>
-                <Image
-                  src={placeholderImg}
-                  alt="Event video"
-                  className="w-full h-auto rounded-lg"
-                />
-              </Col>
-              <Col xs={24} md={12}>
-                <div className="flex flex-col gap-6 lg:gap-10">
-                  <h2 className="text-4xl md:text-6xl font-valentiamo-reg tracking-tight">
-                    Event videos
-                  </h2>
-                  <p className="text-lg text-[#583101]">
-                    We capture the best moments of your events with stunning
-                    visuals and storytelling. Whether it&apos;s a corporate
-                    gathering, wedding, concert, or cultural event, we create
-                    videos that bring your memories to life.
-                  </p>
-                  <div className="mt-4">
-                    <Button
-                      variant="bordered"
-                      size="medium"
-                      borderVariant="dark"
-                    >
-                      Book a video session
-                    </Button>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </motion.div>
-
-        {/* Spacer to push footer down */}
-        <div className="h-[20%]" />
-
-        {/* Footer */}
-        <div className="relative z-20 w-full h-[100%]">
-          <Footer />
-        </div>
-      </div>
-
-      {/* <div className="p-7 my-20 parallax-container ">
-        <Row>
-          <Col xs={24}>
-            <Row align={"middle"} justify={"center"} gutter={[42, 42]}>
-              <Col xs={12}>
-                <Image src={placeholderImg} className="" alt="img" />
-              </Col>
-              <Col xs={12}>
-                <div className="flex flex-col gap-10 ">
-                  <h2 className="text-[64px] font-valentiamo-reg tracking-[-3%]">
-                    Event videos
-                  </h2>
-                  <p className="text-xl text-[#583101]">
-                    We capture the best moments of your events with stunning
-                    visuals and storytelling. Whether it’s a corporate
-                    gathering, wedding, concert, or cultural event, we create
-                    videos that bring your memories to life.
-                  </p>
-                  <div className="flex justify-normal my-5 ">
-                    <Button
-                      variant="bordered"
-                      size="medium"
-                      borderVariant="dark"
-                    >
-                      {" "}
-                      Book a video session
-                    </Button>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </div>
-      <Footer /> */}
+      <Footer sticky />
     </div>
   );
 }

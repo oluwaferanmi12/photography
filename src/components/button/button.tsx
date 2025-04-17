@@ -4,7 +4,8 @@ interface ButtonTypes {
   variant?: "bordered" | "filled";
   borderVariant?: "light" | "dark";
   size?: "small" | "medium" | "large";
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  text?: string
 }
 
 const Button = ({
@@ -12,6 +13,7 @@ const Button = ({
   borderVariant = "dark",
   size = "small",
   children,
+  text
 }: ButtonTypes) => {
   const baseStyles =
     "px-6 py-2 rounded-full cursor-pointer text-base flex justify-center items-center";
@@ -36,6 +38,9 @@ const Button = ({
       <button
         className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} `}
       >
+        {
+          text
+        }
         {children}
       </button>
     </>

@@ -1,0 +1,54 @@
+import Image from "next/image";
+import HS1 from "@/assets/images/HS1.png";
+import HS2 from "@/assets/images/HS2.png";
+import HS3 from "@/assets/images/HS3.png";
+import HS4 from "@/assets/images/HS4.png";
+import HS5 from "@/assets/images/HS5.png";
+import HS6 from "@/assets/images/HS6.png";
+import HS7 from "@/assets/images/HS7.png";
+import HS8 from "@/assets/images/HS8.png";
+import HS9 from "@/assets/images/HS9.png";
+
+const columns = [
+  [HS1, HS2], // first column
+  [HS3, HS4], // second column (staggered)
+  [HS5],      // middle column (centered vertically)
+  [HS6, HS7], // fourth column (staggered)
+  [HS8, HS9], // fifth column
+];
+
+export default function ImageMasonry() {
+  return (
+    <div className="grid grid-cols-5 gap-4 py-10 min-h-screen">
+    {columns.map((column, colIndex) => {
+      const isOffsetColumn = colIndex === 1 || colIndex === 3;
+      const isMiddleColumn = colIndex === 2;
+  
+      return (
+        <div
+          key={colIndex}
+          className={`flex flex-col gap-4 w-full ${
+            isOffsetColumn ? "mt-20" : ""
+          } ${isMiddleColumn ? "justify-center" : "justify-start"}`}
+        >
+          {column.map((src, idx) => (
+            <div
+              key={idx}
+              className="relative aspect-[3/4] w-full overflow-hidden rounded-xl shadow-lg"
+            >
+              <Image
+                src={src}
+                alt={`Image ${idx}`}
+                fill
+                className="object-cover"
+                quality={90}
+                sizes="100vw"
+              />
+            </div>
+          ))}
+        </div>
+      );
+    })}
+  </div>
+  );
+}

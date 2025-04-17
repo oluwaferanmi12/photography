@@ -9,7 +9,7 @@ import instagramIcon from "@/assets/svgs/instagramIcon.svg";
 import facebookIcon from "@/assets/svgs/facebookIcon.svg";
 import Link from "next/link";
 
-export const Footer = () => {
+export const Footer = ({sticky}: {sticky?: boolean}) => {
   const footerLinks = [
     {
       title: "Company",
@@ -40,7 +40,7 @@ export const Footer = () => {
   ];
 
   return (
-    <div className="w-full  px-7 pt-20 bg-[#D9C9AE] text-[#3C3C3B] h-full ">
+    <div className={`w-full ${sticky ? " footer sticky top-20" : "" }   px-7 pt-20 bg-[#D9C9AE] text-[#3C3C3B] `}>
       <Row>
         <Col xs={24}>
           <h3 className="text-center text-6xl pb-12 border-b border-[#EDEDED66]  ">

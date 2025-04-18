@@ -28,7 +28,7 @@ import Button from "@/components/button/button";
 import { Banner } from "@/components/banner/banner";
 import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 
-export default function Home() {
+export default function TSX() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [activeIndex, setActiveIndex] = useState(2);

@@ -33,21 +33,18 @@ export const Footer = ({sticky}: {sticky?: boolean}) => {
         "Payments",
       ],
     },
-    {
-      title: "Help",
-      links: ["Help", "FAQ", "Help Center", "Support"],
-    },
+   
   ];
 
   return (
     <div className={`w-full ${sticky ? " footer sticky top-20" : "" }   px-7 pt-20 bg-[#D9C9AE] text-[#3C3C3B] `}>
       <Row>
         <Col xs={24}>
-          <h3 className="text-center text-6xl pb-12 border-b border-[#EDEDED66]  ">
+          <h3 className="text-center text-2xl lg:text-6xl pb-12 border-b border-[#EDEDED66]  ">
             Hello@Shotbyportable.Com
           </h3>
         </Col>
-        <Col xs={12}>
+        <Col xs={24} lg={12}>
           <div className="pt-10">
             <span>
               <Image src={brandLogo} alt="brand_logo" />
@@ -73,7 +70,7 @@ export const Footer = ({sticky}: {sticky?: boolean}) => {
             </div>
           </div>
         </Col>
-        <Col xs={12}>
+        <Col xs={24} lg={12}>
           <div className="flex justify-between pt-10 text-[#3C3C3B]">
             {footerLinks.map((section, index) => (
               <div key={index} className="flex flex-col gap-4">
@@ -87,12 +84,12 @@ export const Footer = ({sticky}: {sticky?: boolean}) => {
           </div>
         </Col>
         <Col xs={24}>
-          <p className="text-white/30 text-9xl py-12 border-b border-[#EDEDED66]">
+          <p className="text-white/30 text-3xl lg:text-9xl py-12 border-b border-[#EDEDED66]">
             ©Shotbyportable
           </p>
         </Col>
       </Row>
-      <div className="flex justify-between py-5 text-lg items-center">
+      <div className="flex flex-col lg:flex-row justify-between py-5 text-lg items-center">
         <p>© Copyright 2025, All Rights Reserved</p>
         <div className="flex gap-5 items-center">
           <p>Term of Service</p>

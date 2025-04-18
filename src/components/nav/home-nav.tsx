@@ -38,7 +38,7 @@ export const HomeNav = () => {
   ];
   return (
     <div className="w-full z-10 fixed top-0 py-12 px-14 3xl:px-28">
-      <div className="flex justify-between items-center w-full">
+      <div className="hidden lg:flex justify-between items-center w-full ">
         <span>
           <Image src={brandLogo} alt="logo" />
         </span>
@@ -69,14 +69,16 @@ export const HomeNav = () => {
             })}
           </div>
           <div className="min-w-[200px] flex justify-end">
-            {/* <button className="bg-light-brown px-6 py-2 rounded-full cursor-pointer text-[#FB5711] font-grotesk-medium text-base">
-              Book a session
-            </button> */}
             <Button variant="filled" text="Book a session" />
           </div>
         </div>
         <span>
           <Image src={searchIcon} alt="logo" />
+        </span>
+      </div>
+      <div className="flex lg:hidden justify-between items-center">
+        <span>
+          <Image src={brandLogo} alt="logo" />
         </span>
       </div>
       {/* <Row justify={'space-between'}>

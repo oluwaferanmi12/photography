@@ -7,6 +7,7 @@ import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
+import rollingImage from "@/assets/svgs/rollingImage.svg";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
 import circleIcon from "@/assets/svgs/circle-stroke.svg";
 import bgImage1 from "@/assets/images/portfolioBig1.png";
@@ -96,10 +97,11 @@ export default function Home() {
         }}
       >
         <motion.div
-          className="h-full min-h-full landingBg flex justify-center items-center"
+          className="h-full min-h-full landingBg flex justify-center items-center relative"
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
             borderRadius: scrolled ? "32px" : "0px",
+            border: scrolled ? "2px solid #D9C9AE82" : "none",
           }}
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${currentBg.src})`,
@@ -144,6 +146,9 @@ export default function Home() {
               </div>
             </Col>
           </Row>
+          <span className="absolute right-14 bottom-14">
+            <Image src={rollingImage} alt="img" />
+          </span>
         </motion.div>
       </motion.div>
 

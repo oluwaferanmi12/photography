@@ -119,7 +119,7 @@ export const GalleryBox = () => {
             </div>
           </Col>
           <Col xs={12} className="relative">
-            <div className="flex items-center justify-center">
+            <div className="hidden lg:flex items-center justify-center">
               <span>
                 <ParallaxImage 
                   src={sixthImage5} 
@@ -145,7 +145,7 @@ export const GalleryBox = () => {
                 </div>
               </motion.div>
             </div>
-            <div className="flex justify-center">
+            <div className="justify-center hidden lg:flex">
               <span className="absolute bottom-0">
                 <ParallaxImage 
                   src={sixthImage6} 

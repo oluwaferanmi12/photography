@@ -44,7 +44,7 @@ export const ServiceWrapperCard: React.FC<ServiceWrapperCardProps> = ({
         ) : null}
       </div>
 
-      <p className="text-5xl leading-tight max-w-[200px]">{text}</p>
+      <p className={` ${size === "sm" ? "text-5xl" : "text-4xl lg:text-5xl"}  leading-tight max-w-[200px]`}>{text}</p>
     </div>
   );
 };

@@ -109,7 +109,7 @@ export default function Home() {
             backgroundSize: "center",
           }}
         >
-          <Row className="w-full px-20">
+          <Row className="w-full px-5 lg:px-20">
             <Col xs={24} xl={12}>
               <div>
                 <div className="flex items-center gap-2">
@@ -133,12 +133,12 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                <div className="my-6 text-white text-8xl flex flex-col gap-5 font-grotesk-regular">
+                <div className="my-6 text-white text-5xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
                   <p>Picture Perfect.</p>
                   <p>Shotbyportable.</p>
                 </div>
                 <div className="mt-12">
-                  <p className="text-[#E6EAEE] text-xl font-grotesk-regular w-3/4 min[1400px]-[60%]">
+                  <p className="text-[#E6EAEE] text-xl font-grotesk-regular lg:w-3/4 min[1400px]-[60%]">
                     Hey, I’m Victoria Ajala. A luxury lifestyle and portrait
                     photographer based in Barrie, Ontario. I tell compelling
                     visual stories through every frame.
@@ -156,7 +156,7 @@ export default function Home() {
       <div className="flex flex-col gap-28 pt-28 pb-56">
         {/* Second section  */}
         <div className="flex flex-col gap-10 justify-center items-center">
-          <h3 className="text-center w-full lg:w-1/2 leading-20 text-white text-8xl ">
+          <h3 className="text-center w-full lg:w-1/2 leading-20 text-white lg:text-8xl ">
             Photography that leaves a lasting impression
           </h3>
           <p className="text-center text-light-brown text-lg w-1/2 3xl:w-[30%]">

@@ -25,7 +25,7 @@ const Button = ({
   };
 
   const variantStyles = {
-    filled: "bg-white text-[#FB5711]",
+    filled: "bg-light-brown font-semibold text-darker-grey",
     bordered: `border ${
       borderVariant === "light"
         ? "border-[#CFCFCF] text-[#3C3C3B]"
@@ -36,7 +36,7 @@ const Button = ({
   return (
     <>
       <button
-        className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} `}
+        className={`${baseStyles}   ${sizeStyles[size]} ${variantStyles[variant]} `}
       >
         {
           text

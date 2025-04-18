@@ -9,6 +9,7 @@ import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
+import humerCertified from "@/assets/svgs/humer-certified.svg";
 import circleIcon from "@/assets/svgs/circle-stroke.svg";
 import bgImage1 from "@/assets/images/portfolioBig1.png";
 import bgImage2 from "@/assets/images/about-secondImg--cropped.png";
@@ -184,7 +185,7 @@ export default function Home() {
               {services.map((service, i) => (
                 <div
                   key={i}
-                  className="min-w-[260px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-xl shadow-md"
+                  className="min-w-[260px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md"
                   style={{ backgroundColor: service.bg }}
                 >
                   <span className="">
@@ -195,8 +196,8 @@ export default function Home() {
                     />
                   </span>
                   <div>
-                    <h3 className="text-4xl font-playfair text-black font-semibold">{service.title}</h3>
-                    <p className="font-grotesk-medium text-lg mt-2 text-gray-700 leading-relaxed">
+                    <h3 className="text-4xl font-playfair font-light text-darker-grey">{service.title}</h3>
+                    <p className="font-grotesk-medium text-lg mt-2 text-dark-grey leading-relaxed">
                       {service.description}
                     </p>
                   </div>
@@ -248,14 +249,15 @@ export default function Home() {
               <div className="flex flex-col gap-4 w-full ">
                 <ServiceWrapperCard
                   text="5 years+ Experience"
-                  icon={briefIcon}
+                  topArea={{ icon: briefIcon }}
                 />
-                <ServiceWrapperCard text="300+ Clientele" icon={briefIcon} />
+                <ServiceWrapperCard text="300+ Clientele"
+                 topArea={{btn: true }} />
               </div>
               {/*  */}
               <div className="flex flex-col gap-4 w-full mt-6 ">
-                <ServiceWrapperCard text="100% Satisfaction" icon={briefIcon} />
-                <ServiceWrapperCard text="Humber certified!" icon={briefIcon} />
+                <ServiceWrapperCard text="100% Satisfaction"  topArea={{ icon: briefIcon }} />
+                <ServiceWrapperCard text="Humber certified!" topArea={{ icon: humerCertified }} />
               </div>
             </div>
           </div>

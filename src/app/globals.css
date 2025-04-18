@@ -60,6 +60,8 @@
   --color-light-brown: #D9C9AE;
   --color-off-white: #2D2C2C;
   --color-grey: #999999;
+  --color-darker-grey: #151515;
+  --color-dark-grey: #2D2D2C;
 
   --breakpoint-3xl: 1400px;
 }

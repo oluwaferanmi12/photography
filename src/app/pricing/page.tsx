@@ -9,11 +9,12 @@ import HS4 from "@/assets/images/HS4.png";
 import { Col, Row } from "antd";
 import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
+import { PlanCards } from "@/components/plans-card/PlanCards";
 
 const Portfolio = () => {
   return (
     <div>
-      <div className="r mt-48">
+      <div className=" mt-48">
         <div className="px-14 3xl:px-28">
           <div className="flex justify-between w-full items-center">
             <div className="flex flex-col gap-8 w-1/2">
@@ -30,51 +31,66 @@ const Portfolio = () => {
               </div>
             </div>
             <div className="w-1/2">
-                <p>From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.</p>
+              <p>
+                From polished headshots to soulful lifestyle captures, I craft
+                images that do more than just “look good” . They speak volumes.
+                Whether for personal branding, professional needs, or intimate
+                memories, every photo session is a curated experience.
+              </p>
             </div>
             {/* <span>
               <Image src={rollingImage} alt="rollingImage" />
             </span> */}
           </div>
-          <div className="mt-14">
+
+          {/* Third section */}
+          <div className="my-28">
             <Row gutter={[32, 32]}>
               <Col xs={8}>
                 <ServiceWrapperCard
-                  text="5 years+ Experience"
+                  text="Weddings"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
               <Col xs={8}>
                 <ServiceWrapperCard
-                  text="5 years+ Experience"
+                  text="Birthdays"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
               <Col xs={8}>
                 <ServiceWrapperCard
-                  text="5 years+ Experience"
+                  text="Lifestyle"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
               <Col xs={8}>
                 <ServiceWrapperCard
-                  text="5 years+ Experience"
+                  text="Weddings"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
               <Col xs={8}>
                 <ServiceWrapperCard
-                  text="5 years+ Experience"
+                  text="Birthdays"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
               <Col xs={8}>
                 <ServiceWrapperCard
-                  text="5 years+ Experience"
+                  text="Lifestyle"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
             </Row>
+          </div>
+
+          {/* Third section */}
+          <div className="pb-36">
+            <h3 className="w-[25%] text-7xl">Wedding Packages</h3>
+            <div className="mt-10">
+              <PlanCards />
+            </div>
           </div>
         </div>
       </div>

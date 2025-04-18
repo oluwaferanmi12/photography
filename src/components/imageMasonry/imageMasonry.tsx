@@ -28,7 +28,7 @@ export default function ImageMasonry() {
         return (
           <div
             key={colIndex}
-            className={`flex flex-col gap-4 w-full bg-amber-500 ${
+            className={`flex flex-col gap-4 w-full ${
               isOffsetColumn ? "mt-20" : ""
             } ${isMiddleColumn ? "justify-center" : "justify-start"}`}
           >

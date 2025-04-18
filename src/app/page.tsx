@@ -252,10 +252,12 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-4 px-10">
               <div className="flex flex-col gap-4 w-full ">
                 <ServiceWrapperCard
+                  size="sm"
                   text="5 years+ Experience"
                   topArea={{ icon: briefIcon }}
                 />
                 <ServiceWrapperCard
+                  size="sm"
                   text="300+ Clientele"
                   topArea={{ btn: true }}
                 />
@@ -263,10 +265,12 @@ export default function Home() {
               {/*  */}
               <div className="flex flex-col gap-4 w-full mt-6 ">
                 <ServiceWrapperCard
+                  size="sm"
                   text="100% Satisfaction"
                   topArea={{ icon: briefIcon }}
                 />
                 <ServiceWrapperCard
+                  size="sm"
                   text="Humber certified!"
                   topArea={{ icon: humerCertified }}
                 />

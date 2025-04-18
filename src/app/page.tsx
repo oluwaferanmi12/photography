@@ -94,7 +94,11 @@ export default function Home() {
       <motion.div
         className="h-screen min-h-screen transition-all w-full"
         animate={{
-          padding: scrolled ? "28px" : "0px",
+          padding: scrolled
+          ? window.innerWidth < 1024
+            ? "5px"
+            : "28px"
+          : "0px",
         }}
       >
         <motion.div

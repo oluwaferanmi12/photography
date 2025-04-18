@@ -218,7 +218,7 @@ export default function Home() {
         </div>
 
         {/* SIXTH SECTION */}
-        <div className="flex flex-col px-5 lg:px-0 gap-28 justify-center items-center w-full">
+        <div className="flex flex-col px-5 lg:px-0 gap-28 lg:justify-center lg:items-center w-full">
           <div className="text-white relative flex flex-col gap-10 lg:justify-center lg:items-center lg:text-center">
             <h2 className="text-5xl lg:text-6xl">Meet Victoria</h2>
 
@@ -247,7 +247,7 @@ export default function Home() {
               memories, every photo session is a curated experience.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10 w-full">
             <div className="flex flex-col gap-4 w-full ">
               <ServiceWrapperCard
                 size="sm"
@@ -261,7 +261,7 @@ export default function Home() {
               />
             </div>
             {/*  */}
-            <div className="flex flex-col gap-4 w-full mt-6 ">
+            <div className="flex flex-col gap-4 w-full lg:mt-6 ">
               <ServiceWrapperCard
                 size="sm"
                 text="100% Satisfaction"

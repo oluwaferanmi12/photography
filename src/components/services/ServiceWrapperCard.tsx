@@ -20,7 +20,7 @@ export const ServiceWrapperCard: React.FC<ServiceWrapperCardProps> = ({
 }) => {
   const showButton = topArea.btn && !topArea.icon;
   return (
-    <div className={`border border-off-white px-8 py-10 ${size === "sm" ? "w-[400px]" : "w-full"}  rounded-3xl text-white space-y-6`}>
+    <div className={`border border-off-white px-8 py-10 ${size === "sm" ? "w-full lg:w-[400px]" : "w-full"}  rounded-3xl text-white space-y-6`}>
       <div>
         {topArea.icon ? (
           <span>

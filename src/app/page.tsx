@@ -153,13 +153,13 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col gap-28 pt-28 pb-56">
+      <div className="flex flex-col gap-28 pt-28 pb-56 ">
         {/* Second section  */}
-        <div className="flex flex-col gap-10 justify-center items-center">
-          <h3 className="text-center w-full lg:w-1/2 leading-20 text-white lg:text-8xl ">
+        <div className="flex flex-col gap-10 lg:justify-center lg:items-center px-5 lg:px-0">
+          <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
             Photography that leaves a lasting impression
           </h3>
-          <p className="text-center text-light-brown text-lg w-1/2 3xl:w-[30%]">
+          <p className="lg:text-center text-light-brown text-lg lg:w-1/2 3xl:w-[30%]">
             From polished headshots to soulful lifestyle captures, I craft
             images that do more than just “look good” . They speak volumes.
             Whether for personal branding, professional needs, or intimate
@@ -173,7 +173,7 @@ export default function Home() {
         </div>
 
         {/* FOURTH SECTION */}
-        <div className="flex items-center justify-between pl-14 3xl:pl-28 py-10  mx-auto w-full">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between px-5 lg:px-0 lg:pl-14 3xl:pl-28 py-10  mx-auto w-full">
           {/* Title */}
           <h2 className="text-6xl font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
             My Services
@@ -213,14 +213,14 @@ export default function Home() {
         </div>
 
         {/* FIFTH SECTION */}
-        <div className="p-14 3xl:px-28">
+        <div className="p-5 lg:p-14 3xl:px-28">
           <Banner />
         </div>
 
         {/* SIXTH SECTION */}
-        <div className="flex flex-col gap-28 justify-center items-center">
-          <div className="text-white relative flex flex-col gap-10 justify-center items-center text-center">
-            <h2 className="text-6xl">Meet Victoria</h2>
+        <div className="flex flex-col px-5 lg:px-0 gap-28 justify-center items-center w-full">
+          <div className="text-white relative flex flex-col gap-10 lg:justify-center lg:items-center lg:text-center">
+            <h2 className="text-5xl lg:text-6xl">Meet Victoria</h2>
 
             <div className="relative">
               {/* Circle Background */}
@@ -235,46 +235,43 @@ export default function Home() {
               {/* Main Image */}
               <Image
                 src={victoria}
-                className="w-[450px] h-[350px] rounded-2xl object-cover relative z-10"
+                className="lg:w-[450px] lg:h-[350px] w-full h-auto rounded-2xl lg:object-cover relative z-10"
                 alt="victoria"
               />
             </div>
 
-            <p className="w-[450px] text-light-brown text-2xl">
+            <p className="lg:w-[450px] text-light-brown text-2xl">
               From polished headshots to soulful lifestyle captures, I craft
               images that do more than just “look good”. They speak volumes.
               Whether for personal branding, professional needs, or intimate
               memories, every photo session is a curated experience.
             </p>
           </div>
-
-          <div>
-            <div className="grid grid-cols-2 gap-4 px-10">
-              <div className="flex flex-col gap-4 w-full ">
-                <ServiceWrapperCard
-                  size="sm"
-                  text="5 years+ Experience"
-                  topArea={{ icon: briefIcon }}
-                />
-                <ServiceWrapperCard
-                  size="sm"
-                  text="300+ Clientele"
-                  topArea={{ btn: true }}
-                />
-              </div>
-              {/*  */}
-              <div className="flex flex-col gap-4 w-full mt-6 ">
-                <ServiceWrapperCard
-                  size="sm"
-                  text="100% Satisfaction"
-                  topArea={{ icon: briefIcon }}
-                />
-                <ServiceWrapperCard
-                  size="sm"
-                  text="Humber certified!"
-                  topArea={{ icon: humerCertified }}
-                />
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10">
+            <div className="flex flex-col gap-4 w-full ">
+              <ServiceWrapperCard
+                size="sm"
+                text="5 years+ Experience"
+                topArea={{ icon: briefIcon }}
+              />
+              <ServiceWrapperCard
+                size="sm"
+                text="300+ Clientele"
+                topArea={{ btn: true }}
+              />
+            </div>
+            {/*  */}
+            <div className="flex flex-col gap-4 w-full mt-6 ">
+              <ServiceWrapperCard
+                size="sm"
+                text="100% Satisfaction"
+                topArea={{ icon: briefIcon }}
+              />
+              <ServiceWrapperCard
+                size="sm"
+                text="Humber certified!"
+                topArea={{ icon: humerCertified }}
+              />
             </div>
           </div>
         </div>

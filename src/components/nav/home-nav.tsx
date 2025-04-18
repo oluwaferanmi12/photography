@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import brandLogo from "@/assets/svgs/brand-logo.svg";
 import searchIcon from "@/assets/svgs/searchIcon.svg";
+import Button from "../button/button";
 
 export const HomeNav = () => {
   const pathname = usePathname();
@@ -37,7 +38,7 @@ export const HomeNav = () => {
         <span>
           <Image src={brandLogo} alt="logo" />
         </span>
-        <div className="rounded-full navBg  py-2 px-2 flex justify-between items-center">
+        <div className="rounded-full navBg p-2 w-1/2 flex justify-between items-center">
           <div className="w-full justify-center gap-20 items-center flex">
             {navItems.map((item) => {
               return (
@@ -46,7 +47,7 @@ export const HomeNav = () => {
                     <p
                       className={`cursor-pointer font-grotesk-medium text-base ${
                         item.navLink === pathname
-                          ? "text-[#FB5711]"
+                          ? "text-white font-bold"
                           : "text-[#FAFAFA]"
                       }`}
                     >
@@ -64,9 +65,10 @@ export const HomeNav = () => {
             })}
           </div>
           <div className="min-w-[200px] flex justify-end">
-            <button className="bg-light-brown px-6 py-2 rounded-full cursor-pointer text-[#FB5711] font-grotesk-medium text-base">
+            {/* <button className="bg-light-brown px-6 py-2 rounded-full cursor-pointer text-[#FB5711] font-grotesk-medium text-base">
               Book a session
-            </button>
+            </button> */}
+            <Button variant="filled" text="Book a session" />
           </div>
         </div>
         <span>

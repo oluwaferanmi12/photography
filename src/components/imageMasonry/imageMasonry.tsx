@@ -28,7 +28,7 @@ export default function ImageMasonry() {
         return (
           <div
             key={colIndex}
-            className={`flex flex-col gap-4 w-full ${
+            className={`flex flex-col gap-4 w-full bg-amber-500 ${
               isOffsetColumn ? "mt-20" : ""
             } ${isMiddleColumn ? "justify-center" : "justify-start"}`}
           >
@@ -36,7 +36,7 @@ export default function ImageMasonry() {
               <div
                 key={idx}
                 className={`relative ${
-                  firstAndLastColumn ? "aspect-[1/2]" : "aspect-[3/4]"
+                  firstAndLastColumn ? "aspect-[16/9] lg:aspect-[1/2]" : "lg:aspect-[3/4]"
                 }  w-full overflow-hidden rounded-xl shadow-lg  h-[400px]`}
               >
                 <Image

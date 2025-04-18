@@ -66,9 +66,9 @@ const Portfolio = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center mt-48">
-        <div className="px-14 3xl:px-28">
-          <div className="flex justify-between items-center">
+      <div className="flex justify-center items-center mt-28 lg:mt-48">
+        <div className="px-5 lg:px-14 3xl:px-28">
+          <div className="flex flex-col lg:flex-row  lg:justify-between items-center">
             <div className="flex flex-col gap-4">
               <h2 className="text-7xl">Explore my</h2>
               <div className="flex gap-5 items-center">
@@ -82,7 +82,7 @@ const Portfolio = () => {
                 <h2 className=" italic text-7xl ">Portfolio</h2>
               </div>
             </div>
-            <span>
+            <span className="hidden lg:flex">
               <Image src={rollingImage} alt="rollingImage" />
             </span>
           </div>
@@ -123,7 +123,7 @@ const Portfolio = () => {
               </div>
 
               {/* Column 2 with mt-20 */}
-              <div className="flex flex-col gap-6 mt-20">
+              <div className="flex flex-col gap-6 lg:mt-20">
                 {services
                   .filter((_, i) => i % 2 !== 0)
                   .map((service, i) => (
@@ -160,15 +160,14 @@ const Portfolio = () => {
           </div>
 
           {/* text */}
-          <div className="flex justify-between ">
+          <div className="flex flex-col w-full lg:flex-row justify-between ">
             <div>
-              <h3 className="text-5xl 3xl:text-8xl text-white w-1/2">
+              <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
                 100% Satisfaction
               </h3>
             </div>
             <div>
-              <h3 className="text-5xl 3xl:text-8xl text-white ">Seamless</h3>
-              <h3 className="text-5xl 3xl:text-8xl text-white ">Booking</h3>
+              <h3 className="text-5xl 3xl:text-8xl text-white ">Seamless Booking</h3>
             </div>
           </div>
           {/* BANNER */}

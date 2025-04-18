@@ -12,7 +12,7 @@ import HS9 from "@/assets/images/HS9.png";
 const columns = [
   [HS1, HS2], // first column
   [HS3, HS4], // second column (staggered)
-  [HS5],      // middle column (centered vertically)
+  [HS5], // middle column (centered vertically)
   [HS6, HS7], // fourth column (staggered)
   [HS8, HS9], // fifth column
 ];
@@ -20,35 +20,38 @@ const columns = [
 export default function ImageMasonry() {
   return (
     <div className="grid grid-cols-5 gap-4 py-10 min-h-screen">
-    {columns.map((column, colIndex) => {
-      const isOffsetColumn = colIndex === 1 || colIndex === 3;
-      const isMiddleColumn = colIndex === 2;
-  
-      return (
-        <div
-          key={colIndex}
-          className={`flex flex-col gap-4 w-full ${
-            isOffsetColumn ? "mt-20" : ""
-          } ${isMiddleColumn ? "justify-center" : "justify-start"}`}
-        >
-          {column.map((src, idx) => (
-            <div
-              key={idx}
-              className="relative aspect-[3/4] w-full overflow-hidden rounded-xl shadow-lg"
-            >
-              <Image
-                src={src}
-                alt={`Image ${idx}`}
-                fill
-                className="object-cover"
-                quality={90}
-                sizes="100vw"
-              />
-            </div>
-          ))}
-        </div>
-      );
-    })}
-  </div>
+      {columns.map((column, colIndex) => {
+        const isOffsetColumn = colIndex === 1 || colIndex === 3;
+        const isMiddleColumn = colIndex === 2;
+        const firstAndLastColumn = colIndex === 0 || colIndex === 4;
+
+        return (
+          <div
+            key={colIndex}
+            className={`flex flex-col gap-4 w-full ${
+              isOffsetColumn ? "mt-20" : ""
+            } ${isMiddleColumn ? "justify-center" : "justify-start"}`}
+          >
+            {column.map((src, idx) => (
+              <div
+                key={idx}
+                className={`relative ${
+                  firstAndLastColumn ? "aspect-[1/2]" : "aspect-[3/4]"
+                }  w-full overflow-hidden rounded-xl shadow-lg  h-[400px]`}
+              >
+                <Image
+                  src={src}
+                  alt={`Image ${idx}`}
+                  fill
+                  className="object-cover"
+                  quality={90}
+                  sizes="100vw"
+                />
+              </div>
+            ))}
+          </div>
+        );
+      })}
+    </div>
   );
 }

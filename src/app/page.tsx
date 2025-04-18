@@ -174,7 +174,7 @@ export default function Home() {
         {/* FOURTH SECTION */}
         <div className="flex items-center justify-between pl-14 py-10  mx-auto w-full">
           {/* Title */}
-          <h2 className="text-3xl font-semibold text-white whitespace-nowrap pr-6">
+          <h2 className="text-6xl font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
             My Services
           </h2>
 
@@ -195,8 +195,8 @@ export default function Home() {
                     />
                   </span>
                   <div>
-                    <h3 className="text-lg font-semibold">{service.title}</h3>
-                    <p className="text-sm mt-2 text-gray-700 leading-relaxed">
+                    <h3 className="text-4xl font-playfair text-black font-semibold">{service.title}</h3>
+                    <p className="font-grotesk-medium text-lg mt-2 text-gray-700 leading-relaxed">
                       {service.description}
                     </p>
                   </div>
@@ -235,7 +235,7 @@ export default function Home() {
               />
             </div>
 
-            <p className="w-[450px] text-light-brown text-lg">
+            <p className="w-[450px] text-light-brown text-2xl">
               From polished headshots to soulful lifestyle captures, I craft
               images that do more than just “look good”. They speak volumes.
               Whether for personal branding, professional needs, or intimate

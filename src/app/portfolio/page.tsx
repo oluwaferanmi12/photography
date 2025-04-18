@@ -67,27 +67,26 @@ const Portfolio = () => {
   return (
     <div>
       <div className="flex justify-center items-center mt-48">
-        <div className="max-w-[1350px]">
-          <div className="flex justify-between items-center p-14">
+        <div className="px-14 3xl:px-28">
+          <div className="flex justify-between items-center">
             <div className="flex flex-col gap-4">
-              <h2 className="text-7xl" >Explore my</h2>
+              <h2 className="text-7xl">Explore my</h2>
               <div className="flex gap-5 items-center">
                 <span>
-                  <Image src={HS4} className="rounded-full object-cover w-[200px] h-[100px]" alt="img" />
+                  <Image
+                    src={HS4}
+                    className="rounded-full object-cover w-[200px] h-[100px]"
+                    alt="img"
+                  />
                 </span>
                 <h2 className=" italic text-7xl ">Portfolio</h2>
-
               </div>
             </div>
-
             <span>
-              <Image src={rollingImage} alt="rollingImage"/>
+              <Image src={rollingImage} alt="rollingImage" />
             </span>
-
           </div>
-          <div className="p-14">
-            {/*  */}
-
+          <div className="mt-14">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-10">
               {/* Column 1 */}
               <div className="flex flex-col gap-6">

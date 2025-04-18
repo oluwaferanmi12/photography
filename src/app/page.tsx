@@ -196,7 +196,9 @@ export default function Home() {
                     />
                   </span>
                   <div>
-                    <h3 className="text-4xl font-playfair font-light text-darker-grey">{service.title}</h3>
+                    <h3 className="text-4xl font-playfair font-light text-darker-grey">
+                      {service.title}
+                    </h3>
                     <p className="font-grotesk-medium text-lg mt-2 text-dark-grey leading-relaxed">
                       {service.description}
                     </p>
@@ -211,7 +213,9 @@ export default function Home() {
         </div>
 
         {/* FIFTH SECTION */}
-        <Banner />
+        <div className="p-14 3xl:px-28">
+          <Banner />
+        </div>
 
         {/* SIXTH SECTION */}
         <div className="flex flex-col gap-28 justify-center items-center">
@@ -251,13 +255,21 @@ export default function Home() {
                   text="5 years+ Experience"
                   topArea={{ icon: briefIcon }}
                 />
-                <ServiceWrapperCard text="300+ Clientele"
-                 topArea={{btn: true }} />
+                <ServiceWrapperCard
+                  text="300+ Clientele"
+                  topArea={{ btn: true }}
+                />
               </div>
               {/*  */}
               <div className="flex flex-col gap-4 w-full mt-6 ">
-                <ServiceWrapperCard text="100% Satisfaction"  topArea={{ icon: briefIcon }} />
-                <ServiceWrapperCard text="Humber certified!" topArea={{ icon: humerCertified }} />
+                <ServiceWrapperCard
+                  text="100% Satisfaction"
+                  topArea={{ icon: briefIcon }}
+                />
+                <ServiceWrapperCard
+                  text="Humber certified!"
+                  topArea={{ icon: humerCertified }}
+                />
               </div>
             </div>
           </div>

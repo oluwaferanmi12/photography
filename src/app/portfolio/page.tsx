@@ -86,7 +86,7 @@ const Portfolio = () => {
               <Image src={rollingImage} alt="rollingImage" />
             </span>
           </div>
-          <div className="mt-14">
+          <div className="my-14">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-10">
               {/* Column 1 */}
               <div className="flex flex-col gap-6">
@@ -160,7 +160,7 @@ const Portfolio = () => {
           </div>
 
           {/* text */}
-          <div className="p-14 flex justify-between">
+          <div className="flex justify-between ">
             <div>
               <h3 className="text-5xl 3xl:text-8xl text-white w-1/2">
                 100% Satisfaction
@@ -172,7 +172,9 @@ const Portfolio = () => {
             </div>
           </div>
           {/* BANNER */}
-          <Banner />
+          <div className="my-36">
+            <Banner />
+          </div>
         </div>
       </div>
 

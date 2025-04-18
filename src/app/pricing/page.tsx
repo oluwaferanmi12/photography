@@ -30,7 +30,7 @@ const Portfolio = () => {
                 <h2 className=" italic text-7xl ">Portfolio</h2>
               </div>
             </div>
-            <div className="w-1/2">
+            <div className="w-1/2 text-light-brown">
               <p>
                 From polished headshots to soulful lifestyle captures, I craft
                 images that do more than just “look good” . They speak volumes.

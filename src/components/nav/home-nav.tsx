@@ -1,5 +1,4 @@
 "use client";
-import { Row, Col } from "antd";
 import bottomActive from "@/assets/svgs/nav-rectangle.svg";
 import Image from "next/image";
 import Link from "next/link";

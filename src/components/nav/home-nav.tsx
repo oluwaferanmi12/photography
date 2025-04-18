@@ -42,7 +42,7 @@ export const HomeNav = () => {
         <span>
           <Image src={brandLogo} alt="logo" />
         </span>
-        <div className="rounded-full navBg p-2 w-1/2 flex justify-between items-center">
+        <div className="rounded-full navBg p-2 pl-8update flex justify-between items-center">
           <div className="w-full justify-center gap-20 items-center flex">
             {navItems.map((item) => {
               return (

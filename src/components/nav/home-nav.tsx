@@ -20,12 +20,16 @@ export const HomeNav = () => {
       navLink: "/about",
     },
     {
-      navTitle: "Gallery",
-      navLink: "/gallery",
-    },
-    {
       navTitle: "Portfolio",
       navLink: "/portfolio",
+    },
+    {
+      navTitle: "Pricing & Packages",
+      navLink: "/pricing",
+    },
+    {
+      navTitle: "Gallery",
+      navLink: "/gallery",
     },
     {
       navTitle: "Contact",

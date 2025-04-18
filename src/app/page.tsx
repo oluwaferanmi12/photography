@@ -147,7 +147,7 @@ export default function Home() {
               </div>
             </Col>
           </Row>
-          <span className="absolute right-14 bottom-14">
+          <span className="absolute right-14 bottom-14 3xl:right-28 3xl:bottom-28">
             <Image src={rollingImage} alt="img" />
           </span>
         </motion.div>
@@ -173,7 +173,7 @@ export default function Home() {
         </div>
 
         {/* FOURTH SECTION */}
-        <div className="flex items-center justify-between pl-14 py-10  mx-auto w-full">
+        <div className="flex items-center justify-between pl-14 3xl:pl-28 py-10  mx-auto w-full">
           {/* Title */}
           <h2 className="text-6xl font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
             My Services

@@ -97,7 +97,7 @@ export const GalleryBox = () => {
   return (
     <div 
       ref={scrollRef}
-      className="flex justify-center overflow-hidden"
+      className="flex justify-center mt-48 overflow-hidden"
     >
       <motion.div
         ref={containerRef}
@@ -105,9 +105,9 @@ export const GalleryBox = () => {
         style={{ width: containerWidth }}
         className="bg-[#0A0909] px-7 pt-7 overflow-hidden cursor-default"
       >
-        <Row justify="center" gutter={[32, 32]}>
+        <Row justify="center" align={'middle'} gutter={[32, 32]}>
           <Col xs={6}>
-            <div className="grid grid-cols-2 gap-4 pb-7 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-7 relative">
               <ParallaxImage src={sixthImage1} alt="" position={cursorPosition} index={0} isVisible={imagesVisible} />
               <div></div>
               <div></div>
@@ -158,7 +158,7 @@ export const GalleryBox = () => {
             </div>
           </Col>
           <Col xs={6}>
-            <div className="grid grid-cols-2 gap-4 pb-7 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-7 relative">
               <div></div>
               <ParallaxImage src={sixthImage1} alt="" position={cursorPosition} index={0} isVisible={imagesVisible} />
               <ParallaxImage src={sixthImage2} alt="" position={cursorPosition} index={1} isVisible={imagesVisible} />

@@ -4,16 +4,21 @@ import HS4 from "@/assets/images/HS4.png";
 import { PlanCards } from "@/components/plans-card/PlanCards";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
+import rollingImage from "@/assets/svgs/rollingImage.svg";
+
 
 const Gallery = () => {
   return (
     <div>
       <div className="flex flex-col gap-14 justify-center items-center mt-32">
-        <div className="max-w-[1350px] flex flex-col gap-28 w-full p-14">
-          <div className="galleryBg border-4 border-light-brown w-full flex items-center">
+        <div className=" flex flex-col gap-28 w-full p-14 3xl:p-28">
+          <div className="galleryBg relative border-4 border-light-brown w-full flex items-center">
             <div className="my-6 text-white text-8xl flex flex-col gap-5 font-grotesk-regular">
               <p>Weddings</p>
             </div>
+            <span className="absolute -right-10 -bottom-10 ">
+            <Image src={rollingImage} alt="img" />
+          </span>
           </div>
 
           <div className="space-y-4">
@@ -92,9 +97,9 @@ const Gallery = () => {
             </div>
           </div>
         </div>
-        <GalleryBox />
-        <Footer />
       </div>
+      <GalleryBox />
+      <Footer />
     </div>
   );
 };

@@ -97,7 +97,7 @@ export const GalleryBox = () => {
   return (
     <div 
       ref={scrollRef}
-      className="flex justify-center my-20 overflow-hidden"
+      className="flex justify-center mt-20 overflow-hidden"
     >
       <motion.div
         ref={containerRef}

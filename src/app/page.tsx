@@ -95,10 +95,10 @@ export default function Home() {
         className="h-screen min-h-screen transition-all w-full"
         animate={{
           padding: scrolled
-          ? window.innerWidth < 1024
-            ? "5px"
-            : "28px"
-          : "0px",
+            ? window.innerWidth < 1024
+              ? "5px"
+              : "28px"
+            : "0px",
         }}
       >
         <motion.div
@@ -222,7 +222,7 @@ export default function Home() {
         </div>
 
         {/* SIXTH SECTION */}
-        <div className="flex flex-col px-5 lg:px-0 gap-28 lg:justify-center lg:items-center w-full">
+        <div className="flex flex-col px-5 lg:px-0 gap-28 justify-center items-center w-full">
           <div className="text-white relative flex flex-col gap-10 lg:justify-center lg:items-center lg:text-center">
             <h2 className="text-5xl lg:text-6xl">Meet Victoria</h2>
 
@@ -239,7 +239,7 @@ export default function Home() {
               {/* Main Image */}
               <Image
                 src={victoria}
-                className="lg:w-[450px] lg:h-[350px] w-full h-auto rounded-2xl lg:object-cover relative z-10"
+                className="lg:w-[450px] z-1 lg:h-[350px] w-full h-auto rounded-2xl lg:object-cover relative"
                 alt="victoria"
               />
             </div>
@@ -251,31 +251,33 @@ export default function Home() {
               memories, every photo session is a curated experience.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10 w-full">
-            <div className="flex flex-col gap-4 w-full ">
-              <ServiceWrapperCard
-                size="sm"
-                text="5 years+ Experience"
-                topArea={{ icon: briefIcon }}
-              />
-              <ServiceWrapperCard
-                size="sm"
-                text="300+ Clientele"
-                topArea={{ btn: true }}
-              />
-            </div>
-            {/*  */}
-            <div className="flex flex-col gap-4 w-full lg:mt-6 ">
-              <ServiceWrapperCard
-                size="sm"
-                text="100% Satisfaction"
-                topArea={{ icon: briefIcon }}
-              />
-              <ServiceWrapperCard
-                size="sm"
-                text="Humber certified!"
-                topArea={{ icon: humerCertified }}
-              />
+          <div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10 w-full">
+              <div className="flex flex-col gap-4 w-full ">
+                <ServiceWrapperCard
+                  size="sm"
+                  text="5 years+ Experience"
+                  topArea={{ icon: briefIcon }}
+                />
+                <ServiceWrapperCard
+                  size="sm"
+                  text="300+ Clientele"
+                  topArea={{ btn: true }}
+                />
+              </div>
+              {/*  */}
+              <div className="flex flex-col gap-4 w-full lg:mt-6 ">
+                <ServiceWrapperCard
+                  size="sm"
+                  text="100% Satisfaction"
+                  topArea={{ icon: briefIcon }}
+                />
+                <ServiceWrapperCard
+                  size="sm"
+                  text="Humber certified!"
+                  topArea={{ icon: humerCertified }}
+                />
+              </div>
             </div>
           </div>
         </div>

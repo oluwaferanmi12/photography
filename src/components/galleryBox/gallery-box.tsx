@@ -44,7 +44,7 @@ const ParallaxImage = ({ src, alt, position, index, isVisible }: ParallaxImagePr
       className="cursor-pointer"
       style={{ willChange: 'transform' }}
     >
-      <Image className="w-full object-cover" src={src} alt={alt} />
+      <Image className="w-full h-full object-cover" src={src} alt={alt} />
     </motion.div>
   );
 };
@@ -97,7 +97,7 @@ export const GalleryBox = () => {
   return (
     <div 
       ref={scrollRef}
-      className="flex justify-center mt-48 overflow-hidden"
+      className="flex justify-center my-20 overflow-hidden"
     >
       <motion.div
         ref={containerRef}
@@ -105,9 +105,9 @@ export const GalleryBox = () => {
         style={{ width: containerWidth }}
         className="bg-[#0A0909] px-7 pt-7 overflow-hidden cursor-default"
       >
-        <Row justify="center" align={'middle'} gutter={[32, 32]}>
+        <Row justify="center" gutter={[32, 32]}>
           <Col xs={6}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-7 relative">
+            <div className="grid grid-cols-2 gap-4 pb-7 relative">
               <ParallaxImage src={sixthImage1} alt="" position={cursorPosition} index={0} isVisible={imagesVisible} />
               <div></div>
               <div></div>
@@ -119,7 +119,7 @@ export const GalleryBox = () => {
             </div>
           </Col>
           <Col xs={12} className="relative">
-            <div className="hidden lg:flex items-center justify-center">
+            <div className="flex items-center justify-center">
               <span>
                 <ParallaxImage 
                   src={sixthImage5} 
@@ -130,7 +130,7 @@ export const GalleryBox = () => {
                 />
               </span>
             </div>
-            <div className="flex justify-center items-end  relative z-10">
+            <div className="flex justify-center items-end xl:mt-10 relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ 
@@ -145,7 +145,7 @@ export const GalleryBox = () => {
                 </div>
               </motion.div>
             </div>
-            <div className="justify-center hidden lg:flex">
+            <div className="flex justify-center">
               <span className="absolute bottom-0">
                 <ParallaxImage 
                   src={sixthImage6} 
@@ -158,7 +158,7 @@ export const GalleryBox = () => {
             </div>
           </Col>
           <Col xs={6}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-7 relative">
+            <div className="grid grid-cols-2 gap-4 pb-7 relative">
               <div></div>
               <ParallaxImage src={sixthImage1} alt="" position={cursorPosition} index={0} isVisible={imagesVisible} />
               <ParallaxImage src={sixthImage2} alt="" position={cursorPosition} index={1} isVisible={imagesVisible} />

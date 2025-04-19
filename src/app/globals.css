@@ -125,7 +125,7 @@ a{
 .aboutLandingBG::before,
 .catalogueBG::before,
 .contactBG::before,
-.landingBg::before,
+/* .landingBg::before, */
 .galleryBg::before {
   content: "";
   position: absolute;
@@ -141,7 +141,7 @@ a{
 /* .landingBg,  */
 .aboutLandingBG,
 .contactBG,
-.landingBg,
+/* .landingBg, */
 .galleryBg {
   width: 100%;
   filter: grayscale(90%) contrast(1.0);

@@ -25,10 +25,7 @@ export const ServiceCard = ({
   };
 }) => {
   const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start end", "start start"],
-  });
+
 
   const newScale = useTransform(progress, range, [1, targetScale]);
   return (

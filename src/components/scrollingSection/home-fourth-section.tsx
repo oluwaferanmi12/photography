@@ -6,11 +6,14 @@ import HS1 from "@/assets/images/HS1.png";
 import HS6 from "@/assets/images/HS6.png";
 import Image from "next/image";
 import Button from "../button/button";
+import { ServiceCard } from "@/components/cascade-card/service-card";
 
 export const FourthSectionScroll = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
+  const container = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
-    target: targetRef,
+    target: container,
+    offset: ["start start", "end end"],
   });
 
   // Default scroll percentage (for desktop)
@@ -61,42 +64,62 @@ export const FourthSectionScroll = () => {
     },
   ];
   return (
-    <section ref={targetRef} className="relative h-[300vh] py-10 ">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex items-center gap-4">
-          <h2 className="text-6xl font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
-            My Services
-          </h2>
-          {/* <div className="flex gap-4 min-w-max pl-6 pr-0"> */}
-          {services.map((service, i) => (
-            <div
-              key={i}
-              className="w-full md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md"
-              style={{ backgroundColor: service.bg }}
-            >
-              <span className="">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  className="rounded-full h-[130px] w-[80%] object-cover"
-                />
-              </span>
-              <div>
-                <h3 className="text-4xl font-playfair font-light text-darker-grey">
-                  {service.title}
-                </h3>
-                <p className="font-grotesk-medium text-lg mt-2 text-dark-grey leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-              <div>
-                <Button variant="filled" text={service.cta} />
-              </div>
-            </div>
-          ))}
-          {/* </div> */}
-        </motion.div>
+    <>
+      <div ref={container} className="lg:hidden">
+        {services.map((service, index) => {
+          const targetScale = 1 - (services.length - index) * 0.05;
+          return (
+            <ServiceCard
+              currentIndex={index}
+              range={[index * 0.333, 1]}
+              targetScale={targetScale}
+              progress={scrollYProgress}
+              key={index}
+              service={service}
+            />
+          );
+        })}
       </div>
-    </section>
+      <section
+        ref={targetRef}
+        className="relative hidden lg:block h-[300vh] py-10 "
+      >
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+          <motion.div style={{ x }} className="flex items-center gap-4">
+            <h2 className="text-6xl font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
+              My Services
+            </h2>
+            {/* <div className="flex gap-4 min-w-max pl-6 pr-0"> */}
+            {services.map((service, i) => (
+              <div
+                key={i}
+                className="w-full md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md"
+                style={{ backgroundColor: service.bg }}
+              >
+                <span className="">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    className="rounded-full h-[130px] w-[80%] object-cover"
+                  />
+                </span>
+                <div>
+                  <h3 className="text-4xl font-playfair font-light text-darker-grey">
+                    {service.title}
+                  </h3>
+                  <p className="font-grotesk-medium text-lg mt-2 text-dark-grey leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+                <div>
+                  <Button variant="filled" text={service.cta} />
+                </div>
+              </div>
+            ))}
+            {/* </div> */}
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 };

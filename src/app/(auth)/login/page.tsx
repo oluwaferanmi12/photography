@@ -43,7 +43,7 @@ export default function Login() {
                         </p>
                         <input
                           placeholder="Enter your first name"
-                          className="w-full py-4 px-3 rounded-lg border text-sm border-[#DCDCDC] bg-[#F5F5F5] text-xs placeholder:text-[#868D96]"
+                          className="w-full py-4 px-3 rounded-lg border border-[#DCDCDC] bg-[#F5F5F5] text-xs placeholder:text-[#868D96]"
                         />
                       </div>
                       <div className="my-3">

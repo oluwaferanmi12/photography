@@ -9,7 +9,6 @@ import HS7 from "@/assets/images/HS7.png";
 import HS8 from "@/assets/images/HS8.png";
 import HS9 from "@/assets/images/HS9.png";
 import { useRef } from "react";
-// import { useScroll, useTransform, motion } from "framer-motion";
 
 const columns = [
   [HS1, HS2], // first column
@@ -23,11 +22,6 @@ const cardImageData = [HS1, HS2, HS3, HS4, HS5, HS6, HS7, HS8, HS9];
 
 export default function ImageMasonry() {
   const container = useRef<HTMLDivElement | null>(null);
-
-  // const { scrollYProgress } = useScroll({
-  //   target: container,
-  //   offset: ["start start", "end end"],
-  // });
 
   return (
     <>
@@ -67,9 +61,8 @@ export default function ImageMasonry() {
           );
         })}
       </div>
-      <section className="pb-16 lg:hidden" ref={container}>
+      <section className="pb-16 lg:hidden flex flex-col justify-center items-center " ref={container}>
         {cardImageData.map((item, index) => {
-          // const targetScale = 1 - (cardImageData.length - index) * 0.05;
           return (
             <div key={index} className="h-screen sticky top-0">
               <div className="w-[300px] h-[300px]">

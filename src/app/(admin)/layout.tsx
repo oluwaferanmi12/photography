@@ -25,20 +25,12 @@ export default function RootLayout({
                 <Image src={layoutLine} alt="" />
               </div>
               <div className="mt-8">
-                <NavWrapper
-                  icon={homeOutline}
-                  active={false}
-                  text="Dashboard"
-                />
-                <NavWrapper
-                  icon={homeOutline}
-                  active={false}
-                  text="Transaction"
-                />
-                <NavWrapper icon={homeOutline} active={false} text="Links" />
-                <NavWrapper icon={homeOutline} active={false} text="Calendar" />
-                <NavWrapper icon={homeOutline} active={false} text="Packages" />
-                <NavWrapper icon={homeOutline} active={false} text="Settings" />
+                <NavWrapper icon={homeOutline} text="Dashboard" />
+                <NavWrapper icon={homeOutline} text="Transaction" />
+                <NavWrapper icon={homeOutline} text="Links" />
+                <NavWrapper icon={homeOutline} text="Calendar" />
+                <NavWrapper icon={homeOutline} text="Packages" />
+                <NavWrapper icon={homeOutline} text="Settings" />
               </div>
             </div>
 
@@ -70,13 +62,7 @@ export default function RootLayout({
   );
 }
 
-const NavWrapper = ({
-  icon,
-  text,
-}: {
-  icon: string;
-  text: string;
-}) => {
+const NavWrapper = ({ icon, text }: { icon: string; text: string }) => {
   return (
     <div className="flex cursor-pointer items-center gap-2 mb-4">
       <div>

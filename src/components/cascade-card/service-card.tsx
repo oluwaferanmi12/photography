@@ -38,7 +38,7 @@ export const ServiceCard = ({
       }}
     >
       <Row justify={"center"}>
-        <Col xs={22} md={18} lg={16}>
+        <Col xs={24} md={18} lg={16}>
           <motion.div
             className="rounded-lg px-8 min-w-full py-10 my-8  min-h-[500px]"
             style={{

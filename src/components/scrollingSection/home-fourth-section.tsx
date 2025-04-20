@@ -11,9 +11,15 @@ import { ServiceCard } from "@/components/cascade-card/service-card";
 export const FourthSectionScroll = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const container = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
+
+
+  const mobileScroll = useScroll({
     target: container,
     offset: ["start start", "end end"],
+  });
+
+  const desktopScroll = useScroll({
+    target: targetRef,
   });
 
   // Default scroll percentage (for desktop)
@@ -21,11 +27,15 @@ export const FourthSectionScroll = () => {
 
   // Check window size (only runs on client-side)
   if (typeof window !== "undefined") {
-    if (window.innerWidth < 768) scrollPercentage = "-200%"; // Mobile
-    else if (window.innerWidth < 1024) scrollPercentage = "-100%"; // Tablet
+    if (window.innerWidth > 1500) {
+      scrollPercentage = "-25%";
+    } else if (window.innerWidth > 1400) {
+      scrollPercentage = "-80%";
+    } else {
+      scrollPercentage = "-200%";
+    }
   }
-
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", scrollPercentage]);
+  const x = useTransform(desktopScroll.scrollYProgress, [0, 1], ["1%", scrollPercentage]);
   //   -25%
   // -200%
 
@@ -63,11 +73,15 @@ export const FourthSectionScroll = () => {
       cta: "View Lifestyle",
     },
   ];
+
+
+
+
   return (
     <>
-      <p className="text-2xl pl-6 lg:hidden font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
+      <h2 className="text-6xl lg:hidden px-5 font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
         My Services
-      </p>
+      </h2>
       <div ref={container} className="lg:hidden">
         {services.map((service, index) => {
           const targetScale = 1 - (services.length - index) * 0.05;
@@ -76,7 +90,7 @@ export const FourthSectionScroll = () => {
               currentIndex={index}
               range={[index * 0.333, 1]}
               targetScale={targetScale}
-              progress={scrollYProgress}
+              progress={mobileScroll.scrollYProgress}
               key={index}
               service={service}
             />

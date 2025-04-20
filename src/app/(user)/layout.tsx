@@ -1,17 +1,8 @@
 "use client";
 // import type { Metadata } from "next";
-import { Geist_Mono, Playfair } from "next/font/google";
 import { HomeNav } from "@/components/nav/home-nav";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
-const playFair = Playfair({
-  variable: "--font-play-fair",
-  subsets: ["latin"],
-});
 
 export default function RootLayout({
   children,
@@ -19,13 +10,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`antialiased ${geistMono.variable} ${playFair.variable} `}
-      >
-        <HomeNav />
-        {children}
-      </body>
-    </html>
+    <div>
+      <HomeNav />
+      {children}
+    </div>
   );
 }

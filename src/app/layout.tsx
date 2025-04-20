@@ -3,7 +3,6 @@
 import { Geist_Mono, Playfair } from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { HomeNav } from "@/components/nav/home-nav";
 import Lenis from "@studio-freight/lenis";
 import { useEffect } from "react";
 

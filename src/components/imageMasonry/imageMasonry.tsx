@@ -71,21 +71,19 @@ export default function ImageMasonry() {
         {cardImageData.map((item, index) => {
           // const targetScale = 1 - (cardImageData.length - index) * 0.05;
           return (
-            <>
-              <div key={index} className="h-screen sticky top-0">
-                <div className="w-[300px] h-[300px]">
-                  <Image
-                    src={item}
-                    alt={`Image ${index}`}
-                    // fill
-                    className="object-fill w-[300px] h-[300px]"
-                    quality={90}
-                    width={300}
-                    // sizes="100vw"
-                  />
-                </div>
+            <div key={index} className="h-screen sticky top-0">
+              <div className="w-[300px] h-[300px]">
+                <Image
+                  src={item}
+                  alt={`Image ${index}`}
+                  // fill
+                  className="object-fill w-[300px] h-[300px]"
+                  quality={90}
+                  width={300}
+                  // sizes="100vw"
+                />
               </div>
-            </>
+            </div>
           );
         })}
       </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Row, Col } from "antd";
 import Image, { StaticImageData } from "next/image";
 import image2 from "@/assets/svgs/home-image-2.svg";
@@ -26,12 +26,24 @@ import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import { FourthSectionScroll } from "@/components/scrollingSection/home-fourth-section";
 import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
+import { MainCard } from "@/components/cascade-card/cascade-card";
+import cascadeImage1 from "@/assets/svgs/cascade-image-1.svg";
+import cascadeImage2 from "@/assets/svgs/cascade-image-2.svg";
+import cascadeImage3 from "@/assets/svgs/cascade-image-3.svg";
+import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
 
 export default function Home() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [activeIndex, setActiveIndex] = useState(2);
+  const container = useRef<HTMLDivElement | null>(null);
+
   const [currentBg, setCurrentBg] = useState(bgImage3);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+  const cardData = [cascadeImage4, cascadeImage3, cascadeImage2, cascadeImage1];
 
   // Memoize imageMap to prevent unnecessary recreations
   const imageMap = useMemo(
@@ -155,7 +167,7 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col gap-28 pt-28 pb-56 ">
+      <div className="flex flex-col gap-28 pt-28 pb-56">
         {/* Second section  */}
         <div className="flex flex-col gap-10 lg:justify-center lg:items-center px-5 lg:px-0">
           <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
@@ -169,8 +181,29 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Card cascade   */}
+        <div className="lg:hidden">
+          {cardData.map((item, index) => {
+            const targetScale = 1 - (cardData.length - index) * 0.05;
+            return (
+              <>
+                <MainCard
+                  showComingSoon={false}
+                  hideGoTo={false}
+                  key={item}
+                  currentIndex={index}
+                  range={[index * 0.333, 1]}
+                  targetScale={targetScale}
+                  progress={scrollYProgress}
+                  imgSrc={item}
+                />
+              </>
+            );
+          })}
+        </div>
+
         {/* THIRD SECTION */}
-        <div>
+        <div className="hidden lg:block">
           <ImageMasonry />
         </div>
 

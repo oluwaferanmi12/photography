@@ -4,7 +4,7 @@ import sideBarImage from "@/assets/images/ladyAuthImage.png";
 import loginLogo from "@/assets/svgs/loginLogo.svg";
 import loginUsericon from "@/assets/svgs/loginUserIcon.svg";
 
-export const Login = () => {
+export default function Login() {
   return (
     <div className="bg-[#F6F4F0]">
       <div
@@ -69,6 +69,6 @@ export const Login = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Login;
+

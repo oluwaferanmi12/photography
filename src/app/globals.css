@@ -6,6 +6,30 @@
 }
 
 @font-face {
+  font-family: "mona-light";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans-Light.ttf");
+}
+@font-face {
+  font-family: "mona-regular";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "mona-medium";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "mona-semibold";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "mona-bold";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans_Condensed-Bold.ttf");
+}
+
+@font-face {
   font-family: "grotesk-light";
   src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Light.ttf");
 }
@@ -55,13 +79,18 @@
   --font-grotesk-semi-bold: grotesk-semi-bold;
   --font-grotesk-extra-bold: grotesk-extra-bold;
   --font-valentiamo-reg: valentiamo-regular;
+  --font-mono-light: mona-light;
+  --font-mono-regular: mona-regular;
+  --font-mono-medium: mona-medium;
+  --font-mono-semibold: mono-semibold;
+  --font-mono-bold: mono-bold;
 
-  --color-primary-orange: #FB5711;
-  --color-light-brown: #D9C9AE;
-  --color-off-white: #2D2C2C;
+  --color-primary-orange: #fb5711;
+  --color-light-brown: #d9c9ae;
+  --color-off-white: #2d2c2c;
   --color-grey: #999999;
   --color-darker-grey: #151515;
-  --color-dark-grey: #2D2D2C;
+  --color-dark-grey: #2d2d2c;
 
   --breakpoint-3xl: 1400px;
 }
@@ -79,18 +108,14 @@ body {
   color: white;
 }
 
-a{
+a {
   color: inherit !important;
 }
 
 .navBg {
   backdrop-filter: blur(100px);
-  background: #FFFFFF1A;
+  background: #ffffff1a;
 }
-
-
-
-
 
 /* .landingBg {
   background-image: linear-gradient(
@@ -100,20 +125,19 @@ a{
     url("../assets/images/landingImage.jpeg");
 } */
 
-
-.aboutLandingBG{
+.aboutLandingBG {
   background-image: url("../assets/images/about-secondImg--cropped.png");
 }
 
-.catalogueBG{
+.catalogueBG {
   background-image: url("../assets/images/homeHeaderImage--cropped.jpeg");
 }
 
-.contactBG{
+.contactBG {
   background-image: url("../assets/images/catalogue-header.jpeg");
 }
 
-.galleryBg{
+.galleryBg {
   background: url("../assets/images/homeHeaderImage--cropped.jpeg");
   background-position: center;
   background-size: cover;
@@ -137,20 +161,18 @@ a{
   border-radius: 32px;
 }
 
-
 /* .landingBg,  */
 .aboutLandingBG,
 .contactBG,
 /* .landingBg, */
 .galleryBg {
   width: 100%;
-  filter: grayscale(90%) contrast(1.0);
+  filter: grayscale(90%) contrast(1);
   border-radius: 32px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
-
 
 /* Parallax container */
 .parallax-container {
@@ -162,9 +184,8 @@ a{
   background-size: cover;
   min-height: 500px; */
 
-  
   /* Set a specific height */
-  min-height: 500px; 
+  min-height: 500px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -183,7 +204,6 @@ a{
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
-
 .landingBg {
   /* filter: grayscale(100%) contrast(1.1); */
   border-radius: 32px;
@@ -193,22 +213,21 @@ a{
   transition: background-image 0.5s ease-in-out;
 }
 
-
 .parallax-bg {
   position: relative;
-  min-height: 500px; 
+  min-height: 500px;
   background: url("../assets/images/catalogue-header.jpeg");
 
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-} 
+}
 
-.parallax-content{
+.parallax-content {
   z-index: 10;
   position: relative;
-  min-height: 500px; 
+  min-height: 500px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -217,7 +236,7 @@ a{
 
 .footer {
   z-index: 999;
-  background-color: #D9C9AE;
+  background-color: #d9c9ae;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -229,12 +248,9 @@ a{
   scrollbar-width: none; /* Firefox */
 }
 
-.homeBanner{
+.homeBanner {
   /* background: url("../assets/images/homeHeaderImage--cropped.jpeg"); */
-  background-image: linear-gradient(
-      rgba(0, 0, 0, 0.4),
-      rgba(0, 0, 0, 0.4)
-    ),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("../assets/images/homeHeaderImage--cropped.jpeg");
   background-position: center;
   background-size: cover;
@@ -244,14 +260,32 @@ a{
 }
 
 
+.imageRotate {
+  animation: rotate 10s linear infinite;
+}
 
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
-
+.loginBackgroundImage {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../assets/images/ladyAuthImage.png");
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  min-height: 100%;
+  background-repeat: no-repeat;
+}
 
 @media (min-width: 1400px) {
   .footer {
     height: 100dvh !important;
-  } 
+  }
 }
-

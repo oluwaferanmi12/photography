@@ -24,6 +24,8 @@ import ImageMasonry from "@/components/imageMasonry/imageMasonry";
 import { Banner } from "@/components/banner/banner";
 import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import { FourthSectionScroll } from "@/components/scrollingSection/home-fourth-section";
+import Link from "next/link";
+import { FadeInAnimate } from "@/animation/reveal/fade-in";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -85,7 +87,7 @@ export default function Home() {
           }}
         >
           <div
-            className={`absolute inset-0 z-0  `}
+            className={`absolute inset-0 z-0 `}
             style={{
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${currentBg.src})`,
               backgroundSize: "cover",
@@ -140,9 +142,16 @@ export default function Home() {
               </Col>
             </Row>
           </div>
-          <span className="absolute right-14 bottom-14 3xl:right-28 3xl:bottom-28">
+          <FadeInAnimate transitionDuration={15}>
+            <Link href="/">
+              <span className="absolute right-14 bottom-14 3xl:right-28 3xl:bottom-28">
+                <Image className="imageRotate" src={rollingImage} alt="image" />
+              </span>
+            </Link>
+          </FadeInAnimate>
+          {/* <span className="absolute right-14 bottom-14 3xl:right-28 3xl:bottom-28">
             <Image src={rollingImage} alt="img" />
-          </span>
+          </span> */}
         </motion.div>
       </motion.div>
 

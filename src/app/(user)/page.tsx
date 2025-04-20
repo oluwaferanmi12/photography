@@ -188,8 +188,6 @@ export default function Home() {
             return (
               <>
                 <MainCard
-                  showComingSoon={false}
-                  hideGoTo={false}
                   key={item}
                   currentIndex={index}
                   range={[index * 0.333, 1]}

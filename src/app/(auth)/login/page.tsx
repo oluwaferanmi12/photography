@@ -1,6 +1,5 @@
 import { Col, Row } from "antd";
 import Image from "next/image";
-import sideBarImage from "@/assets/images/ladyAuthImage.png";
 import loginLogo from "@/assets/svgs/loginLogo.svg";
 import loginUsericon from "@/assets/svgs/loginUserIcon.svg";
 

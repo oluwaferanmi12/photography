@@ -73,11 +73,9 @@ export default function RootLayout({
 const NavWrapper = ({
   icon,
   text,
-  active,
 }: {
   icon: string;
   text: string;
-  active: boolean;
 }) => {
   return (
     <div className="flex cursor-pointer items-center gap-2 mb-4">

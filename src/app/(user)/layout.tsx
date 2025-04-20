@@ -1,11 +1,7 @@
 "use client";
 // import type { Metadata } from "next";
 import { Geist_Mono, Playfair } from "next/font/google";
-import "./globals.css";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { HomeNav } from "@/components/nav/home-nav";
-import Lenis from "@studio-freight/lenis";
-import { useEffect } from "react";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -22,20 +18,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    const lenis = new Lenis();
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-  });
   return (
     <html lang="en">
       <body
         className={`antialiased ${geistMono.variable} ${playFair.variable} `}
       >
-        <AntdRegistry>{children}</AntdRegistry>
+        <HomeNav />
+        {children}
       </body>
     </html>
   );

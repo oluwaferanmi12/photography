@@ -7,8 +7,8 @@ import arrowRight from "@/assets/svgs/right_arrow.svg";
 export const PlanCards = () => {
   return (
     <div>
-      <Row gutter={32}>
-        <Col xs={8}>
+      <Row gutter={[32, 32]}>
+        <Col xs={24} lg={8}>
           <div className="p-6 border border-off-white bg-[#0E0E0E] rounded-3xl">
             <span>
               <Image src={icon} className=" " alt="icon" />
@@ -41,7 +41,7 @@ export const PlanCards = () => {
             </button>
           </div>
         </Col>
-        <Col xs={8}>
+        <Col xs={24} lg={8}>
           <div className="bg-[#0E0E0E] p-6 border border-off-white rounded-3xl">
             <span>
               <Image src={icon} className=" " alt="icon" />
@@ -74,7 +74,7 @@ export const PlanCards = () => {
             </button>
           </div>
         </Col>
-        <Col xs={8}>
+        <Col xs={24} lg={8}>
           <div className="bg-[#0E0E0E] p-6 border border-off-white rounded-3xl">
             <span>
               <Image src={icon} className=" " alt="icon" />

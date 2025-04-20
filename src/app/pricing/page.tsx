@@ -16,8 +16,8 @@ const Portfolio = () => {
     <div>
       <div className="mt-28 lg:mt-48">
         <div className="px-5 lg:px-14 3xl:px-28">
-          <div className="flex flex-col lg:flex-row justify-between w-full lg:items-center">
-            <div className="flex flex-col gap-8 w-1/2">
+          <div className="flex flex-col gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
+            <div className="flex flex-col gap-8 lg:w-1/2">
               <h2 className="text-7xl">Explore my</h2>
               <div className="flex gap-5 items-center">
                 <span>
@@ -27,10 +27,10 @@ const Portfolio = () => {
                     alt="img"
                   />
                 </span>
-                <h2 className=" italic text-7xl ">Portfolio</h2>
+                <h2 className=" italic text-7xl ">Packages</h2>
               </div>
             </div>
-            <div className="w-1/2 text-light-brown">
+            <div className="lg:w-[70%] text-xl text-light-brown">
               <p>
                 From polished headshots to soulful lifestyle captures, I craft
                 images that do more than just “look good” . They speak volumes.
@@ -46,37 +46,37 @@ const Portfolio = () => {
           {/* Third section */}
           <div className="my-28">
             <Row gutter={[32, 32]}>
-              <Col xs={8}>
+              <Col xs={24} lg={8}>
                 <ServiceWrapperCard
                   text="Weddings"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
-              <Col xs={8}>
+              <Col xs={24} lg={8}>
                 <ServiceWrapperCard
                   text="Birthdays"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
-              <Col xs={8}>
+              <Col xs={24} lg={8}>
                 <ServiceWrapperCard
                   text="Lifestyle"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
-              <Col xs={8}>
+              <Col xs={24} lg={8}>
                 <ServiceWrapperCard
                   text="Weddings"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
-              <Col xs={8}>
+              <Col xs={24} lg={8}>
                 <ServiceWrapperCard
                   text="Birthdays"
                   topArea={{ icon: briefIcon }}
                 />
               </Col>
-              <Col xs={8}>
+              <Col xs={24} lg={8}>
                 <ServiceWrapperCard
                   text="Lifestyle"
                   topArea={{ icon: briefIcon }}
@@ -87,7 +87,7 @@ const Portfolio = () => {
 
           {/* Third section */}
           <div className="pb-36">
-            <h3 className="w-[25%] text-7xl">Wedding Packages</h3>
+            <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Wedding Packages</h3>
             <div className="mt-10">
               <PlanCards />
             </div>

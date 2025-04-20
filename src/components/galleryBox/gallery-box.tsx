@@ -44,7 +44,7 @@ const ParallaxImage = ({ src, alt, position, index, isVisible }: ParallaxImagePr
       className="cursor-pointer"
       style={{ willChange: 'transform' }}
     >
-      <Image className="w-full object-cover" src={src} alt={alt} />
+      <Image className="w-full h-full object-cover" src={src} alt={alt} />
     </motion.div>
   );
 };
@@ -97,7 +97,7 @@ export const GalleryBox = () => {
   return (
     <div 
       ref={scrollRef}
-      className="flex justify-center overflow-hidden"
+      className="flex justify-center mt-20 overflow-hidden"
     >
       <motion.div
         ref={containerRef}
@@ -130,7 +130,7 @@ export const GalleryBox = () => {
                 />
               </span>
             </div>
-            <div className="flex justify-center items-end  relative z-10">
+            <div className="flex justify-center items-end xl:mt-10 relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ 

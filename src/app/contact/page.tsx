@@ -8,9 +8,9 @@ const Contact = () => {
   return (
     <div>
       <HeaderWrapper headerTitle="Contact" landingBg="contactBG" />
-      <div className="flex flex-col items-center justify-center gap-8 p-7">
-        <h2 className="text-8xl font-grotesk-medium">Contact our team</h2>
-        <div className="text-center text-xl flex flex-col gap-3">
+      <div className="flex flex-col w-full items-center justify-center gap-8 p-7">
+        <h2 className=" text-5xl lg:text-8xl font-grotesk-medium">Contact our team</h2>
+        <div className="text-center lg:w-1/2 text-xl flex flex-col gap-3">
           <p>
             Thank you for visiting! We&apos;re so glad you&apos;re here and
             interested in getting in touch. Whether you&apos;re looking to
@@ -29,9 +29,9 @@ const Contact = () => {
           </p>
         </div>
       </div>
-      <div className="p-7">
+      <div className="p-7 lg:flex lg:justify-center lg:items-center w-full">
         <Row>
-          <Col xs={12}>
+          <Col xs={24} lg={24}>
             <div className="flex flex-col gap-5">
               <div className="flex gap-5 items-center">
                 <div className="w-[50%]">
@@ -88,7 +88,7 @@ const Contact = () => {
               </div>
 
               <div className="flex w-full justify-center items-center">
-                <button className="bg-black w-1/2 text-white py-3 px-10 cursor-pointer rounded-lg">Send Message</button>
+                <button className="bg-dark-grey w-1/2 text-white py-3 px-10 cursor-pointer rounded-lg">Send Message</button>
               </div>
             </div>
           </Col>

@@ -65,6 +65,9 @@ export const FourthSectionScroll = () => {
   ];
   return (
     <>
+      <p className="text-2xl pl-6 lg:hidden font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
+        My Services
+      </p>
       <div ref={container} className="lg:hidden">
         {services.map((service, index) => {
           const targetScale = 1 - (services.length - index) * 0.05;

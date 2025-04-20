@@ -1,6 +1,6 @@
 export const Booking = () => {
     return <>
-        This is the booking page
+        This is the booking page and admin
     </>
 }
 

@@ -6,6 +6,30 @@
 }
 
 @font-face {
+  font-family: "mona-light";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans-Light.ttf");
+}
+@font-face {
+  font-family: "mona-regular";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "mona-medium";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "mona-semibold";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "mona-bold";
+  src: url("../assets/fonts/Mona_Sans/static/MonaSans_Condensed-Bold.ttf");
+}
+
+@font-face {
   font-family: "grotesk-light";
   src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Light.ttf");
 }
@@ -55,6 +79,11 @@
   --font-grotesk-semi-bold: grotesk-semi-bold;
   --font-grotesk-extra-bold: grotesk-extra-bold;
   --font-valentiamo-reg: valentiamo-regular;
+  --font-mono-light: mona-light;
+  --font-mono-regular: mona-regular;
+  --font-mono-medium: mona-medium;
+  --font-mono-semibold: mono-semibold;
+  --font-mono-bold: mono-bold;
 
   --color-primary-orange: #fb5711;
   --color-light-brown: #d9c9ae;

@@ -19,13 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`antialiased ${geistMono.variable} ${playFair.variable} `}
-      >
-        <HomeNav />
-        {children}
-      </body>
-    </html>
+    <div>
+      <HomeNav />
+      {children}
+    </div>
   );
 }

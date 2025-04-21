@@ -91,7 +91,7 @@ export default function Home() {
     }, 5000); // 5 seconds
 
     return () => clearInterval(interval); // cleanup on unmount
-  }, []);
+  }, [images.length]);
 
   return (
     <div>

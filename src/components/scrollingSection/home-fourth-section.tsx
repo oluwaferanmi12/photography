@@ -110,14 +110,14 @@ export const FourthSectionScroll = () => {
             {services.map((service, i) => (
               <div
                 key={i}
-                className="w-full md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md"
+                className="w-full h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-28 rounded-3xl shadow-md"
                 style={{ backgroundColor: service.bg }}
               >
                 <span className="">
                   <Image
                     src={service.image}
                     alt={service.title}
-                    className="rounded-full h-[130px] w-[80%] object-cover"
+                    className="rounded-full h-[150px] w-full object-cover"
                   />
                 </span>
                 <div>

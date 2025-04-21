@@ -17,6 +17,8 @@ import bgImage3 from "@/assets/images/homeHeaderImage--cropped.jpeg";
 import bgImage4 from "@/assets/images/about-page-img1.png";
 import bgImage5 from "@/assets/images/catalogue-header.jpeg";
 import victoria from "@/assets/images/victoria.jpeg";
+import victoria2 from "@/assets/images/about-secondImg.png";
+import victoria3 from "@/assets/images/landingImage.jpeg";
 import { Footer } from "@/components/footer/footer";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
@@ -26,12 +28,23 @@ import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import { FourthSectionScroll } from "@/components/scrollingSection/home-fourth-section";
 import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
+import { HomeNav } from "@/components/nav/home-nav";
+import bg_image from "@/assets/images/body_background.png";
+import { AnimatedCard } from "@/animation/animated-card";
+
+
+
+
+
+
+
 
 export default function Home() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [activeIndex, setActiveIndex] = useState(2);
   const [currentBg, setCurrentBg] = useState(bgImage3);
+  const [currentProfileImg, setCurrentProfileImg] = useState(0);
 
   // Memoize imageMap to prevent unnecessary recreations
   const imageMap = useMemo(
@@ -66,10 +79,33 @@ export default function Home() {
     setActiveIndex(index);
   };
 
+  const images = [victoria, victoria2, victoria3];
+
+  const goToSlide = (index: number) => {
+    setCurrentProfileImg(index);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentProfileImg((prev) => (prev + 1) % images.length);
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(interval); // cleanup on unmount
+  }, []);
+
   return (
     <div>
+      <div className="fixed top-0 left-0 w-full h-[150px] z-[-1] pointer-events-none">
+        <Image
+          src={bg_image}
+          alt="Top Background"
+          fill
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+      <HomeNav />
       <motion.div
-        className="h-screen min-h-screen transition-all w-full"
+        className="h-screen min-h-screen relative top-0 z-50 transition-all w-full"
         animate={{
           padding: scrolled
             ? window.innerWidth < 1024
@@ -79,7 +115,7 @@ export default function Home() {
         }}
       >
         <motion.div
-          className="h-full min-h-full w-full landingBg flex justify-center items-center relative"
+          className="h-full min-h-full w-full z-50 landingBg flex justify-center items-center relative"
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
             borderRadius: scrolled ? "32px" : "0px",
@@ -113,7 +149,7 @@ export default function Home() {
                             : "border-2 border-transparent"
                         } rounded-full transition-all`}
                       >
-                        <Image 
+                        <Image
                           src={img.thumbnail}
                           alt=""
                           onClick={() =>
@@ -198,11 +234,39 @@ export default function Home() {
               </span>
 
               {/* Main Image */}
-              <Image
+              <div className="w-full max-w-sm mx-auto">
+                <div className="realtive w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src={images[currentProfileImg]}
+                    alt={`victoria-${currentProfileImg}`}
+                    className="w-full relative transition-all duration-300 h-[300px] min-w-[400px] lg:h-[350px] object-cover rounded-2xl"
+                  />
+
+                  {/* Dots */}
+                  <div className="flex justify-center items-center">
+                    <div className="absolute bottom-8 bg-white/25 backdrop-blur-3xl rounded-full p-2 ">
+                      <div className="flex justify-center items-center gap-2">
+                        {images.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => goToSlide(index)}
+                            className={`w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${
+                              currentProfileImg === index
+                                ? "bg-black"
+                                : "bg-black/50"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <Image
                 src={victoria}
                 className="lg:w-[450px] z-1 lg:h-[350px] w-full h-auto rounded-2xl lg:object-cover relative"
                 alt="victoria"
-              />
+              /> */}
             </div>
 
             <p className="lg:w-[450px] text-light-brown text-2xl">
@@ -212,32 +276,42 @@ export default function Home() {
               memories, every photo session is a curated experience.
             </p>
           </div>
-          <div>
+          <div className="w-full lg:w-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10 w-full">
-              <div className="flex flex-col gap-4 w-full ">
-                <ServiceWrapperCard
-                  size="sm"
-                  text="5 years+ Experience"
-                  topArea={{ icon: briefIcon }}
-                />
-                <ServiceWrapperCard
-                  size="sm"
-                  text="300+ Clientele"
-                  topArea={{ btn: true }}
-                />
+              <div className="flex flex-col gap-4 w-full">
+                <AnimatedCard from="top-left">
+                  <ServiceWrapperCard
+                    size="sm"
+                    text="5 years+ Experience"
+                    topArea={{ icon: briefIcon }}
+                  />
+                </AnimatedCard>
+
+                <AnimatedCard from="bottom-left" delay={0.2}>
+                  <ServiceWrapperCard
+                    size="sm"
+                    text="300+ Clientele"
+                    topArea={{ btn: true }}
+                  />
+                </AnimatedCard>
               </div>
-              {/*  */}
-              <div className="flex flex-col gap-4 w-full lg:mt-6 ">
-                <ServiceWrapperCard
-                  size="sm"
-                  text="100% Satisfaction"
-                  topArea={{ icon: briefIcon }}
-                />
-                <ServiceWrapperCard
-                  size="sm"
-                  text="Humber certified!"
-                  topArea={{ icon: humerCertified }}
-                />
+
+              <div className="flex flex-col gap-4 w-full lg:mt-6">
+                <AnimatedCard from="top-right" delay={0.4}>
+                  <ServiceWrapperCard
+                    size="sm"
+                    text="100% Satisfaction"
+                    topArea={{ icon: briefIcon }}
+                  />
+                </AnimatedCard>
+
+                <AnimatedCard from="bottom-right" delay={0.6}>
+                  <ServiceWrapperCard
+                    size="sm"
+                    text="Humber certified!"
+                    topArea={{ icon: humerCertified }}
+                  />
+                </AnimatedCard>
               </div>
             </div>
           </div>

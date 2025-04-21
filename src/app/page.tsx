@@ -26,6 +26,8 @@ import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import { FourthSectionScroll } from "@/components/scrollingSection/home-fourth-section";
 import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
+import { HomeNav } from "@/components/nav/home-nav";
+import bg_image from "@/assets/images/body_background.png";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -68,8 +70,17 @@ export default function Home() {
 
   return (
     <div>
+      <div className="fixed top-0 left-0 w-full h-[150px] z-[-1] pointer-events-none">
+        <Image
+          src={bg_image}
+          alt="Top Background"
+          fill
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+      <HomeNav />
       <motion.div
-        className="h-screen min-h-screen transition-all w-full"
+        className="h-screen min-h-screen relative top-0 z-50 transition-all w-full"
         animate={{
           padding: scrolled
             ? window.innerWidth < 1024
@@ -79,7 +90,7 @@ export default function Home() {
         }}
       >
         <motion.div
-          className="h-full min-h-full w-full landingBg flex justify-center items-center relative"
+          className="h-full min-h-full w-full z-50 landingBg flex justify-center items-center relative"
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
             borderRadius: scrolled ? "32px" : "0px",
@@ -113,7 +124,7 @@ export default function Home() {
                             : "border-2 border-transparent"
                         } rounded-full transition-all`}
                       >
-                        <Image 
+                        <Image
                           src={img.thumbnail}
                           alt=""
                           onClick={() =>

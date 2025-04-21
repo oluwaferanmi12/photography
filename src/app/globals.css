@@ -91,6 +91,8 @@
   --color-grey: #999999;
   --color-darker-grey: #151515;
   --color-dark-grey: #2d2d2c;
+  --color-admin-grey: #878787;
+  --color-admin-black-100: #292D32;
 
   --breakpoint-3xl: 1400px;
 }

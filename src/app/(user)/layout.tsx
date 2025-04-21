@@ -12,11 +12,12 @@ export default function RootLayout({
   return (
     <>
       {/* Fixed top background image */}
-      <div className="relative top-0 left-0 w-full h-[150px]  pointer-events-none">
+      <div className="relative z-[1] top-0 left-0 w-full h-[100px]  pointer-events-none">
         <Image
           src={bg_image}
           alt="Top Background"
           fill
+          className="background-blur-3xl"
           style={{ objectFit: "cover" }}
           // priority
         />

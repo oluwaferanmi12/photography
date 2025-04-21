@@ -5,6 +5,7 @@ import layoutLine from "@/assets/svgs/layout_left_line.svg";
 import homeOutline from "@/assets/svgs/home_1_line.svg";
 import biDirection from "@/assets/svgs/selector_vertical_line.svg";
 import addLine from "@/assets/svgs/add_line.svg";
+import notificationIcon from "@/assets/svgs/notification.svg";
 
 export default function RootLayout({
   children,
@@ -26,6 +27,7 @@ export default function RootLayout({
               </div>
               <div className="mt-8">
                 <NavWrapper icon={homeOutline} text="Dashboard" />
+                <NavWrapper icon={homeOutline} text="Booking" />
                 <NavWrapper icon={homeOutline} text="Transaction" />
                 <NavWrapper icon={homeOutline} text="Links" />
                 <NavWrapper icon={homeOutline} text="Calendar" />
@@ -83,7 +85,10 @@ const AdminHeader = () => {
           every day.
         </p>
       </div>
-      <div>
+      <div className="flex gap-6 items-stretch ">
+        <span className="p-4 border cursor-pointer rounded-lg border-[#EFEEEE] flex justify-center items-center">
+          <Image src={notificationIcon}  alt="notification" />
+        </span>
         <button className="flex items-center gap-2 bg-[#101010] py-3 px-4 rounded-lg">
           <Image src={addLine} alt="" />
           <p className="text-sm font-mono-regular">Create a booking link</p>

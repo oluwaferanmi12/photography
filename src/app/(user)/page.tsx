@@ -95,17 +95,9 @@ export default function Home() {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 w-full h-[150px] z-[-1] pointer-events-none">
-        <Image
-          src={bg_image}
-          alt="Top Background"
-          fill
-          style={{ objectFit: "cover" }}
-        />
-      </div>
       <HomeNav />
       <motion.div
-        className="h-screen min-h-screen relative top-0 z-50 transition-all w-full"
+        className="h-screen min-h-screen relative top-0 z-[1] transition-all w-full"
         animate={{
           padding: scrolled
             ? window.innerWidth < 1024

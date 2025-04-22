@@ -5,6 +5,8 @@ import { Switch } from 'antd'
 import eyeIcon from "@/assets/svgs/eyeIcon.svg";
 import BaseDataTable from '@/components/data-table/data-table';
 import Image from 'next/image';
+import dot from "@/assets/svgs/dots.svg";
+
 
 interface PackageOption {
   name: string
@@ -64,12 +66,13 @@ const columns: TableColumn<Service>[] = [
       <div className="flex  gap-2">
         {row.packages.map((pkg, idx) => (
           <div
-            key={idx}
-            className="flex items-center gap-1 text-xs bg-gray-100 text-gray-800 px-2 py-2 rounded-md"
-          >
-            <span className="w-2 h-2 rounded-full bg-purple-400"></span>
-            {pkg.name} ({pkg.price})
-          </div>
+          key={idx}
+          className="bg-white font-medium border border-[#D0D5DD] px-2 py-0.5 rounded-md text-[#344054] flex gap-1 items-center">
+          <span>
+            <Image src={dot} alt="dot" />
+          </span>
+          {pkg.name} ({pkg.price})
+        </div>
         ))}
       </div>
     ),
@@ -81,7 +84,7 @@ const columns: TableColumn<Service>[] = [
         <span className="text-sm font-medium text-gray-700">
           {row.status ? 'Active' : 'Inactive'}
         </span>
-        <Switch defaultChecked={row.status} />
+        <Switch defaultChecked={row.status}   className="custom-switch" />
       </div>
     ),
   },

@@ -23,7 +23,7 @@ export const MainCard = ({
   return (
     <div
       ref={container}
-      className="h-screen flex items-center justify-center cursor-pointer"
+      className="h-screen overflow-hidden flex items-center justify-center cursor-pointer"
       style={{
         position: "sticky",
         top: "0px",

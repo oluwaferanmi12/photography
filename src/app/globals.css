@@ -287,6 +287,10 @@ a {
   background-repeat: no-repeat;
 }
 
+.custom-switch.ant-switch-checked {
+  background-color: #D9C9AE !important;
+}
+
 @media (min-width: 1400px) {
   .footer {
     height: 100dvh !important;

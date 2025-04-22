@@ -14,9 +14,9 @@ import { PlanCards } from "@/components/plans-card/PlanCards";
 const Portfolio = () => {
   return (
     <div>
-      <div className="mt-28 lg:mt-48">
+      <div className="flex justify-center items-center relative bg-transparent ">
         <div className="px-5 lg:px-14 3xl:px-28">
-          <div className="flex flex-col gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
+          <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
             <div className="flex flex-col gap-8 lg:w-1/2">
               <h2 className="text-7xl">Explore my</h2>
               <div className="flex gap-5 items-center">

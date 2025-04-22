@@ -29,13 +29,13 @@ import { FourthSectionScroll } from "@/components/scrollingSection/home-fourth-s
 import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
 import { HomeNav } from "@/components/nav/home-nav";
-import bg_image from "@/assets/images/body_background.png";
 import { AnimatedCard } from "@/animation/animated-card";
 import { MainCard } from "@/components/cascade-card/cascade-card";
 import cascadeImage1 from "@/assets/svgs/cascade-image-1.svg";
 import cascadeImage2 from "@/assets/svgs/cascade-image-2.svg";
 import cascadeImage3 from "@/assets/svgs/cascade-image-3.svg";
 import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
+import bg_image from "@/assets/images/body_background.png";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -101,8 +101,16 @@ export default function Home() {
   }, [images.length]);
 
   return (
-    <div>
-      <HomeNav />
+    <div className="relative w-full">
+      <div className="absolute !top-0 left-0 w-full h-[100px] pointer-events-none z-0">
+        <Image
+          src={bg_image}
+          alt="Top Background"
+          fill
+          className="background-blur-3xl"
+          style={{ objectFit: "cover" }}
+        />
+      </div>
       <motion.div
         className="h-screen min-h-screen relative top-0 z-[1] transition-all w-full"
         animate={{

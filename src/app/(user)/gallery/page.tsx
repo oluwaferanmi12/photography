@@ -10,14 +10,14 @@ import rollingImage from "@/assets/svgs/rollingImage.svg";
 const Gallery = () => {
   return (
     <div>
-      <div className="flex flex-col gap-14 justify-center items-center mt-28 lg:mt-32">
-        <div className=" flex flex-col gap-28 w-full px-5 lg:p-14 3xl:p-28">
+      <div className="flex flex-col gap-14 justify-center items-center ">
+        <div className=" flex flex-col gap-28 w-full px-5 lg:p-14 3xl:!p-7">
           <div className="galleryBg relative border-4 border-light-brown w-full flex items-center">
             <div className="mx-14 text-white text-6xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
               <p>Weddings</p>
             </div>
-            <span className="absolute right-0 -bottom-10 lg:-right-10 lg:-bottom-10 ">
-            <Image src={rollingImage} alt="img" />
+            <span className="absolute right-0 -bottom-10  lg:-bottom-15 ">
+            <Image src={rollingImage} className="imageRotate" alt="img" />
           </span>
           </div>
 

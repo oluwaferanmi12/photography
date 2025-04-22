@@ -11,7 +11,6 @@ import jorImage from "@/assets/images/jorImage.jpeg";
 import HS3 from "@/assets/images/HS3.png";
 import HS6 from "@/assets/images/HS6.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
-import bg_image from "@/assets/images/body_background.png";
 
 const Portfolio = () => {
   const services = [

@@ -251,13 +251,13 @@ export default function Home() {
 
             <div className="relative">
               {/* Circle Background */}
-              {/* <span className="absolute -left-40 top-0 -z-10">
+              <span className="absolute -left-40 top-0 -z-10">
                 <Image
                   src={circleIcon}
                   alt="circle-stroke"
                   className="w-[300px] h-[350px] opacity-60"
                 />
-              </span> */}
+              </span>
 
               {/* Main Image */}
               <div className="w-full max-w-sm mx-auto">

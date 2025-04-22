@@ -66,9 +66,9 @@ const Portfolio = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center mt-28 lg:mt-48">
+      <div className="flex justify-center items-center relative bg-transparent ">
         <div className="px-5 lg:px-14 3xl:px-28">
-          <div className="flex flex-col lg:flex-row  lg:justify-between items-center">
+          <div className="flex flex-col mt-28 lg:mt-48 lg:flex-row lg:justify-between items-center">
             <div className="flex flex-col gap-4">
               <h2 className="text-7xl">Explore my</h2>
               <div className="flex gap-5 items-center">
@@ -83,7 +83,7 @@ const Portfolio = () => {
               </div>
             </div>
             <span className="hidden lg:flex">
-              <Image src={rollingImage} alt="rollingImage" />
+              <Image src={rollingImage} className="imageRotate"  alt="rollingImage" />
             </span>
           </div>
           <div className="my-14">
@@ -167,7 +167,9 @@ const Portfolio = () => {
               </h3>
             </div>
             <div>
-              <h3 className="text-5xl 3xl:text-8xl text-white ">Seamless Booking</h3>
+              <h3 className="text-5xl 3xl:text-8xl text-white ">
+                Seamless Booking
+              </h3>
             </div>
           </div>
           {/* BANNER */}

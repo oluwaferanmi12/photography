@@ -21,10 +21,10 @@ export default function BaseDataTable<T>({ title, columns, data }: BaseDataTable
         customStyles={{
           headCells: {
             style: {
-              backgroundColor: '#f9fafb',
+              backgroundColor: '#F6F6F6',
               fontSize: '14px',
-              color: '#6b7280',
-              fontWeight: '500',
+              color: '#667085',
+              fontWeight: '400',
             },
           },
           cells: {

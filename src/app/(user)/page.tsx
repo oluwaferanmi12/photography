@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Row, Col } from "antd";
 import Image, { StaticImageData } from "next/image";
 import image2 from "@/assets/svgs/home-image-2.svg";
@@ -29,15 +29,13 @@ import { FourthSectionScroll } from "@/components/scrollingSection/home-fourth-s
 import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
 import { HomeNav } from "@/components/nav/home-nav";
-import bg_image from "@/assets/images/body_background.png";
 import { AnimatedCard } from "@/animation/animated-card";
-
-
-
-
-
-
-
+import { MainCard } from "@/components/cascade-card/cascade-card";
+import cascadeImage1 from "@/assets/svgs/cascade-image-1.svg";
+import cascadeImage2 from "@/assets/svgs/cascade-image-2.svg";
+import cascadeImage3 from "@/assets/svgs/cascade-image-3.svg";
+import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
+import bg_image from "@/assets/images/body_background.png";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -45,6 +43,15 @@ export default function Home() {
   const [activeIndex, setActiveIndex] = useState(2);
   const [currentBg, setCurrentBg] = useState(bgImage3);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
+
+  // CASCADE CARDS
+  const container = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+  const cardData = [cascadeImage4, cascadeImage3, cascadeImage2, cascadeImage1];
 
   // Memoize imageMap to prevent unnecessary recreations
   const imageMap = useMemo(
@@ -94,8 +101,16 @@ export default function Home() {
   }, [images.length]);
 
   return (
-    <div>
-      <HomeNav />
+    <div className="relative w-full">
+      <div className="absolute !top-0 left-0 w-full h-[100px] pointer-events-none z-0">
+        <Image
+          src={bg_image}
+          alt="Top Background"
+          fill
+          className="background-blur-3xl"
+          style={{ objectFit: "cover" }}
+        />
+      </div>
       <motion.div
         className="h-screen min-h-screen relative top-0 z-[1] transition-all w-full"
         animate={{
@@ -183,7 +198,7 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col gap-28 pt-28 pb-56 ">
+      <div className="flex flex-col gap-28 pt-28 pb-56">
         {/* Second section  */}
         <div className="flex flex-col gap-10 lg:justify-center lg:items-center px-5 lg:px-0">
           <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
@@ -197,8 +212,27 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Card cascade   */}
+        <div className="lg:hidden">
+          {cardData.map((item, index) => {
+            const targetScale = 1 - (cardData.length - index) * 0.05;
+            return (
+              <>
+                <MainCard
+                  key={index}
+                  currentIndex={index}
+                  range={[index * 0.333, 1]}
+                  targetScale={targetScale}
+                  progress={scrollYProgress}
+                  imgSrc={item}
+                />
+              </>
+            );
+          })}
+        </div>
+
         {/* THIRD SECTION */}
-        <div>
+        <div className="hidden lg:block">
           <ImageMasonry />
         </div>
 
@@ -211,7 +245,7 @@ export default function Home() {
         </div>
 
         {/* SIXTH SECTION */}
-        <div className="flex flex-col px-5 lg:px-0 gap-28 justify-center items-center w-full">
+        <div className="flex flex-col mx-5 lg:px-0 gap-28 lg:justify-center lg:items-center">
           <div className="text-white relative flex flex-col gap-10 lg:justify-center lg:items-center lg:text-center">
             <h2 className="text-5xl lg:text-6xl">Meet Victoria</h2>
 
@@ -268,42 +302,50 @@ export default function Home() {
               memories, every photo session is a curated experience.
             </p>
           </div>
-          <div className="w-full lg:w-auto">
+          <div className=" lg:w-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10 w-full">
               <div className="flex flex-col gap-4 w-full">
-                <AnimatedCard from="top-left">
-                  <ServiceWrapperCard
-                    size="sm"
-                    text="5 years+ Experience"
-                    topArea={{ icon: briefIcon }}
-                  />
-                </AnimatedCard>
+                <div className="relative overflow-hidden">
+                  <AnimatedCard from="top-left">
+                    <ServiceWrapperCard
+                      size="sm"
+                      text="5 years+ Experience"
+                      topArea={{ icon: briefIcon }}
+                    />
+                  </AnimatedCard>
+                </div>
 
-                <AnimatedCard from="bottom-left" delay={0.2}>
-                  <ServiceWrapperCard
-                    size="sm"
-                    text="300+ Clientele"
-                    topArea={{ btn: true }}
-                  />
-                </AnimatedCard>
+                <div className="relative overflow-hidden">
+                  <AnimatedCard from="bottom-left" delay={0.2}>
+                    <ServiceWrapperCard
+                      size="sm"
+                      text="300+ Clientele"
+                      topArea={{ btn: true }}
+                    />
+                  </AnimatedCard>
+                </div>
               </div>
 
               <div className="flex flex-col gap-4 w-full lg:mt-6">
-                <AnimatedCard from="top-right" delay={0.4}>
-                  <ServiceWrapperCard
-                    size="sm"
-                    text="100% Satisfaction"
-                    topArea={{ icon: briefIcon }}
-                  />
-                </AnimatedCard>
+                <div className="relative overflow-hidden">
+                  <AnimatedCard from="top-right" delay={0.4}>
+                    <ServiceWrapperCard
+                      size="sm"
+                      text="100% Satisfaction"
+                      topArea={{ icon: briefIcon }}
+                    />
+                  </AnimatedCard>
+                </div>
 
-                <AnimatedCard from="bottom-right" delay={0.6}>
-                  <ServiceWrapperCard
-                    size="sm"
-                    text="Humber certified!"
-                    topArea={{ icon: humerCertified }}
-                  />
-                </AnimatedCard>
+                <div className="relative overflow-hidden">
+                  <AnimatedCard from="bottom-right" delay={0.6}>
+                    <ServiceWrapperCard
+                      size="sm"
+                      text="Humber certified!"
+                      topArea={{ icon: humerCertified }}
+                    />
+                  </AnimatedCard>
+                </div>
               </div>
             </div>
           </div>

@@ -93,6 +93,7 @@
   --color-dark-grey: #2d2d2c;
   --color-admin-grey: #878787;
   --color-admin-black-100: #292D32;
+  --color-admin-grey-300: #667085;
 
   --breakpoint-3xl: 1400px;
 }
@@ -284,6 +285,10 @@ a {
   height: 100%;
   min-height: 100%;
   background-repeat: no-repeat;
+}
+
+.custom-switch.ant-switch-checked {
+  background-color: #D9C9AE !important;
 }
 
 @media (min-width: 1400px) {

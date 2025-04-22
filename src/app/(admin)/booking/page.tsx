@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
 import BaseDataTable from "@/components/data-table/data-table";
 import { TableColumn } from "react-data-table-component";
 import eyeIcon from "@/assets/svgs/eyeIcon.svg";
+import dot from "@/assets/svgs/dots.svg";
+import blueDot from "@/assets/svgs/blue-dot.svg";
 import Image from "next/image";
-
 
 interface Booking {
   name: string;
@@ -68,7 +69,6 @@ const data: Booking[] = [
     status: "Pending",
     created: "Today",
   },
-  
 ];
 
 const columns: TableColumn<Booking>[] = [
@@ -76,7 +76,7 @@ const columns: TableColumn<Booking>[] = [
     name: "Name",
     cell: (row) => (
       <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-full bg-admin-black-100 text-white flex items-center justify-center text-xs font-medium">
+        <div className="h-10 w-10 rounded-full bg-[#101010] text-[#FFF0EA] flex items-center justify-center text-xs font-medium">
           {row.name
             .split(" ")
             .map((n) => n[0])
@@ -84,7 +84,7 @@ const columns: TableColumn<Booking>[] = [
             .toUpperCase()}
         </div>
         <div>
-          <div className="font-medium">{row.name}</div>
+          <div className="font-medium text-[#292D32]">{row.name}</div>
           <div className="text-admin-grey text-xs">{row.email}</div>
         </div>
       </div>
@@ -94,45 +94,49 @@ const columns: TableColumn<Booking>[] = [
   },
   {
     name: "Phone number",
-    selector: (row) => row.phone,
+    cell: (row) => <div className="text-[#292D32]">{row.phone}</div>,
   },
   {
     name: "Package",
     cell: (row) => (
       <div>
-        <div>{row.packageType}</div>
+        <div className="text-[#292D32]">{row.packageType}</div>
         <div className="flex items-center gap-1 text-xs mt-1">
-          <span className="w-2 h-2 rounded-full bg-purple-400"></span>
-          <span className="bg-gray-100 px-2 py-0.5 rounded-md text-gray-700">
+          <div className="bg-white font-medium border border-[#D0D5DD] px-2 py-0.5 rounded-md text-[#344054] flex gap-1 items-center">
+            <span>
+              <Image src={dot} alt="dot" />
+            </span>
             {row.packageName}
-          </span>
+          </div>
         </div>
       </div>
     ),
   },
   {
     name: "Date booked",
-    selector: (row) => row.dateBooked,
+    cell: (row) => <div className="text-[#292D32]">{row.dateBooked}</div>,
   },
   {
     name: "Status",
     cell: (row) => (
-      <span className="inline-flex items-center px-2 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-medium">
-        <span className="w-2 h-2 mr-1 rounded-full bg-blue-500"></span>
+      <div className="inline-flex gap-1 items-center border border-[#B2DDFF] px-2 py-1 rounded-full bg-[#EFF8FF] text-[#175CD3] text-xs font-medium">
+        <span>
+          <Image src={blueDot} alt="dot" />
+        </span>
         {row.status}
-      </span>
+      </div>
     ),
   },
   {
     name: "Date created",
-    selector: (row) => row.created,
+    cell: (row) => <div className="text-[#292D32]">{row.created}</div>,
   },
   {
     name: "",
     cell: () => (
-      <button className="flex items-center gap-1 px-4 py-1.5 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+      <button className="flex items-center gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50">
         <span>
-          <Image src={eyeIcon}  alt="img" />
+          <Image src={eyeIcon} alt="img" />
         </span>
         Details
       </button>

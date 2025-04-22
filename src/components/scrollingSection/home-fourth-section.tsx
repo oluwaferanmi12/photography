@@ -12,7 +12,6 @@ export const FourthSectionScroll = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const container = useRef<HTMLDivElement | null>(null);
 
-
   const mobileScroll = useScroll({
     target: container,
     offset: ["start start", "end end"],
@@ -35,7 +34,11 @@ export const FourthSectionScroll = () => {
       scrollPercentage = "-200%";
     }
   }
-  const x = useTransform(desktopScroll.scrollYProgress, [0, 1], ["1%", scrollPercentage]);
+  const x = useTransform(
+    desktopScroll.scrollYProgress,
+    [0, 1],
+    ["1%", scrollPercentage]
+  );
   //   -25%
   // -200%
 
@@ -74,11 +77,9 @@ export const FourthSectionScroll = () => {
     },
   ];
 
-
-
-
   return (
     <>
+      {/* Mobile */}
       <h2 className="text-6xl lg:hidden px-5 font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
         My Services
       </h2>
@@ -97,6 +98,7 @@ export const FourthSectionScroll = () => {
           );
         })}
       </div>
+      {/* Desktop */}
       <section
         ref={targetRef}
         className="relative hidden lg:block h-[300vh] py-10 "
@@ -110,16 +112,20 @@ export const FourthSectionScroll = () => {
             {services.map((service, i) => (
               <div
                 key={i}
-                className="w-full h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-28 rounded-3xl shadow-md"
+                className="w-full h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-6 flex flex-col gap-28 rounded-3xl shadow-md"
                 style={{ backgroundColor: service.bg }}
               >
-                <span className="">
+                <div className="relative w-full h-48 overflow-hidden rounded-full">
+                  {/* 2) Fill image */}
                   <Image
                     src={service.image}
                     alt={service.title}
-                    className="rounded-full h-[150px] w-full object-cover"
+                    fill
+                    className="object-cover w-full h-48"
+                    quality={90}
+                    priority
                   />
-                </span>
+                </div>
                 <div>
                   <h3 className="text-4xl font-playfair font-light text-darker-grey">
                     {service.title}

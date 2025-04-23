@@ -36,6 +36,7 @@ import cascadeImage2 from "@/assets/svgs/cascade-image-2.svg";
 import cascadeImage3 from "@/assets/svgs/cascade-image-3.svg";
 import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
 import bg_image from "@/assets/images/body_background.png";
+import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -355,6 +356,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <h3 className="text-4xl">Words from my clients</h3>
+            <AnimatedTestimonial />
           </div>
         </div>
       </div>

@@ -43,6 +43,17 @@ export default function Home() {
   const [activeIndex, setActiveIndex] = useState(2);
   const [currentBg, setCurrentBg] = useState(bgImage3);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
+  // SCROLLING EFFECT ON HEADER
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // CASCADE CARDS
   const container = useRef<HTMLDivElement | null>(null);
@@ -114,19 +125,15 @@ export default function Home() {
       <motion.div
         className="h-screen min-h-screen relative top-0 z-[1] transition-all w-full"
         animate={{
-          padding: scrolled
-            ? window.innerWidth < 1024
-              ? "5px"
-              : "28px"
-            : "0px",
+          padding: isDesktop && scrolled ? "28px" : "0px",
         }}
       >
         <motion.div
           className="h-full min-h-full w-full z-50 landingBg flex justify-center items-center relative"
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
-            borderRadius: scrolled ? "32px" : "0px",
-            border: scrolled ? "2px solid #D9C9AE82" : "none",
+            borderRadius: isDesktop && scrolled ? "32px" : "0px",
+            border: isDesktop && scrolled ? "2px solid #D9C9AE82" : "none",
           }}
         >
           <div
@@ -137,7 +144,7 @@ export default function Home() {
               backgroundPosition: "center",
               filter: "grayscale(90%) contrast(1.0)",
               transition: "opacity 500ms ease-in-out",
-              borderRadius: scrolled ? "32px" : "0px",
+              borderRadius: isDesktop && scrolled ? "32px" : "0px",
             }}
           />
 

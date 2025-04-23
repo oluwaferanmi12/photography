@@ -195,7 +195,7 @@ export default function Home() {
           <FadeInAnimate transitionDuration={15}>
             <Link href="/">
               <span className="absolute right-14 bottom-14 3xl:right-28 3xl:bottom-28">
-                <Image className="imageRotate" src={rollingImage} alt="image" />
+                <Image className="imageRotate h-24 w-24 md:h-auto md:w-auto" src={rollingImage} alt="image" />
               </span>
             </Link>
           </FadeInAnimate>

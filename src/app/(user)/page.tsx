@@ -28,7 +28,6 @@ import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import { FourthSectionScroll } from "@/components/scrollingSection/home-fourth-section";
 import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
-import { HomeNav } from "@/components/nav/home-nav";
 import { AnimatedCard } from "@/animation/animated-card";
 import { MainCard } from "@/components/cascade-card/cascade-card";
 import cascadeImage1 from "@/assets/svgs/cascade-image-1.svg";
@@ -36,6 +35,7 @@ import cascadeImage2 from "@/assets/svgs/cascade-image-2.svg";
 import cascadeImage3 from "@/assets/svgs/cascade-image-3.svg";
 import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
 import bg_image from "@/assets/images/body_background.png";
+import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -43,6 +43,18 @@ export default function Home() {
   const [activeIndex, setActiveIndex] = useState(2);
   const [currentBg, setCurrentBg] = useState(bgImage3);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+
+
+  // SCROLLING EFFECT ON HEADER
+  useEffect(() => {
+    const checkIsDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkIsDesktop(); // set initial value on mount
+
+    window.addEventListener("resize", checkIsDesktop);
+    return () => window.removeEventListener("resize", checkIsDesktop);
+  }, []);
 
   // CASCADE CARDS
   const container = useRef<HTMLDivElement | null>(null);
@@ -114,19 +126,15 @@ export default function Home() {
       <motion.div
         className="h-screen min-h-screen relative top-0 z-[1] transition-all w-full"
         animate={{
-          padding: scrolled
-            ? window.innerWidth < 1024
-              ? "5px"
-              : "28px"
-            : "0px",
+          padding: isDesktop && scrolled ? "28px" : "0px",
         }}
       >
         <motion.div
           className="h-full min-h-full w-full z-50 landingBg flex justify-center items-center relative"
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
-            borderRadius: scrolled ? "32px" : "0px",
-            border: scrolled ? "2px solid #D9C9AE82" : "none",
+            borderRadius: isDesktop && scrolled ? "32px" : "0px",
+            border: isDesktop && scrolled ? "2px solid #D9C9AE82" : "none",
           }}
         >
           <div
@@ -137,7 +145,7 @@ export default function Home() {
               backgroundPosition: "center",
               filter: "grayscale(90%) contrast(1.0)",
               transition: "opacity 500ms ease-in-out",
-              borderRadius: scrolled ? "32px" : "0px",
+              borderRadius: isDesktop && scrolled ? "32px" : "0px",
             }}
           />
 
@@ -188,7 +196,11 @@ export default function Home() {
           <FadeInAnimate transitionDuration={15}>
             <Link href="/">
               <span className="absolute right-14 bottom-14 3xl:right-28 3xl:bottom-28">
-                <Image className="imageRotate" src={rollingImage} alt="image" />
+                <Image
+                  className="imageRotate h-24 w-24 md:h-auto md:w-auto"
+                  src={rollingImage}
+                  alt="image"
+                />
               </span>
             </Link>
           </FadeInAnimate>
@@ -349,7 +361,18 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div>
+            <h3 className="text-4xl">Words from my clients</h3>
+            <AnimatedTestimonial />
+          </div>
         </div>
+      </div>
+
+      {/* Sixth Section */}
+      <div>
+        <h3 className="text-4xl">Playground</h3>
+        <p className="text-light-brown">Swipe to see before & after magic</p>
+        <AnimatedTestimonial />
       </div>
 
       {/* Sixth Section */}

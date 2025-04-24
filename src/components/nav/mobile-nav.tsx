@@ -8,7 +8,12 @@ import Image from "next/image";
 import { Drawer } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Button from "../button/button";
+import facebook from "@/assets/svgs/mobile-facebook.svg";
+import instagram from "@/assets/svgs/mobile-instagram.svg";
+import linkedin from "@/assets/svgs/mobile-linkedin.svg";
+import youtube from "@/assets/svgs/mobile-youtube.svg";
+import tiktok from "@/assets/svgs/mobile-tiktok.svg";
+import { X } from "lucide-react";
 
 export const MobileNav = () => {
   const [open, setOpen] = useState(false);
@@ -50,15 +55,21 @@ export const MobileNav = () => {
           className="!bg-[#282824] text-white"
         >
           <div>
-            <span>
-              <Image src={brandLogo} alt="logo" />
-            </span>
+            <div className="flex justify-between items-center">
+              <span>
+                <Image src={brandLogo} alt="logo" />
+              </span>
+              <span>
+              <X onClick={onClose} />
+              </span>
+            </div>
+
             <div className="flex flex-col gap-10  mt-14">
               {navLinks.map(({ name, path }) => (
                 <Link
                   key={path}
                   href={path}
-                  onClick={onClose}
+                 
                   className={`${
                     pathname === path
                       ? "text-4xl font-semibold text-[#D9C9AE] flex gap-2 items-center"
@@ -75,12 +86,38 @@ export const MobileNav = () => {
               ))}
             </div>
           </div>
-         <div className="w-full mt-28">
-            <button className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey">Book a session</button>
-         </div>
+          <div className="w-full mt-28">
+            <button className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey">
+              Book a session
+            </button>
+          </div>
 
-          <div className="flex gap-4 mt-6 text-xl">
-            
+          <div className="flex gap-4 mt-8 text-xl">
+            <Link href="/">
+              <span>
+                <Image src={facebook} alt="social_links" />
+              </span>
+            </Link>
+            <Link href="/">
+              <span>
+                <Image src={instagram} alt="social_links" />
+              </span>
+            </Link>
+            <Link href="/">
+              <span>
+                <Image src={linkedin} alt="social_links" />
+              </span>
+            </Link>
+            <Link href="/">
+              <span>
+                <Image src={youtube} alt="social_links" />
+              </span>
+            </Link>
+            <Link href="/">
+              <span>
+                <Image src={tiktok} alt="social_links" />
+              </span>
+            </Link>
           </div>
         </Drawer>
       </div>

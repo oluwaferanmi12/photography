@@ -34,7 +34,7 @@ import cascadeImage1 from "@/assets/svgs/cascade-image-1.svg";
 import cascadeImage2 from "@/assets/svgs/cascade-image-2.svg";
 import cascadeImage3 from "@/assets/svgs/cascade-image-3.svg";
 import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
-import bg_image from "@/assets/images/body_background.png";
+import scrollDown from "@/assets/svgs/scroll-down-icon.svg";
 import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
 import { Compare } from "@/components/ui/compare";
 
@@ -45,6 +45,7 @@ export default function Home() {
   const [currentBg, setCurrentBg] = useState(bgImage3);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const nextSectionRef = useRef<HTMLDivElement>(null)
 
   // SCROLLING EFFECT ON HEADER
   useEffect(() => {
@@ -54,6 +55,12 @@ export default function Home() {
     window.addEventListener("resize", checkIsDesktop);
     return () => window.removeEventListener("resize", checkIsDesktop);
   }, []);
+
+
+  // SCROLL TO NEXT SECTION FOR MOBILE
+  const handleScroll = () => {
+    nextSectionRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   // CASCADE CARDS
   const container = useRef<HTMLDivElement | null>(null);
@@ -113,15 +120,6 @@ export default function Home() {
 
   return (
     <div className="relative w-full">
-      <div className="absolute !top-0 left-0 w-full h-[100px] pointer-events-none z-0">
-        <Image
-          src={bg_image}
-          alt="Top Background"
-          fill
-          className="background-blur-3xl"
-          style={{ objectFit: "cover" }}
-        />
-      </div>
       <motion.div
         className="h-screen min-h-screen relative top-0 z-[1] transition-all w-full"
         animate={{
@@ -129,7 +127,7 @@ export default function Home() {
         }}
       >
         <motion.div
-          className="h-full min-h-full w-full z-50 landingBg flex justify-center items-center relative"
+          className="h-full min-h-full w-full z-50 landingBg flex justify-center lg:items-center relative"
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
             borderRadius: isDesktop && scrolled ? "32px" : "0px",
@@ -149,11 +147,11 @@ export default function Home() {
           />
 
           {/* Content (unaffected by filter) */}
-          <div className="relative z-10 w-full">
+          <div className="relative z-10 mt-48 lg:mt-0 w-full">
             <Row className="w-full px-5 lg:px-20">
               <Col xs={24} xl={12}>
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="hidden lg:flex items-center gap-2">
                     {imageMap.map((img, index) => (
                       <div
                         key={index}
@@ -177,7 +175,7 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
-                  <div className="my-6 text-white text-5xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
+                  <div className="lg:my-6 text-white text-5xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
                     <p>Picture Perfect.</p>
                     <p>Shotbyportable.</p>
                   </div>
@@ -188,13 +186,23 @@ export default function Home() {
                       visual stories through every frame.
                     </p>
                   </div>
+                  <motion.div
+                    className="flex lg:hidden justify-center items-center mt-24 cursor-pointer"
+                    onClick={handleScroll}
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                  >
+                    <span>
+                      <Image src={scrollDown} alt="arrow down" />
+                    </span>
+                  </motion.div>
                 </div>
               </Col>
             </Row>
           </div>
           <FadeInAnimate transitionDuration={15}>
             <Link href="/">
-              <span className="absolute right-14 bottom-14 3xl:!right-28 3xl:!bottom-28">
+              <span className="absolute right-5 lg:right-14 bottom-14 3xl:!right-28 3xl:!bottom-28">
                 <Image
                   className="imageRotate h-24 w-24 md:h-auto md:w-auto"
                   src={rollingImage}
@@ -206,9 +214,12 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col gap-28 pt-28 pb-56">
+      <div className="flex flex-col pt-28 pb-56">
         {/* Second section  */}
-        <div className="flex flex-col gap-10 lg:justify-center lg:items-center px-5 lg:px-0">
+        <div
+          ref={nextSectionRef}
+          className="flex flex-col gap-10 lg:justify-center lg:items-center px-5 lg:px-0"
+        >
           <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
             Photography that leaves a lasting impression
           </h3>
@@ -253,7 +264,7 @@ export default function Home() {
         </div>
 
         {/* SIXTH SECTION */}
-        <div className="flex flex-col mx-5 lg:px-0 gap-28 lg:justify-center lg:items-center">
+        <div className="flex flex-col mt-20 mx-5 lg:px-0 gap-28 lg:justify-center lg:items-center">
           <div className="text-white relative flex flex-col gap-10 lg:justify-center lg:items-center lg:text-center">
             <h2 className="text-5xl lg:text-6xl">Meet Victoria</h2>
 
@@ -362,8 +373,10 @@ export default function Home() {
 
         {/* Sixth Section */}
         <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center">
-          <h3 className="text-6xl">Playground</h3>
-          <p className="text-light-brown text-2xl">Swipe to see before & after magic</p>
+          <h3 className="text-4xl lg:text-6xl">Playground</h3>
+          <p className="text-light-brown text-2xl">
+            Swipe to see before & after magic
+          </p>
           <div className="p-4 border mt-14 rounded-3xl dark:bg-neutral-900 bg-neutral-100  border-neutral-200 dark:border-neutral-800 px-4">
             <Compare
               firstImage={victoria2}

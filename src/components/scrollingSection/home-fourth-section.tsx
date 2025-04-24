@@ -49,7 +49,8 @@ export const FourthSectionScroll = () => {
       bg: "#EFFBF9",
       description:
         "Elegant and timeless wedding photography that captures the love, joy, and unforgettable moments of your special day.",
-      cta: "View Weddings",
+      cta_link: "/gallery/wedding",
+        cta: "View Weddings",
     },
     {
       title: "Birthdays",
@@ -57,7 +58,8 @@ export const FourthSectionScroll = () => {
       bg: "#FFF5E5",
       description:
         "Celebrate another trip around the sun with vibrant, fun, and candid shots that showcase the energy and excitement of the moment.",
-      cta: "View Birthdays",
+      cta_link: "/gallery/birthday",
+        cta: "View Birthdays",
     },
     {
       title: "Kids",
@@ -65,7 +67,8 @@ export const FourthSectionScroll = () => {
       bg: "#F5F0FF",
       description:
         "Playful and tender portraits of your little ones — capturing their personalities and milestones as they grow.",
-      cta: "View Kids",
+      cta_link: "/gallery/kid",
+        cta: "View Kids",
     },
     {
       title: "Lifestyle and Others",
@@ -73,7 +76,8 @@ export const FourthSectionScroll = () => {
       bg: "#F0F9FF",
       description:
         "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-      cta: "View Lifestyle",
+      cta_link: "/gallery/lifestyle",
+        cta: "View Lifestyle",
     },
   ];
 
@@ -112,7 +116,7 @@ export const FourthSectionScroll = () => {
             {services.map((service, i) => (
               <div
                 key={i}
-                className="w-full h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-6 flex flex-col gap-28 rounded-3xl shadow-md"
+                className="w-full h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-6  rounded-3xl shadow-md"
                 style={{ backgroundColor: service.bg }}
               >
                 <div className="relative w-full h-48 overflow-hidden rounded-full">
@@ -126,7 +130,7 @@ export const FourthSectionScroll = () => {
                     priority
                   />
                 </div>
-                <div>
+                <div className="mt-14">
                   <h3 className="text-4xl font-playfair font-light text-darker-grey">
                     {service.title}
                   </h3>
@@ -134,8 +138,8 @@ export const FourthSectionScroll = () => {
                     {service.description}
                   </p>
                 </div>
-                <div>
-                  <Button variant="filled" text={service.cta} />
+                <div className="absolute bottom-8">
+                  <Button variant="filled" text={service.cta} link={service.cta_link}  />
                 </div>
               </div>
             ))}

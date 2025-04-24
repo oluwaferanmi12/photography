@@ -91,7 +91,7 @@ const Gallery = () => {
 
           {/* SECOND SECTION */}
           <div>
-            <h3 className="w-[25%] text-7xl">Wedding Packages</h3>
+            <h3 className=" text-7xl">Wedding Packages</h3>
             <div className="mt-10">
               <PlanCards />
             </div>

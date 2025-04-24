@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 interface ButtonTypes {
@@ -5,7 +6,8 @@ interface ButtonTypes {
   borderVariant?: "light" | "dark";
   size?: "small" | "medium" | "large";
   children?: React.ReactNode;
-  text?: string
+  text?: string;
+  link?: string;
 }
 
 const Button = ({
@@ -13,7 +15,8 @@ const Button = ({
   borderVariant = "dark",
   size = "small",
   children,
-  text
+  text,
+  link,
 }: ButtonTypes) => {
   const baseStyles =
     "px-6 py-2 rounded-full cursor-pointer text-base flex justify-center items-center";
@@ -33,18 +36,17 @@ const Button = ({
     } backdrop-blur-2xl text-base uppercase font-mono`,
   };
 
-  return (
-    <>
-      <button
-        className={`${baseStyles}   ${sizeStyles[size]} ${variantStyles[variant]} `}
-      >
-        {
-          text
-        }
-        {children}
-      </button>
-    </>
+  const ButtonComponent = (
+    <button
+      className={`${baseStyles}   ${sizeStyles[size]} ${variantStyles[variant]} `}
+    >
+      {text}
+      {children}
+    </button>
   );
+
+  return link ? <Link href={link}>{ButtonComponent}</Link> : ButtonComponent
+  
 };
 
 export default Button;

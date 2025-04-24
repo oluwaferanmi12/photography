@@ -36,6 +36,7 @@ import cascadeImage3 from "@/assets/svgs/cascade-image-3.svg";
 import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
 import bg_image from "@/assets/images/body_background.png";
 import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
+import { Compare } from "@/components/ui/compare";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -44,8 +45,6 @@ export default function Home() {
   const [currentBg, setCurrentBg] = useState(bgImage3);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
-
-
 
   // SCROLLING EFFECT ON HEADER
   useEffect(() => {
@@ -354,20 +353,31 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <h3 className="text-4xl lg:text-5xl text-center">Words from my clients</h3>
+            <h3 className="text-4xl lg:text-5xl lg:text-center">
+              Words from my clients
+            </h3>
             <AnimatedTestimonial />
+          </div>
+        </div>
+
+        {/* Sixth Section */}
+        <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center">
+          <h3 className="text-6xl">Playground</h3>
+          <p className="text-light-brown text-2xl">Swipe to see before & after magic</p>
+          <div className="p-4 border mt-14 rounded-3xl dark:bg-neutral-900 bg-neutral-100  border-neutral-200 dark:border-neutral-800 px-4">
+            <Compare
+              firstImage={victoria2}
+              secondImage={victoria}
+              firstImageClassName="object-cover object-left-top w-full"
+              secondImageClassname="object-cover object-left-top w-full"
+              className="h-[250px] w-full md:h-[500px] md:w-[500px] lg:h-[500px] lg:w-[800px]"
+              slideMode="hover"
+            />
           </div>
         </div>
       </div>
 
-      {/* Sixth Section */}
-      <div>
-        <h3 className="text-4xl">Playground</h3>
-        <p className="text-light-brown">Swipe to see before & after magic</p>
-        <AnimatedTestimonial />
-      </div>
-
-      {/* Sixth Section */}
+      {/* Seventh Section */}
       <GalleryBox />
       <Footer />
     </div>

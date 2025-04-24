@@ -31,13 +31,13 @@ export const HomeNav = () => {
       navTitle: "Gallery",
       navLink: "/gallery",
     },
-    {
-      navTitle: "Contact",
-      navLink: "/contact",
-    },
+    // {
+    //   navTitle: "Contact",
+    //   navLink: "/contact",
+    // },
   ];
   return (
-    <div className="w-full z-50 fixed top-0 py-12 px-5 lg:px-14 3xl:px-28">
+    <div className="w-full z-50 fixed top-0 py-12 px-5 lg:px-14 3xl:!px-44">
       <div className="hidden lg:flex justify-between items-center w-full ">
         <span>
           <Image src={brandLogo} alt="logo" />

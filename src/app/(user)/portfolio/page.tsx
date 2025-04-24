@@ -67,7 +67,7 @@ const Portfolio = () => {
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
-        <div className="px-5 lg:px-14 3xl:px-28">
+        <div className="px-5 lg:px-14 3xl:!px-28">
           <div className="flex flex-col mt-28 lg:mt-48 lg:flex-row lg:justify-between items-center">
             <div className="flex flex-col gap-4">
               <h2 className="text-7xl">Explore my</h2>

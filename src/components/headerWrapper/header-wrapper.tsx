@@ -2,7 +2,7 @@ import { Col, Row } from "antd";
 
 export const HeaderWrapper = ({headerTitle, landingBg}: {headerTitle: string, landingBg: string}) => {
   return (
-    <div className="h-[500px] min-h-[500px] !w-full  p-7">
+    <div className="h-[500px] min-h-[500px] !w-full">
       <div className={`h-full min-h-full ${landingBg} rounded-4xl flex justify-center items-center`}>
         <Row className="w-full">
           <Col xs={24}>

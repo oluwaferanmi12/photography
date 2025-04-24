@@ -28,7 +28,6 @@ import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import { FourthSectionScroll } from "@/components/scrollingSection/home-fourth-section";
 import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
-import { HomeNav } from "@/components/nav/home-nav";
 import { AnimatedCard } from "@/animation/animated-card";
 import { MainCard } from "@/components/cascade-card/cascade-card";
 import cascadeImage1 from "@/assets/svgs/cascade-image-1.svg";
@@ -44,16 +43,17 @@ export default function Home() {
   const [activeIndex, setActiveIndex] = useState(2);
   const [currentBg, setCurrentBg] = useState(bgImage3);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+
 
   // SCROLLING EFFECT ON HEADER
   useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
+    const checkIsDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkIsDesktop(); // set initial value on mount
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("resize", checkIsDesktop);
+    return () => window.removeEventListener("resize", checkIsDesktop);
   }, []);
 
   // CASCADE CARDS
@@ -196,7 +196,11 @@ export default function Home() {
           <FadeInAnimate transitionDuration={15}>
             <Link href="/">
               <span className="absolute right-14 bottom-14 3xl:right-28 3xl:bottom-28">
-                <Image className="imageRotate h-24 w-24 md:h-auto md:w-auto" src={rollingImage} alt="image" />
+                <Image
+                  className="imageRotate h-24 w-24 md:h-auto md:w-auto"
+                  src={rollingImage}
+                  alt="image"
+                />
               </span>
             </Link>
           </FadeInAnimate>
@@ -362,6 +366,13 @@ export default function Home() {
             <AnimatedTestimonial />
           </div>
         </div>
+      </div>
+
+      {/* Sixth Section */}
+      <div>
+        <h3 className="text-4xl">Playground</h3>
+        <p className="text-light-brown">Swipe to see before & after magic</p>
+        <AnimatedTestimonial />
       </div>
 
       {/* Sixth Section */}

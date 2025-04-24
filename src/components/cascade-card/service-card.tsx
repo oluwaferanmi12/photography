@@ -22,6 +22,7 @@ export const ServiceCard = ({
     bg: string;
     description: string;
     cta: string;
+    cta_link?: string;
   };
 }) => {
   const container = useRef(null);
@@ -55,7 +56,7 @@ export const ServiceCard = ({
                 <Image
                   src={service.image}
                   alt={service.title}
-                  className="rounded-full h-[130px] w-[80%] object-cover"
+                  className="rounded-[20px] h-[196px] w-full object-cover"
                 />
               </span>
               <div>
@@ -67,7 +68,7 @@ export const ServiceCard = ({
                 </p>
               </div>
               <div>
-                <Button variant="filled" text={service.cta} />
+              <Button variant="filled" text={service.cta} link={service.cta_link}  />
               </div>
             </div>
           </motion.div>

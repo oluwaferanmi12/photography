@@ -3,6 +3,7 @@
 import { HomeNav } from "@/components/nav/home-nav";
 import Image from "next/image";
 import bg_image from "@/assets/images/body_background.png";
+import { MobileNav } from "@/components/nav/mobile-nav";
 
 export default function RootLayout({
   children,
@@ -25,7 +26,13 @@ export default function RootLayout({
 
         {/* Actual content */}
         <div className="relative z-10">
-          <HomeNav />
+          <div className="hidden md:block">
+            <HomeNav />
+          </div>
+          <div className="block md:hidden">
+            <MobileNav />
+          </div>
+
           {children}
         </div>
       </div>

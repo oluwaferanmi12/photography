@@ -16,123 +16,124 @@ import { Footer } from "@/components/footer/footer";
 const page = () => {
   return (
     <div>
-      <HeaderWrapper
-        headerTitle="About Portable hub"
-        landingBg="aboutLandingBG"
-      />
-      {/* SECOND SECTION */}
-      <div>
-        <Row>
-          <Col xs={24}>
-            <div className="flex flex-col justify-center items-center">
-              <div className="lg:w-[30%] flex flex-col gap-5 justify-center items-center">
-                <p className="text-4xl font-grotesk-medium text-center">
-                  Where Passion Meets Perfection Through the Lens
-                </p>
-                <span>
-                  <Image src={aboutPageImg} height={300} alt="about_img" />
+      <div className="p-5 lg:p-14 3xl:!px-28">
+        <HeaderWrapper
+          headerTitle="About Portable hub"
+          landingBg="aboutLandingBG"
+        />
+        {/* SECOND SECTION */}
+        <div>
+          <Row>
+            <Col xs={24}>
+              <div className="flex flex-col justify-center items-center">
+                <div className="lg:w-[30%] flex flex-col gap-5 justify-center items-center">
+                  <p className="text-4xl font-grotesk-medium text-center">
+                    Where Passion Meets Perfection Through the Lens
+                  </p>
+                  <span>
+                    <Image src={aboutPageImg} height={300} alt="about_img" />
+                  </span>
+                  <p className="text-2xl font-grotesk-medium text-center">
+                    At ShotByPortable, storytelling is at the heart of
+                    everything we do. With a decade of experience in photography
+                    and cinematography, we craft visuals that captivate,
+                    inspire, and leave a lasting impact.
+                  </p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
+        {/* THIRD SECTION */}
+        <div className="py-12">
+          <div>
+            <div className="flex justify-between items-stretch gap-4">
+              {/* Large Image */}
+              <span className="w-[75%]">
+                <Image
+                  src={image2}
+                  alt="img"
+                  className="w-full max-h-[600px] object-cover"
+                />
+              </span>
+
+              {/* Smaller Stacked Images */}
+              <div className="flex flex-col gap-5">
+                <span className="w-full">
+                  <Image
+                    src={image3}
+                    alt="img"
+                    className="w-full max-h-[290px] object-contain"
+                  />
                 </span>
-                <p className="text-2xl font-grotesk-medium text-center">
-                  At ShotByPortable, storytelling is at the heart of everything
-                  we do. With a decade of experience in photography and
-                  cinematography, we craft visuals that captivate, inspire, and
-                  leave a lasting impact.
-                </p>
+                <span className="w-full">
+                  <Image
+                    src={image3}
+                    alt="img"
+                    className="w-full max-h-[290px] object-contain"
+                  />
+                </span>
               </div>
             </div>
-          </Col>
-        </Row>
-      </div>
-      {/* THIRD SECTION */}
-      <div className="p-7 py-12">
-        <div>
-          <div className="flex justify-between items-stretch gap-4">
-            {/* Large Image */}
-            <span className="w-[75%]">
-              <Image
-                src={image2}
-                alt="img"
-                className="w-full max-h-[600px] object-cover"
-              />
-            </span>
+          </div>
+        </div>
 
-            {/* Smaller Stacked Images */}
-            <div className="flex flex-col gap-5">
-              <span className="w-full">
-                <Image
-                  src={image3}
-                  alt="img"
-                  className="w-full max-h-[290px] object-contain"
-                />
-              </span>
-              <span className="w-full">
-                <Image
-                  src={image3}
-                  alt="img"
-                  className="w-full max-h-[290px] object-contain"
-                />
-              </span>
+        {/* FOURTH SECTION */}
+        <div className="py-12  ">
+          <div className="flex justify-between items-center w-full">
+            <div>
+              <p className="text-7xl w-1/2 uppercase font-valentiamo-reg">
+                Key Reasons to Work with me
+              </p>
             </div>
+
+            <span className="text-[#6B7280]">
+              <p className="text-2xl">
+                Whatever your customers&apos; payment preferences
+              </p>
+              <p className="text-2xl">
+                we’ll help you find the right solution for{" "}
+              </p>
+              <p className="text-2xl">your business.</p>
+            </span>
           </div>
         </div>
-      </div>
 
-      {/* FOURTH SECTION */}
-      <div className="p-7 py-12  ">
-        <div className="flex justify-between items-center w-full">
-          <div>
-            <p className="text-7xl w-1/2 uppercase font-valentiamo-reg">
-              Key Reasons to Work with me
-            </p>
-          </div>
+        {/* FIFTH SECTION */}
+        <div className="flex justify-between items-center">
+          <AboutCards
+            tagText="Customers"
+            iconSrc={customersIcon}
+            numberCount="20K"
+            numberAttribute="+"
+            cardText="In 38 countries, we work as one global team to help clients"
+          />
 
-          <span className="text-[#6B7280]">
-            <p className="text-2xl">
-              Whatever your customers&apos; payment preferences
-            </p>
-            <p className="text-2xl">
-              we’ll help you find the right solution for{" "}
-            </p>
-            <p className="text-2xl">your business.</p>
+          <span>
+            <Image src={lineImg} alt="img" />
           </span>
+
+          <AboutCards
+            tagText="Satisfaction"
+            iconSrc={webIcon}
+            numberCount="98"
+            numberAttribute="%"
+            cardText="In 38 countries, we work as one global team to help clients"
+          />
+
+          <span>
+            <Image src={lineImg} alt="img" />
+          </span>
+
+          <AboutCards
+            tagText="Experience"
+            iconSrc={experienceIcon}
+            numberCount="89"
+            numberAttribute="%"
+            cardText="We started with a ebellious mindset and set ourselves the challange"
+          />
         </div>
       </div>
-
-      {/* FIFTH SECTION */}
-      <div className="p-7 flex justify-between items-center">
-        <AboutCards
-          tagText="Customers"
-          iconSrc={customersIcon}
-          numberCount="20K"
-          numberAttribute="+"
-          cardText="In 38 countries, we work as one global team to help clients"
-        />
-
-        <span>
-          <Image src={lineImg} alt="img" />
-        </span>
-
-        <AboutCards
-          tagText="Satisfaction"
-          iconSrc={webIcon}
-          numberCount="98"
-          numberAttribute="%"
-          cardText="In 38 countries, we work as one global team to help clients"
-        />
-
-        <span>
-          <Image src={lineImg} alt="img" />
-        </span>
-
-        <AboutCards
-          tagText="Experience"
-          iconSrc={experienceIcon}
-          numberCount="89"
-          numberAttribute="%"
-          cardText="We started with a ebellious mindset and set ourselves the challange"
-        />
-      </div>
-
       {/* SIXTH SECTION */}
       <GalleryBox />
       <Footer />

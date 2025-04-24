@@ -108,8 +108,8 @@ export const FourthSectionScroll = () => {
         className="relative hidden lg:block h-[300vh] py-10 "
       >
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          <motion.div style={{ x }} className="flex items-center gap-4">
-            <h2 className="text-6xl font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
+          <motion.div style={{ x }} className="flex items-center ml-5 lg:ml-14 3xl:!ml-28 gap-4 ">
+            <h2 className="text-6xl font-grotesk-bold font-semibold text-white whitespace-nowrap ">
               My Services
             </h2>
             {/* <div className="flex gap-4 min-w-max pl-6 pr-0"> */}

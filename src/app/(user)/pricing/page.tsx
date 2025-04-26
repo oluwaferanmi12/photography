@@ -22,6 +22,7 @@ import { PlanCards } from "@/components/plans-card/PlanCards";
 import { Input } from "@/components/inputs/input";
 import Button from "@/components/button/button";
 import { SelectInput } from "@/components/inputs/selectInput";
+import { ContactBanner } from "@/components/banner/contact-banner";
 
 const Portfolio = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -315,7 +316,13 @@ const Portfolio = () => {
           </div>
         </div>
       </div>
+      <div className="px-5 lg:px-14 3xl:!px-28">
+        {/* contact banner */}
+        <ContactBanner />
+      </div>
 
+
+      
       <GalleryBox />
       <Footer />
 

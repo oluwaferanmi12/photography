@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import HS4 from "@/assets/images/HS4.png";
@@ -12,10 +14,10 @@ const SessionPage = () => {
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
-        <div className="px-5 lg:px-14 3xl:!px-28">
+        <div className="px-5 lg:px-14 3xl:!px-28 flex flex-col gap-14">
           <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
             <div className="flex flex-col gap-8 lg:w-1/2">
-              <h2 className="text-7xl">Explore my</h2>
+              <h2 className="text-7xl">Book a</h2>
               <div className="flex gap-5 items-center">
                 <span>
                   <Image
@@ -24,7 +26,7 @@ const SessionPage = () => {
                     alt="img"
                   />
                 </span>
-                <h2 className=" italic text-7xl ">Packages</h2>
+                <h2 className=" italic text-7xl ">session</h2>
               </div>
             </div>
             <div className="lg:w-[70%] text-xl text-light-brown">
@@ -38,10 +40,10 @@ const SessionPage = () => {
           </div>
 
           {/* Next Section */}
-          <Row>
+          <Row className="mb-14">
             <Col xs={24} md={12}>
               <span>
-                <Image src={calendar} alt="calendar template" />
+                <Image src={calendar} className="w-[80%]" alt="calendar template" />
               </span>
             </Col>
             <Col xs={24} md={12}>

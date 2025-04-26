@@ -31,7 +31,7 @@ export const ContactFrom = ({
   ];
 
   return (
-    <div className="py-8 px-10 w-full bg-[#282824]">
+    <div className="py-8 px-10 w-full rounded-[20px] bg-[#282824]">
       <div className="flex justify-between items-center w-full">
         <div className="flex gap-3 place-items-center">
           <span>

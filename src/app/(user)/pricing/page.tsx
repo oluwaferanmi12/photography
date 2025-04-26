@@ -9,7 +9,15 @@ import HS4 from "@/assets/images/HS4.png";
 import { Col, Row } from "antd";
 import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
-import icon1 from "@/assets/svgs/kids.svg";
+import icon1 from "@/assets/svgs/kids_icon.svg";
+import wedding_icon from "@/assets/svgs/wedding_icon.svg";
+import kids_icon from "@/assets/svgs/kids.svg";
+import lifestyle_icon from "@/assets/svgs/lifestyle_icon.svg";
+import videography_icon from "@/assets/svgs/videography_icon.svg";
+import makeup_icon from "@/assets/svgs/makeup_icon.svg";
+import birthday_icon from "@/assets/svgs/birthday_icon.svg";
+import family_icon from "@/assets/svgs/makeup_icon.svg";
+
 import { PlanCards } from "@/components/plans-card/PlanCards";
 
 const Portfolio = () => {
@@ -45,92 +53,93 @@ const Portfolio = () => {
               <Image src={rollingImage} alt="rollingImage" />
             </span> */}
           </div>
-          <div className="scroller px-28" ref={scrollerRef}>
+          <div className="scroller !py-28" ref={scrollerRef}>
             <ul className="scroller__inner">
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Weddings</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Birthdays</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Videography</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Kids & infants</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Lifestyle & events</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Make up & Gele</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Family</p>
               </li>
 
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Weddings</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Birthdays</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Videography</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Kids & infants</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Lifestyle & events</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Make up & Gele</p>
               </li>
-              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
                   <Image className="w-full h-full" src={icon1} alt="" />
                 </span>
-                <p className="text-white-100">Weddings</p>
+                <p className="text-white-100 text-xl">Family</p>
               </li>
             </ul>
           </div>

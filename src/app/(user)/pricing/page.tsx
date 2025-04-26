@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import HS4 from "@/assets/images/HS4.png";
-// import rollingImage from "@/assets/svgs/rollingImage.svg";
-import { Col, Row } from "antd";
+import rollingImage from "@/assets/svgs/rollingImage.svg";
+import { Col, Modal, Row } from "antd";
 import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
@@ -16,11 +16,28 @@ import videography_icon from "@/assets/svgs/videography_icon.svg";
 import makeup_icon from "@/assets/svgs/makeup_icon.svg";
 import birthday_icon from "@/assets/svgs/birthday_icon.svg";
 import family_icon from "@/assets/svgs/makeup_icon.svg";
+import bas from "@/assets/svgs/BAS_modal_icon.svg";
 
 import { PlanCards } from "@/components/plans-card/PlanCards";
+import { Input } from "@/components/inputs/input";
 
 const Portfolio = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+
+  const showModal = (service) => {
+    setSelectedService(service);
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
@@ -48,93 +65,147 @@ const Portfolio = () => {
                 memories, every photo session is a curated experience.
               </p>
             </div>
-            {/* <span>
-              <Image src={rollingImage} alt="rollingImage" />
-            </span> */}
           </div>
           <div className="scroller !py-28" ref={scrollerRef}>
             <ul className="scroller__inner">
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("wedding")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={wedding_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Weddings</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("birthday")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={birthday_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Birthdays</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("videography")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
-                  <Image className="w-full h-full" src={videography_icon} alt="" />
+                  <Image
+                    className="w-full h-full"
+                    src={videography_icon}
+                    alt=""
+                  />
                 </span>
                 <p className="text-white-100 text-xl">Videography</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("kids")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={kids_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Kids & infants</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("lifestyle")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
-                  <Image className="w-full h-full" src={lifestyle_icon} alt="" />
+                  <Image
+                    className="w-full h-full"
+                    src={lifestyle_icon}
+                    alt=""
+                  />
                 </span>
                 <p className="text-white-100 text-xl">Lifestyle & events</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("makeup")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={makeup_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Make up & Gele</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("family")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={family_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Family</p>
               </li>
 
-
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("wedding")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={wedding_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Weddings</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("birthday")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={birthday_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Birthdays</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("videography")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
-                  <Image className="w-full h-full" src={videography_icon} alt="" />
+                  <Image
+                    className="w-full h-full"
+                    src={videography_icon}
+                    alt=""
+                  />
                 </span>
                 <p className="text-white-100 text-xl">Videography</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("kids")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={kids_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Kids & infants</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("lifestyle")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
-                  <Image className="w-full h-full" src={lifestyle_icon} alt="" />
+                  <Image
+                    className="w-full h-full"
+                    src={lifestyle_icon}
+                    alt=""
+                  />
                 </span>
                 <p className="text-white-100 text-xl">Lifestyle & events</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("makeup")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={makeup_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Make up & Gele</p>
               </li>
-              <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
+              <li
+                onClick={() => showModal("family")}
+                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
+              >
                 <span>
                   <Image className="w-full h-full" src={family_icon} alt="" />
                 </span>
@@ -221,6 +292,61 @@ const Portfolio = () => {
 
       <GalleryBox />
       <Footer />
+
+      {/* MODAL */}
+      <Modal
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+        className="sessionForm_modal"
+        closeIcon={null}
+      >
+        <div className="py-4 px-5 w-full">
+          <div className="flex justify-between items-center w-full">
+            <div className="flex gap-3 place-items-center">
+              <span>
+                <Image src={bas} alt="bas" />
+              </span>
+              <h3 className="font-playfair text-yellow-50 text-[40px] text-center">
+                Book a session
+              </h3>
+            </div>
+            <span>
+              <Image
+                src={rollingImage}
+                className="w-20 h-20"
+                alt="rollingImage"
+              />
+            </span>
+          </div>
+          <div className="forms text-[#BABABA]">
+            <form action="">
+              <div className="flex flex-col gap-4">
+                <div className="flex gap-5">
+                  <div className="w-1/2">
+                    <label htmlFor="firstname">First name</label>
+                    <Input placeholder="Enter your first name" />
+                  </div>
+                  <div className="w-1/2">
+                    <label htmlFor="lastname">Last name</label>
+                    <Input placeholder="Enter your last name" />
+                  </div>
+                </div>
+                {/* Email */}
+                <div className="w-full">
+                  <label htmlFor="email">Email address</label>
+                  <Input placeholder="Example@email.com" />
+                </div>
+                {/* Phone Number */}
+                <div className="w-full">
+                  <label htmlFor="phone">Phone number</label>
+                  <Input placeholder="+1 999-999-999" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

@@ -3,7 +3,10 @@ import React from "react";
 import HS4 from "@/assets/images/HS4.png";
 import calendar from "@/assets/svgs/calendar_template.svg";
 import { Col, Row } from "antd";
-import { ContactFom } from "@/components/contact-form/contact-form";
+import { ContactFrom } from "@/components/contact-form/contact-form";
+import { ContactBanner } from "@/components/banner/contact-banner";
+import { GalleryBox } from "@/components/galleryBox/gallery-box";
+import { Footer } from "@/components/footer/footer";
 
 const SessionPage = () => {
   return (
@@ -42,12 +45,16 @@ const SessionPage = () => {
               </span>
             </Col>
             <Col xs={24} md={12}>
-            <ContactFrom />
-            
+              <ContactFrom />
             </Col>
           </Row>
+
+          {/* Next Section */}
+          <ContactBanner />
         </div>
       </div>
+      <GalleryBox />
+      <Footer />
     </div>
   );
 };

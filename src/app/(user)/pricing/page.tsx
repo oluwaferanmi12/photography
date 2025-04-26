@@ -23,7 +23,7 @@ import { Input } from "@/components/inputs/input";
 import Button from "@/components/button/button";
 import { SelectInput } from "@/components/inputs/selectInput";
 import { ContactBanner } from "@/components/banner/contact-banner";
-import { ContactFom } from "@/components/contact-form/contact-form";
+import { ContactFrom } from "@/components/contact-form/contact-form";
 
 const Portfolio = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);

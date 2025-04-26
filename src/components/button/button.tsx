@@ -9,6 +9,7 @@ interface ButtonTypes {
   text?: string;
   link?: string;
   widthFull?:boolean
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({
@@ -18,7 +19,8 @@ const Button = ({
   children,
   text,
   link,
-  widthFull
+  widthFull,
+  onClick
 }: ButtonTypes) => {
   const baseStyles =
     `px-6 py-2 ${widthFull ? "w-full" : "w-auto"} rounded-full cursor-pointer text-base flex justify-center items-center`;
@@ -40,6 +42,7 @@ const Button = ({
 
   const ButtonComponent = (
     <button
+    onClick={onClick}
       className={`${baseStyles}   ${sizeStyles[size]} ${variantStyles[variant]} `}
     >
       {text}

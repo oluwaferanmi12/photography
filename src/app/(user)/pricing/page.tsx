@@ -17,8 +17,7 @@ import makeup_icon from "@/assets/svgs/makeup_icon.svg";
 import birthday_icon from "@/assets/svgs/birthday_icon.svg";
 import family_icon from "@/assets/svgs/makeup_icon.svg";
 import bas from "@/assets/svgs/BAS_modal_icon.svg";
-import select_arrow from "@/assets/svgs/select_arrow.svg";
-
+import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { PlanCards } from "@/components/plans-card/PlanCards";
 import { Input } from "@/components/inputs/input";
 import Button from "@/components/button/button";
@@ -26,17 +25,18 @@ import { SelectInput } from "@/components/inputs/selectInput";
 
 const Portfolio = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSessionFormModalOpen, setIsSessionFormModalOpen] = useState(false);
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
   const [selectedPackage, setSelectedPackage] = useState("");
 
   const showModal = (service) => {
     setSelectedService(service);
-    setIsModalOpen(true);
+    setIsSessionFormModalOpen(true);
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setIsSessionFormModalOpen(false);
   };
 
   const services = [
@@ -54,6 +54,16 @@ const Portfolio = () => {
     { label: "Premium", value: "Premium ($900 plus tax)" },
     { label: "Pro+", value: "Pro+ ($1500 plus tax)" },
   ];
+
+  // Submit form onClick
+  const handleReserveSpot = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    setIsSessionFormModalOpen(false);
+    setIsThankYouModalOpen(true); // Open the thank you modal
+    // setTimeout(() => {
+    //   setIsThankYouModalOpen(false);
+    // }, 3000);
+  };
 
   return (
     <div>
@@ -311,7 +321,7 @@ const Portfolio = () => {
 
       {/* MODAL */}
       <Modal
-        open={isModalOpen}
+        open={isSessionFormModalOpen}
         onCancel={handleCancel}
         footer={null}
         className="sessionForm_modal"
@@ -338,30 +348,30 @@ const Portfolio = () => {
             </span>
           </div>
           <div className="forms text-[#BABABA]">
-            <form action="">
+            <form>
               <div className="flex flex-col gap-4">
                 <div className="flex gap-5">
-                  <div className="w-1/2">
+                  <div className="w-1/2 flex flex-col gap-3">
                     <label htmlFor="firstname">First name</label>
                     <Input placeholder="Enter your first name" />
                   </div>
-                  <div className="w-1/2">
+                  <div className="w-1/2 flex flex-col gap-3">
                     <label htmlFor="lastname">Last name</label>
                     <Input placeholder="Enter your last name" />
                   </div>
                 </div>
                 {/* Email */}
-                <div className="w-full">
+                <div className="w-full flex flex-col gap-3">
                   <label htmlFor="email">Email address</label>
                   <Input placeholder="Example@email.com" />
                 </div>
                 {/* Phone Number */}
-                <div className="w-full">
+                <div className="w-full flex flex-col gap-3">
                   <label htmlFor="phone">Phone number</label>
                   <Input placeholder="+1 999-999-999" />
                 </div>
                 {/* Services */}
-                <div>
+                <div className="w-full flex flex-col gap-3">
                   <label htmlFor="phone">Select Services</label>
                   <SelectInput
                     selectValue={selectedService}
@@ -371,7 +381,7 @@ const Portfolio = () => {
                   />
                 </div>
                 {/* Package */}
-                <div>
+                <div className="w-full flex flex-col gap-3">
                   <label htmlFor="phone">Select package</label>
                   <SelectInput
                     selectValue={selectedPackage}
@@ -382,7 +392,7 @@ const Portfolio = () => {
                 </div>
                 {/* DATE AND PREFERRED TIME */}
                 <div className="flex gap-5">
-                  <div className="w-1/2">
+                  <div className="w-1/2 flex flex-col gap-3">
                     <label htmlFor="phone">Date</label>
                     <SelectInput
                       selectValue={selectedPackage}
@@ -391,7 +401,7 @@ const Portfolio = () => {
                       selectData={packages}
                     />
                   </div>
-                  <div className="w-1/2">
+                  <div className="w-1/2 flex flex-col gap-3">
                     <label htmlFor="phone">Time</label>
                     <SelectInput
                       selectValue={selectedPackage}
@@ -402,9 +412,14 @@ const Portfolio = () => {
                   </div>
                 </div>
                 {/* Location */}
-                <div>
+                <div className="w-full flex flex-col gap-3">
                   <label htmlFor="phone">Location</label>
-                  <SelectInput selectValue={selectedPackage} setSelectedValue={setSelectedPackage} defaultOption="Provide your location" selectData={packages} />
+                  <SelectInput
+                    selectValue={selectedPackage}
+                    setSelectedValue={setSelectedPackage}
+                    defaultOption="Provide your location"
+                    selectData={packages}
+                  />
                 </div>
               </div>
               <div className="mt-8 w-1/2">
@@ -413,9 +428,50 @@ const Portfolio = () => {
                   widthFull
                   size="large"
                   text="Reserve a spot"
+                  onClick={handleReserveSpot}
                 />
               </div>
             </form>
+          </div>
+        </div>
+      </Modal>
+      {/* AFTER FORM FILLING MODAL */}
+      <Modal
+        open={isThankYouModalOpen}
+        onCancel={() => setIsThankYouModalOpen(false)}
+        footer={null}
+        className="sessionForm_modal"
+        closeIcon={null}
+        width={600}
+        centered
+      >
+        <div className="py-8 px-10 w-full">
+          <div className="flex justify-between items-start w-full">
+            <div className="flex flex-col gap-2">
+              <span>
+                <Image src={bas_thanks} alt="bas" />
+              </span>
+              <h3 className="font-playfair text-5xl text-white">Thank you for your reservation</h3>
+            </div>
+            <span>
+              <Image
+                src={rollingImage}
+                className="w-28 h-28"
+                alt="rollingImage"
+              />
+            </span>
+          </div>
+          <div className="flex flex-col gap-5 mt-10">
+            <p className="text-sm text-light-brown">
+              Thank you for reserving a spot with me, I will check my
+              availability and respond to your booking in less than 24hrs, If
+              confirmed you will receive a payment link and a confirmation email
+              from me, Please watch out for your junks and texts.
+            </p>
+            <div>
+              <p className="text-light-brown text-sm">yours sincerely</p>
+              <p className="text-[#5A5A50] text-sm font-valentiamo-reg">shotbyportable</p>
+            </div>
           </div>
         </div>
       </Modal>

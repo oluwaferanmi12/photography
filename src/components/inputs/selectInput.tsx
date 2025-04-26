@@ -9,7 +9,7 @@ type SelectDataType = {
 
 interface SelectInputProps {
   selectValue: string;
-  setSelectedValue: (val: string) => void;
+  setSelectedValue: (val: string) => void ;
   defaultOption: string;
   selectData: SelectDataType[];
 }

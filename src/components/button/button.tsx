@@ -8,6 +8,7 @@ interface ButtonTypes {
   children?: React.ReactNode;
   text?: string;
   link?: string;
+  widthFull?:boolean
 }
 
 const Button = ({
@@ -17,9 +18,10 @@ const Button = ({
   children,
   text,
   link,
+  widthFull
 }: ButtonTypes) => {
   const baseStyles =
-    "px-6 py-2 rounded-full cursor-pointer text-base flex justify-center items-center";
+    `px-6 py-2 ${widthFull ? "w-full" : "w-auto"} rounded-full cursor-pointer text-base flex justify-center items-center`;
 
   const sizeStyles = {
     small: "px-6 py-2",

@@ -17,27 +17,43 @@ import makeup_icon from "@/assets/svgs/makeup_icon.svg";
 import birthday_icon from "@/assets/svgs/birthday_icon.svg";
 import family_icon from "@/assets/svgs/makeup_icon.svg";
 import bas from "@/assets/svgs/BAS_modal_icon.svg";
+import select_arrow from "@/assets/svgs/select_arrow.svg";
 
 import { PlanCards } from "@/components/plans-card/PlanCards";
 import { Input } from "@/components/inputs/input";
+import Button from "@/components/button/button";
+import { SelectInput } from "@/components/inputs/selectInput";
 
 const Portfolio = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const [selectedPackage, setSelectedPackage] = useState("");
 
   const showModal = (service) => {
     setSelectedService(service);
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const services = [
+    { label: "Weddings", value: "wedding" },
+    { label: "Birthdays", value: "birthday" },
+    { label: "Videography", value: "videography" },
+    { label: "Kids & infants", value: "kids" },
+    { label: "Lifestyle & events", value: "lifestyle" },
+    { label: "Make up & Gele", value: "makeup" },
+    { label: "Family", value: "family" },
+  ];
+
+  const packages = [
+    { label: "Basic", value: "Basic ($400 plus tax)" },
+    { label: "Premium", value: "Premium ($900 plus tax)" },
+    { label: "Pro+", value: "Pro+ ($1500 plus tax)" },
+  ];
 
   return (
     <div>
@@ -300,8 +316,10 @@ const Portfolio = () => {
         footer={null}
         className="sessionForm_modal"
         closeIcon={null}
+        width={800}
+        centered
       >
-        <div className="py-4 px-5 w-full">
+        <div className="py-8 px-10 w-full">
           <div className="flex justify-between items-center w-full">
             <div className="flex gap-3 place-items-center">
               <span>
@@ -342,6 +360,60 @@ const Portfolio = () => {
                   <label htmlFor="phone">Phone number</label>
                   <Input placeholder="+1 999-999-999" />
                 </div>
+                {/* Services */}
+                <div>
+                  <label htmlFor="phone">Select Services</label>
+                  <SelectInput
+                    selectValue={selectedService}
+                    setSelectedValue={setSelectedService}
+                    defaultOption="Select services"
+                    selectData={services}
+                  />
+                </div>
+                {/* Package */}
+                <div>
+                  <label htmlFor="phone">Select package</label>
+                  <SelectInput
+                    selectValue={selectedPackage}
+                    setSelectedValue={setSelectedPackage}
+                    defaultOption="Select package"
+                    selectData={packages}
+                  />
+                </div>
+                {/* DATE AND PREFERRED TIME */}
+                <div className="flex gap-5">
+                  <div className="w-1/2">
+                    <label htmlFor="phone">Date</label>
+                    <SelectInput
+                      selectValue={selectedPackage}
+                      setSelectedValue={setSelectedPackage}
+                      defaultOption="Select date"
+                      selectData={packages}
+                    />
+                  </div>
+                  <div className="w-1/2">
+                    <label htmlFor="phone">Time</label>
+                    <SelectInput
+                      selectValue={selectedPackage}
+                      setSelectedValue={setSelectedPackage}
+                      defaultOption="Select time"
+                      selectData={packages}
+                    />
+                  </div>
+                </div>
+                {/* Location */}
+                <div>
+                  <label htmlFor="phone">Location</label>
+                  <SelectInput selectValue={selectedPackage} setSelectedValue={setSelectedPackage} defaultOption="Provide your location" selectData={packages} />
+                </div>
+              </div>
+              <div className="mt-8 w-1/2">
+                <Button
+                  variant="filled"
+                  widthFull
+                  size="large"
+                  text="Reserve a spot"
+                />
               </div>
             </form>
           </div>

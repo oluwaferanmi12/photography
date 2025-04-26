@@ -10,7 +10,7 @@ import { Col, Row } from "antd";
 import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
-import kids_icon from "@/assets/svgs/kids.svg";
+import kids_icon from "@/assets/svgs/kids_icon.svg";
 import lifestyle_icon from "@/assets/svgs/lifestyle_icon.svg";
 import videography_icon from "@/assets/svgs/videography_icon.svg";
 import makeup_icon from "@/assets/svgs/makeup_icon.svg";

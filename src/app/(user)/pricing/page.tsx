@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
@@ -9,9 +9,12 @@ import HS4 from "@/assets/images/HS4.png";
 import { Col, Row } from "antd";
 import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
+import icon1 from "@/assets/svgs/kids.svg";
 import { PlanCards } from "@/components/plans-card/PlanCards";
 
 const Portfolio = () => {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
@@ -41,6 +44,95 @@ const Portfolio = () => {
             {/* <span>
               <Image src={rollingImage} alt="rollingImage" />
             </span> */}
+          </div>
+          <div className="scroller px-28" ref={scrollerRef}>
+            <ul className="scroller__inner">
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+              <li className="w-[120px] rounded-3xl border border-off-white py-3 px-5 min-w-[120px] lg:w-[200px] lg:min-w-[200px] flex gap-3 items-center ">
+                <span>
+                  <Image className="w-full h-full" src={icon1} alt="" />
+                </span>
+                <p className="text-white-100">Weddings</p>
+              </li>
+            </ul>
           </div>
 
           {/* Third section */}
@@ -86,10 +178,34 @@ const Portfolio = () => {
           </div>
 
           {/* Third section */}
-          <div className="pb-36">
-            <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Wedding Packages</h3>
-            <div className="mt-10">
-              <PlanCards />
+          <div className="pb-36 flex flex-col gap-20">
+            <div>
+              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Weddings</h3>
+              <div className="mt-10">
+                <PlanCards />
+              </div>
+            </div>
+            <div>
+              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Birthdays</h3>
+              <div className="mt-10">
+                <PlanCards />
+              </div>
+            </div>
+            <div>
+              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">
+                Kids & infants
+              </h3>
+              <div className="mt-10">
+                <PlanCards />
+              </div>
+            </div>
+            <div>
+              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">
+                Kids & infants
+              </h3>
+              <div className="mt-10">
+                <PlanCards />
+              </div>
             </div>
           </div>
         </div>

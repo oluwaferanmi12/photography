@@ -9,7 +9,6 @@ import HS4 from "@/assets/images/HS4.png";
 import { Col, Row } from "antd";
 import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
-import icon1 from "@/assets/svgs/kids_icon.svg";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
 import kids_icon from "@/assets/svgs/kids.svg";
 import lifestyle_icon from "@/assets/svgs/lifestyle_icon.svg";
@@ -57,43 +56,43 @@ const Portfolio = () => {
             <ul className="scroller__inner">
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={wedding_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Weddings</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={birthday_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Birthdays</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={videography_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Videography</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={kids_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Kids & infants</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={lifestyle_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Lifestyle & events</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={makeup_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Make up & Gele</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={family_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Family</p>
               </li>
@@ -101,43 +100,43 @@ const Portfolio = () => {
 
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={wedding_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Weddings</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={birthday_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Birthdays</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={videography_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Videography</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={kids_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Kids & infants</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={lifestyle_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Lifestyle & events</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={makeup_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Make up & Gele</p>
               </li>
               <li className="rounded-3xl border border-off-white py-3 px-6 flex gap-3 items-center ">
                 <span>
-                  <Image className="w-full h-full" src={icon1} alt="" />
+                  <Image className="w-full h-full" src={family_icon} alt="" />
                 </span>
                 <p className="text-white-100 text-xl">Family</p>
               </li>

@@ -16,7 +16,7 @@ import { Footer } from "@/components/footer/footer";
 const page = () => {
   return (
     <div>
-      <div className="p-5 lg:p-14 3xl:!px-28">
+      <div className="p-5 lg:p-14 3xl:!px-28 flex flex-col gap-14">
         <HeaderWrapper
           headerTitle="About Portable hub"
           landingBg="aboutLandingBG"
@@ -80,14 +80,14 @@ const page = () => {
 
         {/* FOURTH SECTION */}
         <div className="py-12  ">
-          <div className="flex justify-between items-center w-full">
+          <div className="flex flex-col lg:flex-row gap-4 justify-between items-center w-full">
             <div>
-              <p className="text-7xl w-1/2 uppercase font-valentiamo-reg">
+              <p className=" text-4xl lg:text-7xl lg:w-1/2 uppercase font-valentiamo-reg">
                 Key Reasons to Work with me
               </p>
             </div>
 
-            <span className="text-[#6B7280]">
+             <span className="text-[#6B7280]">
               <p className="text-2xl">
                 Whatever your customers&apos; payment preferences
               </p>
@@ -100,7 +100,7 @@ const page = () => {
         </div>
 
         {/* FIFTH SECTION */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col lg:flex-row gap-5 lg:justify-between items-center">
           <AboutCards
             tagText="Customers"
             iconSrc={customersIcon}
@@ -109,7 +109,7 @@ const page = () => {
             cardText="In 38 countries, we work as one global team to help clients"
           />
 
-          <span>
+          <span className="hidden lg:flex">
             <Image src={lineImg} alt="img" />
           </span>
 
@@ -121,7 +121,7 @@ const page = () => {
             cardText="In 38 countries, we work as one global team to help clients"
           />
 
-          <span>
+          <span className="hidden lg:flex">
             <Image src={lineImg} alt="img" />
           </span>
 

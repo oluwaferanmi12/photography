@@ -2,13 +2,13 @@ import Link from "next/link";
 import React from "react";
 
 interface ButtonTypes {
-  variant?: "bordered" | "filled";
-  borderVariant?: "light" | "dark";
+  variant?: "bordered" | "filled" | "black";
+  borderVariant?: "light" | "dark" | "yellow";
   size?: "small" | "medium" | "large";
   children?: React.ReactNode;
   text?: string;
   link?: string;
-  widthFull?:boolean
+  widthFull?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -20,10 +20,11 @@ const Button = ({
   text,
   link,
   widthFull,
-  onClick
+  onClick,
 }: ButtonTypes) => {
-  const baseStyles =
-    `px-6 py-2 ${widthFull ? "w-full" : "w-auto"} rounded-full cursor-pointer text-base flex justify-center items-center`;
+  const baseStyles = `px-6 py-2 ${
+    widthFull ? "w-full" : "w-auto"
+  } rounded-full cursor-pointer text-base flex justify-center items-center`;
 
   const sizeStyles = {
     small: "px-6 py-2",
@@ -33,16 +34,19 @@ const Button = ({
 
   const variantStyles = {
     filled: "bg-light-brown font-semibold text-darker-grey",
+    black: "bg-darker-grey text-white",
     bordered: `border ${
       borderVariant === "light"
         ? "border-[#CFCFCF] text-[#3C3C3B]"
-        : "border-[#3C3C3B] text-[#060605] "
-    } backdrop-blur-2xl text-base uppercase font-mono`,
+        : borderVariant === "dark"
+        ? "border-[#3C3C3B] text-[#060605]"
+        : "border-[#FBFAF7] text-[#FBFAF7] bg-transparent "
+    }  text-base font-mono`,
   };
 
   const ButtonComponent = (
     <button
-    onClick={onClick}
+      onClick={onClick}
       className={`${baseStyles}   ${sizeStyles[size]} ${variantStyles[variant]} `}
     >
       {text}
@@ -50,8 +54,7 @@ const Button = ({
     </button>
   );
 
-  return link ? <Link href={link}>{ButtonComponent}</Link> : ButtonComponent
-  
+  return link ? <Link href={link}>{ButtonComponent}</Link> : ButtonComponent;
 };
 
 export default Button;

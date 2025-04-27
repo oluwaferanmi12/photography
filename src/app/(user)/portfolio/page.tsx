@@ -6,61 +6,68 @@ import { Footer } from "@/components/footer/footer";
 import { Banner } from "@/components/banner/banner";
 import Image from "next/image";
 import Button from "@/components/button/button";
+import card1 from "@/assets/svgs/portfolioImages/card1.svg";
+import card2 from "@/assets/svgs/portfolioImages/card2.svg";
+import card3 from "@/assets/svgs/portfolioImages/card3.svg";
+import card4 from "@/assets/svgs/portfolioImages/card4.svg";
 import HS4 from "@/assets/images/HS4.png";
-import jorImage from "@/assets/images/jorImage.jpeg";
-import HS3 from "@/assets/images/HS3.png";
-import HS6 from "@/assets/images/HS6.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 
 const Portfolio = () => {
   const services = [
     {
       title: "Weddings",
-      image: HS4,
+      image: card1,
       bg: "#EFFBF9",
       description:
-        "Elegant and timeless wedding photography that captures the love, joy, and unforgettable moments of your special day.",
-      cta: "View Weddings",
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/gallery/wedding`,
+      cta: "View weddings",
     },
     {
       title: "Birthdays",
-      image: HS3,
-      bg: "#FFF5E5",
+      image: card4,
+      bg: "#F9EFFB",
       description:
-        "Celebrate another trip around the sun with vibrant, fun, and candid shots that showcase the energy and excitement of the moment.",
-      cta: "View Birthdays",
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/gallery/birthday`,
+      cta: "View birthdays",
     },
     {
       title: "Lifestyle and Others",
-      image: HS3,
-      bg: "#F0F9FF",
+      image: card2,
+      bg: "#FBEFF2",
       description:
-        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-      cta: "View Lifestyle",
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good”.",
+      cta_href: `/gallery/lifestyle`,
+      cta: "View lifestyle and events",
     },
     {
       title: "Kids",
-      image: jorImage,
-      bg: "#F5F0FF",
+      image: card4,
+      bg: "#FBFBEF",
       description:
-        "Playful and tender portraits of your little ones — capturing their personalities and milestones as they grow.",
-      cta: "View Kids",
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/gallery/kids`,
+      cta: "View kids",
     },
     {
       title: "Videography",
-      image: HS6,
-      bg: "#F0F9FF",
+      image: card3,
+      bg: "#DDFFD7",
       description:
-        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-      cta: "View Lifestyle",
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good”.",
+      cta_href: `/gallery/videography`,
+      cta: "View videography",
     },
     {
       title: "Makeup and Gele",
-      image: HS3,
-      bg: "#F0F9FF",
+      image: card4,
+      bg: "#FFF9D7",
       description:
-        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-      cta: "View Lifestyle",
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/gallery/makeup`,
+      cta: "View others",
     },
   ];
 
@@ -83,7 +90,11 @@ const Portfolio = () => {
               </div>
             </div>
             <span className="hidden lg:flex">
-              <Image src={rollingImage} className="imageRotate"  alt="rollingImage" />
+              <Image
+                src={rollingImage}
+                className="imageRotate"
+                alt="rollingImage"
+              />
             </span>
           </div>
           <div className="my-14">
@@ -95,7 +106,7 @@ const Portfolio = () => {
                   .map((service, i) => (
                     <div
                       key={`left-${i}`}
-                      className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] h-[400px] w-full"
+                      className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] min-h-[400px] max-h-[600px] w-full"
                       style={{ backgroundColor: service.bg }}
                     >
                       <span className="w-full overflow-hidden rounded-xl mb-4">
@@ -115,7 +126,11 @@ const Portfolio = () => {
                           </p>
                         </div>
                         <div className="mt-4">
-                          <Button variant="filled" text={service.cta} />
+                          <Button
+                            variant="black"
+                            link={service.cta_href}
+                            text={service.cta}
+                          />
                         </div>
                       </div>
                     </div>
@@ -129,7 +144,7 @@ const Portfolio = () => {
                   .map((service, i) => (
                     <div
                       key={`right-${i}`}
-                      className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] h-[400px] w-full"
+                      className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] min-h-[400px] max-h-[600px] w-full"
                       style={{ backgroundColor: service.bg }}
                     >
                       <div className="w-full overflow-hidden rounded-xl mb-4">
@@ -149,7 +164,11 @@ const Portfolio = () => {
                           </p>
                         </div>
                         <div className="mt-4">
-                          <Button variant="filled" text={service.cta} />
+                          <Button
+                            variant="black"
+                            link={service.cta_href}
+                            text={service.cta}
+                          />
                         </div>
                       </div>
                     </div>

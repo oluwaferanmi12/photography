@@ -1,24 +1,25 @@
 import Image from "next/image";
-import HS1 from "@/assets/images/HS1.png";
-import HS2 from "@/assets/images/HS2.png";
-import HS3 from "@/assets/images/HS3.png";
-import HS4 from "@/assets/images/HS4.png";
-import HS5 from "@/assets/images/HS5.png";
-import HS6 from "@/assets/images/HS6.png";
-import HS7 from "@/assets/images/HS7.png";
-import HS8 from "@/assets/images/HS8.png";
-import HS9 from "@/assets/images/HS9.png";
+
+import MI1 from "@/assets/svgs/masonryImages/MI1.svg";
+import MI2 from "@/assets/svgs/masonryImages/MI2.svg";
+import MI3 from "@/assets/svgs/masonryImages/MI3.svg";
+import MI4 from "@/assets/svgs/masonryImages/MI4.svg";
+import MI5 from "@/assets/svgs/masonryImages/MI5.svg";
+import MI6 from "@/assets/svgs/masonryImages/MI6.svg";
+import MI7 from "@/assets/svgs/masonryImages/MI7.svg";
+import MI8 from "@/assets/svgs/masonryImages/MI8.svg";
+import MI9 from "@/assets/svgs/masonryImages/MI9.svg";
 import { useRef } from "react";
 
 const columns = [
-  [HS1, HS2], // first column
-  [HS3, HS4], // second column (staggered)
-  [HS5], // middle column (centered vertically)
-  [HS6, HS7], // fourth column (staggered)
-  [HS8, HS9], // fifth column
+  [MI1, MI3], // first column
+  [MI2, MI7], // second column (staggered)
+  [MI4], // middle column (centered vertically)
+  [MI5, MI8], // fourth column (staggered)
+  [MI6, MI9], // fifth column
 ];
 
-const cardImageData = [HS1, HS2, HS3, HS4, HS5, HS6, HS7, HS8, HS9];
+const cardImageData = [MI1, MI2, MI3, MI4, MI5, MI6, MI7, MI8, MI9];
 
 export default function ImageMasonry() {
   const container = useRef<HTMLDivElement | null>(null);
@@ -38,30 +39,40 @@ export default function ImageMasonry() {
                 isOffsetColumn ? "mt-20" : ""
               } ${isMiddleColumn ? "justify-center" : "justify-start"}`}
             >
-              {column.map((src, idx) => (
-                <div
-                  key={idx}
-                  className={`relative ${
-                    firstAndLastColumn
-                      ? "aspect-[16/9] lg:aspect-[1/2]"
-                      : "lg:aspect-[3/4]"
-                  }  w-full overflow-hidden rounded-xl shadow-lg  h-[400px]`}
-                >
-                  <Image
-                    src={src}
-                    alt={`Image ${idx}`}
-                    fill
-                    className="object-cover"
-                    quality={90}
-                    sizes="100vw"
-                  />
-                </div>
-              ))}
+              {column.map((src, idx) => {
+                const shouldApplyGrayscale =
+                  (colIndex === 1 || colIndex === 4) && idx === 0;
+
+                return (
+                  <div
+                    key={idx}
+                    className={`relative ${
+                      firstAndLastColumn
+                        ? "aspect-[16/9] lg:aspect-[1/2]"
+                        : "lg:aspect-[3/4]"
+                    } w-full overflow-hidden rounded-xl shadow-lg h-[400px]`}
+                  >
+                    <Image
+                      src={src}
+                      alt={`Image ${idx}`}
+                      fill
+                      className={`object-cover ${
+                        shouldApplyGrayscale ? "grayscale" : ""
+                      }`}
+                      quality={90}
+                      sizes="100vw"
+                    />
+                  </div>
+                );
+              })}
             </div>
           );
         })}
       </div>
-      <section className="pb-16 lg:hidden flex flex-col justify-center items-center " ref={container}>
+      <section
+        className="pb-16 lg:hidden flex flex-col justify-center items-center "
+        ref={container}
+      >
         {cardImageData.map((item, index) => {
           return (
             <div key={index} className="h-screen sticky top-0">

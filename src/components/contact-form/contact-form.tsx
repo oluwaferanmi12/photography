@@ -123,7 +123,7 @@ export const ContactFrom = ({
               />
             </div>
           </div>
-          <div className="mt-8 w-1/2">
+          <div className="mt-8 lg:w-1/2">
             <Button
               variant="filled"
               widthFull

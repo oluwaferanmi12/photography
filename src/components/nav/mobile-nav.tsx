@@ -26,8 +26,8 @@ export const MobileNav = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Portfolio", path: "/portfolio" },
-    { name: "Packages", path: "/pricing" },
-    { name: "Gallery", path: "/gallery" },
+    { name: "Packages", path: "/packages" },
+    // { name: "Gallery", path: "/gallery" },
   ];
 
   return (
@@ -60,7 +60,7 @@ export const MobileNav = () => {
                 <Image src={brandLogo} alt="logo" />
               </span>
               <span>
-              <X onClick={onClose} />
+                <X onClick={onClose} />
               </span>
             </div>
 
@@ -69,10 +69,10 @@ export const MobileNav = () => {
                 <Link
                   key={path}
                   href={path}
-                 
+                  onClick={onClose}
                   className={`${
                     pathname === path
-                      ? "text-4xl font-semibold text-[#D9C9AE] flex gap-2 items-center"
+                      ? "text-5xl font-semibold text-[#D9C9AE] flex gap-2 items-center"
                       : "text-3xl font-light text-[#F3EEE6]"
                   } font-playfair transition-all duration-200`}
                 >
@@ -87,9 +87,11 @@ export const MobileNav = () => {
             </div>
           </div>
           <div className="w-full mt-28">
-            <button className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey">
-              Book a session
-            </button>
+            <Link href={"/session"}>
+              <button onClick={onClose} className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey">
+                Book a session
+              </button>
+            </Link>
           </div>
 
           <div className="flex gap-4 mt-8 text-xl">

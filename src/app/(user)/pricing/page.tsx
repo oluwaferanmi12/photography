@@ -59,7 +59,7 @@ const Portfolio = () => {
 
   // Submit form onClick
   const handleReserveSpot = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     setIsSessionFormModalOpen(false);
     setIsThankYouModalOpen(true); // Open the thank you modal
     // setTimeout(() => {
@@ -322,8 +322,6 @@ const Portfolio = () => {
         <ContactBanner />
       </div>
 
-
-      
       <GalleryBox />
       <Footer />
 
@@ -337,7 +335,11 @@ const Portfolio = () => {
         width={800}
         centered
       >
-      <ContactFrom onSubmit={handleReserveSpot} />
+        <ContactFrom
+          onSubmit={handleReserveSpot}
+          selectedService={selectedService}
+          setSelectedService={setSelectedService}
+        />
       </Modal>
       {/* AFTER FORM FILLING MODAL */}
       <Modal
@@ -355,7 +357,9 @@ const Portfolio = () => {
               <span>
                 <Image src={bas_thanks} alt="bas" />
               </span>
-              <h3 className="font-playfair text-5xl text-white">Thank you for your reservation</h3>
+              <h3 className="font-playfair text-5xl text-white">
+                Thank you for your reservation
+              </h3>
             </div>
             <span>
               <Image
@@ -374,7 +378,9 @@ const Portfolio = () => {
             </p>
             <div>
               <p className="text-light-brown text-sm">yours sincerely</p>
-              <p className="text-[#5A5A50] text-sm font-valentiamo-reg">shotbyportable</p>
+              <p className="text-[#5A5A50] text-sm font-valentiamo-reg">
+                shotbyportable
+              </p>
             </div>
           </div>
         </div>

@@ -8,10 +8,13 @@ import Button from "@/components/button/button";
 
 export const ContactFrom = ({
   onSubmit,
+  selectedService,
+  setSelectedService,
 }: {
   onSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  selectedService: string;
+  setSelectedService: (val:string) => void;
 }) => {
-  const [selectedService, setSelectedService] = useState("");
   const [selectedPackage, setSelectedPackage] = useState("");
 
   const services = [

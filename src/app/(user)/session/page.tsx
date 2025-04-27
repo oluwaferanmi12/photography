@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import HS4 from "@/assets/images/HS4.png";
 import calendar from "@/assets/svgs/calendar_template.svg";
 import { Col, Row } from "antd";
@@ -11,6 +11,7 @@ import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 
 const SessionPage = () => {
+  const [selectedService, setSelectedService] = useState("");
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
@@ -43,11 +44,18 @@ const SessionPage = () => {
           <Row className="mb-14">
             <Col xs={24} md={12}>
               <span>
-                <Image src={calendar} className="w-[80%]" alt="calendar template" />
+                <Image
+                  src={calendar}
+                  className="w-[80%]"
+                  alt="calendar template"
+                />
               </span>
             </Col>
             <Col xs={24} md={12}>
-              <ContactFrom />
+              <ContactFrom
+                selectedService={selectedService}
+                setSelectedService={() => setSelectedService("")}
+              />
             </Col>
           </Row>
 

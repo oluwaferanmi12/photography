@@ -88,7 +88,7 @@ export const MobileNav = () => {
           </div>
           <div className="w-full mt-28">
             <Link href={"/session"}>
-              <button className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey">
+              <button onClick={onClose} className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey">
                 Book a session
               </button>
             </Link>

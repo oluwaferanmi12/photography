@@ -41,12 +41,12 @@ const SessionPage = () => {
           </div>
 
           {/* Next Section */}
-          <Row className="mb-14">
+          <Row gutter={[24, 24]} className="mb-14">
             <Col xs={24} md={12}>
               <span>
                 <Image
                   src={calendar}
-                  className="w-[80%]"
+                  className="w-full lg:w-[90%]"
                   alt="calendar template"
                 />
               </span>

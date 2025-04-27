@@ -15,7 +15,7 @@ export const ContactBanner = () => {
         <p className="text-white text-xl">
           Contact me and let’s create a special one for you
         </p>
-        <div className="w-1/2">
+        <div className="lg:w-1/2">
           <Button variant="filled" widthFull text="Contact me" size="large" />
         </div>
       </div>

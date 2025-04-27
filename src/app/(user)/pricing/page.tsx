@@ -16,12 +16,8 @@ import videography_icon from "@/assets/svgs/videography_icon.svg";
 import makeup_icon from "@/assets/svgs/makeup_icon.svg";
 import birthday_icon from "@/assets/svgs/birthday_icon.svg";
 import family_icon from "@/assets/svgs/makeup_icon.svg";
-import bas from "@/assets/svgs/BAS_modal_icon.svg";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { PlanCards } from "@/components/plans-card/PlanCards";
-import { Input } from "@/components/inputs/input";
-import Button from "@/components/button/button";
-import { SelectInput } from "@/components/inputs/selectInput";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
 
@@ -30,7 +26,6 @@ const Portfolio = () => {
   const [isSessionFormModalOpen, setIsSessionFormModalOpen] = useState(false);
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
-  const [selectedPackage, setSelectedPackage] = useState("");
 
   const showModal = (service) => {
     setSelectedService(service);

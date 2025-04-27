@@ -1,9 +1,9 @@
 import React from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
-import HS4 from "@/assets/images/HS4.png";
-import HS1 from "@/assets/images/HS1.png";
-import HS6 from "@/assets/images/HS6.png";
+import card1 from "@/assets/svgs/homeServicesImage/card1.svg";
+import card2 from "@/assets/svgs/homeServicesImage/card2.svg";
+import card3 from "@/assets/svgs/homeServicesImage/card3.svg";
 import Image from "next/image";
 import Button from "../button/button";
 import { ServiceCard } from "@/components/cascade-card/service-card";
@@ -45,7 +45,7 @@ export const FourthSectionScroll = () => {
   const services = [
     {
       title: "Weddings",
-      image: HS4,
+      image: card1,
       bg: "#EFFBF9",
       description:
         "Elegant and timeless wedding photography that captures the love, joy, and unforgettable moments of your special day.",
@@ -54,7 +54,7 @@ export const FourthSectionScroll = () => {
     },
     {
       title: "Birthdays",
-      image: HS1,
+      image: card2,
       bg: "#FFF5E5",
       description:
         "Celebrate another trip around the sun with vibrant, fun, and candid shots that showcase the energy and excitement of the moment.",
@@ -63,7 +63,7 @@ export const FourthSectionScroll = () => {
     },
     {
       title: "Kids",
-      image: HS6,
+      image: card3,
       bg: "#F5F0FF",
       description:
         "Playful and tender portraits of your little ones — capturing their personalities and milestones as they grow.",
@@ -72,7 +72,7 @@ export const FourthSectionScroll = () => {
     },
     {
       title: "Lifestyle and Others",
-      image: HS6,
+      image: card3,
       bg: "#F0F9FF",
       description:
         "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",

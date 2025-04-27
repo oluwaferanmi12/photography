@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 interface ButtonTypes {
-  variant?: "bordered" | "filled";
+  variant?: "bordered" | "filled" | "black";
   borderVariant?: "light" | "dark";
   size?: "small" | "medium" | "large";
   children?: React.ReactNode;
@@ -38,6 +38,7 @@ const Button = ({
         ? "border-[#CFCFCF] text-[#3C3C3B]"
         : "border-[#3C3C3B] text-[#060605] "
     } backdrop-blur-2xl text-base uppercase font-mono`,
+     black: "bg-darker-grey text-white"
   };
 
   const ButtonComponent = (

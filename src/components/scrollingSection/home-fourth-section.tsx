@@ -1,9 +1,9 @@
 import React from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
-import card1 from "@/assets/svgs/homeServicesImage/card1.svg";
-import card2 from "@/assets/svgs/homeServicesImage/card2.svg";
-import card3 from "@/assets/svgs/homeServicesImage/card3.svg";
+import card1 from "@/assets/svgs/masonryImages/MI7.svg";
+import card2 from "@/assets/images/portfolioSingleBg.jpg";
+import card3 from "@/assets/svgs/masonryImages/MI5.svg";
 import Image from "next/image";
 import Button from "../button/button";
 import { ServiceCard } from "@/components/cascade-card/service-card";
@@ -125,7 +125,7 @@ export const FourthSectionScroll = () => {
                     src={service.image}
                     alt={service.title}
                     fill
-                    className="object-cover w-full h-48"
+                    className="object-cover rounded-full w-full h-48"
                     quality={90}
                     priority
                   />

@@ -27,7 +27,7 @@ export const FourthSectionScroll = () => {
   // Check window size (only runs on client-side)
   if (typeof window !== "undefined") {
     if (window.innerWidth > 1500) {
-      scrollPercentage = "-25%";
+      scrollPercentage = "-35%";
     } else if (window.innerWidth > 1400) {
       scrollPercentage = "-80%";
     } else {
@@ -50,7 +50,7 @@ export const FourthSectionScroll = () => {
       description:
         "Elegant and timeless wedding photography that captures the love, joy, and unforgettable moments of your special day.",
       cta_link: "/gallery/wedding",
-        cta: "View Weddings",
+        cta: "View weddings",
     },
     {
       title: "Birthdays",
@@ -59,7 +59,7 @@ export const FourthSectionScroll = () => {
       description:
         "Celebrate another trip around the sun with vibrant, fun, and candid shots that showcase the energy and excitement of the moment.",
       cta_link: "/gallery/birthday",
-        cta: "View Birthdays",
+        cta: "View birthdays",
     },
     {
       title: "Kids",
@@ -68,7 +68,7 @@ export const FourthSectionScroll = () => {
       description:
         "Playful and tender portraits of your little ones — capturing their personalities and milestones as they grow.",
       cta_link: "/gallery/kid",
-        cta: "View Kids",
+        cta: "View kids",
     },
     {
       title: "Lifestyle and Others",
@@ -77,7 +77,7 @@ export const FourthSectionScroll = () => {
       description:
         "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
       cta_link: "/gallery/lifestyle",
-        cta: "View Lifestyle",
+        cta: "View lifestyle",
     },
   ];
 
@@ -138,8 +138,8 @@ export const FourthSectionScroll = () => {
                     {service.description}
                   </p>
                 </div>
-                <div className="absolute bottom-8">
-                  <Button variant="filled" text={service.cta} link={service.cta_link}  />
+                <div className="absolute bottom-8 w-40">
+                  <Button variant="filled" text={service.cta} widthFull link={service.cta_link}  />
                 </div>
               </div>
             ))}

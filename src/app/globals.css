@@ -165,12 +165,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
 
 body {
   font-family: "grotesk-medium", sans-serif;
@@ -187,14 +181,6 @@ a {
   background: #ffffff1a;
 }
 
-/* .landingBg {
-  background-image: linear-gradient(
-      rgba(0, 0, 0, 0.6),
-      rgba(0, 0, 0, 0.6)
-    ),
-    url("../assets/images/landingImage.jpeg");
-} */
-
 .aboutLandingBG {
   background-image: url("../assets/images/about-secondImg--cropped.png");
 }
@@ -207,20 +193,9 @@ a {
   background-image: url("../assets/images/catalogue-header.jpeg");
 }
 
-.galleryBg {
-  background: url("../assets/images/homeHeaderImage--cropped.jpeg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 500px;
-  width: 100%;
-}
-
 .aboutLandingBG::before,
 .catalogueBG::before,
-.contactBG::before,
-/* .landingBg::before, */
-.galleryBg::before {
+.contactBG::before{
   content: "";
   position: absolute;
   top: 0;
@@ -232,11 +207,8 @@ a {
   border-radius: 32px;
 }
 
-/* .landingBg,  */
 .aboutLandingBG,
-.contactBG,
-/* .landingBg, */
-.galleryBg {
+.contactBG{
   width: 100%;
   filter: grayscale(90%) contrast(1);
   border-radius: 32px;
@@ -247,18 +219,7 @@ a {
 
 /* Parallax container */
 .parallax-container {
-  /* position: relative;
-  z-index: 1;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 500px; */
-
-  /* Set a specific height */
   min-height: 500px;
-
-  /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -276,14 +237,20 @@ a {
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.landingBg {
-  /* filter: grayscale(100%) contrast(1.1); */
+.landingBg, 
+.galleryBg{
   border-radius: 32px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   transition: background-image 0.5s ease-in-out;
 }
+
+.galleryBg{
+  min-height: 500px;
+  height: 500px;
+}
+
 
 .parallax-bg {
   position: relative;
@@ -317,13 +284,10 @@ a {
 
 .scrollbar-hide {
   -ms-overflow-style: none;
-  /* IE & Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
 .homeBanner {
-  /* background: url("../assets/images/homeHeaderImage--cropped.jpeg"); */
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("../assets/images/homeHeaderImage--cropped.jpeg");
   background-position: center;
@@ -454,8 +418,7 @@ a {
 
 
 
-/* scroll */
-
+/* Packages scroll */
 .scroller {
   max-width: 80vw;
   width: 80vw;
@@ -514,5 +477,4 @@ a {
   pointer-events: auto;
   padding: 0 !important;
   /* padding: 20px 24px; */
-
 }

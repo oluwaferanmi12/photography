@@ -12,7 +12,7 @@ const Gallery = () => {
     <div>
       <div className="flex flex-col gap-14 justify-center items-center ">
         <div className=" flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28">
-          <div className="galleryBg relative border-4 border-light-brown w-full flex items-center">
+          <div className="galleryBg mt-28 lg:mt-48 relative border-4 border-light-brown w-full flex items-center">
             <div className="mx-14 text-white text-6xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
               <p>Weddings</p>
             </div>

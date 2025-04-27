@@ -3,41 +3,63 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import HS4 from "@/assets/images/HS4.png";
+import HS4 from "@/assets/svgs/masonryImages/MI7.svg";
 import { PlanCards } from "@/components/plans-card/PlanCards";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import Button from "@/components/button/button";
+import galleryBg from "@/assets/images/portfolioSingleBg.jpg";
 
-const SingleGallery = () => {
+
+
+const SinglePackages = () => {
   const { slug } = useParams();
+  const [currentBg, setCurrentBg] = useState(galleryBg);
+  const [activeIndex, setActiveIndex] = useState(2);
 
-  const images = ["galleryBg", "galleryBg", "galleryBg"];
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const images = [galleryBg, galleryBg, galleryBg];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      const nextIndex = (activeIndex + 1) % images.length;
+      setCurrentBg(images[nextIndex]);
+      setActiveIndex(nextIndex);
     }, 5000); // auto-slide every 5s
     return () => clearInterval(interval);
   }, []);
 
-
   return (
     <div>
       <div className="flex flex-col gap-14 justify-center items-center">
-        <div className="flex flex-col gap-28 w-full px-5 lg:p-14 3xl:!p-7">
+        <div className="flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28">
           {/* Header Section */}
           <div
-            className={`${images[currentIndex]} relative border-4 border-light-brown w-full flex items-center transition-all duration-700`}
+            className={`h-full min-h-full galleryBg mt-28 lg:mt-48 relative border-4 border-light-brown w-full flex items-center transition-all duration-700`}
           >
-            <div className="mx-14 text-white flex flex-col gap-5 font-grotesk-regular">
-              <p className="capitalize text-6xl lg:text-8xl  ">{slug}</p>
-              <p className="text-xl text-white">From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.</p>
+            <div
+              className="absolute inset-0 z-0 "
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${currentBg.src})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                filter: "grayscale(90%) contrast(1.0)",
+                transition: "opacity 500ms ease-in-out",
+                borderRadius: "32px",
+              }}
+            />
+            {/* Content */}
+            <div className="mx-14 relative text-white flex flex-col gap-5 font-grotesk-regular">
+              <p className="capitalize text-6xl lg:text-8xl">{slug}</p>
+              <p className="text-xl text-white max-w-[75%]">
+                From polished headshots to soulful lifestyle captures, I craft
+                images that do more than just “look good” . They speak volumes.
+                Whether for personal branding, professional needs, or intimate
+                memories, every photo session is a curated experience.
+              </p>
               <div className="flex gap-5">
                 <Button variant="filled" text="Book a wedding session" />
-                <Button variant="bordered" text="See pricing" />
+                <Button variant="bordered" borderVariant="yellow" text="See pricing" />
               </div>
             </div>
 
@@ -50,9 +72,9 @@ const SingleGallery = () => {
               {images.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setCurrentIndex(i)}
+                  onClick={() => setActiveIndex(i)}
                   className={`w-6 h-1 rounded-full cursor-pointer transition-all duration-300 ${
-                    currentIndex === i ? "bg-white" : "bg-white/40"
+                    activeIndex === i ? "bg-white" : "bg-white/40"
                   }`}
                 />
               ))}
@@ -124,4 +146,4 @@ const SingleGallery = () => {
   );
 };
 
-export default SingleGallery;
+export default SinglePackages;

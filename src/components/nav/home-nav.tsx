@@ -27,10 +27,10 @@ export const HomeNav = () => {
       navTitle: "Packages",
       navLink: "/packages",
     },
-    {
-      navTitle: "Gallery",
-      navLink: "/gallery",
-    },
+    // {
+    //   navTitle: "Gallery",
+    //   navLink: "/gallery",
+    // },
     // {
     //   navTitle: "Contact",
     //   navLink: "/contact",
@@ -69,7 +69,7 @@ export const HomeNav = () => {
             })}
           </div>
           <div className="min-w-[200px] flex justify-end">
-            <Button variant="filled" text="Book a session" />
+            <Button variant="filled" link="/session" text="Book a session" />
           </div>
         </div>
         <span>

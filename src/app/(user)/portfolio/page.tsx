@@ -10,7 +10,6 @@ import card1 from "@/assets/svgs/portfolioImages/card1.svg";
 import card2 from "@/assets/svgs/portfolioImages/card2.svg";
 import card3 from "@/assets/svgs/portfolioImages/card3.svg";
 import card4 from "@/assets/svgs/portfolioImages/card4.svg";
-import jorImage from "@/assets/images/jorImage.jpeg";
 import HS4 from "@/assets/images/HS4.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 
@@ -22,6 +21,7 @@ const Portfolio = () => {
       bg: "#EFFBF9",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/gallery/wedding`,
       cta: "View weddings",
     },
     {
@@ -30,6 +30,7 @@ const Portfolio = () => {
       bg: "#F9EFFB",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/gallery/birthday`,
       cta: "View birthdays",
     },
     {
@@ -38,6 +39,7 @@ const Portfolio = () => {
       bg: "#FBEFF2",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good”.",
+      cta_href: `/gallery/lifestyle`,
       cta: "View lifestyle and events",
     },
     {
@@ -46,6 +48,7 @@ const Portfolio = () => {
       bg: "#FBFBEF",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/gallery/kids`,
       cta: "View kids",
     },
     {
@@ -54,6 +57,7 @@ const Portfolio = () => {
       bg: "#DDFFD7",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good”.",
+      cta_href: `/gallery/videography`,
       cta: "View videography",
     },
     {
@@ -62,6 +66,7 @@ const Portfolio = () => {
       bg: "#FFF9D7",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/gallery/makeup`,
       cta: "View others",
     },
   ];
@@ -85,7 +90,11 @@ const Portfolio = () => {
               </div>
             </div>
             <span className="hidden lg:flex">
-              <Image src={rollingImage} className="imageRotate"  alt="rollingImage" />
+              <Image
+                src={rollingImage}
+                className="imageRotate"
+                alt="rollingImage"
+              />
             </span>
           </div>
           <div className="my-14">
@@ -117,7 +126,11 @@ const Portfolio = () => {
                           </p>
                         </div>
                         <div className="mt-4">
-                          <Button variant="black" text={service.cta} />
+                          <Button
+                            variant="black"
+                            link={service.cta_href}
+                            text={service.cta}
+                          />
                         </div>
                       </div>
                     </div>
@@ -151,7 +164,11 @@ const Portfolio = () => {
                           </p>
                         </div>
                         <div className="mt-4">
-                          <Button variant="black" text={service.cta} />
+                          <Button
+                            variant="black"
+                            link={service.cta_href}
+                            text={service.cta}
+                          />
                         </div>
                       </div>
                     </div>

@@ -26,7 +26,7 @@ export const MobileNav = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Portfolio", path: "/portfolio" },
-    { name: "Packages", path: "/pricing" },
+    { name: "Packages", path: "/packages" },
     { name: "Gallery", path: "/gallery" },
   ];
 

@@ -238,48 +238,6 @@ const Portfolio = () => {
           </div>
 
           {/* Third section */}
-          <div className="my-28">
-            <Row gutter={[32, 32]}>
-              <Col xs={24} lg={8}>
-                <ServiceWrapperCard
-                  text="Weddings"
-                  topArea={{ icon: briefIcon }}
-                />
-              </Col>
-              <Col xs={24} lg={8}>
-                <ServiceWrapperCard
-                  text="Birthdays"
-                  topArea={{ icon: briefIcon }}
-                />
-              </Col>
-              <Col xs={24} lg={8}>
-                <ServiceWrapperCard
-                  text="Lifestyle"
-                  topArea={{ icon: briefIcon }}
-                />
-              </Col>
-              <Col xs={24} lg={8}>
-                <ServiceWrapperCard
-                  text="Weddings"
-                  topArea={{ icon: briefIcon }}
-                />
-              </Col>
-              <Col xs={24} lg={8}>
-                <ServiceWrapperCard
-                  text="Birthdays"
-                  topArea={{ icon: briefIcon }}
-                />
-              </Col>
-              <Col xs={24} lg={8}>
-                <ServiceWrapperCard
-                  text="Lifestyle"
-                  topArea={{ icon: briefIcon }}
-                />
-              </Col>
-            </Row>
-          </div>
-
-          {/* Third section */}
           <div className="pb-36 flex flex-col gap-20">
             <div>
               <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Weddings</h3>

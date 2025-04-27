@@ -25,7 +25,7 @@ export const HomeNav = () => {
     },
     {
       navTitle: "Packages",
-      navLink: "/pricing",
+      navLink: "/packages",
     },
     {
       navTitle: "Gallery",

@@ -49,7 +49,7 @@ export const FourthSectionScroll = () => {
       bg: "#EFFBF9",
       description:
         "Elegant and timeless wedding photography that captures the love, joy, and unforgettable moments of your special day.",
-      cta_link: "/gallery/wedding",
+      cta_link: "/packages/wedding",
         cta: "View weddings",
     },
     {
@@ -58,7 +58,7 @@ export const FourthSectionScroll = () => {
       bg: "#FFF5E5",
       description:
         "Celebrate another trip around the sun with vibrant, fun, and candid shots that showcase the energy and excitement of the moment.",
-      cta_link: "/gallery/birthday",
+      cta_link: "/packages/birthday",
         cta: "View birthdays",
     },
     {
@@ -67,7 +67,7 @@ export const FourthSectionScroll = () => {
       bg: "#F5F0FF",
       description:
         "Playful and tender portraits of your little ones — capturing their personalities and milestones as they grow.",
-      cta_link: "/gallery/kid",
+      cta_link: "/packages/kid",
         cta: "View kids",
     },
     {
@@ -76,7 +76,7 @@ export const FourthSectionScroll = () => {
       bg: "#F0F9FF",
       description:
         "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-      cta_link: "/gallery/lifestyle",
+      cta_link: "/packages/lifestyle",
         cta: "View lifestyle",
     },
   ];

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { SelectInput } from "@/components/inputs/selectInput";
 import Image from "next/image";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import bas from "@/assets/svgs/BAS_modal_icon.svg";
 import { Input } from "@/components/inputs/input";
 import Button from "@/components/button/button";
+import CustomSelect from "../inputs/custom-select/custom-select";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const ContactFrom = ({
   onSubmit,
@@ -13,9 +15,11 @@ export const ContactFrom = ({
 }: {
   onSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedService: string;
-  setSelectedService: (val:string) => void;
+  setSelectedService: (val: string) => void;
 }) => {
   const [selectedPackage, setSelectedPackage] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<Date | null>(null);
 
   const services = [
     { label: "Weddings", value: "wedding" },
@@ -31,6 +35,18 @@ export const ContactFrom = ({
     { label: "Basic", value: "Basic ($400 plus tax)" },
     { label: "Premium", value: "Premium ($900 plus tax)" },
     { label: "Pro+", value: "Pro+ ($1500 plus tax)" },
+  ];
+
+  const locations = [
+    { label: "Montreal", value: "Basic ($400 plus tax)" },
+    { label: "Ottawa", value: "Premium ($900 plus tax)" },
+    { label: "Whistler+", value: "Pro+ ($1500 plus tax)" },
+    { label: "Calgary", value: "Pro+ ($1500 plus tax)" },
+    { label: "Toronto", value: "Pro+ ($1500 plus tax)" },
+    { label: "Banff", value: "Pro+ ($1500 plus tax)" },
+    { label: "Victoria", value: "Pro+ ($1500 plus tax)" },
+    { label: "Halifax", value: "Pro+ ($1500 plus tax)" },
+    { label: "Churchchill", value: "Pro+ ($1500 plus tax)" },
   ];
 
   return (
@@ -74,17 +90,17 @@ export const ContactFrom = ({
             {/* Services */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Select Services</label>
-              <SelectInput
+              <CustomSelect
+                selectData={services}
+                defaultOption="Select services"
                 selectValue={selectedService}
                 setSelectedValue={setSelectedService}
-                defaultOption="Select services"
-                selectData={services}
               />
             </div>
             {/* Package */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Select package</label>
-              <SelectInput
+              <CustomSelect
                 selectValue={selectedPackage}
                 setSelectedValue={setSelectedPackage}
                 defaultOption="Select package"
@@ -95,31 +111,57 @@ export const ContactFrom = ({
             <div className="flex gap-5">
               <div className="w-1/2 flex flex-col gap-3">
                 <label htmlFor="phone">Date</label>
-                <SelectInput
-                  selectValue={selectedPackage}
-                  setSelectedValue={setSelectedPackage}
-                  defaultOption="Select date"
-                  selectData={packages}
-                />
+                {/* <div className="border border-[#575252] rounded-xl px-5 py-2">
+                  <input
+                    type="date"
+                    className="w-full bg-transparent text-[#BABABA] placeholder:text-[#BABABA] focus:outline-none appearance-none"
+                    placeholder="Select date"
+                  />
+                </div> */}
+                <div className="border border-[#575252] rounded-xl px-5 py-2 w-full">
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    dateFormat="MMMM d, yyyy"
+                    placeholderText="Select date"
+                    className="w-full bg-transparent text-[#BABABA] placeholder:text-[#BABABA] focus:outline-none"
+                    calendarClassName="bg-[#1a1a1a] text-[#BABABA] rounded-xl border-[#575252]"
+                  />
+                </div>
               </div>
               <div className="w-1/2 flex flex-col gap-3">
                 <label htmlFor="phone">Time</label>
-                <SelectInput
-                  selectValue={selectedPackage}
-                  setSelectedValue={setSelectedPackage}
-                  defaultOption="Select time"
-                  selectData={packages}
-                />
+                {/* <div className="border-[#575252] placeholder:text-[#BABABA] border px-5 py-2 rounded-xl ">
+                  <input
+                    type="time"
+                    className="bg-transparent focus:outline-0  w-full"
+                    placeholder="Select time"
+                  />
+                </div> */}
+                <div className="border border-[#575252] rounded-xl px-5 py-2 w-full">
+                  <DatePicker
+                    selected={selectedTime}
+                    onChange={(date) => setSelectedTime(date)}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
+                    placeholderText="Select time"
+                    className="w-full bg-transparent text-[#BABABA] placeholder:text-[#BABABA] focus:outline-none"
+                    calendarClassName="bg-[#1a1a1a] text-[#BABABA] rounded-xl border-[#575252]"
+                  />
+                </div>
               </div>
             </div>
             {/* Location */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Location</label>
-              <SelectInput
+              <CustomSelect
                 selectValue={selectedPackage}
                 setSelectedValue={setSelectedPackage}
                 defaultOption="Provide your location"
-                selectData={packages}
+                selectData={locations}
               />
             </div>
           </div>

@@ -478,3 +478,24 @@ a {
   padding: 0 !important;
   /* padding: 20px 24px; */
 }
+
+
+/* CUSTOM DATE PICKER */
+/* datepicker.css */
+.react-datepicker {
+  background-color: #1a1a1a !important;
+  color: #BABABA;
+  border: 1px solid #575252;
+  border-radius: 0.75rem;
+}
+
+.react-datepicker__time-container,
+.react-datepicker__header {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #575252;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__time-list-item--selected {
+  background-color: #333 !important;
+}

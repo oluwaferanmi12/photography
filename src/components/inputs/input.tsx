@@ -7,7 +7,7 @@ export const Input = ({
 }) => {
   return (
     <div className="border-[#575252] placeholder:text-[#BABABA] border px-5 py-2 rounded-xl ">
-      <input type="text" className="bg-transparent w-full" placeholder={placeholder} />
+      <input type="text" className="bg-transparent focus:outline-0  w-full" placeholder={placeholder} />
     </div>
   );
 };

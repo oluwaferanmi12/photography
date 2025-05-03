@@ -37,6 +37,7 @@ import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
 import scrollDown from "@/assets/svgs/scroll-down-icon.svg";
 import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
 import { Compare } from "@/components/ui/compare";
+import TextReveal from "@/components/animattions/animated-text-reveal";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -45,7 +46,7 @@ export default function Home() {
   const [currentBg, setCurrentBg] = useState(bgImage3);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
-  const nextSectionRef = useRef<HTMLDivElement>(null)
+  const nextSectionRef = useRef<HTMLDivElement>(null);
 
   // SCROLLING EFFECT ON HEADER
   useEffect(() => {
@@ -56,11 +57,10 @@ export default function Home() {
     return () => window.removeEventListener("resize", checkIsDesktop);
   }, []);
 
-
   // SCROLL TO NEXT SECTION FOR MOBILE
   const handleScroll = () => {
-    nextSectionRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
+    nextSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   // CASCADE CARDS
   const container = useRef<HTMLDivElement | null>(null);
@@ -220,9 +220,15 @@ export default function Home() {
           ref={nextSectionRef}
           className="flex flex-col gap-10 lg:justify-center lg:items-center px-5 lg:px-0"
         >
-          <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
+          {/* <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
             Photography that leaves a lasting impression
-          </h3>
+          </h3> */}
+
+           <div className="flex flex-col items-center justify-center">
+            <TextReveal>Photography that leaves a</TextReveal>
+            <TextReveal>lasting impression</TextReveal>
+          </div>
+         
           <p className="lg:text-center text-light-brown text-lg lg:w-1/2 3xl:w-[30%]">
             From polished headshots to soulful lifestyle captures, I craft
             images that do more than just “look good” . They speak volumes.

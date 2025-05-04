@@ -27,7 +27,7 @@ export const FourthSectionScroll = () => {
   // Check window size (only runs on client-side)
   if (typeof window !== "undefined") {
     if (window.innerWidth > 1500) {
-      scrollPercentage = "-35%";
+      scrollPercentage = "-50%";
     } else if (window.innerWidth > 1400) {
       scrollPercentage = "-80%";
     } else {

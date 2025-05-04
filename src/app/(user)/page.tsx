@@ -30,10 +30,10 @@ import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
 import { AnimatedCard } from "@/animation/animated-card";
 import { MainCard } from "@/components/cascade-card/cascade-card";
-import cascadeImage1 from "@/assets/svgs/masonryImages/mobile/card01.jpg";
-import cascadeImage2 from "@/assets/svgs/masonryImages/mobile/card02.jpg";
-import cascadeImage3 from "@/assets/svgs/masonryImages/mobile/card03.jpg";
-import cascadeImage4 from "@/assets/svgs/masonryImages/mobile/card04.jpg";
+import cascadeImage1 from "@/assets/svgs/masonryImages/mobile/card1.svg";
+import cascadeImage2 from "@/assets/svgs/masonryImages/mobile/card2.svg";
+import cascadeImage3 from "@/assets/svgs/masonryImages/mobile/card3.svg";
+import cascadeImage4 from "@/assets/svgs/masonryImages/mobile/card4.svg";
 import scrollDown from "@/assets/svgs/scroll-down-icon.svg";
 import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
 import { Compare } from "@/components/ui/compare";
@@ -72,13 +72,9 @@ export default function Home() {
     target: container,
     offset: ["start start", "end end"],
   });
-  // const cardData = [cascadeImage4, cascadeImage3, cascadeImage2, cascadeImage1];
-  const cardData = [
-    { img: cascadeImage4, skewDeg: 0 }, // straight
-    { img: cascadeImage3, skewDeg: -7 }, // left skew
-    { img: cascadeImage2, skewDeg: 7 }, // right skew
-    { img: cascadeImage1, skewDeg: -7 }, // left skew
-  ];
+
+
+  const cardData = [cascadeImage1, cascadeImage2, cascadeImage3, cascadeImage4];
 
   // Memoize imageMap to prevent unnecessary recreations
   const imageMap = useMemo(
@@ -256,8 +252,7 @@ export default function Home() {
                 range={[index * 0.333, 1]}
                 targetScale={targetScale}
                 progress={scrollYProgress}
-                imgSrc={item.img}
-                skewDeg={item.skewDeg}
+                imgSrc={item}
               />
             );
           })}
@@ -397,7 +392,7 @@ export default function Home() {
         </div>
 
         {/* Sixth Section */}
-        <div>
+       <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
           <h3 className="text-4xl lg:text-5xl lg:text-center">
             Words from my clients
           </h3>

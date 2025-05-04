@@ -12,7 +12,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="w-14 h-12 flex items-center justify-center rounded-lg bg-white/70 hover:bg-gray-100 disabled:opacity-50 border border-white"
+        className=" w-6 h-8 lg:w-14 lg:h-12 flex items-center justify-center rounded-lg bg-white/70 hover:bg-gray-100 disabled:opacity-50 border border-white"
       >
         <span>
           <Image src={leftPaginationIcon} alt="icon" />
@@ -23,7 +23,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`w-14 h-12 flex items-center justify-center rounded-lg border border-white transition ${
+          className={` w-6 h-8 lg:w-14 lg:h-12 flex items-center justify-center rounded-lg border border-white transition ${
             page === currentPage
               ? "bg-[#1B1B1B] text-white"
               : "bg-white/70 text-gray-600 hover:bg-gray-100"
@@ -36,7 +36,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="w-14 h-12 flex items-center justify-center rounded-lg bg-white/70 border border-white hover:bg-gray-100 disabled:opacity-50"
+        className=" w-6 h-8 lg:w-14 lg:h-12 flex items-center justify-center rounded-lg bg-white/70 border border-white hover:bg-gray-100 disabled:opacity-50"
       >
         <span>
           <Image src={rightPaginationIcon} alt="icon" />

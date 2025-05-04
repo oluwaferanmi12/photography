@@ -84,7 +84,7 @@ const Gallery = () => {
               <p className="text-6xl lg:text-8xl font-playfair ">
                 Client’s Gallery
               </p>
-              <p className="text-white text-xl max-w-1/2">
+              <p className="text-white text-xl lg:max-w-1/2">
                 From polished headshots to soulful lifestyle captures, I craft
                 images that do more than just “look good” . They speak volumes.
                 Whether for personal branding, professional needs, or intimate

@@ -1,8 +1,8 @@
 "use client";
 import { Col, Row } from "antd";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import React, { useRef } from "react";
-import { motion,  useTransform } from "framer-motion";
+import { motion, useTransform } from "framer-motion";
 
 export const MainCard = ({
   currentIndex,
@@ -10,16 +10,25 @@ export const MainCard = ({
   targetScale,
   progress,
   imgSrc,
+  skewDeg,
 }: {
   currentIndex: number;
   range: number[];
   targetScale: number;
   progress: any;
-  imgSrc: string;
+  imgSrc: StaticImageData;
+  skewDeg: number;
 }) => {
   const container = useRef(null);
-  
+
   const newScale = useTransform(progress, range, [1, targetScale]);
+
+  const skew = skewDeg + "deg"; // Convert number to CSS string
+  const transformStyle = useTransform(progress, range, [
+    `scale(1) skewX(${skew})`,
+    `scale(${targetScale}) skewX(${skew})`,
+  ]);
+
   return (
     <div
       ref={container}
@@ -32,14 +41,19 @@ export const MainCard = ({
       <Row justify={"center"}>
         <Col xs={22} md={18} lg={16}>
           <motion.div
-            className="rounded-lg px-8 min-w-full py-10 my-8  min-h-[500px]"
+            className="rounded-lg  px-6 min-w-full bg-white py-4 my-8 "
             style={{
               scale: newScale,
               position: "relative",
               top: `calc(-5vh + ${currentIndex * 25}px)`,
+              transform: transformStyle,
             }}
           >
-            <Image src={imgSrc} alt="" />
+            <Image
+              src={imgSrc}
+              className="max-h-[250px] w-[200px]  object-cover"
+              alt=""
+            />
           </motion.div>
         </Col>
       </Row>

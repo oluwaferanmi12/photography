@@ -27,10 +27,10 @@ export const HomeNav = () => {
       navTitle: "Packages",
       navLink: "/packages",
     },
-    // {
-    //   navTitle: "Gallery",
-    //   navLink: "/gallery",
-    // },
+    {
+      navTitle: "Gallery",
+      navLink: "/gallery",
+    },
     // {
     //   navTitle: "Contact",
     //   navLink: "/contact",

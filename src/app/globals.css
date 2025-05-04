@@ -297,6 +297,16 @@ a {
   height: 650px;
 }
 
+.galleryBg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("../assets/images/homeHeaderImage--cropped.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 40px;
+  height: 650px;
+}
+
 .imageRotate {
   animation: rotate 10s linear infinite;
 }

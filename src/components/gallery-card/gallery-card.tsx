@@ -12,28 +12,29 @@ type GalleryCardProps = {
 export const GalleryCard = ({ imgSrc, no_of_photos, cardTitle, photoDate }: GalleryCardProps) => {
   return (
     <div className="bg-white p-3 rounded-3xl flex flex-col gap-4">
-      <div className="relative h-[200px] rounded-[20px]">
+      <div className="relative h-[250px] rounded-[20px]">
         <Image
           src={imgSrc}
-          className="w-full h-auto rounded-[20px] object-cover"
+          className="w-full object-cover max-h-[250px]  rounded-[20px]"
           alt="gallery_img"
+          fill
         />
-        <div className="absolute top-2 left-4">
+        <div className="absolute top-2 left-2">
             <span>
                 <Image src={galleryLock} alt="gallery_lock" />
             </span>
         </div>
-        <div className="absolute bottom-2 right-4">
-          <span className="flex justify-center items-center text-white  bg-black/50 px-2 py-1">
+        <div className="absolute bottom-4 right-4">
+          <span className="flex justify-center rounded-[12px] items-center text-white  bg-black/50 px-2 py-1">
             <p>{no_of_photos} photos</p>
           </span>
         </div>
       </div>
       <span>
-        <p className="text-darker-grey font-playfair">{cardTitle}</p>
+        <p className="text-darker-grey font-playfair text-2xl">{cardTitle}</p>
       </span>
       <span>
-        <p className="text-darker-grey font-playfair">{photoDate}</p>
+        <p className="text-darker-grey font-playfair text-lg">{photoDate}</p>
       </span>
     </div>
   );

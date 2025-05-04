@@ -94,23 +94,28 @@ const Gallery = () => {
               <Image src={rollingImage} className="imageRotate" alt="img" />
             </span> */}
           </div>
-          {/* SECONF SECTION */}
-          <div>
-            <Row>
-              {galleryData.map((item, index) => (
-                <Col key={index} xs={24} md={8}>
-                  <GalleryCard
-                    imgSrc={item.imgSrc}
-                    no_of_photos={item.noOfPhoto}
-                    cardTitle={item.galleryTitle}
-                    photoDate={item.date}
-                  />
-                </Col>
-              ))}
-            </Row>
-          </div>
         </div>
       </div>
+      {/* SECONF SECTION */}
+      <section className="bg-[#F4F3EA] mt-28 flex flex-col gap-14 justify-center items-center  px-5 lg:px-14 3xl:!px-28  pt-20 pb-32">
+        <div>
+          <Row gutter={[32, 32]}>
+            {galleryData.map((item, index) => (
+              <Col key={index} xs={24} md={8}>
+                <GalleryCard
+                  imgSrc={item.imgSrc}
+                  no_of_photos={item.noOfPhoto}
+                  cardTitle={item.galleryTitle}
+                  photoDate={item.date}
+                />
+              </Col>
+            ))}
+          </Row>
+        </div>
+        <div>
+          
+        </div>
+      </section>
       <GalleryBox />
       <Footer />
     </div>

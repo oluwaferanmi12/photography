@@ -1,9 +1,15 @@
 import React from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
-import card1 from "@/assets/svgs/masonryImages/MI7.svg";
-import card2 from "@/assets/images/portfolioSingleBg.jpg";
-import card3 from "@/assets/svgs/masonryImages/MI5.svg";
+import wedding from "@/assets/svgs/portfolio_svgs/wedding.svg";
+import birthdays from "@/assets/svgs/portfolio_svgs/birthdays.svg";
+import lifestyle from "@/assets/svgs/portfolio_svgs/lifestyle.svg";
+import family from "@/assets/svgs/portfolio_svgs/family.svg";
+import videography from "@/assets/svgs/portfolio_svgs/videography.svg";
+import kids from "@/assets/svgs/portfolio_svgs/kids.svg";
+import pregnancy from "@/assets/svgs/portfolio_svgs/pregnancy.svg";
+import portrait from "@/assets/svgs/portfolio_svgs/portrait.svg";
+
 import Image from "next/image";
 import Button from "../button/button";
 import { ServiceCard } from "@/components/cascade-card/service-card";
@@ -27,7 +33,7 @@ export const FourthSectionScroll = () => {
   // Check window size (only runs on client-side)
   if (typeof window !== "undefined") {
     if (window.innerWidth > 1500) {
-      scrollPercentage = "-50%";
+      scrollPercentage = "-110%";
     } else if (window.innerWidth > 1400) {
       scrollPercentage = "-80%";
     } else {
@@ -45,7 +51,7 @@ export const FourthSectionScroll = () => {
   const services = [
     {
       title: "Weddings",
-      image: card1,
+      image: wedding,
       bg: "#EFFBF9",
       description:
         "Elegant and timeless wedding photography that captures the love, joy, and unforgettable moments of your special day.",
@@ -54,7 +60,7 @@ export const FourthSectionScroll = () => {
     },
     {
       title: "Birthdays",
-      image: card2,
+      image: birthdays,
       bg: "#FFF5E5",
       description:
         "Celebrate another trip around the sun with vibrant, fun, and candid shots that showcase the energy and excitement of the moment.",
@@ -63,7 +69,7 @@ export const FourthSectionScroll = () => {
     },
     {
       title: "Kids",
-      image: card3,
+      image: kids,
       bg: "#F5F0FF",
       description:
         "Playful and tender portraits of your little ones — capturing their personalities and milestones as they grow.",
@@ -72,12 +78,48 @@ export const FourthSectionScroll = () => {
     },
     {
       title: "Lifestyle and Others",
-      image: card3,
+      image: lifestyle,
       bg: "#F0F9FF",
       description:
         "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
       cta_link: "/packages/lifestyle",
         cta: "View lifestyle",
+    },
+    {
+      title: "Family",
+      image: family,
+      bg: "#F0F9FF",
+      description:
+        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
+      cta_link: "/packages/family",
+        cta: "View family",
+    },
+    {
+      title: "Videography",
+      image: videography,
+      bg: "#F0F9FF",
+      description:
+        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
+      cta_link: "/packages/family",
+        cta: "View family",
+    },
+    {
+      title: "Pregnancy",
+      image: pregnancy,
+      bg: "#F0F9FF",
+      description:
+        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
+      cta_link: "/packages/pregnancy",
+        cta: "View pregnancy",
+    },
+    {
+      title: "Portrait",
+      image: portrait,
+      bg: "#F0F9FF",
+      description:
+        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
+      cta_link: "/packages/portrait",
+        cta: "View portrait",
     },
   ];
 

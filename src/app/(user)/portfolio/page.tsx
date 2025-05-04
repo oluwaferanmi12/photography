@@ -6,14 +6,14 @@ import { Footer } from "@/components/footer/footer";
 import { Banner } from "@/components/banner/banner";
 import Image from "next/image";
 import Button from "@/components/button/button";
-import wedding from "@/assets/images/portfolio_images/wedding.jpg";
-import birthdays from "@/assets/images/portfolio_images/birthdays.png";
-import lifestyle from "@/assets/images/portfolio_images/lifestyle.png";
-import family from "@/assets/images/portfolio_images/family.png";
-import videography from "@/assets/images/portfolio_images/videography.png";
-import kids from "@/assets/images/portfolio_images/kids.png";
-import pregnancy from "@/assets/images/portfolio_images/pregnancy.png";
-import portrait from "@/assets/images/portfolio_images/portrait.png";
+import wedding from "@/assets/svgs/portfolio_svgs/wedding.svg";
+import birthdays from "@/assets/svgs/portfolio_svgs/birthdays.svg";
+import lifestyle from "@/assets/svgs/portfolio_svgs/lifestyle.svg";
+import family from "@/assets/svgs/portfolio_svgs/family.svg";
+import videography from "@/assets/svgs/portfolio_svgs/videography.svg";
+import kids from "@/assets/svgs/portfolio_svgs/kids.svg";
+import pregnancy from "@/assets/svgs/portfolio_svgs/pregnancy.svg";
+import portrait from "@/assets/svgs/portfolio_svgs/portrait.svg";
 import short_img from "@/assets/images/portfolio_images/short_img.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 
@@ -149,10 +149,9 @@ const Portfolio = () => {
                             {service.description}
                           </p>
                         </div>
-                        <div className="mt-4 w-[25%]">
+                        <div className="mt-4">
                           <Button
                             variant="black"
-                            widthFull
                             link={service.cta_href}
                             text={service.cta}
                           />
@@ -188,10 +187,9 @@ const Portfolio = () => {
                             {service.description}
                           </p>
                         </div>
-                        <div className="mt-4 w-[25%]">
+                        <div className="mt-4">
                           <Button
                             variant="black"
-                            widthFull
                             link={service.cta_href}
                             text={service.cta}
                           />

@@ -30,17 +30,17 @@ import Link from "next/link";
 import { FadeInAnimate } from "@/animation/reveal/fade-in";
 import { AnimatedCard } from "@/animation/animated-card";
 import { MainCard } from "@/components/cascade-card/cascade-card";
-import cascadeImage1 from "@/assets/svgs/masonryImages/mobile/card1.svg";
-import cascadeImage2 from "@/assets/svgs/masonryImages/mobile/card2.svg";
-import cascadeImage3 from "@/assets/svgs/masonryImages/mobile/card3.svg";
-import cascadeImage4 from "@/assets/svgs/masonryImages/mobile/card4.svg";
+import cascadeImage1 from "@/assets/svgs/masonryImages/mobile/card01.jpg";
+import cascadeImage2 from "@/assets/svgs/masonryImages/mobile/card02.jpg";
+import cascadeImage3 from "@/assets/svgs/masonryImages/mobile/card03.jpg";
+import cascadeImage4 from "@/assets/svgs/masonryImages/mobile/card04.jpg";
 import scrollDown from "@/assets/svgs/scroll-down-icon.svg";
 import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
 import { Compare } from "@/components/ui/compare";
 import TextReveal from "@/components/animattions/animated-text-reveal";
 import Button from "@/components/button/button";
-import beforeImage from "@/assets/images/beforeImage.jpg"
-import afterImage from "@/assets/images/afterImage.jpg"
+import beforeImage from "@/assets/images/beforeImage.jpg";
+import afterImage from "@/assets/images/afterImage.jpg";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -72,7 +72,13 @@ export default function Home() {
     target: container,
     offset: ["start start", "end end"],
   });
-  const cardData = [cascadeImage4, cascadeImage3, cascadeImage2, cascadeImage1];
+  // const cardData = [cascadeImage4, cascadeImage3, cascadeImage2, cascadeImage1];
+  const cardData = [
+    { img: cascadeImage4, skewDeg: 0 }, // straight
+    { img: cascadeImage3, skewDeg: -7 }, // left skew
+    { img: cascadeImage2, skewDeg: 7 }, // right skew
+    { img: cascadeImage1, skewDeg: -7 }, // left skew
+  ];
 
   // Memoize imageMap to prevent unnecessary recreations
   const imageMap = useMemo(
@@ -184,7 +190,9 @@ export default function Home() {
                   </div>
                   <div className="mt-12">
                     <p className="text-[#E6EAEE] text-xl font-grotesk-regular lg:w-3/4 min[1400px]-[60%]">
-                    Whether you’re stepping in front of the lens for the first time or your fiftieth I’ll help you look and feel your absolute best
+                      Whether you’re stepping in front of the lens for the first
+                      time or your fiftieth I’ll help you look and feel your
+                      absolute best
                     </p>
                   </div>
                   <motion.div
@@ -225,13 +233,15 @@ export default function Home() {
             Photography that leaves a lasting impression
           </h3> */}
 
-           <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center">
             <TextReveal>Photography that leaves a</TextReveal>
             <TextReveal>lasting impression</TextReveal>
           </div>
-         
+
           <p className="lg:text-center text-light-brown text-lg lg:w-1/2 3xl:w-[30%]">
-          From polished headshots to soulful lifestyle captures I craft images that do more than just look good. They speak volumes and turn personal branding or intimate moments into a curated experience.
+            From polished headshots to soulful lifestyle captures I craft images
+            that do more than just look good. They speak volumes and turn
+            personal branding or intimate moments into a curated experience.
           </p>
         </div>
 
@@ -240,14 +250,15 @@ export default function Home() {
           {cardData.map((item, index) => {
             const targetScale = 1 - (cardData.length - index) * 0.05;
             return (
-                <MainCard
-                  key={index}
-                  currentIndex={index}
-                  range={[index * 0.333, 1]}
-                  targetScale={targetScale}
-                  progress={scrollYProgress}
-                  imgSrc={item}
-                />
+              <MainCard
+                key={index}
+                currentIndex={index}
+                range={[index * 0.333, 1]}
+                targetScale={targetScale}
+                progress={scrollYProgress}
+                imgSrc={item.img} 
+                skewDeg={item.skewDeg}
+              />
             );
           })}
         </div>

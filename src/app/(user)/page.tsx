@@ -397,7 +397,7 @@ export default function Home() {
         </div>
 
         {/* Sixth Section */}
-        <div>
+       <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
           <h3 className="text-4xl lg:text-5xl lg:text-center">
             Words from my clients
           </h3>

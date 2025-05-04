@@ -104,7 +104,7 @@ export const GalleryBox = () => {
         ref={containerRef}
         onMouseMove={handleMouseMove}
         style={{ width: containerWidth }}
-        className="bg-[#0A0909] px-7 pt-7 overflow-hidden cursor-default"
+        className="bg-[#0A0909] hidden lg:block px-7 pt-7 overflow-hidden cursor-default"
       >
         <Row gutter={[32, 32]}>
           <Col xs={6}>
@@ -154,7 +154,7 @@ export const GalleryBox = () => {
                   isVisible={imagesVisible}
                 />
               </span>
-               <motion.div
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{
                   opacity: imagesVisible ? 1 : 0,
@@ -177,43 +177,6 @@ export const GalleryBox = () => {
                 />
               </span>
             </div>
-            {/* <div className="flex items-center justify-center">
-              <span>
-                <ParallaxImage 
-                  src={sixthImage5} 
-                  alt="" 
-                  position={cursorPosition} 
-                  index={4} 
-                  isVisible={imagesVisible}
-                />
-              </span>
-            </div> */}
-            {/* <div className="flex justify-center items-end relative z-10">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: imagesVisible ? 1 : 0,
-                  y: imagesVisible ? 0 : 20,
-                }}
-                transition={{ delay: 0.3 }}
-              >
-                <div className="text-4xl lg:text-5xl font-valentiamo-reg text-center text-white">
-                  <p>Wherever You Go, I&apos;ll Be</p>
-                  <p className="my-3">There to Shoot!</p>
-                </div>
-              </motion.div>
-            </div> */}
-            {/* <div className="flex justify-center">
-              <span className="absolute bottom-0">
-                <ParallaxImage
-                  src={sixthImage6}
-                  alt=""
-                  position={cursorPosition}
-                  index={5}
-                  isVisible={imagesVisible}
-                />
-              </span>
-            </div> */}
           </Col>
           <Col xs={6}>
             <div className="grid grid-cols-2 gap-4 pb-7 relative">
@@ -249,6 +212,69 @@ export const GalleryBox = () => {
                 isVisible={imagesVisible}
               />
               <div></div>
+            </div>
+          </Col>
+        </Row>
+      </motion.div>
+
+      <motion.div
+        ref={containerRef}
+        onMouseMove={handleMouseMove}
+        style={{ width: containerWidth }}
+        className="bg-[#0A0909] lg:hidden  pt-7 overflow-hidden cursor-default"
+      >
+        <Row gutter={[32, 32]} >
+          <Col xs={8} className="relative">
+            <div className="flex flex-col gap-14 left-0">
+              <ParallaxImage
+                src={sixthImage1}
+                alt=""
+                position={cursorPosition}
+                index={3}
+                isVisible={imagesVisible}
+              />
+              <ParallaxImage
+                src={sixthImage2}
+                alt=""
+                position={cursorPosition}
+                index={3}
+                isVisible={imagesVisible}
+              />
+              <ParallaxImage
+                src={sixthImage3}
+                alt=""
+                position={cursorPosition}
+                index={3}
+                isVisible={imagesVisible}
+              />
+            </div>
+          </Col>
+          <Col xs={8} className="flex my-auto items-center justify-center">
+            <div className="text-2xl  font-valentiamo-reg text-center text-white">
+              <p>Wherever You Go, I&apos;ll Be</p>
+              <p className="my-3">There to Shoot!</p>
+            </div>
+          </Col>
+          <Col xs={8} className=" h-full" >
+            <div className="flex  relative flex-col h-full justify-between">
+              <ParallaxImage
+                src={sixthImage4}
+                alt=""
+                position={cursorPosition}
+                index={3}
+                isVisible={imagesVisible}
+              />
+              <div className="absolute bottom-0">
+                <ParallaxImage
+                src={sixthImage6}
+                alt=""
+                position={cursorPosition}
+                index={3}
+                isVisible={imagesVisible}
+              />
+              </div>
+              
+              <div className="h-[200px]"></div>
             </div>
           </Col>
         </Row>

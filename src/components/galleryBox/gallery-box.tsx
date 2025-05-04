@@ -4,12 +4,16 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Col, Row } from "antd";
 import Image, { StaticImageData } from "next/image";
-import sixthImage1 from "@/assets/images/sixth-section-image1.png";
-import sixthImage2 from "@/assets/images/sixth-section-image2.png";
-import sixthImage3 from "@/assets/images/sixth-section-image3.png";
-import sixthImage4 from "@/assets/images/sixth-section-image3.png";
-import sixthImage5 from "@/assets/images/sixth-section-image5.png";
-import sixthImage6 from "@/assets/images/sixth-section-image6.png";
+import sixthImage1 from "@/assets/svgs/gallery-svg/img1.svg";
+import sixthImage2 from "@/assets/svgs/gallery-svg/img02.svg";
+import sixthImage3 from "@/assets/svgs/gallery-svg/img03.svg";
+import sixthImage4 from "@/assets/svgs/gallery-svg/img04.svg";
+import sixthImage5 from "@/assets/svgs/gallery-svg/img05.svg";
+import sixthImage6 from "@/assets/svgs/gallery-svg/bottom_big.svg";
+import sixthImage7 from "@/assets/svgs/gallery-svg/img06.svg";
+import sixthImage8 from "@/assets/svgs/gallery-svg/img08.svg";
+import sixthImage9 from "@/assets/svgs/gallery-svg/img07.svg";
+import sixthImage10 from "@/assets/svgs/gallery-svg/img09.svg";
 
 interface ParallaxImageProps {
   src: StaticImageData;
@@ -215,14 +219,14 @@ export const GalleryBox = () => {
             <div className="grid grid-cols-2 gap-4 pb-7 relative">
               <div></div>
               <ParallaxImage
-                src={sixthImage1}
+                src={sixthImage7}
                 alt=""
                 position={cursorPosition}
                 index={0}
                 isVisible={imagesVisible}
               />
               <ParallaxImage
-                src={sixthImage2}
+                src={sixthImage8}
                 alt=""
                 position={cursorPosition}
                 index={1}
@@ -231,14 +235,14 @@ export const GalleryBox = () => {
               <div></div>
               <div></div>
               <ParallaxImage
-                src={sixthImage3}
+                src={sixthImage9}
                 alt=""
                 position={cursorPosition}
                 index={2}
                 isVisible={imagesVisible}
               />
               <ParallaxImage
-                src={sixthImage4}
+                src={sixthImage10}
                 alt=""
                 position={cursorPosition}
                 index={3}

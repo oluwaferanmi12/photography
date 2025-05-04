@@ -231,10 +231,7 @@ export default function Home() {
           </div>
          
           <p className="lg:text-center text-light-brown text-lg lg:w-1/2 3xl:w-[30%]">
-            From polished headshots to soulful lifestyle captures, I craft
-            images that do more than just “look good” . They speak volumes.
-            Whether for personal branding, professional needs, or intimate
-            memories, every photo session is a curated experience.
+          From polished headshots to soulful lifestyle captures I craft images that do more than just look good. They speak volumes and turn personal branding or intimate moments into a curated experience.
           </p>
         </div>
 
@@ -320,7 +317,7 @@ export default function Home() {
               Whether for personal branding, professional needs, or intimate
               memories, every photo session is a curated experience.
             </p>
-            <Button text="Read more" variant="filled" link="/about" />
+            <Button text="Read my story" variant="filled" link="/about" />
           </div>
           <div className=" lg:w-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10 w-full">

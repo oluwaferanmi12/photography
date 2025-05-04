@@ -40,7 +40,7 @@ const Portfolio = () => {
       cta: "View birthdays",
     },
     {
-      title: "Lifestyle and Others",
+      title: "Lifestyle and events",
       image: lifestyle,
       bg: "#FBEFF2",
       description:
@@ -49,13 +49,31 @@ const Portfolio = () => {
       cta: "View lifestyle and events",
     },
     {
-      title: "Kids",
+      title: "Kids and New born",
       image: kids,
       bg: "#FBFBEF",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
       cta_href: `/packages/kids`,
       cta: "View kids",
+    },
+    {
+      title: "Family",
+      image: family,
+      bg: "#D7D8FF",
+      description:
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/packages/family`,
+      cta: "View family",
+    },
+    {
+      title: "Pregnancy",
+      image: pregnancy,
+      bg: "#D7FBFF",
+      description:
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/packages/pregnancy`,
+      cta: "View pregnancy",
     },
     {
       title: "Videography",
@@ -67,31 +85,13 @@ const Portfolio = () => {
       cta: "View videography",
     },
     {
-      title: "Family",
-      image: family,
-      bg: "#FFF9D7",
-      description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
-      cta_href: `/packages/family`,
-      cta: "View others",
-    },
-    {
       title: "Portraits",
       image: portrait,
       bg: "#FFF9D7",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
       cta_href: `/packages/portrait`,
-      cta: "View others",
-    },
-    {
-      title: "Pregnancy",
-      image: pregnancy,
-      bg: "#FFF9D7",
-      description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
-      cta_href: `/packages/pregnancy`,
-      cta: "View others",
+      cta: "View portrait",
     },
   ];
 
@@ -149,9 +149,10 @@ const Portfolio = () => {
                             {service.description}
                           </p>
                         </div>
-                        <div className="mt-4">
+                        <div className="mt-4 w-[25%]">
                           <Button
                             variant="black"
+                            widthFull
                             link={service.cta_href}
                             text={service.cta}
                           />
@@ -187,9 +188,10 @@ const Portfolio = () => {
                             {service.description}
                           </p>
                         </div>
-                        <div className="mt-4">
+                        <div className="mt-4 w-[25%]">
                           <Button
                             variant="black"
+                            widthFull
                             link={service.cta_href}
                             text={service.cta}
                           />

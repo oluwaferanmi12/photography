@@ -11,7 +11,6 @@ import sixthImage4 from "@/assets/images/sixth-section-image3.png";
 import sixthImage5 from "@/assets/images/sixth-section-image5.png";
 import sixthImage6 from "@/assets/images/sixth-section-image6.png";
 
-
 interface ParallaxImageProps {
   src: StaticImageData;
   alt: string;
@@ -20,11 +19,16 @@ interface ParallaxImageProps {
   isVisible: boolean;
 }
 
-
-const ParallaxImage = ({ src, alt, position, index, isVisible }: ParallaxImageProps) => {
+const ParallaxImage = ({
+  src,
+  alt,
+  position,
+  index,
+  isVisible,
+}: ParallaxImageProps) => {
   const multipliers = [0.03, 0.05, 0.04, 0.06, 0.02, 0.05];
   const multiplier = multipliers[index % multipliers.length];
-  
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
@@ -32,19 +36,19 @@ const ParallaxImage = ({ src, alt, position, index, isVisible }: ParallaxImagePr
         opacity: isVisible ? 1 : 0,
         scale: isVisible ? 1 : 0.8,
         x: position.x * multiplier,
-        y: position.y * multiplier
+        y: position.y * multiplier,
       }}
-      transition={{ 
-        type: "spring", 
-        stiffness: 100, 
+      transition={{
+        type: "spring",
+        stiffness: 100,
         damping: 10,
         opacity: { duration: 0.4 },
-        scale: { duration: 0.4 }
+        scale: { duration: 0.4 },
       }}
       className="cursor-pointer"
-      style={{ willChange: 'transform' }}
+      style={{ willChange: "transform" }}
     >
-      <Image className="w-full h-full object-cover" src={src} alt={alt} />
+      <Image className="w-full h-auto object-cover" src={src} alt={alt} />
     </motion.div>
   );
 };
@@ -57,7 +61,7 @@ export const GalleryBox = () => {
 
   const { scrollYProgress } = useScroll({
     target: scrollRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   // Container width animation (80% to 100%)
@@ -68,22 +72,18 @@ export const GalleryBox = () => {
   );
 
   // Controls when images start appearing (after container expansion)
-  const imageAppearProgress = useTransform(
-    scrollYProgress,
-    [0.3, 0.5],
-    [0, 1]
-  );
+  const imageAppearProgress = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
-    
+
     const containerRect = containerRef.current.getBoundingClientRect();
     const centerX = containerRect.left + containerRect.width / 2;
     const centerY = containerRect.top + containerRect.height / 2;
-    
+
     const relX = e.clientX - centerX;
     const relY = e.clientY - centerY;
-    
+
     setCursorPosition({ x: relX, y: relY });
   };
 
@@ -95,31 +95,85 @@ export const GalleryBox = () => {
   }, [imageAppearProgress]);
 
   return (
-    <div 
-      ref={scrollRef}
-      className="flex justify-center mt-20 overflow-hidden"
-    >
+    <div ref={scrollRef} className="flex justify-center mt-20 overflow-hidden">
       <motion.div
         ref={containerRef}
         onMouseMove={handleMouseMove}
         style={{ width: containerWidth }}
         className="bg-[#0A0909] px-7 pt-7 overflow-hidden cursor-default"
       >
-        <Row justify="center" gutter={[32, 32]}>
+        <Row gutter={[32, 32]}>
           <Col xs={6}>
             <div className="grid grid-cols-2 gap-4 pb-7 relative">
-              <ParallaxImage src={sixthImage1} alt="" position={cursorPosition} index={0} isVisible={imagesVisible} />
+              <ParallaxImage
+                src={sixthImage1}
+                alt=""
+                position={cursorPosition}
+                index={0}
+                isVisible={imagesVisible}
+              />
               <div></div>
               <div></div>
-              <ParallaxImage src={sixthImage2} alt="" position={cursorPosition} index={1} isVisible={imagesVisible} />
-              <ParallaxImage src={sixthImage3} alt="" position={cursorPosition} index={2} isVisible={imagesVisible} />
+              <ParallaxImage
+                src={sixthImage2}
+                alt=""
+                position={cursorPosition}
+                index={1}
+                isVisible={imagesVisible}
+              />
+              <ParallaxImage
+                src={sixthImage3}
+                alt=""
+                position={cursorPosition}
+                index={2}
+                isVisible={imagesVisible}
+              />
               <div></div>
               <div></div>
-              <ParallaxImage src={sixthImage4} alt="" position={cursorPosition} index={3} isVisible={imagesVisible} />
+              <ParallaxImage
+                src={sixthImage4}
+                alt=""
+                position={cursorPosition}
+                index={3}
+                isVisible={imagesVisible}
+              />
             </div>
           </Col>
-          <Col xs={12} className="relative">
-            <div className="flex items-center justify-center">
+          <Col xs={12}>
+            <div className="relative h-full flex flex-col justify-center items-center">
+              <span className="absolute top-0 h-[80px] max-h-[80px]">
+                <ParallaxImage
+                  src={sixthImage5}
+                  alt=""
+                  position={cursorPosition}
+                  index={4}
+                  isVisible={imagesVisible}
+                />
+              </span>
+               <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{
+                  opacity: imagesVisible ? 1 : 0,
+                  y: imagesVisible ? 0 : 20,
+                }}
+                transition={{ delay: 0.3 }}
+              >
+                <div className="text-4xl -mt-8 lg:text-6xl font-valentiamo-reg text-center text-white">
+                  <p>Wherever You Go, I&apos;ll Be</p>
+                  <p className="my-3">There to Shoot!</p>
+                </div>
+              </motion.div>
+              <span className="absolute bottom-0 max-h-[250px]">
+                <ParallaxImage
+                  src={sixthImage6}
+                  alt=""
+                  position={cursorPosition}
+                  index={5}
+                  isVisible={imagesVisible}
+                />
+              </span>
+            </div>
+            {/* <div className="flex items-center justify-center">
               <span>
                 <ParallaxImage 
                   src={sixthImage5} 
@@ -129,13 +183,13 @@ export const GalleryBox = () => {
                   isVisible={imagesVisible}
                 />
               </span>
-            </div>
-            <div className="flex justify-center items-end xl:mt-10 relative z-10">
+            </div> */}
+            {/* <div className="flex justify-center items-end relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ 
+                animate={{
                   opacity: imagesVisible ? 1 : 0,
-                  y: imagesVisible ? 0 : 20
+                  y: imagesVisible ? 0 : 20,
                 }}
                 transition={{ delay: 0.3 }}
               >
@@ -144,28 +198,52 @@ export const GalleryBox = () => {
                   <p className="my-3">There to Shoot!</p>
                 </div>
               </motion.div>
-            </div>
-            <div className="flex justify-center">
+            </div> */}
+            {/* <div className="flex justify-center">
               <span className="absolute bottom-0">
-                <ParallaxImage 
-                  src={sixthImage6} 
-                  alt="" 
-                  position={cursorPosition} 
-                  index={5} 
+                <ParallaxImage
+                  src={sixthImage6}
+                  alt=""
+                  position={cursorPosition}
+                  index={5}
                   isVisible={imagesVisible}
                 />
               </span>
-            </div>
+            </div> */}
           </Col>
           <Col xs={6}>
             <div className="grid grid-cols-2 gap-4 pb-7 relative">
               <div></div>
-              <ParallaxImage src={sixthImage1} alt="" position={cursorPosition} index={0} isVisible={imagesVisible} />
-              <ParallaxImage src={sixthImage2} alt="" position={cursorPosition} index={1} isVisible={imagesVisible} />
+              <ParallaxImage
+                src={sixthImage1}
+                alt=""
+                position={cursorPosition}
+                index={0}
+                isVisible={imagesVisible}
+              />
+              <ParallaxImage
+                src={sixthImage2}
+                alt=""
+                position={cursorPosition}
+                index={1}
+                isVisible={imagesVisible}
+              />
               <div></div>
               <div></div>
-              <ParallaxImage src={sixthImage3} alt="" position={cursorPosition} index={2} isVisible={imagesVisible} />
-              <ParallaxImage src={sixthImage4} alt="" position={cursorPosition} index={3} isVisible={imagesVisible} />
+              <ParallaxImage
+                src={sixthImage3}
+                alt=""
+                position={cursorPosition}
+                index={2}
+                isVisible={imagesVisible}
+              />
+              <ParallaxImage
+                src={sixthImage4}
+                alt=""
+                position={cursorPosition}
+                index={3}
+                isVisible={imagesVisible}
+              />
               <div></div>
             </div>
           </Col>

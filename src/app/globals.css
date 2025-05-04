@@ -297,6 +297,8 @@ a {
   height: 650px;
 }
 
+/* homeBanner */
+
 .galleryBg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("../assets/images/homeHeaderImage--cropped.jpeg");
@@ -474,6 +476,10 @@ a {
   to {
     transform: translate(calc(-50% - 0.5rem));
   }
+}
+
+.pause-scroll {
+  animation-play-state: paused !important;
 }
 
 

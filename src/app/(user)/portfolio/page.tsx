@@ -1,72 +1,96 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import { Banner } from "@/components/banner/banner";
 import Image from "next/image";
 import Button from "@/components/button/button";
-import card1 from "@/assets/svgs/portfolioImages/card1.svg";
-import card2 from "@/assets/svgs/portfolioImages/card2.svg";
-import card3 from "@/assets/svgs/portfolioImages/card3.svg";
-import card4 from "@/assets/svgs/portfolioImages/card4.svg";
-import HS4 from "@/assets/images/HS4.png";
+import wedding from "@/assets/images/portfolio_images/wedding.jpg";
+import birthdays from "@/assets/images/portfolio_images/birthdays.png";
+import lifestyle from "@/assets/images/portfolio_images/lifestyle.png";
+import family from "@/assets/images/portfolio_images/family.png";
+import videography from "@/assets/images/portfolio_images/videography.png";
+import kids from "@/assets/images/portfolio_images/kids.png";
+import pregnancy from "@/assets/images/portfolio_images/pregnancy.png";
+import portrait from "@/assets/images/portfolio_images/portrait.png";
+import short_img from "@/assets/images/portfolio_images/short_img.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 
 const Portfolio = () => {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
   const services = [
     {
       title: "Weddings",
-      image: card1,
+      image: wedding,
       bg: "#EFFBF9",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
-      cta_href: `/gallery/wedding`,
+      cta_href: `/packages/wedding`,
       cta: "View weddings",
     },
     {
       title: "Birthdays",
-      image: card4,
+      image: birthdays,
       bg: "#F9EFFB",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
-      cta_href: `/gallery/birthday`,
+      cta_href: `/packages/birthday`,
       cta: "View birthdays",
     },
     {
       title: "Lifestyle and Others",
-      image: card2,
+      image: lifestyle,
       bg: "#FBEFF2",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good”.",
-      cta_href: `/gallery/lifestyle`,
+      cta_href: `/packages/lifestyle`,
       cta: "View lifestyle and events",
     },
     {
       title: "Kids",
-      image: card4,
+      image: kids,
       bg: "#FBFBEF",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
-      cta_href: `/gallery/kids`,
+      cta_href: `/packages/kids`,
       cta: "View kids",
     },
     {
       title: "Videography",
-      image: card3,
+      image: videography,
       bg: "#DDFFD7",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good”.",
-      cta_href: `/gallery/videography`,
+      cta_href: `/packages/videography`,
       cta: "View videography",
     },
     {
-      title: "Makeup and Gele",
-      image: card4,
+      title: "Family",
+      image: family,
       bg: "#FFF9D7",
       description:
         "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
-      cta_href: `/gallery/makeup`,
+      cta_href: `/packages/family`,
+      cta: "View others",
+    },
+    {
+      title: "Portraits",
+      image: portrait,
+      bg: "#FFF9D7",
+      description:
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/packages/portrait`,
+      cta: "View others",
+    },
+    {
+      title: "Pregnancy",
+      image: pregnancy,
+      bg: "#FFF9D7",
+      description:
+        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+      cta_href: `/packages/pregnancy`,
       cta: "View others",
     },
   ];
@@ -81,7 +105,7 @@ const Portfolio = () => {
               <div className="flex gap-5 items-center">
                 <span>
                   <Image
-                    src={HS4}
+                    src={short_img}
                     className="rounded-full object-cover w-[200px] h-[100px]"
                     alt="img"
                   />
@@ -118,7 +142,7 @@ const Portfolio = () => {
                       </span>
                       <div className="flex flex-col justify-between flex-1">
                         <div>
-                          <h3 className="text-xl font-semibold text-black">
+                          <h3 className="text-5xl font-playfair text-darker-grey ">
                             {service.title}
                           </h3>
                           <p className="text-sm text-gray-800 mt-2 leading-relaxed">
@@ -156,7 +180,7 @@ const Portfolio = () => {
                       </div>
                       <div className="flex flex-col justify-between flex-1">
                         <div>
-                          <h3 className="text-xl font-semibold text-black">
+                          <h3 className="text-5xl font-playfair text-darker-grey ">
                             {service.title}
                           </h3>
                           <p className="text-sm text-gray-800 mt-2 leading-relaxed">
@@ -179,17 +203,40 @@ const Portfolio = () => {
           </div>
 
           {/* text */}
-          <div className="flex flex-col w-full lg:flex-row justify-between ">
-            <div>
-              <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
-                100% Satisfaction
-              </h3>
-            </div>
-            <div>
-              <h3 className="text-5xl 3xl:text-8xl text-white ">
-                Seamless Booking
-              </h3>
-            </div>
+      
+          <div className="scroller !py-28" ref={scrollerRef}>
+            <ul className={`scroller__inner`}>
+              <li className="rounded-3xl cursor-pointer py-3 px-6 flex gap-3 items-center ">
+                <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
+                  100% Satisfaction
+                </h3>
+              </li>
+              <li className="rounded-3xl cursor-pointer py-3 px-6 flex gap-3 items-center ">
+                <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
+                  Seamless Booking
+                </h3>
+              </li>
+              <li className="rounded-3xl cursor-pointer py-3 px-6 flex gap-3 items-center ">
+                <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
+                  100% Satisfaction
+                </h3>
+              </li>
+              <li className="rounded-3xl cursor-pointer py-3 px-6 flex gap-3 items-center ">
+                <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
+                  Seamless Booking
+                </h3>
+              </li>
+              <li className="rounded-3xl cursor-pointer py-3 px-6 flex gap-3 items-center ">
+                <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
+                  100% Satisfaction
+                </h3>
+              </li>
+              <li className="rounded-3xl cursor-pointer py-3 px-6 flex gap-3 items-center ">
+                <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
+                  Seamless Booking
+                </h3>
+              </li>
+            </ul>
           </div>
           {/* BANNER */}
           <div className="my-36">

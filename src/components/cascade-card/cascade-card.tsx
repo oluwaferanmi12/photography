@@ -23,11 +23,15 @@ export const MainCard = ({
 
   const newScale = useTransform(progress, range, [1, targetScale]);
 
-  const skew = skewDeg + "deg"; // Convert number to CSS string
-  const transformStyle = useTransform(progress, range, [
-    `scale(1) skewX(${skew})`,
-    `scale(${targetScale}) skewX(${skew})`,
-  ]);
+  const transformValue = useTransform(
+    progress,
+    range,
+    [
+      `scale(1) skewX(${skewDeg}deg)`,
+      `scale(${targetScale}) skewX(${skewDeg}deg)`,
+    ]
+  );
+  
 
   return (
     <div
@@ -46,14 +50,17 @@ export const MainCard = ({
               scale: newScale,
               position: "relative",
               top: `calc(-5vh + ${currentIndex * 25}px)`,
-              transform: transformStyle,
+              transform: transformValue,
             }}
           >
-            <Image
-              src={imgSrc}
-              className="max-h-[250px] w-[200px]  object-cover"
-              alt=""
-            />
+             {/* Prevent image from inheriting skew */}
+             <motion.div style={{ skewX: "0deg" }}>
+              <Image
+                src={imgSrc}
+                className="max-h-[300px] object-cover"
+                alt=""
+              />
+            </motion.div>
           </motion.div>
         </Col>
       </Row>

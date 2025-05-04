@@ -32,8 +32,11 @@ export default function RootLayout({
           <div className="block md:hidden">
             <MobileNav />
           </div>
-
+          <div className="relative">
           {children}
+          </div>
+
+         
         </div>
       </div>
     </>

@@ -26,7 +26,13 @@ export default function ImageMasonry() {
 
   return (
     <>
-      <div className=" hidden lg:grid grid-cols-5 gap-4 py-10 min-h-screen">
+      {/* <div className=" hidden lg:grid grid-cols-5 gap-4 py-10 min-h-screen"> */}
+      <div
+  className="hidden lg:grid gap-4 py-10 min-h-screen"
+  style={{
+    gridTemplateColumns: "0.5fr 1fr 1fr 1fr 0.5fr", // Slim first and last columns
+  }}
+>
         {columns.map((column, colIndex) => {
           const isOffsetColumn = colIndex === 1 || colIndex === 3;
           const isMiddleColumn = colIndex === 2;
@@ -41,16 +47,12 @@ export default function ImageMasonry() {
             >
               {column.map((src, idx) => {
                 const shouldApplyGrayscale =
-                  (colIndex === 1 || colIndex === 4) && idx === 0;
+                  (colIndex === 1) && idx === 0;
 
                 return (
                   <div
                     key={idx}
-                    className={`relative ${
-                      firstAndLastColumn
-                        ? "aspect-[16/9] lg:aspect-[1/2]"
-                        : "lg:aspect-[3/4]"
-                    } w-full overflow-hidden rounded-xl shadow-lg h-[400px]`}
+                    className={`relative w-full overflow-hidden rounded-xl shadow-lg h-[500px]`}
                   >
                     <Image
                       src={src}

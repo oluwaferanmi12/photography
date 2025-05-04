@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 interface ButtonTypes {
-  variant?: "bordered" | "filled" | "black";
+  variant?: "bordered" | "filled" | "black" ;
   borderVariant?: "light" | "dark" | "yellow";
   size?: "small" | "medium" | "large";
   children?: React.ReactNode;

@@ -17,8 +17,8 @@ import bgImage3 from "@/assets/images/homeHeaderImage--cropped.jpeg";
 import bgImage4 from "@/assets/images/about-page-img1.png";
 import bgImage5 from "@/assets/images/catalogue-header.jpeg";
 import victoria from "@/assets/images/victoria.jpeg";
-import victoria2 from "@/assets/images/about-secondImg.png";
-import victoria3 from "@/assets/images/landingImage.jpeg";
+import victoria2 from "@/assets/images/victoriaPics/slide2.jpg";
+import victoria3 from "@/assets/images/victoriaPics/slide3.jpg";
 import { Footer } from "@/components/footer/footer";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
@@ -37,6 +37,10 @@ import cascadeImage4 from "@/assets/svgs/cascade-image-4.svg";
 import scrollDown from "@/assets/svgs/scroll-down-icon.svg";
 import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
 import { Compare } from "@/components/ui/compare";
+import TextReveal from "@/components/animattions/animated-text-reveal";
+import Button from "@/components/button/button";
+import beforeImage from "@/assets/images/beforeImage.jpg"
+import afterImage from "@/assets/images/afterImage.jpg"
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -45,7 +49,7 @@ export default function Home() {
   const [currentBg, setCurrentBg] = useState(bgImage3);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
-  const nextSectionRef = useRef<HTMLDivElement>(null)
+  const nextSectionRef = useRef<HTMLDivElement>(null);
 
   // SCROLLING EFFECT ON HEADER
   useEffect(() => {
@@ -56,11 +60,10 @@ export default function Home() {
     return () => window.removeEventListener("resize", checkIsDesktop);
   }, []);
 
-
   // SCROLL TO NEXT SECTION FOR MOBILE
   const handleScroll = () => {
-    nextSectionRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
+    nextSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   // CASCADE CARDS
   const container = useRef<HTMLDivElement | null>(null);
@@ -176,14 +179,12 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="lg:my-6 text-white text-5xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
-                    <p>Picture Perfect.</p>
-                    <p>Shotbyportable.</p>
+                    <p>Timeless Looks.</p>
+                    <p>Lasting Emotions.</p>
                   </div>
                   <div className="mt-12">
                     <p className="text-[#E6EAEE] text-xl font-grotesk-regular lg:w-3/4 min[1400px]-[60%]">
-                      Hey, I’m Victoria Ajala. A luxury lifestyle and portrait
-                      photographer based in Barrie, Ontario. I tell compelling
-                      visual stories through every frame.
+                    Whether you’re stepping in front of the lens for the first time or your fiftieth I’ll help you look and feel your absolute best
                     </p>
                   </div>
                   <motion.div
@@ -220,9 +221,15 @@ export default function Home() {
           ref={nextSectionRef}
           className="flex flex-col gap-10 lg:justify-center lg:items-center px-5 lg:px-0"
         >
-          <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
+          {/* <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
             Photography that leaves a lasting impression
-          </h3>
+          </h3> */}
+
+           <div className="flex flex-col items-center justify-center">
+            <TextReveal>Photography that leaves a</TextReveal>
+            <TextReveal>lasting impression</TextReveal>
+          </div>
+         
           <p className="lg:text-center text-light-brown text-lg lg:w-1/2 3xl:w-[30%]">
             From polished headshots to soulful lifestyle captures, I craft
             images that do more than just “look good” . They speak volumes.
@@ -236,7 +243,6 @@ export default function Home() {
           {cardData.map((item, index) => {
             const targetScale = 1 - (cardData.length - index) * 0.05;
             return (
-              <>
                 <MainCard
                   key={index}
                   currentIndex={index}
@@ -245,7 +251,6 @@ export default function Home() {
                   progress={scrollYProgress}
                   imgSrc={item}
                 />
-              </>
             );
           })}
         </div>
@@ -315,6 +320,7 @@ export default function Home() {
               Whether for personal branding, professional needs, or intimate
               memories, every photo session is a curated experience.
             </p>
+            <Button text="Read more" variant="filled" link="/about" />
           </div>
           <div className=" lg:w-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10 w-full">
@@ -340,7 +346,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4 w-full lg:mt-6">
+              <div className="flex flex-col gap-4 w-full lg:mt-14">
                 <div className="relative overflow-hidden">
                   <AnimatedCard from="top-right" delay={0.4}>
                     <ServiceWrapperCard
@@ -372,15 +378,15 @@ export default function Home() {
         </div>
 
         {/* Sixth Section */}
-        <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center">
+        <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
           <h3 className="text-4xl lg:text-6xl">Playground</h3>
           <p className="text-light-brown text-2xl">
             Swipe to see before & after magic
           </p>
           <div className="p-4 border mt-14 rounded-3xl dark:bg-neutral-900 bg-neutral-100  border-neutral-200 dark:border-neutral-800 px-4">
             <Compare
-              firstImage={victoria2}
-              secondImage={victoria}
+              firstImage={beforeImage}
+              secondImage={afterImage}
               firstImageClassName="object-cover object-left-top w-full"
               secondImageClassname="object-cover object-left-top w-full"
               className="h-[250px] w-full md:h-[500px] md:w-[500px] lg:h-[500px] lg:w-[800px]"

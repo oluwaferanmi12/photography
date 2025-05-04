@@ -17,7 +17,8 @@ const GalleryAccessPage = () => {
   const router = useRouter();
 
   const handleAccessLogin = () => {
-    router.push(`/gallery/single-gallery/${gallerySlug}`)
+    const singlePageSlug = encodeURIComponent(pageName.toLowerCase().replace(/ /g, "-"));
+    router.push(`/gallery/${singlePageSlug}`)
   }
 
   return (

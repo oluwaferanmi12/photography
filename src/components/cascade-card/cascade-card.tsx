@@ -23,15 +23,10 @@ export const MainCard = ({
 
   const newScale = useTransform(progress, range, [1, targetScale]);
 
-  const transformValue = useTransform(
-    progress,
-    range,
-    [
-      `scale(1) skewX(${skewDeg}deg)`,
-      `scale(${targetScale}) skewX(${skewDeg}deg)`,
-    ]
-  );
-  
+  const transformValue = useTransform(progress, range, [
+    `scale(1) skewX(${skewDeg}deg)`,
+    `scale(${targetScale}) skewX(${skewDeg}deg)`,
+  ]);
 
   return (
     <div
@@ -45,7 +40,7 @@ export const MainCard = ({
       <Row justify={"center"}>
         <Col xs={22} md={18} lg={16}>
           <motion.div
-            className="rounded-lg  px-6 min-w-full bg-white py-4 my-8 "
+            className="rounded-lg px-6 min-w-full bg-white py-4 my-8"
             style={{
               scale: newScale,
               position: "relative",
@@ -53,14 +48,14 @@ export const MainCard = ({
               transform: transformValue,
             }}
           >
-             {/* Prevent image from inheriting skew */}
-             <motion.div style={{ skewX: "0deg" }}>
+            {/* This wrapper will counteract the parent skew */}
+            <div style={{ transform: `skewX(${-skewDeg}deg)` }}>
               <Image
                 src={imgSrc}
                 className="max-h-[300px] object-cover"
                 alt=""
               />
-            </motion.div>
+            </div>
           </motion.div>
         </Col>
       </Row>

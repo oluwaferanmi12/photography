@@ -58,13 +58,13 @@ const SinglePackages = () => {
             {/* Content */}
             <div className="mx-14 relative text-white flex flex-col gap-5 font-grotesk-regular">
               <p className="capitalize text-6xl lg:text-8xl">{slug}</p>
-              <p className="text-xl text-white max-w-[75%]">
+              <p className="text-xl text-white w-full lg:max-w-[75%]">
                 From polished headshots to soulful lifestyle captures, I craft
                 images that do more than just “look good” . They speak volumes.
                 Whether for personal branding, professional needs, or intimate
                 memories, every photo session is a curated experience.
               </p>
-              <div className="flex gap-5">
+              <div className="flex flex-col lg:flex-row gap-5">
                 <Button variant="filled" text="Book a wedding session" />
                 <Button
                   variant="bordered"
@@ -75,7 +75,7 @@ const SinglePackages = () => {
             </div>
 
             <span className="absolute right-0 -bottom-10 lg:-bottom-15">
-              <Image src={rollingImage} className="imageRotate" alt="img" />
+              <Image src={rollingImage} className="imageRotate h-24 w-24 md:h-auto md:w-auto" alt="img" />
             </span>
 
             {/* Carousel buttons */}
@@ -96,7 +96,8 @@ const SinglePackages = () => {
           </div>
 
           {/* Image Grid Section */}
-          <div className="space-y-4">
+          {/* DESKTOP */}
+          <div className="space-y-4 hidden lg:flex">
             <div className="grid grid-cols-3 gap-4">
               <div className="flex flex-col gap-4">
                 <Image
@@ -129,6 +130,50 @@ const SinglePackages = () => {
                   alt="img"
                 />
               </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <Image
+                src={HS3}
+                className="w-full h-[300px] object-cover rounded-3xl"
+                alt="img"
+              />
+              <Image
+                src={HS7}
+                className="w-full h-[300px] object-cover rounded-3xl"
+                alt="img"
+              />
+            </div>
+          </div>
+
+          {/* MOBILE */}
+          <div className="space-y-4 lg:hidden">
+            <div className="grid grid-cols-2 grid-rows-3 gap-4">
+              <Image
+                src={HS1}
+                className="w-full h-[300px] object-cover rounded-3xl"
+                alt="img"
+              />
+              <Image
+                src={HS2}
+                className="w-full h-[300px] object-cover rounded-3xl"
+                alt="img"
+              />
+              <Image
+                src={HS4}
+                className="w-full h-[300px] object-cover rounded-3xl"
+                alt="img"
+              />
+              <Image
+                src={HS5}
+                className="w-full h-full object-cover rounded-3xl row-span-2"
+                alt="img"
+              />
+              <Image
+                src={HS6}
+                className="w-full h-[300px] object-cover rounded-3xl"
+                alt="img"
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">

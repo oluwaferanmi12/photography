@@ -256,7 +256,7 @@ export default function Home() {
                 range={[index * 0.333, 1]}
                 targetScale={targetScale}
                 progress={scrollYProgress}
-                imgSrc={item.img} 
+                imgSrc={item.img}
                 skewDeg={item.skewDeg}
               />
             );
@@ -377,30 +377,31 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div>
-            <h3 className="text-4xl lg:text-5xl lg:text-center">
-              Words from my clients
-            </h3>
-            <AnimatedTestimonial />
+          {/*  */}
+          <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
+            <h3 className="text-4xl lg:text-6xl">Playground</h3>
+            <p className="text-light-brown text-2xl">
+              Swipe to see before & after magic
+            </p>
+            <div className="p-4 border mt-14 rounded-3xl dark:bg-neutral-900 bg-neutral-100  border-neutral-200 dark:border-neutral-800 px-4">
+              <Compare
+                firstImage={beforeImage}
+                secondImage={afterImage}
+                firstImageClassName="object-cover object-left-top w-full"
+                secondImageClassname="object-cover object-left-top w-full"
+                className="h-[250px] w-full md:h-[500px] md:w-[500px] lg:h-[500px] lg:w-[800px]"
+                slideMode="hover"
+              />
+            </div>
           </div>
         </div>
 
         {/* Sixth Section */}
-        <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
-          <h3 className="text-4xl lg:text-6xl">Playground</h3>
-          <p className="text-light-brown text-2xl">
-            Swipe to see before & after magic
-          </p>
-          <div className="p-4 border mt-14 rounded-3xl dark:bg-neutral-900 bg-neutral-100  border-neutral-200 dark:border-neutral-800 px-4">
-            <Compare
-              firstImage={beforeImage}
-              secondImage={afterImage}
-              firstImageClassName="object-cover object-left-top w-full"
-              secondImageClassname="object-cover object-left-top w-full"
-              className="h-[250px] w-full md:h-[500px] md:w-[500px] lg:h-[500px] lg:w-[800px]"
-              slideMode="hover"
-            />
-          </div>
+        <div>
+          <h3 className="text-4xl lg:text-5xl lg:text-center">
+            Words from my clients
+          </h3>
+          <AnimatedTestimonial />
         </div>
       </div>
 

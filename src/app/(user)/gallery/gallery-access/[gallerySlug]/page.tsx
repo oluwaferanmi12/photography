@@ -24,10 +24,10 @@ const GalleryAccessPage = () => {
   return (
     <div>
       <div className="flex flex-col gap-14 justify-center items-center ">
-        <div className=" flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28 !py-28">
+        <div className="flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28 !py-28">
           <div className="my-14 relative w-full">
-            <Row align={"middle"} gutter={[32, 32]}>
-              <Col xs={24} lg={10}>
+            <Row align={"middle"} gutter={[32, 32]} >
+              <Col  xs={{ span: 24, order: 2 }} lg={{ span: 10, order: 1 }}>
                 <div>
                   <Image
                     src={famImg}
@@ -36,7 +36,7 @@ const GalleryAccessPage = () => {
                   />
                 </div>
               </Col>
-              <Col xs={24} lg={14}>
+              <Col xs={{ span: 24, order: 1 }} lg={{ span: 14, order: 2 }}>
                 <div>
                   <h3 className="font-playfair text-4xl mb-8 capitalize"> {pageName} </h3> 
                   <div className="py-8 px-10 w-full rounded-[20px] bg-[#282824]">

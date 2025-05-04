@@ -14,7 +14,7 @@ import videography from "@/assets/svgs/portfolio_svgs/videography.svg";
 import kids from "@/assets/svgs/portfolio_svgs/kids.svg";
 import pregnancy from "@/assets/svgs/portfolio_svgs/pregnancy.svg";
 import portrait from "@/assets/svgs/portfolio_svgs/portrait.svg";
-import short_img from "@/assets/images/portfolio_images/short_img.jpg";
+import short_img from "@/assets/images/short_img.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 
 const Portfolio = () => {

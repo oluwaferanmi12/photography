@@ -1,7 +1,7 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
-import HS4 from "@/assets/images/HS4.png";
-import { PlanCards } from "@/components/plans-card/PlanCards";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 // import rollingImage from "@/assets/svgs/rollingImage.svg";
@@ -16,6 +16,7 @@ import card8 from "@/assets/images/gallery/card8.jpg";
 import card9 from "@/assets/images/gallery/card9.jpg";
 import { Row, Col } from "antd";
 import { GalleryCard } from "@/components/gallery-card/gallery-card";
+import Pagination from "@/components/pagination/pagination";
 
 const Gallery = () => {
   const galleryData = [
@@ -78,7 +79,7 @@ const Gallery = () => {
     <div>
       <div className="flex flex-col gap-14 justify-center items-center ">
         <div className=" flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28">
-          <div className="galleryBg mt-28 lg:mt-48 relative border-[5px] border-light-brown w-full flex items-center">
+          <div className="galleryBg mt-28 lg:mt-48 relative border-[5px]  border-light-brown w-full flex items-center">
             <div className="mx-14 text-white flex flex-col gap-5 font-grotesk-regular">
               <p className="text-6xl lg:text-8xl font-playfair ">
                 Client’s Gallery
@@ -90,14 +91,11 @@ const Gallery = () => {
                 memories, every photo session is a curated experience.
               </p>
             </div>
-            {/* <span className="absolute right-0 -bottom-10  lg:-bottom-15 ">
-              <Image src={rollingImage} className="imageRotate" alt="img" />
-            </span> */}
           </div>
         </div>
       </div>
       {/* SECONF SECTION */}
-      <section className="bg-[#F4F3EA] mt-28 flex flex-col gap-14 justify-center items-center  px-5 lg:px-14 3xl:!px-28  pt-20 pb-32">
+      <section className="bg-[#F4F3EA] mt-28 flex flex-col gap-14 justify-center items-center px-5 lg:px-14 3xl:!px-28  pt-20 pb-32">
         <div>
           <Row gutter={[32, 32]}>
             {galleryData.map((item, index) => (
@@ -113,7 +111,11 @@ const Gallery = () => {
           </Row>
         </div>
         <div>
-          
+          <Pagination
+            currentPage={1}
+            totalPages={7}
+            onPageChange={(page) => console.log("Go to page:", page)}
+          />
         </div>
       </section>
       <GalleryBox />

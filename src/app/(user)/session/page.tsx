@@ -4,14 +4,23 @@ import Image from "next/image";
 import React, { useState } from "react";
 import HS4 from "@/assets/images/HS4.png";
 import calendar from "@/assets/svgs/calendar_template.svg";
-import { Col, Row } from "antd";
+import { Col, Modal, Row } from "antd";
 import { ContactFrom } from "@/components/contact-form/contact-form";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
+import rollingImage from "@/assets/svgs/rollingImage.svg";
+import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 
 const SessionPage = () => {
   const [selectedService, setSelectedService] = useState("");
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
+
+  const handleReserveSpot = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsThankYouModalOpen(true); // Open the thank you modal
+  };
+
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
@@ -55,6 +64,7 @@ const SessionPage = () => {
               <ContactFrom
                 selectedService={selectedService}
                 setSelectedService={() => setSelectedService("")}
+                onSubmit={handleReserveSpot}
               />
             </Col>
           </Row>
@@ -65,6 +75,50 @@ const SessionPage = () => {
       </div>
       <GalleryBox />
       <Footer />
+      {/* AFTER FORM FILLING MODAL */}
+      <Modal
+        open={isThankYouModalOpen}
+        onCancel={() => setIsThankYouModalOpen(false)}
+        footer={null}
+        className="sessionForm_modal"
+        closeIcon={null}
+        width={600}
+        centered
+      >
+        <div className="py-8 px-10 w-full">
+          <div className="flex justify-between items-start w-full">
+            <div className="flex flex-col gap-2">
+              <span>
+                <Image src={bas_thanks} alt="bas" />
+              </span>
+              <h3 className="font-playfair text-5xl text-white">
+                Thank you for your reservation
+              </h3>
+            </div>
+            <span>
+              <Image
+                src={rollingImage}
+                className="w-28 h-28"
+                alt="rollingImage"
+              />
+            </span>
+          </div>
+          <div className="flex flex-col gap-5 mt-10">
+            <p className="text-sm text-light-brown">
+              Thank you for reserving a spot with me, I will check my
+              availability and respond to your booking in less than 24hrs, If
+              confirmed you will receive a payment link and a confirmation email
+              from me, Please watch out for your junks and texts.
+            </p>
+            <div>
+              <p className="text-light-brown text-sm">yours sincerely</p>
+              <p className="text-[#5A5A50] text-sm font-valentiamo-reg">
+                shotbyportable
+              </p>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

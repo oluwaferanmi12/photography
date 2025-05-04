@@ -6,9 +6,7 @@ import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import HS4 from "@/assets/images/HS4.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
-import { Col, Modal, Row } from "antd";
-import { ServiceWrapperCard } from "@/components/services/ServiceWrapperCard";
-import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
+import { Modal} from "antd";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
 import kids_icon from "@/assets/svgs/kids_icon.svg";
 import lifestyle_icon from "@/assets/svgs/lifestyle_icon.svg";
@@ -90,7 +88,7 @@ const Portfolio = () => {
             </div>
           </div>
           <div className="scroller !py-28" ref={scrollerRef}>
-            <ul className="scroller__inner">
+            <ul className={`scroller__inner ${isSessionFormModalOpen || isThankYouModalOpen ? "pause-scroll" : ""}`}>
               <li
                 onClick={() => showModal("wedding")}
                 className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "

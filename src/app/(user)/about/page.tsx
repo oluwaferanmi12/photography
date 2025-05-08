@@ -88,8 +88,8 @@ const About = () => {
       <div className="flex justify-center items-center relative bg-transparent ">
         <div className="px-5 lg:px-14 3xl:!px-28">
           <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
-            <div className="flex flex-col gap-8 lg:w-1/2">
-              <h2 className="text-7xl">I Started with Beauty.</h2>
+            <div className="flex flex-col gap-2 lg:gap-8 lg:w-1/2">
+              <h2 className="text-4xl lg:text-7xl">I Started with Beauty.</h2>
               <div className="flex gap-5 items-center">
                 <span>
                   <Image
@@ -98,11 +98,11 @@ const About = () => {
                     alt="img"
                   />
                 </span>
-                <h2 className=" italic text-7xl ">Now I Capture It.</h2>
+                <h2 className=" italic text-3xl lg:text-7xl ">Now I Capture It.</h2>
               </div>
             </div>
           </div>
-          <div className="pb-28 pt-64">
+          <div className="pb-28 pt-32">
             <div className="relative">
               {/* Main Image */}
               <div className="w-full">
@@ -134,13 +134,13 @@ const About = () => {
               </div>
             </div>
             {/*  */}
-            <div className="flex relative w-full items-start mt-14">
-              <div className="w-1/2">
+            <div className="flex flex-col lg:flex-row relative w-full items-start mt-14">
+              <div className="lg:w-1/2">
                 <p className="w-full text-5xl font-bold text-neutral-light">
                   My Journey
                 </p>
               </div>
-              <div className="w-1/2 text-[#C1BFBF] text-2xl">
+              <div className="lg:w-1/2 text-[#C1BFBF] text-2xl">
                 <p>
                   My journey began as a makeup artist, where I mastered the art
                   of enhancing beauty and paying attention to the smallest
@@ -184,13 +184,13 @@ const About = () => {
             </div>
 
             {/*  */}
-            <div className="flex relative w-full items-start">
-              <div className="w-1/2">
+            <div className="flex flex-col lg:flex-row relative w-full items-start">
+              <div className="lg:w-1/2">
                 <p className="w-full text-5xl font-bold text-neutral-light">
                   My Philosophy
                 </p>
               </div>
-              <div className="w-1/2 text-[#C1BFBF] text-2xl">
+              <div className="lg:w-1/2 text-[#C1BFBF] text-2xl">
                 <p>
                   I believe photography is not about perfection but presence — a
                   quiet way of honoring the moments that shape us with intention

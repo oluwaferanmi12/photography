@@ -1,144 +1,309 @@
-import { HeaderWrapper } from "@/components/headerWrapper/header-wrapper";
-import { Col, Row } from "antd";
-import React from "react";
-import Image from "next/image";
-import aboutPageImg from "@/assets/images/about-page-img1.png";
-import lineImg from "@/assets/svgs/Line 601.svg";
-import image2 from "@/assets/images/about-secondImg.png";
-import image3 from "@/assets/images/about-thirdImg.png";
-import customersIcon from "@/assets/svgs/customers-icon.svg";
-import webIcon from "@/assets/svgs/satisfaction-icon.svg";
-import experienceIcon from "@/assets/svgs/experience-icon.svg";
-import { AboutCards } from "@/components/about-cards/aboutCards";
+"use client";
+
+import React, { useRef, useState } from "react";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
+import Image from "next/image";
+import short_img from "@/assets/svgs/about_short-img.svg";
+import headerImage from "@/assets/svgs/about_img//header_img.jpg";
+import rollingImage from "@/assets/svgs/rollingImage.svg";
+import { Col, Modal, Row } from "antd";
+import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
+import { ContactBanner } from "@/components/banner/contact-banner";
+import { ContactFrom } from "@/components/contact-form/contact-form";
+import victoria from "@/assets/images/victoria.jpeg";
+import clientImage1 from "@/assets/svgs/about_img/clientImage1.svg";
+import clientImage2 from "@/assets/svgs/about_img/clientImage2.svg";
+import expect_cloud from "@/assets/svgs/about_img/expect_cloud.svg";
+import expect_camera from "@/assets/svgs/about_img/expect_camera.svg";
+import expect_tree from "@/assets/svgs/about_img/expect_tree.svg";
+import expect_spread from "@/assets/svgs/about_img/expect_spread.svg";
+import { Banner } from "@/components/banner/banner";
 
-const page = () => {
+const expectationData = [
+  {
+    icon: expect_cloud,
+    title: "A calm, guided experience",
+    description:
+      "The most iconic sight of the festival is the sea of pink blossoms that blanket the trees.",
+  },
+  {
+    icon: expect_cloud,
+    title: "A personal connection",
+    description:
+      "The most iconic sight of the festival is the sea of pink blossoms that blanket the trees.",
+  },
+  {
+    icon: expect_camera,
+    title: "Support with styling",
+    description:
+      "Experiment with different angles and perspectives to capture the beauty of the cherry blossoms in a unique way.",
+  },
+  {
+    icon: expect_tree,
+    title: "A session that feels effortless",
+    description:
+      "One of the most popular activities during Hanami is to have a picnic under the cherry blossom trees.",
+  },
+  {
+    icon: expect_tree,
+    title: "Thoughtfully edited images",
+    description:
+      "The most iconic sight of the festival is the sea of pink blossoms that blanket the trees.",
+  },
+  {
+    icon: expect_spread,
+    title: "A story that stays with you",
+    description:
+      "While the cherry blossoms are undoubtedly the stars of the show, don't forget to capture the people who come to admire them.",
+  },
+];
+
+const About = () => {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isSessionFormModalOpen, setIsSessionFormModalOpen] = useState(false);
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [currentProfileImg, setCurrentProfileImg] = useState(0);
+
+  const images = [headerImage, victoria, headerImage];
+
+  const goToSlide = (index: number) => {
+    setCurrentProfileImg(index);
+  };
+
+  const handleCancel = () => {
+    setIsSessionFormModalOpen(false);
+  };
+
+  // Submit form onClick
+  const handleReserveSpot = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsSessionFormModalOpen(false);
+    setIsThankYouModalOpen(true);
+  };
+
   return (
     <div>
-      <div className="p-5 lg:p-14 3xl:!px-28 flex flex-col gap-14">
-        <HeaderWrapper
-          headerTitle="About Portable hub"
-          landingBg="aboutLandingBG"
-        />
-        {/* SECOND SECTION */}
-        <div>
-          <Row>
-            <Col xs={24}>
-              <div className="flex flex-col justify-center items-center">
-                <div className="lg:w-[30%] flex flex-col gap-5 justify-center items-center">
-                  <p className="text-4xl font-grotesk-medium text-center">
-                    Where Passion Meets Perfection Through the Lens
-                  </p>
-                  <span>
-                    <Image src={aboutPageImg} height={300} alt="about_img" />
-                  </span>
-                  <p className="text-2xl font-grotesk-medium text-center">
-                    At ShotByPortable, storytelling is at the heart of
-                    everything we do. With a decade of experience in photography
-                    and cinematography, we craft visuals that captivate,
-                    inspire, and leave a lasting impact.
-                  </p>
+      <div className="flex justify-center items-center relative bg-transparent ">
+        <div className="px-5 lg:px-14 3xl:!px-28">
+          <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
+            <div className="flex flex-col gap-8 lg:w-1/2">
+              <h2 className="text-7xl">I Started with Beauty.</h2>
+              <div className="flex gap-5 items-center">
+                <span>
+                  <Image
+                    src={short_img}
+                    className="rounded-full object-cover w-[150px] h-[80px]"
+                    alt="img"
+                  />
+                </span>
+                <h2 className=" italic text-7xl ">Now I Capture It.</h2>
+              </div>
+            </div>
+          </div>
+          <div className="pb-28 pt-64">
+            <div className="relative">
+              {/* Main Image */}
+              <div className="w-full">
+                <div className="realtive w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src={images[currentProfileImg]}
+                    alt={`victoria-${currentProfileImg}`}
+                    className="w-full relative transition-all duration-300 h-[300px]  lg:h-[800px] object-cover rounded-2xl"
+                  />
+                  {/* Dots */}
+                  <div className="flex justify-center items-center">
+                    <div className="absolute bottom-8 bg-white/25 backdrop-blur-3xl rounded-full p-2 ">
+                      <div className="flex justify-center items-center gap-2">
+                        {images.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => goToSlide(index)}
+                            className={`w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${
+                              currentProfileImg === index
+                                ? "bg-black"
+                                : "bg-black/50"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </Col>
-          </Row>
-        </div>
-        {/* THIRD SECTION */}
-        <div className="py-12">
-          <div>
-            <div className="flex justify-between items-stretch gap-4">
-              {/* Large Image */}
-              <span className="w-[75%]">
-                <Image
-                  src={image2}
-                  alt="img"
-                  className="w-full max-h-[600px] object-cover"
-                />
-              </span>
-
-              {/* Smaller Stacked Images */}
-              <div className="flex flex-col gap-5">
-                <span className="w-full">
-                  <Image
-                    src={image3}
-                    alt="img"
-                    className="w-full max-h-[290px] object-contain"
-                  />
-                </span>
-                <span className="w-full">
-                  <Image
-                    src={image3}
-                    alt="img"
-                    className="w-full max-h-[290px] object-contain"
-                  />
-                </span>
+            </div>
+            {/*  */}
+            <div className="flex relative w-full items-start mt-14">
+              <div className="w-1/2">
+                <p className="w-full text-5xl font-bold text-neutral-light">
+                  My Journey
+                </p>
+              </div>
+              <div className="w-1/2 text-[#C1BFBF] text-2xl">
+                <p>
+                  My journey began as a makeup artist, where I mastered the art
+                  of enhancing beauty and paying attention to the smallest
+                  details. But I didn’t just want to prepare moments. I wanted
+                  to hold onto them. To freeze emotion in its purest form. That
+                  desire to do more led me to pick up a camera and everything
+                  changed. What started as passion became purpose. As a graduate
+                  of Humber College in Photography with over five years of
+                  experience, I’ve transformed instinct into craft. My approach
+                  blends creativity, emotion, and technical precision to tell
+                  stories that go beyond the surface. Every session is
+                  intentional. Every frame is a reflection of something real. I
+                  don’t just take photos. I create powerful visual experiences.
+                  Because beauty deserves to be seen. And moments deserve to be
+                  remembered.
+                </p>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* FOURTH SECTION */}
-        <div className="py-12  ">
-          <div className="flex flex-col lg:flex-row gap-4 justify-between items-center w-full">
+          {/* common spacing */}
+          <div className="flex flex-col gap-32">
+            {/*  */}
             <div>
-              <p className=" text-4xl lg:text-7xl lg:w-1/2 uppercase font-valentiamo-reg">
-                Key Reasons to Work with me
-              </p>
+              <Row gutter={[20, 20]}>
+                <Col xs={24} lg={12}>
+                  <Image
+                    src={clientImage1}
+                    className="w-full object-cover"
+                    alt="img"
+                  />
+                </Col>
+                <Col xs={24} lg={12}>
+                  <Image
+                    src={clientImage2}
+                    className="w-full object-cover"
+                    alt="img"
+                  />
+                </Col>
+              </Row>
             </div>
 
-             <span className="text-[#6B7280]">
-              <p className="text-2xl">
-                Whatever your customers&apos; payment preferences
-              </p>
-              <p className="text-2xl">
-                we’ll help you find the right solution for{" "}
-              </p>
-              <p className="text-2xl">your business.</p>
-            </span>
+            {/*  */}
+            <div className="flex relative w-full items-start">
+              <div className="w-1/2">
+                <p className="w-full text-5xl font-bold text-neutral-light">
+                  My Philosophy
+                </p>
+              </div>
+              <div className="w-1/2 text-[#C1BFBF] text-2xl">
+                <p>
+                  I believe photography is not about perfection but presence — a
+                  quiet way of honoring the moments that shape us with intention
+                  empathy and timeless beauty.
+                </p>
+              </div>
+            </div>
+
+            {/*  */}
+            <div>
+              <div>
+                <h3 className="text-neutral-light font-medium text-3xl">
+                  What to expect:
+                </h3>
+              </div>
+              <div className="mt-8">
+                <Row gutter={[32, 96]}>
+                  {expectationData.map((item, index) => (
+                    <Col xs={12} lg={8} key={index}>
+                      <div className="flex flex-col gap-4">
+                        <div>
+                          <Image src={item.icon} alt="icon" />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <h3 className="text-neutral-light text-base">
+                            {" "}
+                            {item.title}{" "}
+                          </h3>
+                          <p className="text-base text-[#666666]">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            </div>
+
+            {/*  */}
+            <Banner />
+
+            {/*  */}
+            <ContactBanner />
           </div>
         </div>
-
-        {/* FIFTH SECTION */}
-        <div className="flex flex-col lg:flex-row gap-5 lg:justify-between items-center">
-          <AboutCards
-            tagText="Customers"
-            iconSrc={customersIcon}
-            numberCount="20K"
-            numberAttribute="+"
-            cardText="In 38 countries, we work as one global team to help clients"
-          />
-
-          <span className="hidden lg:flex">
-            <Image src={lineImg} alt="img" />
-          </span>
-
-          <AboutCards
-            tagText="Satisfaction"
-            iconSrc={webIcon}
-            numberCount="98"
-            numberAttribute="%"
-            cardText="In 38 countries, we work as one global team to help clients"
-          />
-
-          <span className="hidden lg:flex">
-            <Image src={lineImg} alt="img" />
-          </span>
-
-          <AboutCards
-            tagText="Experience"
-            iconSrc={experienceIcon}
-            numberCount="89"
-            numberAttribute="%"
-            cardText="We started with a ebellious mindset and set ourselves the challange"
-          />
-        </div>
       </div>
-      {/* SIXTH SECTION */}
+
       <GalleryBox />
       <Footer />
+
+      {/* MODAL */}
+      <Modal
+        open={isSessionFormModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+        className="sessionForm_modal"
+        closeIcon={null}
+        width={800}
+        centered
+      >
+        <ContactFrom
+          onSubmit={handleReserveSpot}
+          selectedService={selectedService}
+          setSelectedService={setSelectedService}
+        />
+      </Modal>
+      {/* AFTER FORM FILLING MODAL */}
+      <Modal
+        open={isThankYouModalOpen}
+        onCancel={() => setIsThankYouModalOpen(false)}
+        footer={null}
+        className="sessionForm_modal"
+        closeIcon={null}
+        width={600}
+        centered
+      >
+        <div className="py-8 px-10 w-full">
+          <div className="flex justify-between items-start w-full">
+            <div className="flex flex-col gap-2">
+              <span>
+                <Image src={bas_thanks} alt="bas" />
+              </span>
+              <h3 className="font-playfair text-5xl text-white">
+                Thank you for your reservation
+              </h3>
+            </div>
+            <span>
+              <Image
+                src={rollingImage}
+                className="w-28 h-28"
+                alt="rollingImage"
+              />
+            </span>
+          </div>
+          <div className="flex flex-col gap-5 mt-10">
+            <p className="text-sm text-light-brown">
+              Thank you for reserving a spot with me, I will check my
+              availability and respond to your booking in less than 24hrs, If
+              confirmed you will receive a payment link and a confirmation email
+              from me, Please watch out for your junks and texts.
+            </p>
+            <div>
+              <p className="text-light-brown text-sm">yours sincerely</p>
+              <p className="text-[#5A5A50] text-sm font-valentiamo-reg">
+                shotbyportable
+              </p>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
 
-export default page;
+export default About;

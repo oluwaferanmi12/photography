@@ -5,7 +5,7 @@ import localImg from "@/assets/images/homeHeaderImage--cropped.jpeg";
 
 export const Banner = () => {
   return (
-    <section className="pt-20 relative h-screen overflow-hidden ">
+    <section className="pt-20 relative h-[650px] overflow-hidden ">
       <div className="flex justify-center">
         <video
           className="absolute top-0 left-0 grayscale overflow-hidden h-[650px] w-screen object-cover"

@@ -534,3 +534,15 @@ a {
     transform: rotateX(0deg);
   }
 }
+
+@keyframes fall {
+  0% {
+    transform: translateY(-200px) rotate(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px) rotate(var(--rotate, 0deg));
+    opacity: 1;
+  }
+}
+

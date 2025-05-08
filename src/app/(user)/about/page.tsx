@@ -1,144 +1,214 @@
-import { HeaderWrapper } from "@/components/headerWrapper/header-wrapper";
-import { Col, Row } from "antd";
-import React from "react";
-import Image from "next/image";
-import aboutPageImg from "@/assets/images/about-page-img1.png";
-import lineImg from "@/assets/svgs/Line 601.svg";
-import image2 from "@/assets/images/about-secondImg.png";
-import image3 from "@/assets/images/about-thirdImg.png";
-import customersIcon from "@/assets/svgs/customers-icon.svg";
-import webIcon from "@/assets/svgs/satisfaction-icon.svg";
-import experienceIcon from "@/assets/svgs/experience-icon.svg";
-import { AboutCards } from "@/components/about-cards/aboutCards";
+"use client";
+
+import React, { useRef, useState } from "react";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
+import Image from "next/image";
+import short_img from "@/assets/svgs/about_short-img.svg";
+import headerImage from "@/assets/svgs/about_img/header_img.svg";
+import rollingImage from "@/assets/svgs/rollingImage.svg";
+import { Modal } from "antd";
+import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
+import { PlanCards } from "@/components/plans-card/PlanCards";
+import { ContactBanner } from "@/components/banner/contact-banner";
+import { ContactFrom } from "@/components/contact-form/contact-form";
+import circleIcon from "@/assets/svgs/circle-stroke.svg";
+import victoria from "@/assets/images/victoria.jpeg";
 
-const page = () => {
+
+const About = () => {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isSessionFormModalOpen, setIsSessionFormModalOpen] = useState(false);
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [currentProfileImg, setCurrentProfileImg] = useState(0);
+
+  const images = [headerImage, victoria, headerImage];
+
+  const goToSlide = (index: number) => {
+    setCurrentProfileImg(index);
+  };
+
+
+  const handleCancel = () => {
+    setIsSessionFormModalOpen(false);
+  };
+
+  // Submit form onClick
+  const handleReserveSpot = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsSessionFormModalOpen(false);
+    setIsThankYouModalOpen(true); // Open the thank you modal
+    // setTimeout(() => {
+    //   setIsThankYouModalOpen(false);
+    // }, 3000);
+  };
+
   return (
     <div>
-      <div className="p-5 lg:p-14 3xl:!px-28 flex flex-col gap-14">
-        <HeaderWrapper
-          headerTitle="About Portable hub"
-          landingBg="aboutLandingBG"
-        />
-        {/* SECOND SECTION */}
-        <div>
-          <Row>
-            <Col xs={24}>
-              <div className="flex flex-col justify-center items-center">
-                <div className="lg:w-[30%] flex flex-col gap-5 justify-center items-center">
-                  <p className="text-4xl font-grotesk-medium text-center">
-                    Where Passion Meets Perfection Through the Lens
-                  </p>
-                  <span>
-                    <Image src={aboutPageImg} height={300} alt="about_img" />
-                  </span>
-                  <p className="text-2xl font-grotesk-medium text-center">
-                    At ShotByPortable, storytelling is at the heart of
-                    everything we do. With a decade of experience in photography
-                    and cinematography, we craft visuals that captivate,
-                    inspire, and leave a lasting impact.
-                  </p>
-                </div>
+      <div className="flex justify-center items-center relative bg-transparent ">
+        <div className="px-5 lg:px-14 3xl:!px-28">
+          <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
+            <div className="flex flex-col gap-8 lg:w-1/2">
+              <h2 className="text-7xl">I Started with Beauty.</h2>
+              <div className="flex gap-5 items-center">
+                <span>
+                  <Image
+                    src={short_img}
+                    className="rounded-full object-cover w-[150px] h-[80px]"
+                    alt="img"
+                  />
+                </span>
+                <h2 className=" italic text-7xl ">Now I Capture It.</h2>
               </div>
-            </Col>
-          </Row>
-        </div>
-        {/* THIRD SECTION */}
-        <div className="py-12">
-          <div>
-            <div className="flex justify-between items-stretch gap-4">
-              {/* Large Image */}
-              <span className="w-[75%]">
+            </div>
+          </div>
+          <div className="py-28">
+            <div className="relative">
+              {/* Circle Background */}
+              <span className="absolute -left-40 top-0 -z-10">
                 <Image
-                  src={image2}
-                  alt="img"
-                  className="w-full max-h-[600px] object-cover"
+                  src={circleIcon}
+                  alt="circle-stroke"
+                  className="w-[300px] h-[350px] opacity-60"
                 />
               </span>
 
-              {/* Smaller Stacked Images */}
-              <div className="flex flex-col gap-5">
-                <span className="w-full">
+              {/* Main Image */}
+              <div className="w-full max-w-sm mx-auto">
+                <div className="realtive w-full overflow-hidden rounded-2xl">
                   <Image
-                    src={image3}
-                    alt="img"
-                    className="w-full max-h-[290px] object-contain"
+                    src={images[currentProfileImg]}
+                    alt={`victoria-${currentProfileImg}`}
+                    className="w-full relative transition-all duration-300 h-[300px] min-w-[400px] lg:h-[350px] object-cover rounded-2xl"
                   />
-                </span>
-                <span className="w-full">
-                  <Image
-                    src={image3}
-                    alt="img"
-                    className="w-full max-h-[290px] object-contain"
-                  />
-                </span>
+
+                  {/* Dots */}
+                  <div className="flex justify-center items-center">
+                    <div className="absolute bottom-8 bg-white/25 backdrop-blur-3xl rounded-full p-2 ">
+                      <div className="flex justify-center items-center gap-2">
+                        {images.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => goToSlide(index)}
+                            className={`w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${
+                              currentProfileImg === index
+                                ? "bg-black"
+                                : "bg-black/50"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Third section */}
+          <div className="pb-36 flex flex-col gap-20">
+            <div>
+              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Weddings</h3>
+              <div className="mt-10">
+                <PlanCards />
+              </div>
+            </div>
+            <div>
+              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Birthdays</h3>
+              <div className="mt-10">
+                <PlanCards />
+              </div>
+            </div>
+            <div>
+              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">
+                Kids & infants
+              </h3>
+              <div className="mt-10">
+                <PlanCards />
+              </div>
+            </div>
+            <div>
+              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">
+                Kids & infants
+              </h3>
+              <div className="mt-10">
+                <PlanCards />
               </div>
             </div>
           </div>
         </div>
-
-        {/* FOURTH SECTION */}
-        <div className="py-12  ">
-          <div className="flex flex-col lg:flex-row gap-4 justify-between items-center w-full">
-            <div>
-              <p className=" text-4xl lg:text-7xl lg:w-1/2 uppercase font-valentiamo-reg">
-                Key Reasons to Work with me
-              </p>
-            </div>
-
-             <span className="text-[#6B7280]">
-              <p className="text-2xl">
-                Whatever your customers&apos; payment preferences
-              </p>
-              <p className="text-2xl">
-                we’ll help you find the right solution for{" "}
-              </p>
-              <p className="text-2xl">your business.</p>
-            </span>
-          </div>
-        </div>
-
-        {/* FIFTH SECTION */}
-        <div className="flex flex-col lg:flex-row gap-5 lg:justify-between items-center">
-          <AboutCards
-            tagText="Customers"
-            iconSrc={customersIcon}
-            numberCount="20K"
-            numberAttribute="+"
-            cardText="In 38 countries, we work as one global team to help clients"
-          />
-
-          <span className="hidden lg:flex">
-            <Image src={lineImg} alt="img" />
-          </span>
-
-          <AboutCards
-            tagText="Satisfaction"
-            iconSrc={webIcon}
-            numberCount="98"
-            numberAttribute="%"
-            cardText="In 38 countries, we work as one global team to help clients"
-          />
-
-          <span className="hidden lg:flex">
-            <Image src={lineImg} alt="img" />
-          </span>
-
-          <AboutCards
-            tagText="Experience"
-            iconSrc={experienceIcon}
-            numberCount="89"
-            numberAttribute="%"
-            cardText="We started with a ebellious mindset and set ourselves the challange"
-          />
-        </div>
       </div>
-      {/* SIXTH SECTION */}
+      <div className="px-5 lg:px-14 3xl:!px-28">
+        {/* contact banner */}
+        <ContactBanner />
+      </div>
+
       <GalleryBox />
       <Footer />
+
+      {/* MODAL */}
+      <Modal
+        open={isSessionFormModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+        className="sessionForm_modal"
+        closeIcon={null}
+        width={800}
+        centered
+      >
+        <ContactFrom
+          onSubmit={handleReserveSpot}
+          selectedService={selectedService}
+          setSelectedService={setSelectedService}
+        />
+      </Modal>
+      {/* AFTER FORM FILLING MODAL */}
+      <Modal
+        open={isThankYouModalOpen}
+        onCancel={() => setIsThankYouModalOpen(false)}
+        footer={null}
+        className="sessionForm_modal"
+        closeIcon={null}
+        width={600}
+        centered
+      >
+        <div className="py-8 px-10 w-full">
+          <div className="flex justify-between items-start w-full">
+            <div className="flex flex-col gap-2">
+              <span>
+                <Image src={bas_thanks} alt="bas" />
+              </span>
+              <h3 className="font-playfair text-5xl text-white">
+                Thank you for your reservation
+              </h3>
+            </div>
+            <span>
+              <Image
+                src={rollingImage}
+                className="w-28 h-28"
+                alt="rollingImage"
+              />
+            </span>
+          </div>
+          <div className="flex flex-col gap-5 mt-10">
+            <p className="text-sm text-light-brown">
+              Thank you for reserving a spot with me, I will check my
+              availability and respond to your booking in less than 24hrs, If
+              confirmed you will receive a payment link and a confirmation email
+              from me, Please watch out for your junks and texts.
+            </p>
+            <div>
+              <p className="text-light-brown text-sm">yours sincerely</p>
+              <p className="text-[#5A5A50] text-sm font-valentiamo-reg">
+                shotbyportable
+              </p>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
 
-export default page;
+export default About;

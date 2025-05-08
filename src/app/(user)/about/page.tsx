@@ -5,16 +5,59 @@ import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import short_img from "@/assets/svgs/about_short-img.svg";
-import headerImage from "@/assets/svgs/about_img/header_img.svg";
+import headerImage from "@/assets/svgs/about_img//header_img.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
-import { Modal } from "antd";
+import { Col, Modal, Row } from "antd";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
-import { PlanCards } from "@/components/plans-card/PlanCards";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
-import circleIcon from "@/assets/svgs/circle-stroke.svg";
 import victoria from "@/assets/images/victoria.jpeg";
+import clientImage1 from "@/assets/svgs/about_img/clientImage1.svg";
+import clientImage2 from "@/assets/svgs/about_img/clientImage2.svg";
+import expect_cloud from "@/assets/svgs/about_img/expect_cloud.svg";
+import expect_camera from "@/assets/svgs/about_img/expect_camera.svg";
+import expect_tree from "@/assets/svgs/about_img/expect_tree.svg";
+import expect_spread from "@/assets/svgs/about_img/expect_spread.svg";
+import { Banner } from "@/components/banner/banner";
 
+const expectationData = [
+  {
+    icon: expect_cloud,
+    title: "A calm, guided experience",
+    description:
+      "The most iconic sight of the festival is the sea of pink blossoms that blanket the trees.",
+  },
+  {
+    icon: expect_cloud,
+    title: "A personal connection",
+    description:
+      "The most iconic sight of the festival is the sea of pink blossoms that blanket the trees.",
+  },
+  {
+    icon: expect_camera,
+    title: "Support with styling",
+    description:
+      "Experiment with different angles and perspectives to capture the beauty of the cherry blossoms in a unique way.",
+  },
+  {
+    icon: expect_tree,
+    title: "A session that feels effortless",
+    description:
+      "One of the most popular activities during Hanami is to have a picnic under the cherry blossom trees.",
+  },
+  {
+    icon: expect_tree,
+    title: "Thoughtfully edited images",
+    description:
+      "The most iconic sight of the festival is the sea of pink blossoms that blanket the trees.",
+  },
+  {
+    icon: expect_spread,
+    title: "A story that stays with you",
+    description:
+      "While the cherry blossoms are undoubtedly the stars of the show, don't forget to capture the people who come to admire them.",
+  },
+];
 
 const About = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -29,7 +72,6 @@ const About = () => {
     setCurrentProfileImg(index);
   };
 
-
   const handleCancel = () => {
     setIsSessionFormModalOpen(false);
   };
@@ -38,10 +80,7 @@ const About = () => {
   const handleReserveSpot = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsSessionFormModalOpen(false);
-    setIsThankYouModalOpen(true); // Open the thank you modal
-    // setTimeout(() => {
-    //   setIsThankYouModalOpen(false);
-    // }, 3000);
+    setIsThankYouModalOpen(true);
   };
 
   return (
@@ -63,26 +102,16 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="py-28">
+          <div className="pb-28 pt-64">
             <div className="relative">
-              {/* Circle Background */}
-              <span className="absolute -left-40 top-0 -z-10">
-                <Image
-                  src={circleIcon}
-                  alt="circle-stroke"
-                  className="w-[300px] h-[350px] opacity-60"
-                />
-              </span>
-
               {/* Main Image */}
-              <div className="w-full max-w-sm mx-auto">
+              <div className="w-full">
                 <div className="realtive w-full overflow-hidden rounded-2xl">
                   <Image
                     src={images[currentProfileImg]}
                     alt={`victoria-${currentProfileImg}`}
-                    className="w-full relative transition-all duration-300 h-[300px] min-w-[400px] lg:h-[350px] object-cover rounded-2xl"
+                    className="w-full relative transition-all duration-300 h-[300px]  lg:h-[800px] object-cover rounded-2xl"
                   />
-
                   {/* Dots */}
                   <div className="flex justify-center items-center">
                     <div className="absolute bottom-8 bg-white/25 backdrop-blur-3xl rounded-full p-2 ">
@@ -104,44 +133,110 @@ const About = () => {
                 </div>
               </div>
             </div>
+            {/*  */}
+            <div className="flex relative w-full items-start mt-14">
+              <div className="w-1/2">
+                <p className="w-full text-5xl font-bold text-neutral-light">
+                  My Journey
+                </p>
+              </div>
+              <div className="w-1/2 text-[#C1BFBF] text-2xl">
+                <p>
+                  My journey began as a makeup artist, where I mastered the art
+                  of enhancing beauty and paying attention to the smallest
+                  details. But I didn’t just want to prepare moments. I wanted
+                  to hold onto them. To freeze emotion in its purest form. That
+                  desire to do more led me to pick up a camera and everything
+                  changed. What started as passion became purpose. As a graduate
+                  of Humber College in Photography with over five years of
+                  experience, I’ve transformed instinct into craft. My approach
+                  blends creativity, emotion, and technical precision to tell
+                  stories that go beyond the surface. Every session is
+                  intentional. Every frame is a reflection of something real. I
+                  don’t just take photos. I create powerful visual experiences.
+                  Because beauty deserves to be seen. And moments deserve to be
+                  remembered.
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Third section */}
-          <div className="pb-36 flex flex-col gap-20">
+          {/* common spacing */}
+          <div className="flex flex-col gap-32">
+            {/*  */}
             <div>
-              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Weddings</h3>
-              <div className="mt-10">
-                <PlanCards />
+              <Row gutter={[20, 20]}>
+                <Col xs={24} lg={12}>
+                  <Image
+                    src={clientImage1}
+                    className="w-full object-cover"
+                    alt="img"
+                  />
+                </Col>
+                <Col xs={24} lg={12}>
+                  <Image
+                    src={clientImage2}
+                    className="w-full object-cover"
+                    alt="img"
+                  />
+                </Col>
+              </Row>
+            </div>
+
+            {/*  */}
+            <div className="flex relative w-full items-start">
+              <div className="w-1/2">
+                <p className="w-full text-5xl font-bold text-neutral-light">
+                  My Philosophy
+                </p>
+              </div>
+              <div className="w-1/2 text-[#C1BFBF] text-2xl">
+                <p>
+                  I believe photography is not about perfection but presence — a
+                  quiet way of honoring the moments that shape us with intention
+                  empathy and timeless beauty.
+                </p>
               </div>
             </div>
+
+            {/*  */}
             <div>
-              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Birthdays</h3>
-              <div className="mt-10">
-                <PlanCards />
+              <div>
+                <h3 className="text-neutral-light font-medium text-3xl">
+                  What to expect:
+                </h3>
+              </div>
+              <div className="mt-8">
+                <Row gutter={[32, 96]}>
+                  {expectationData.map((item, index) => (
+                    <Col xs={12} lg={8} key={index}>
+                      <div className="flex flex-col gap-4">
+                        <div>
+                          <Image src={item.icon} alt="icon" />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <h3 className="text-neutral-light text-base">
+                            {" "}
+                            {item.title}{" "}
+                          </h3>
+                          <p className="text-base text-[#666666]">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
               </div>
             </div>
-            <div>
-              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">
-                Kids & infants
-              </h3>
-              <div className="mt-10">
-                <PlanCards />
-              </div>
-            </div>
-            <div>
-              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">
-                Kids & infants
-              </h3>
-              <div className="mt-10">
-                <PlanCards />
-              </div>
-            </div>
+
+            {/*  */}
+            <Banner />
+
+            {/*  */}
+            <ContactBanner />
           </div>
         </div>
-      </div>
-      <div className="px-5 lg:px-14 3xl:!px-28">
-        {/* contact banner */}
-        <ContactBanner />
       </div>
 
       <GalleryBox />

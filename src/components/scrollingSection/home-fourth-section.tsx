@@ -1,12 +1,12 @@
 import React from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
-import wedding from "@/assets/svgs/portfolio_svgs/wedding.svg";
+import wedding from "@/assets/images/wedding-1.jpg";
 import birthdays from "@/assets/svgs/portfolio_svgs/birthdays.svg";
 import lifestyle from "@/assets/svgs/portfolio_svgs/lifestyle.svg";
 import family from "@/assets/svgs/portfolio_svgs/family.svg";
 import videography from "@/assets/svgs/portfolio_svgs/videography.svg";
-import kids from "@/assets/svgs/portfolio_svgs/kids.svg";
+import kids from "@/assets/images/kid-1.jpg";
 import pregnancy from "@/assets/svgs/portfolio_svgs/pregnancy.svg";
 import portrait from "@/assets/svgs/portfolio_svgs/portrait.svg";
 

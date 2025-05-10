@@ -1,11 +1,8 @@
 import { Col, Row } from "antd";
-import logo from "@/assets/svgs/brand-logo.svg";
 import Image from "next/image";
-import layoutLine from "@/assets/svgs/layout_left_line.svg";
-import homeOutline from "@/assets/svgs/home_1_line.svg";
-import biDirection from "@/assets/svgs/selector_vertical_line.svg";
 import addLine from "@/assets/svgs/add_line.svg";
 import notificationIcon from "@/assets/svgs/notification.svg";
+import { Nav } from "@/components/admin-components/sideNav/nav";
 
 export default function RootLayout({
   children,
@@ -19,38 +16,7 @@ export default function RootLayout({
           xs={4}
           className="bg-[#F6F4F0] border border-[#EFEEEE] h-full min-h-full"
         >
-          <div className="min-h-full flex flex-col justify-between p-4">
-            <div>
-              <div className="bg-[#1D1C1C] rounded-lg p-4 flex items-center justify-between">
-                <Image src={logo} alt="" />
-                <Image src={layoutLine} alt="" />
-              </div>
-              <div className="mt-8">
-                <NavWrapper icon={homeOutline} text="Dashboard" />
-                <NavWrapper icon={homeOutline} text="Booking" />
-                <NavWrapper icon={homeOutline} text="Transaction" />
-                <NavWrapper icon={homeOutline} text="Links" />
-                <NavWrapper icon={homeOutline} text="Calendar" />
-                <NavWrapper icon={homeOutline} text="Packages" />
-                <NavWrapper icon={homeOutline} text="Settings" />
-              </div>
-            </div>
-
-            <div
-              style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)" }}
-              className="flex items-center justify-between p-4 rounded-lg"
-            >
-              <div className="flex items-center gap-2 font-mono-medium">
-                <div className="w-[40px] h-[40px] rounded-full bg-[#D9D9D9]"></div>
-                <div>
-                  <p className="text-[#101010]">John Doe</p>
-                  <p className="text-[#615F5F] text-xs">johndoe@gmail.com</p>
-                </div>
-              </div>
-
-              <Image src={biDirection} alt="" />
-            </div>
-          </div>
+          <Nav />
         </Col>
         <Col xs={20}>
           <div className="p-4">
@@ -63,17 +29,6 @@ export default function RootLayout({
     </div>
   );
 }
-
-const NavWrapper = ({ icon, text }: { icon: string; text: string }) => {
-  return (
-    <div className="flex cursor-pointer items-center gap-2 mb-4">
-      <div>
-        <Image src={icon} alt="" />
-      </div>
-      <p className="text-[#5F6368] font-mono">{text}</p>
-    </div>
-  );
-};
 
 const AdminHeader = () => {
   return (

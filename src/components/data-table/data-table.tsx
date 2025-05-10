@@ -11,7 +11,6 @@ interface BaseDataTableProps<T> {
 export default function BaseDataTable<T>({ title, columns, data }: BaseDataTableProps<T>) {
   return (
     <div className="p-4">
-      {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
       <DataTable
         columns={columns}
         data={data}

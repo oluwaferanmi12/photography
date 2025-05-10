@@ -4,6 +4,10 @@ import logo from "@/assets/svgs/brand-logo.svg";
 import Image from "next/image";
 import layoutLine from "@/assets/svgs/layout_left_line.svg";
 import homeOutline from "@/assets/svgs/home_1_line.svg";
+import dollarSign from "@/assets/svgs/Admin_svgs/dollar_icon.svg";
+import calenderIcon from "@/assets/svgs/Admin_svgs/calender_icon.svg";
+import multiselectionIcon from "@/assets/svgs/Admin_svgs/multiselection_icon.svg";
+import settingsIcon from "@/assets/svgs/Admin_svgs/gearsIcon.svg";
 import biDirection from "@/assets/svgs/selector_vertical_line.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,27 +24,27 @@ const navData = [
     navTitle: "Booking",
   },
   {
-    icon: homeOutline,
+    icon: dollarSign,
     navLink: "/transaction",
     navTitle: "Transaction",
   },
   {
-    icon: homeOutline,
+    icon: dollarSign,
     navLink: "/links",
     navTitle: "Links",
   },
   {
-    icon: homeOutline,
+    icon: calenderIcon,
     navLink: "/calender",
     navTitle: "Calender",
   },
   {
-    icon: homeOutline,
+    icon: multiselectionIcon,
     navLink: "/admin-packages",
     navTitle: "Packages",
   },
   {
-    icon: homeOutline,
+    icon: settingsIcon,
     navLink: "/settings",
     navTitle: "Settings",
   },
@@ -49,6 +53,7 @@ const navData = [
 export const Nav = () => {
   const pathname = usePathname();
 
+
   return (
     <div className="min-h-full flex flex-col justify-between p-4">
       <div>
@@ -56,10 +61,10 @@ export const Nav = () => {
           <Image src={logo} alt="" />
           <Image src={layoutLine} alt="" />
         </div>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-col gap-5">
           {navData.map((navs) => (
-            <Link key={navs.navTitle} className={` ${navs.navLink === pathname ? "bg-black text-white" : ""} `} href={navs.navLink}>
-              <NavWrapper icon={navs.icon} text={navs.navTitle} />
+            <Link key={navs.navTitle} href={navs.navLink} className="text-[12px]">
+              <NavWrapper active={pathname === navs.navLink} icon={navs.icon} text={navs.navTitle} />
             </Link>
           ))}
         </div>
@@ -83,13 +88,13 @@ export const Nav = () => {
   );
 };
 
-const NavWrapper = ({ icon, text }: { icon: string; text: string }) => {
+const NavWrapper = ({ icon, text, active }: { icon: string; text: string, active: boolean }) => {
   return (
-    <div className="flex cursor-pointer items-center gap-2 mb-4">
+    <div className={`${active ? "text-white bg-black p-3 rounded-xl" : "text-[#5F6368]"} flex cursor-pointer items-center gap-2 `}>
       <div>
         <Image src={icon} alt="" />
       </div>
-      <p className="text-[#5F6368] font-mono">{text}</p>
+      <p className="font-mono">{text}</p>
     </div>
   );
 };

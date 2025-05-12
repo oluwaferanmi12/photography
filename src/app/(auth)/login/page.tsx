@@ -1,9 +1,38 @@
+"use client"
+
 import { Col, Row } from "antd";
 import Image from "next/image";
 import loginLogo from "@/assets/svgs/loginLogo.svg";
 import loginUsericon from "@/assets/svgs/loginUserIcon.svg";
+import { useState } from "react";
+import { apiCall } from "@/axios/axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+   const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleLogin = async () => {
+     setLoading(true);
+    try {
+      const response = await apiCall("post", "Account/login", {
+        username,
+        password,
+      });
+
+      localStorage.setItem("userDetails", JSON.stringify(response.data));
+      toast.success("Authorized Successfully");
+      router.push("/booking");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-[#F6F4F0]">
       <div
@@ -33,8 +62,10 @@ export default function Login() {
                           Username
                         </p>
                         <input
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
                           placeholder="Enter your first name"
-                          className="w-full py-4 px-3 rounded-lg border border-[#DCDCDC] bg-[#F5F5F5] text-xs placeholder:text-[#868D96]"
+                          className="w-full text-[#292929] py-4 px-3 rounded-lg border border-[#DCDCDC] bg-[#F5F5F5] text-xs placeholder:text-[#868D96]"
                         />
                       </div>
                       <div className="mb-4">
@@ -42,12 +73,19 @@ export default function Login() {
                           Password
                         </p>
                         <input
-                          placeholder="Enter your first name"
-                          className="w-full py-4 px-3 rounded-lg border border-[#DCDCDC] bg-[#F5F5F5] text-xs placeholder:text-[#868D96]"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="Enter password"
+                          className="w-full text-[#292929] py-4 px-3 rounded-lg border border-[#DCDCDC] bg-[#F5F5F5] text-xs placeholder:text-[#868D96]"
                         />
                       </div>
                       <div className="my-3">
-                        <button className="bg-black w-full py-3 text-center rounded-lg">
+                        <button
+                          onClick={handleLogin}
+                          type="submit"
+                          disabled={loading}
+                          className="bg-black cursor-pointer w-full py-3 text-center rounded-lg"
+                        >
                           Login
                         </button>
                       </div>
@@ -69,5 +107,3 @@ export default function Login() {
     </div>
   );
 }
-
-

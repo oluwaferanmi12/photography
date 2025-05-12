@@ -145,5 +145,5 @@ const columns: TableColumn<Booking>[] = [
 ];
 
 export default function Booking() {
-  return <BaseDataTable title="Bookings" columns={columns} data={data} />;
+  return <BaseDataTable columns={columns} data={data} />;
 }

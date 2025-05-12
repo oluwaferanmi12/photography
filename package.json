@@ -16,6 +16,7 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
     "antd": "^5.24.3",
+    "axios": "^1.9.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -29,6 +30,7 @@
     "react-datepicker": "^8.3.0",
     "react-dom": "^19.0.0",
     "react-intersection-observer": "^9.16.0",
+    "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {

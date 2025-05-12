@@ -1,11 +1,10 @@
 import { Col, Row } from "antd";
-import logo from "@/assets/svgs/brand-logo.svg";
 import Image from "next/image";
-import layoutLine from "@/assets/svgs/layout_left_line.svg";
-import homeOutline from "@/assets/svgs/home_1_line.svg";
-import biDirection from "@/assets/svgs/selector_vertical_line.svg";
 import addLine from "@/assets/svgs/add_line.svg";
+import searchIcon from "@/assets/svgs/Admin_svgs/searchIcon.svg";
+import badgeIcon from "@/assets/svgs/Admin_svgs/help-badge.svg";
 import notificationIcon from "@/assets/svgs/notification.svg";
+import { Nav } from "@/components/admin-components/sideNav/nav";
 
 export default function RootLayout({
   children,
@@ -19,81 +18,71 @@ export default function RootLayout({
           xs={4}
           className="bg-[#F6F4F0] border border-[#EFEEEE] h-full min-h-full"
         >
-          <div className="min-h-full flex flex-col justify-between p-4">
-            <div>
-              <div className="bg-[#1D1C1C] rounded-lg p-4 flex items-center justify-between">
-                <Image src={logo} alt="" />
-                <Image src={layoutLine} alt="" />
-              </div>
-              <div className="mt-8">
-                <NavWrapper icon={homeOutline} text="Dashboard" />
-                <NavWrapper icon={homeOutline} text="Booking" />
-                <NavWrapper icon={homeOutline} text="Transaction" />
-                <NavWrapper icon={homeOutline} text="Links" />
-                <NavWrapper icon={homeOutline} text="Calendar" />
-                <NavWrapper icon={homeOutline} text="Packages" />
-                <NavWrapper icon={homeOutline} text="Settings" />
-              </div>
-            </div>
-
-            <div
-              style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)" }}
-              className="flex items-center justify-between p-4 rounded-lg"
-            >
-              <div className="flex items-center gap-2 font-mono-medium">
-                <div className="w-[40px] h-[40px] rounded-full bg-[#D9D9D9]"></div>
-                <div>
-                  <p className="text-[#101010]">John Doe</p>
-                  <p className="text-[#615F5F] text-xs">johndoe@gmail.com</p>
-                </div>
-              </div>
-
-              <Image src={biDirection} alt="" />
-            </div>
-          </div>
+          <Nav />
         </Col>
         <Col xs={20}>
           <div className="p-4">
             <AdminHeader />
-
-            {children}
           </div>
+          <hr />
+          <div className="flex justify-between items-center p-4">
+            <div className="flex gap-2 border items-center p-2 rounded-xl ">
+              <span>
+                <Image
+                  src={searchIcon}
+                  alt="search"
+                  className="cursor-pointer w-6 h-6"
+                />
+              </span>
+              <input
+                type="text"
+                placeholder="Search"
+                className="border-0 text-sm text-admin-black-150 w-full placeholder:text-admin-black-150 focus:border-0 focus:outline-none"
+                />
+              <span>
+                <Image
+                  src={badgeIcon}
+                  alt="search"
+                  className="cursor-pointer"
+                />
+              </span>
+
+            </div>
+            <div className="flex items-center gap-2">
+
+            </div>
+
+          </div>
+          <div className="">{children}</div>
         </Col>
       </Row>
     </div>
   );
 }
 
-const NavWrapper = ({ icon, text }: { icon: string; text: string }) => {
-  return (
-    <div className="flex cursor-pointer items-center gap-2 mb-4">
-      <div>
-        <Image src={icon} alt="" />
-      </div>
-      <p className="text-[#5F6368] font-mono">{text}</p>
-    </div>
-  );
-};
-
 const AdminHeader = () => {
   return (
-    <div className="flex justify-between items-center">
-      <div className="w-1/2">
-        <p className="text-[#101010] text-2xl font-mono-medium">My Bookings</p>
-        <p className="text-[#615F5F] font-mono-regular w-1/2 mt-1 ">
-          Supercharge your workflow and handle repetitive tasks the apps you use
-          every day.
-        </p>
+    <>
+      <div className="flex justify-between items-center">
+        <div className="w-1/2">
+          <p className="text-[#101010] text-2xl font-mono-medium">
+            My Bookings
+          </p>
+          <p className="text-[#615F5F] font-mono-regular w-1/2 mt-1 ">
+            Supercharge your workflow and handle repetitive tasks the apps you
+            use every day.
+          </p>
+        </div>
+        <div className="flex gap-6 items-stretch ">
+          <span className="p-4 border cursor-pointer rounded-lg border-[#EFEEEE] flex justify-center items-center">
+            <Image src={notificationIcon} alt="notification" />
+          </span>
+          <button className="flex items-center gap-2 bg-[#101010] py-3 px-4 rounded-lg">
+            <Image src={addLine} alt="" />
+            <p className="text-sm font-mono-regular">Create a booking link</p>
+          </button>
+        </div>
       </div>
-      <div className="flex gap-6 items-stretch ">
-        <span className="p-4 border cursor-pointer rounded-lg border-[#EFEEEE] flex justify-center items-center">
-          <Image src={notificationIcon}  alt="notification" />
-        </span>
-        <button className="flex items-center gap-2 bg-[#101010] py-3 px-4 rounded-lg">
-          <Image src={addLine} alt="" />
-          <p className="text-sm font-mono-regular">Create a booking link</p>
-        </button>
-      </div>
-    </div>
+    </>
   );
 };

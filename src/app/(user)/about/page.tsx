@@ -19,6 +19,7 @@ import expect_camera from "@/assets/svgs/about_img/expect_camera.svg";
 import expect_tree from "@/assets/svgs/about_img/expect_tree.svg";
 import expect_spread from "@/assets/svgs/about_img/expect_spread.svg";
 import { Banner } from "@/components/banner/banner";
+import { FallingTag } from "@/components/animattions/animation-fall/falling-card";
 
 const expectationData = [
   {
@@ -83,6 +84,15 @@ const About = () => {
     setIsThankYouModalOpen(true);
   };
 
+  const fallingTags = [
+    "Amazing Wife & Mom",
+    "Truth Capturer",
+    "Storyteller",
+    "Memory Keeper",
+    "Detail Lover",
+    "Visual Poet",
+  ];
+
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
@@ -98,36 +108,42 @@ const About = () => {
                     alt="img"
                   />
                 </span>
-                <h2 className=" italic text-3xl lg:text-7xl ">Now I Capture It.</h2>
+                <h2 className=" italic text-3xl lg:text-7xl ">
+                  Now I Capture It.
+                </h2>
               </div>
             </div>
           </div>
-          <div className="pb-28 pt-32">
-            <div className="relative">
-              {/* Main Image */}
-              <div className="w-full">
-                <div className="realtive w-full overflow-hidden rounded-2xl">
-                  <Image
-                    src={images[currentProfileImg]}
-                    alt={`victoria-${currentProfileImg}`}
-                    className="w-full relative transition-all duration-300 h-[300px]  lg:h-[800px] object-cover rounded-2xl"
-                  />
-                  {/* Dots */}
-                  <div className="flex justify-center items-center">
-                    <div className="absolute bottom-8 bg-white/25 backdrop-blur-3xl rounded-full p-2 ">
-                      <div className="flex justify-center items-center gap-2">
-                        {images.map((_, index) => (
-                          <button
-                            key={index}
-                            onClick={() => goToSlide(index)}
-                            className={`w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${
-                              currentProfileImg === index
-                                ? "bg-black"
-                                : "bg-black/50"
-                            }`}
-                          />
-                        ))}
-                      </div>
+          <div className="pb-28 pt-48">
+            <div className="w-full relative">
+              {/* Falling Tags */}
+              {fallingTags.map((text, i) => (
+                <FallingTag key={i} text={text} index={i} total={fallingTags.length} />
+              ))}
+              {/* Image + Falling Tags */}
+              <div className="relative w-full overflow-hidden rounded-2xl">
+                {/* Main Image */}
+                <Image
+                  src={images[currentProfileImg]}
+                  alt={`victoria-${currentProfileImg}`}
+                  className="w-full h-[300px] lg:h-[800px] object-cover rounded-2xl"
+                />
+
+                {/* Dots */}
+                <div className="flex justify-center items-center">
+                  <div className="absolute bottom-8 bg-white/25 backdrop-blur-3xl rounded-full p-2">
+                    <div className="flex justify-center items-center gap-2">
+                      {images.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => goToSlide(index)}
+                          className={`w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${
+                            currentProfileImg === index
+                              ? "bg-black"
+                              : "bg-black/50"
+                          }`}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>

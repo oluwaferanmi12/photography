@@ -10,19 +10,16 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    // get localSTorage
+    // get token from localStorage
     let details: { accessToken: string } = { accessToken: "" };
-
     try {
       details = JSON.parse(localStorage.getItem("userDetails")!);
     } catch (e) {
       localStorage.removeItem("userDetails");
     }
-
     config.headers.Authorization = `Bearer ${
       details?.accessToken ? details.accessToken : ""
     }`;
-
     return config;
   },
   (error) => {
@@ -46,3 +43,19 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export const apiCall = async (
+  method: "post" | "get" | "put" | "delete",
+  url: string,
+  body?: any
+) => {
+  if (method == "post") {
+    return await instance.post(url, body);
+  } else if (method == "get") {
+    return await instance.get(url);
+  } else if (method == "put") {
+    return await instance.put(url, body);
+  } else {
+    return await instance.delete(url);
+  }
+};

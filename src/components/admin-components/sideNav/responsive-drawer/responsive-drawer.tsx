@@ -1,8 +1,11 @@
 "use client";
 
+
+import closeIcon from "@/assets/svgs/Admin_svgs/modal-cancel.svg"
 import { Drawer } from "antd";
 import { useMediaQuery } from "usehooks-ts";
 import { ReactNode } from "react";
+import Image from "next/image";
 
 interface ResponsiveDrawerProps {
   open: boolean;
@@ -21,14 +24,21 @@ export const ResponsiveDrawer = ({
 
   return (
     <Drawer
-      title={title || "Booking Details"}
       placement={isMobile ? "bottom" : "right"}
       open={open}
       onClose={onClose}
       height={isMobile ? "85%" : undefined}
       width={isMobile ? undefined : 480}
-      className="!rounded-t-xl md:!rounded-l-xl"
+      className="!rounded-tl-xl md:!rounded-l-xl"
+      closeIcon={null}
     >
+        <div className="flex justify-between items-center py-4">
+            <p className="font-semibold text-xl">{title}</p>
+            <span>
+                <Image onClick={onClose} src={closeIcon} className="cursor-pointer" alt="close icon" />
+            </span>
+        </div>
+        <hr className="py-4" />
       {children}
     </Drawer>
   );

@@ -8,6 +8,7 @@ import blueDot from "@/assets/svgs/blue-dot.svg";
 import Image from "next/image";
 import { useState } from "react";
 import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
+import { Col, Row } from "antd";
 
 interface Booking {
   name: string;
@@ -160,49 +161,118 @@ export default function Booking() {
   return (
     <>
       <BaseDataTable columns={columns} data={data} />
-      <ResponsiveDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+      <ResponsiveDrawer
+        title="Booking details"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
         {selectedBooking && (
           <div className="space-y-4">
             <div className="bg-gradient-to-br from-gray-900 to-black text-white p-5 rounded-xl">
-              <div className="text-sm text-gray-300">Service booked</div>
-              <div className="text-lg font-semibold">
-                {selectedBooking.packageType}
+              <div className="p-4 flex justify-between rounded-xl bg-[#756C6C47]/30 text-sm text-gray-300">
+                <div className="flex flex-col gap-2">
+                  <p className="text-[12px] text-white">Service booked</p>
+                  <p className="text-lg font-semibold">
+                    {selectedBooking.packageType}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-[12px] text-white text-right">Status</p>
+                  <div className="inline-flex gap-1 items-center border border-[#B2DDFF] px-2 py-1 rounded-full bg-[#EFF8FF] text-[#175CD3] text-xs font-medium">
+                    <span>
+                      <Image src={blueDot} alt="dot" />
+                    </span>
+                    {selectedBooking.status}
+                  </div>
+                </div>
               </div>
-              <div className="flex gap-2 text-xs my-2">
-                <span className="bg-white text-black rounded px-2 py-1">
-                  {selectedBooking.packageName}
-                </span>
-                <span className="bg-white text-black rounded px-2 py-1">
-                  Make up ($50)
-                </span>
-              </div>
-              <div className="text-3xl font-bold my-2">$1200.00</div>
-              <div className="text-sm text-gray-400">
-                On the 20th February 2025, 12:00PM
+              <div className="flex flex-col items-center gap-3 mt-5">
+                <div className="flex gap-2 text-xs">
+                  <div className="bg-white font-medium border border-[#D0D5DD] px-2 py-0.5 rounded-md text-[#344054] flex gap-1 items-center">
+                    <span>
+                      <Image src={dot} alt="dot" />
+                    </span>
+                    {selectedBooking.packageName}
+                  </div>
+                  <div className="bg-white font-medium border border-[#D0D5DD] px-2 py-0.5 rounded-md text-[#344054] flex gap-1 items-center">
+                    <span>
+                      <Image src={dot} alt="dot" />
+                    </span>
+                    Make up ($50)
+                  </div>
+                </div>
+                <p className="text-3xl font-bold my-2">$1200.00</p>
+                <p className="text-base text-white">
+                  On the 20th February 2025, 12:00PM
+                </p>
               </div>
             </div>
-            <div className="bg-[#F9F9F9] rounded-xl p-5">
-              <div className="grid grid-cols-2 gap-y-4 text-sm">
-                <span className="text-gray-500">Name</span>
-                <span>{selectedBooking.name}</span>
-                <span className="text-gray-500">Email</span>
-                <span>{selectedBooking.email}</span>
-                <span className="text-gray-500">Phone</span>
-                <span>{selectedBooking.phone}</span>
-                <span className="text-gray-500">Date created</span>
-                <span>02-14-2025 9:30</span>
-                <span className="text-gray-500">Reference</span>
-                <span>0998709888776</span>
+            <div className="bg-white-100 border border-bayfi-grey rounded-xl p-5">
+              <div className="">
+                <Row className="border-b border-bayfi-grey p-3 mb-2">
+                  <Col span={12}>
+                    <p className="text-[13px] text-black font-normal">Name</p>
+                  </Col>
+                  <Col span={12}>
+                    <p className="text-right text-[#494949] text-sm font-medium">
+                      {selectedBooking.name}
+                    </p>
+                  </Col>
+                </Row>
+                <Row className="border-b border-bayfi-grey p-3 mb-2">
+                  <Col span={12}>
+                    <p className="text-[13px] text-black font-normal">Email</p>
+                  </Col>
+                  <Col span={12}>
+                    <p className="text-right text-[#494949] text-sm font-medium">
+                      {selectedBooking.email}
+                    </p>
+                  </Col>
+                </Row>
+                <Row className="border-b border-bayfi-grey p-3 mb-2">
+                  <Col span={12}>
+                    <p className="text-[13px] text-black font-normal">Phone</p>
+                  </Col>
+                  <Col span={12}>
+                    <p className="text-right text-[#494949] text-sm font-medium">
+                      {selectedBooking.phone}
+                    </p>
+                  </Col>
+                </Row>
+                <Row className="border-b border-bayfi-grey p-3 mb-2">
+                  <Col span={12}>
+                    <p className="text-[13px] text-black font-normal">
+                      Date Created
+                    </p>
+                  </Col>
+                  <Col span={12}>
+                    <p className="text-right text-[#494949] text-sm font-medium">
+                      02-14-2025 9:30
+                    </p>
+                  </Col>
+                </Row>
+                <Row className="p-3 mb-2">
+                  <Col span={12}>
+                    <p className="text-[13px] text-black font-normal">
+                      Reference
+                    </p>
+                  </Col>
+                  <Col span={12}>
+                    <p className="text-right text-[#494949] text-sm font-medium">
+                      0998709888776
+                    </p>
+                  </Col>
+                </Row>
               </div>
             </div>
             <div className="flex justify-between items-center gap-2">
-              <button className="bg-green-600 text-white py-2 px-4 rounded-full w-full">
+              <button className="bg-[#058503] text-white p-4 rounded-full w-full">
                 Confirm booking
               </button>
-              <button className="bg-[#F5F5F5] text-black py-2 px-4 rounded-full w-full">
+              <button className="bg-[#F4F3EA] text-black p-4 rounded-full w-full">
                 Reschedule
               </button>
-              <button className="border border-red-600 text-red-600 py-2 px-4 rounded-full w-full">
+              <button className="border border-[#D80027] text-[#D80027] p-4 rounded-full w-full">
                 Decline
               </button>
             </div>

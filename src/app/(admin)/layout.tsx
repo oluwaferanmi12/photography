@@ -5,12 +5,16 @@ import searchIcon from "@/assets/svgs/Admin_svgs/searchIcon.svg";
 import badgeIcon from "@/assets/svgs/Admin_svgs/help-badge.svg";
 import notificationIcon from "@/assets/svgs/notification.svg";
 import { Nav } from "@/components/admin-components/sideNav/nav";
+import { DropdownFilter } from "@/components/admin-components/sideNav/dropdown-filter/dropdown-filter";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const categoryData = ["All", "Wedding", "Makeup", "Lifestyle"];
+  const statusData = ["All", "Pending", "Active", "Successful"];
+  const groupByData = ["Categories", "statusData", "Date Created"];
   return (
     <div className="bg-white h-screen min-h-screen">
       <Row className="h-full">
@@ -38,7 +42,7 @@ export default function RootLayout({
                 type="text"
                 placeholder="Search"
                 className="border-0 text-sm text-admin-black-150 w-full placeholder:text-admin-black-150 focus:border-0 focus:outline-none"
-                />
+              />
               <span>
                 <Image
                   src={badgeIcon}
@@ -46,12 +50,21 @@ export default function RootLayout({
                   className="cursor-pointer"
                 />
               </span>
-
             </div>
             <div className="flex items-center gap-2">
-
+              <DropdownFilter
+                dropdownList={categoryData}
+                dropdownName="Category"
+              />
+              <DropdownFilter
+                dropdownList={statusData}
+                dropdownName="Status"
+              />
+              <DropdownFilter
+                dropdownList={groupByData}
+                dropdownName="Group by"
+              />
             </div>
-
           </div>
           <div className="">{children}</div>
         </Col>

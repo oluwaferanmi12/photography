@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Col, Row } from "antd";
 import Image from "next/image";
@@ -10,13 +10,13 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
-   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleLogin = async () => {
-     setLoading(true);
+    setLoading(true);
     try {
       const response = await apiCall("post", "Account/login", {
         username,
@@ -62,9 +62,10 @@ export default function Login() {
                           Username
                         </p>
                         <input
+                          type="text"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
-                          placeholder="Enter your first name"
+                          placeholder="Enter Email"
                           className="w-full text-[#292929] py-4 px-3 rounded-lg border border-[#DCDCDC] bg-[#F5F5F5] text-xs placeholder:text-[#868D96]"
                         />
                       </div>

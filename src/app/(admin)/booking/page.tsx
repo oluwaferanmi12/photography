@@ -6,6 +6,8 @@ import eyeIcon from "@/assets/svgs/eyeIcon.svg";
 import dot from "@/assets/svgs/dots.svg";
 import blueDot from "@/assets/svgs/blue-dot.svg";
 import Image from "next/image";
+import { useState } from "react";
+import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
 
 interface Booking {
   name: string;
@@ -71,79 +73,142 @@ const data: Booking[] = [
   },
 ];
 
-const columns: TableColumn<Booking>[] = [
-  {
-    name: "Name",
-    cell: (row) => (
-      <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-full bg-[#101010] text-[#FFF0EA] flex items-center justify-center text-xs font-medium">
-          {row.name
-            .split(" ")
-            .map((n) => n[0])
-            .join("")
-            .toUpperCase()}
-        </div>
-        <div>
-          <div className="font-medium text-[#292D32]">{row.name}</div>
-          <div className="text-admin-grey text-xs">{row.email}</div>
-        </div>
-      </div>
-    ),
-    sortable: true,
-    grow: 2,
-  },
-  {
-    name: "Phone number",
-    cell: (row) => <div className="text-[#292D32]">{row.phone}</div>,
-  },
-  {
-    name: "Package",
-    cell: (row) => (
-      <div>
-        <div className="text-[#292D32]">{row.packageType}</div>
-        <div className="flex items-center gap-1 text-xs mt-1">
-          <div className="bg-white font-medium border border-[#D0D5DD] px-2 py-0.5 rounded-md text-[#344054] flex gap-1 items-center">
-            <span>
-              <Image src={dot} alt="dot" />
-            </span>
-            {row.packageName}
+export default function Booking() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+
+  const handleViewDetails = (row: Booking) => {
+    setSelectedBooking(row);
+    setDrawerOpen(true);
+  };
+
+  const columns: TableColumn<Booking>[] = [
+    {
+      name: "Name",
+      cell: (row) => (
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-[#101010] text-[#FFF0EA] flex items-center justify-center text-xs font-medium">
+            {row.name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")
+              .toUpperCase()}
+          </div>
+          <div>
+            <div className="font-medium text-[#292D32]">{row.name}</div>
+            <div className="text-admin-grey text-xs">{row.email}</div>
           </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    name: "Date booked",
-    cell: (row) => <div className="text-[#292D32]">{row.dateBooked}</div>,
-  },
-  {
-    name: "Status",
-    cell: (row) => (
-      <div className="inline-flex gap-1 items-center border border-[#B2DDFF] px-2 py-1 rounded-full bg-[#EFF8FF] text-[#175CD3] text-xs font-medium">
-        <span>
-          <Image src={blueDot} alt="dot" />
-        </span>
-        {row.status}
-      </div>
-    ),
-  },
-  {
-    name: "Date created",
-    cell: (row) => <div className="text-[#292D32]">{row.created}</div>,
-  },
-  {
-    name: "",
-    cell: () => (
-      <button className="flex items-center gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50">
-        <span>
-          <Image src={eyeIcon} alt="img" />
-        </span>
-        Details
-      </button>
-    ),
-  },
-];
-
-export default function Booking() {
-  return <BaseDataTable columns={columns} data={data} />;
+      ),
+      sortable: true,
+      grow: 2,
+    },
+    {
+      name: "Phone number",
+      cell: (row) => <div className="text-[#292D32]">{row.phone}</div>,
+    },
+    {
+      name: "Package",
+      cell: (row) => (
+        <div>
+          <div className="text-[#292D32]">{row.packageType}</div>
+          <div className="flex items-center gap-1 text-xs mt-1">
+            <div className="bg-white font-medium border border-[#D0D5DD] px-2 py-0.5 rounded-md text-[#344054] flex gap-1 items-center">
+              <span>
+                <Image src={dot} alt="dot" />
+              </span>
+              {row.packageName}
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      name: "Date booked",
+      cell: (row) => <div className="text-[#292D32]">{row.dateBooked}</div>,
+    },
+    {
+      name: "Status",
+      cell: (row) => (
+        <div className="inline-flex gap-1 items-center border border-[#B2DDFF] px-2 py-1 rounded-full bg-[#EFF8FF] text-[#175CD3] text-xs font-medium">
+          <span>
+            <Image src={blueDot} alt="dot" />
+          </span>
+          {row.status}
+        </div>
+      ),
+    },
+    {
+      name: "Date created",
+      cell: (row) => <div className="text-[#292D32]">{row.created}</div>,
+    },
+    {
+      name: "",
+      cell: (row) => (
+        <button
+          className="flex cursor-pointer items-center gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
+          onClick={() => handleViewDetails(row)}
+        >
+          <span>
+            <Image src={eyeIcon} alt="img" />
+          </span>
+          Details
+        </button>
+      ),
+    },
+  ];
+  return (
+    <>
+      <BaseDataTable columns={columns} data={data} />
+      <ResponsiveDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        {selectedBooking && (
+          <div className="space-y-4">
+            <div className="bg-gradient-to-br from-gray-900 to-black text-white p-5 rounded-xl">
+              <div className="text-sm text-gray-300">Service booked</div>
+              <div className="text-lg font-semibold">
+                {selectedBooking.packageType}
+              </div>
+              <div className="flex gap-2 text-xs my-2">
+                <span className="bg-white text-black rounded px-2 py-1">
+                  {selectedBooking.packageName}
+                </span>
+                <span className="bg-white text-black rounded px-2 py-1">
+                  Make up ($50)
+                </span>
+              </div>
+              <div className="text-3xl font-bold my-2">$1200.00</div>
+              <div className="text-sm text-gray-400">
+                On the 20th February 2025, 12:00PM
+              </div>
+            </div>
+            <div className="bg-[#F9F9F9] rounded-xl p-5">
+              <div className="grid grid-cols-2 gap-y-4 text-sm">
+                <span className="text-gray-500">Name</span>
+                <span>{selectedBooking.name}</span>
+                <span className="text-gray-500">Email</span>
+                <span>{selectedBooking.email}</span>
+                <span className="text-gray-500">Phone</span>
+                <span>{selectedBooking.phone}</span>
+                <span className="text-gray-500">Date created</span>
+                <span>02-14-2025 9:30</span>
+                <span className="text-gray-500">Reference</span>
+                <span>0998709888776</span>
+              </div>
+            </div>
+            <div className="flex justify-between items-center gap-2">
+              <button className="bg-green-600 text-white py-2 px-4 rounded-full w-full">
+                Confirm booking
+              </button>
+              <button className="bg-[#F5F5F5] text-black py-2 px-4 rounded-full w-full">
+                Reschedule
+              </button>
+              <button className="border border-red-600 text-red-600 py-2 px-4 rounded-full w-full">
+                Decline
+              </button>
+            </div>
+          </div>
+        )}
+      </ResponsiveDrawer>
+    </>
+  );
 }

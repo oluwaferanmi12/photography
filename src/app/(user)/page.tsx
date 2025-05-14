@@ -41,12 +41,17 @@ import TextReveal from "@/components/animattions/animated-text-reveal";
 import Button from "@/components/button/button";
 import beforeImage from "@/assets/images/beforeImage.jpg";
 import afterImage from "@/assets/images/afterImage.jpg";
+import headerImg1 from "@/assets/images/home_header/img1.jpg"
+import headerImg2 from "@/assets/images/home_header/img2.jpg"
+import headerImg3 from "@/assets/images/home_header/img3.jpg"
+import headerImg4 from "@/assets/images/home_header/img4.jpg"
+import headerImg5 from "@/assets/images/home_header/img5.jpg"
 
 export default function Home() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [activeIndex, setActiveIndex] = useState(2);
-  const [currentBg, setCurrentBg] = useState(bgImage3);
+  const [currentBg, setCurrentBg] = useState(headerImg1);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
   const nextSectionRef = useRef<HTMLDivElement>(null);
@@ -79,11 +84,11 @@ export default function Home() {
   // Memoize imageMap to prevent unnecessary recreations
   const imageMap = useMemo(
     () => [
-      { thumbnail: image5, background: bgImage1 },
-      { thumbnail: image2, background: bgImage2 },
-      { thumbnail: image3, background: bgImage3 },
-      { thumbnail: image4, background: bgImage4 },
-      { thumbnail: image5, background: bgImage5 },
+      { thumbnail: image5, background: headerImg1 },
+      { thumbnail: image2, background: headerImg2 },
+      { thumbnail: image3, background: headerImg3 },
+      { thumbnail: image4, background: headerImg4 },
+      { thumbnail: image5, background: headerImg5 },
     ],
     []
   );
@@ -136,7 +141,7 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
             borderRadius: isDesktop && scrolled ? "32px" : "0px",
-            border: isDesktop && scrolled ? "2px solid #D9C9AE82" : "none",
+            // border: isDesktop && scrolled ? "2px solid #D9C9AE82" : "none",
           }}
         >
           <div
@@ -241,6 +246,21 @@ export default function Home() {
           </p>
         </div>
 
+        
+
+        {/* THIRD SECTION */}
+        <div className="hidden lg:block">
+          <ImageMasonry />
+        </div>
+
+        {/* FOURTH SECTION */}
+        <FourthSectionScroll />
+
+        {/* FIFTH SECTION */}
+        <div className="p-5 lg:p-14 3xl:!px-28">
+          <Banner />
+        </div>
+
         {/* Card cascade   */}
         <div className="lg:hidden">
           {cardData.map((item, index) => {
@@ -256,19 +276,6 @@ export default function Home() {
               />
             );
           })}
-        </div>
-
-        {/* THIRD SECTION */}
-        <div className="hidden lg:block">
-          <ImageMasonry />
-        </div>
-
-        {/* FOURTH SECTION */}
-        <FourthSectionScroll />
-
-        {/* FIFTH SECTION */}
-        <div className="p-5 lg:p-14 3xl:!px-28">
-          <Banner />
         </div>
 
         {/* SIXTH SECTION */}

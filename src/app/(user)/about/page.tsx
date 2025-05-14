@@ -120,14 +120,11 @@ const About = () => {
           <div className="pb-28 pt-48 px-5 lg:px-14 3xl:!px-28">
             <div className="w-full relative">
               {/* Falling Tags */}
-              {fallingTags.map((text, i) => (
-                <FallingTag
-                  key={i}
-                  text={text}
-                  index={i}
-                  total={fallingTags.length}
-                />
-              ))}
+              <div className="w-full flex justify-center gap-4 flex-wrap relative">
+                {fallingTags.map((text, i) => (
+                  <FallingTag key={i} text={text} index={i} />
+                ))}
+              </div>
               {/* Image + Falling Tags */}
               <div className="relative w-full overflow-hidden rounded-2xl">
                 {/* Main Image */}

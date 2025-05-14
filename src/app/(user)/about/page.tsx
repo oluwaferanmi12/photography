@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import short_img from "@/assets/svgs/about_short-img.svg";
-import headerImage from "@/assets/svgs/about_img//header_img.jpg";
+import headerImage from "../../../../public/header_img.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import { Col, Modal, Row } from "antd";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
-import victoria from "@/assets/images/victoria.jpeg";
+import victoria from "../../../../public/victoria.jpeg";
 import clientImage1 from "@/assets/images/about_marq/img1.jpg";
 import clientImage2 from "@/assets/images/about_marq/img2.jpg";
 import clientImage3 from "@/assets/images/about_marq/img3.jpg";
@@ -72,6 +72,14 @@ const About = () => {
 
   const images = [headerImage, victoria, headerImage];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentProfileImg((prev) => (prev + 1) % images.length);
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(interval); // cleanup on unmount
+  }, [images.length]);
+
   const goToSlide = (index: number) => {
     setCurrentProfileImg(index);
   };
@@ -95,6 +103,8 @@ const About = () => {
     "Detail Lover",
     "Visual Poet",
   ];
+
+  console.log("Image pathhhhhhhhhh:", images[currentProfileImg]);
 
   return (
     <div>
@@ -127,11 +137,17 @@ const About = () => {
               </div>
               {/* Image + Falling Tags */}
               <div className="relative w-full overflow-hidden rounded-2xl">
-                {/* Main Image */}
-                <Image
-                  src={images[currentProfileImg]}
-                  alt={`victoria-${currentProfileImg}`}
-                  className="w-full h-[300px] lg:h-[800px] object-cover rounded-2xl"
+                {/* Background Image Div */}
+                <div
+                  style={{
+                    backgroundImage: `url(${images[currentProfileImg].src})`, // Note the .src
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    border: "2px solid red",
+                  }}
+                  className="w-full h-[500px] lg:h-[500px] bg-cover bg-center rounded-2xl"
+                  aria-label={`victoria-${currentProfileImg}`}
                 />
 
                 {/* Dots */}

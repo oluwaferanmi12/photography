@@ -8,7 +8,7 @@ export const Banner = () => {
     <section className="pt-20 relative h-[650px] overflow-hidden ">
       <div className="flex justify-center">
         <video
-          className="absolute top-0 left-0 grayscale overflow-hidden h-[650px] w-screen object-cover"
+          className="absolute top-0 left-0 overflow-hidden h-[650px] w-screen object-cover"
           width="640"
           height="360"
           autoPlay

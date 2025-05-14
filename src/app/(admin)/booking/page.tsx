@@ -9,8 +9,13 @@ import Image from "next/image";
 import { useState } from "react";
 import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
 import { Col, Row } from "antd";
-import RootLayout from "../layout";
 import AdminPageLayout from "@/adminLayouts/admin-page-layout";
+import { Input } from "@/components/inputs/input";
+import CustomSelect from "@/components/inputs/custom-select/custom-select";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+
 
 interface Booking {
   name: string;
@@ -80,6 +85,11 @@ export default function Booking() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [openBookingDetails, setOpenBookingDetails] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [selectedPackage, setSelectedPackage] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+
 
   const handleViewDetails = (row: Booking) => {
     setSelectedBooking(row);
@@ -161,13 +171,32 @@ export default function Booking() {
       ),
     },
   ];
+
+  // booking
+  const services = [
+    { label: "Weddings", value: "wedding" },
+    { label: "Birthdays", value: "birthday" },
+    { label: "Videography", value: "videography" },
+    { label: "Kids & infants", value: "kids" },
+    { label: "Lifestyle & events", value: "lifestyle" },
+    { label: "Make up & Gele", value: "makeup" },
+    { label: "Family", value: "family" },
+  ];
+
+  const packages = [
+    { label: "Basic", value: "Basic ($400 plus tax)" },
+    { label: "Premium", value: "Premium ($900 plus tax)" },
+    { label: "Pro+", value: "Pro+ ($1500 plus tax)" },
+  ];
+
   return (
     <AdminPageLayout
       headerProps={{
         dashTitle: "My Bookings",
-        dashDescription: "Supercharge your workflow and handle repetitive tasks the apps you use every day.",
+        dashDescription:
+          "Supercharge your workflow and handle repetitive tasks the apps you use every day.",
         buttonTitle: "Create a booking Link",
-        buttonOnClick: () => setOpenBookingDetails(true)
+        buttonOnClick: () => setOpenBookingDetails(true),
       }}
     >
       <BaseDataTable columns={columns} data={data} />
@@ -295,13 +324,93 @@ export default function Booking() {
       {/* BOOKING DETAILS DRAWER */}
       <ResponsiveDrawer
         title="Create a booking link"
-        open={drawerOpen}
+        open={openBookingDetails}
         onClose={() => setOpenBookingDetails(false)}
       >
-        <div>
-          
+        <div className="pb-14"> 
+          <form>
+            <div className="flex flex-col gap-4">
+              <div className="w-full flex flex-col gap-3">
+                <label
+                  htmlFor="name"
+                  className="text-grayish-500 font-semibold"
+                >
+                  Full Name
+                </label>
+                <Input variant="admin" placeholder="First name and Last name" />
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label
+                  htmlFor="email"
+                  className="text-grayish-500 font-semibold"
+                >
+                  Email address
+                </label>
+                <Input variant="admin" placeholder="example@email.com" />
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="phone">Phone number</label>
+                <Input variant="admin" placeholder="+1 999-999-999" />
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="phone">Date and time</label>
+                <div className="bg-bayfi-grey-300 border-bayfi-grey text-[#868D96] placeholder:text-[#868D96] border py-4 px-3 rounded-lg flex justify-between items-center w-full">
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    dateFormat="MMMM d, yyyy"
+                    placeholderText="Select date"
+                    className="!w-full bg-transparent text-[#BABABA] placeholder:text-[#BABABA] focus:outline-none"
+                    calendarClassName="bg-[#1a1a1a] text-[#BABABA] !w-full rounded-xl border-[#575252]"
+                  />
+                </div>
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="phone">Select Services</label>
+                <CustomSelect
+                  variant="admin"
+                  selectData={services}
+                  defaultOption="Select Services"
+                  selectValue={selectedService}
+                  setSelectedValue={setSelectedService}
+                />
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="phone">Select Package</label>
+                <CustomSelect
+                  variant="admin"
+                  selectData={packages}
+                  defaultOption="Select Package"
+                  selectValue={selectedPackage}
+                  setSelectedValue={setSelectedPackage}
+                />
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="location">Location</label>
+                <Input variant="admin" placeholder="Enter location" />
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="phone">Select Add ons(optional)</label>
+                <CustomSelect
+                  variant="admin"
+                  selectData={packages}
+                  defaultOption="Make up"
+                  selectValue={selectedPackage}
+                  setSelectedValue={setSelectedPackage}
+                />
+              </div>
+
+              {/*  */}
+            </div>
+            <div className="flex justify-between mt-3">
+              <p className="text-[#292D32] text-xl font-normal">Total</p>
+              <p className="text-black text-2xl font-medium">$1200.00</p>
+            </div>
+            <div className="mt-5">
+              <button className="w-full text-white py-4 px-8 rounded-full bg-[#1B1B1B]">Send booking link</button>
+            </div>
+          </form>
         </div>
-      
       </ResponsiveDrawer>
     </AdminPageLayout>
   );

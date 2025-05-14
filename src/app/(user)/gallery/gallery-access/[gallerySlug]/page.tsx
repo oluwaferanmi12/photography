@@ -51,11 +51,11 @@ const GalleryAccessPage = () => {
                     <div className="flex flex-col gap-8 w-full mt-8">
                       <div className="flex flex-col gap-3">
                         <label htmlFor="email">Email address</label>
-                        <Input placeholder="Example@email.com" />
+                        <Input variant="user" placeholder="Example@email.com" />
                       </div>
                       <div className="flex flex-col gap-3">
                         <label htmlFor="password">Password</label>
-                        <Input placeholder="Enter password" />
+                        <Input variant="user" placeholder="Enter password" />
                       </div>
                     </div>
                     <div className="mt-8 lg:w-1/2">

@@ -79,6 +79,7 @@ const data: Booking[] = [
 export default function Booking() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+  const [openBookingDetails, setOpenBookingDetails] = useState(false);
 
   const handleViewDetails = (row: Booking) => {
     setSelectedBooking(row);
@@ -166,9 +167,12 @@ export default function Booking() {
         dashTitle: "My Bookings",
         dashDescription: "Supercharge your workflow and handle repetitive tasks the apps you use every day.",
         buttonTitle: "Create a booking Link",
+        buttonOnClick: () => setOpenBookingDetails(true)
       }}
     >
       <BaseDataTable columns={columns} data={data} />
+
+      {/* INDIVIDUAL DETAILS DRAWER */}
       <ResponsiveDrawer
         title="Booking details"
         open={drawerOpen}
@@ -286,6 +290,18 @@ export default function Booking() {
             </div>
           </div>
         )}
+      </ResponsiveDrawer>
+
+      {/* BOOKING DETAILS DRAWER */}
+      <ResponsiveDrawer
+        title="Create a booking link"
+        open={drawerOpen}
+        onClose={() => setOpenBookingDetails(false)}
+      >
+        <div>
+          
+        </div>
+      
       </ResponsiveDrawer>
     </AdminPageLayout>
   );

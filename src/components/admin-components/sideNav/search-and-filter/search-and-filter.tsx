@@ -18,7 +18,7 @@ export default function SearchAndFilters() {
           placeholder="Search"
           className="border-0 text-sm text-admin-black-150 w-full placeholder:text-admin-black-150 focus:outline-none"
         />
-        <Image src={badgeIcon} alt="help" className="w-5 h-5 cursor-pointer" />
+        <Image src={badgeIcon} alt="help" className="rounded-md cursor-pointer" />
       </div>
       <div className="flex items-center gap-2">
         <DropdownFilter dropdownList={categoryData} dropdownName="Category" />

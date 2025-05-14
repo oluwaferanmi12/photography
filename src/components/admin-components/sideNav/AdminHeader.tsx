@@ -7,10 +7,12 @@ export const AdminHeader = ({
   dashTitle,
   dashDescription,
   buttonTitle,
+  buttonOnClick
 }: {
   dashTitle: string;
   dashDescription: string;
   buttonTitle: string;
+  buttonOnClick: () => void
 }) => {
   return (
     <>
@@ -27,7 +29,7 @@ export const AdminHeader = ({
           <span className="p-4 border cursor-pointer rounded-lg border-[#EFEEEE] flex justify-center items-center">
             <Image src={notificationIcon} alt="notification" />
           </span>
-          <button className="flex items-center gap-2 bg-[#101010] py-3 px-4 rounded-lg">
+          <button onClick={buttonOnClick} className="flex cursor-pointer items-center gap-2 bg-[#101010] py-3 px-4 rounded-lg">
             <Image src={addLine} alt="" />
             <p className="text-sm font-mono-regular">{buttonTitle}</p>
           </button>

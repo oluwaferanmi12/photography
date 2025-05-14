@@ -7,6 +7,10 @@ import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
+import hero1 from "@/assets/images/hero-1.jpg";
+import hero2 from "@/assets/images/hero-2.jpg";
+import hero3 from "@/assets/images/hero-3.jpg";
+import hero4 from "@/assets/images/hero-4.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
 import humerCertified from "@/assets/svgs/humer-certified.svg";
@@ -77,7 +81,6 @@ export default function Home() {
     target: container,
     offset: ["start start", "end end"],
   });
-
 
   const cardData = [cascadeImage1, cascadeImage2, cascadeImage3, cascadeImage4];
 
@@ -153,6 +156,7 @@ export default function Home() {
               filter: "grayscale(90%) contrast(1.0)",
               transition: "opacity 500ms ease-in-out",
               borderRadius: isDesktop && scrolled ? "32px" : "0px",
+              backgroundRepeat:"no-repeat"
             }}
           />
 
@@ -399,7 +403,7 @@ export default function Home() {
         </div>
 
         {/* Sixth Section */}
-       <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
+        <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
           <h3 className="text-4xl lg:text-5xl lg:text-center">
             Words from my clients
           </h3>

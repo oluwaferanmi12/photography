@@ -145,7 +145,7 @@ const Portfolio = () => {
                           <h3 className="text-5xl font-playfair text-darker-grey ">
                             {service.title}
                           </h3>
-                          <p className="text-sm text-gray-800 mt-2 leading-relaxed">
+                          <p className="text-base text-gray-800 mt-2 leading-relaxed">
                             {service.description}
                           </p>
                         </div>
@@ -183,7 +183,7 @@ const Portfolio = () => {
                           <h3 className="text-5xl font-playfair text-darker-grey ">
                             {service.title}
                           </h3>
-                          <p className="text-sm text-gray-800 mt-2 leading-relaxed">
+                          <p className="text-base text-gray-800 mt-2 leading-relaxed">
                             {service.description}
                           </p>
                         </div>

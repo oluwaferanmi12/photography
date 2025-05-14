@@ -445,6 +445,16 @@ a {
   padding-block: 0.2rem;
 }
 
+.about-scroller {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  overflow: hidden;
+  padding-block: 0.2rem;
+  overflow: hidden;
+}
+
+
+
 .scroller__inner {
   display: flex;
   gap: 1rem;

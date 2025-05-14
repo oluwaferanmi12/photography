@@ -191,7 +191,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage1}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -200,7 +200,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage2}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -209,7 +209,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage3}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -218,7 +218,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage4}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -227,7 +227,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage5}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -236,7 +236,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage1}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -245,7 +245,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage2}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -254,7 +254,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage3}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -263,7 +263,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage4}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>
@@ -272,7 +272,7 @@ const About = () => {
                   <div className="relative w-[100%] h-[500px] shrink-0">
                     <Image
                       src={clientImage5}
-                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      className="h-[350px] w-[500px] object-cover max-h-[350px]"
                       alt="owner_img"
                     />
                   </div>

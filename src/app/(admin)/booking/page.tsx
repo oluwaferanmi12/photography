@@ -9,6 +9,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
 import { Col, Row } from "antd";
+import RootLayout from "../layout";
+import AdminPageLayout from "@/adminLayouts/admin-page-layout";
 
 interface Booking {
   name: string;
@@ -39,7 +41,7 @@ const data: Booking[] = [
     packageType: "Wedding",
     packageName: "Basic ($200)",
     dateBooked: "July - 28 - 2025",
-    status: "Pending",
+    status: "Awaiting",
     created: "Today",
   },
   {
@@ -49,7 +51,7 @@ const data: Booking[] = [
     packageType: "Wedding",
     packageName: "Basic ($200)",
     dateBooked: "July - 28 - 2025",
-    status: "Pending",
+    status: "confirmed",
     created: "Today",
   },
   {
@@ -59,7 +61,7 @@ const data: Booking[] = [
     packageType: "Wedding",
     packageName: "Basic ($200)",
     dateBooked: "July - 28 - 2025",
-    status: "Pending",
+    status: "Declined",
     created: "Today",
   },
   {
@@ -69,7 +71,7 @@ const data: Booking[] = [
     packageType: "Wedding",
     packageName: "Basic ($200)",
     dateBooked: "July - 28 - 2025",
-    status: "Pending",
+    status: "Resceduled",
     created: "Today",
   },
 ];
@@ -159,7 +161,13 @@ export default function Booking() {
     },
   ];
   return (
-    <>
+    <AdminPageLayout
+      headerProps={{
+        dashTitle: "My Bookings",
+        dashDescription: "Supercharge your workflow and handle repetitive tasks the apps you use every day.",
+        buttonTitle: "Create a booking Link",
+      }}
+    >
       <BaseDataTable columns={columns} data={data} />
       <ResponsiveDrawer
         title="Booking details"
@@ -279,6 +287,6 @@ export default function Booking() {
           </div>
         )}
       </ResponsiveDrawer>
-    </>
+    </AdminPageLayout>
   );
 }

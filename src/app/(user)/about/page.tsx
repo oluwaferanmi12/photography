@@ -188,24 +188,6 @@ const About = () => {
           {/* common spacing */}
           <div className="flex flex-col gap-32">
             {/*  */}
-            {/* <div>
-              <Row gutter={[20, 20]}>
-                <Col xs={24} lg={12}>
-                  <Image
-                    src={clientImage1}
-                    className="w-full object-cover"
-                    alt="img"
-                  />
-                </Col>
-                <Col xs={24} lg={12}>
-                  <Image
-                    src={clientImage2}
-                    className="w-full object-cover"
-                    alt="img"
-                  />
-                </Col>
-              </Row>
-            </div> */}
             <div className="scroller about-scroller !py-28" ref={scrollerRef}>
               <ul className={`scroller__inner`}>
                 <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">

@@ -70,27 +70,28 @@ export const ContactFrom = ({
             <div className="flex gap-5">
               <div className="w-1/2 flex flex-col gap-3">
                 <label htmlFor="firstname">First name</label>
-                <Input placeholder="Enter your first name" />
+                <Input variant="user" placeholder="Enter your first name" />
               </div>
               <div className="w-1/2 flex flex-col gap-3">
                 <label htmlFor="lastname">Last name</label>
-                <Input placeholder="Enter your last name" />
+                <Input variant="user" placeholder="Enter your last name" />
               </div>
             </div>
             {/* Email */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="email">Email address</label>
-              <Input placeholder="Example@email.com" />
+              <Input variant="user" placeholder="Example@email.com" />
             </div>
             {/* Phone Number */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Phone number</label>
-              <Input placeholder="+1 999-999-999" />
+              <Input variant="user" placeholder="+1 999-999-999" />
             </div>
             {/* Services */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Select Services</label>
               <CustomSelect
+                variant="user"
                 selectData={services}
                 defaultOption="Select services"
                 selectValue={selectedService}
@@ -101,6 +102,7 @@ export const ContactFrom = ({
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Select package</label>
               <CustomSelect
+                variant="user"
                 selectValue={selectedPackage}
                 setSelectedValue={setSelectedPackage}
                 defaultOption="Select package"
@@ -158,6 +160,7 @@ export const ContactFrom = ({
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Location</label>
               <CustomSelect
+                variant="user"
                 selectValue={selectedPackage}
                 setSelectedValue={setSelectedPackage}
                 defaultOption="Provide your location"

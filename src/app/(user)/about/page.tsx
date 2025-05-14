@@ -12,8 +12,11 @@ import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
 import victoria from "@/assets/images/victoria.jpeg";
-import clientImage1 from "@/assets/svgs/about_img/clientImage1.svg";
-import clientImage2 from "@/assets/svgs/about_img/clientImage2.svg";
+import clientImage1 from "@/assets/images/about_marq/img1.jpg";
+import clientImage2 from "@/assets/images/about_marq/img2.jpg";
+import clientImage3 from "@/assets/images/about_marq/img3.jpg";
+import clientImage4 from "@/assets/images/about_marq/img4.jpg";
+import clientImage5 from "@/assets/images/about_marq/img5.jpg";
 import expect_cloud from "@/assets/svgs/about_img/expect_cloud.svg";
 import expect_camera from "@/assets/svgs/about_img/expect_camera.svg";
 import expect_tree from "@/assets/svgs/about_img/expect_tree.svg";
@@ -96,8 +99,8 @@ const About = () => {
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
-        <div className="px-5 lg:px-14 3xl:!px-28">
-          <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
+        <div className="">
+          <div className="px-5 lg:px-14 3xl:!px-28 flex  flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
             <div className="flex flex-col gap-2 lg:gap-8 lg:w-1/2">
               <h2 className="text-4xl lg:text-7xl">I Started with Beauty.</h2>
               <div className="flex gap-5 items-center">
@@ -114,12 +117,14 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="pb-28 pt-48">
+          <div className="pb-28 pt-48 px-5 lg:px-14 3xl:!px-28">
             <div className="w-full relative">
               {/* Falling Tags */}
-              {fallingTags.map((text, i) => (
-                <FallingTag key={i} text={text} index={i} total={fallingTags.length} />
-              ))}
+              <div className="w-full flex justify-center gap-4 flex-wrap relative">
+                {fallingTags.map((text, i) => (
+                  <FallingTag key={i} text={text} index={i} />
+                ))}
+              </div>
               {/* Image + Falling Tags */}
               <div className="relative w-full overflow-hidden rounded-2xl">
                 {/* Main Image */}
@@ -180,27 +185,103 @@ const About = () => {
           {/* common spacing */}
           <div className="flex flex-col gap-32">
             {/*  */}
-            <div>
-              <Row gutter={[20, 20]}>
-                <Col xs={24} lg={12}>
-                  <Image
-                    src={clientImage1}
-                    className="w-full object-cover"
-                    alt="img"
-                  />
-                </Col>
-                <Col xs={24} lg={12}>
-                  <Image
-                    src={clientImage2}
-                    className="w-full object-cover"
-                    alt="img"
-                  />
-                </Col>
-              </Row>
+            <div className="scroller about-scroller !py-28" ref={scrollerRef}>
+              <ul className={`scroller__inner`}>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage1}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage2}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage3}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage4}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage5}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage1}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage2}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage3}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage4}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage5}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+              </ul>
             </div>
 
             {/*  */}
-            <div className="flex flex-col lg:flex-row relative w-full items-start">
+            <div className="flex flex-col lg:flex-row relative w-full items-start px-5 lg:px-14 3xl:!px-28">
               <div className="lg:w-1/2">
                 <p className="w-full text-5xl font-bold text-neutral-light">
                   My Philosophy
@@ -216,7 +297,7 @@ const About = () => {
             </div>
 
             {/*  */}
-            <div>
+            <div className="px-5 lg:px-14 3xl:!px-28">
               <div>
                 <h3 className="text-neutral-light font-medium text-3xl">
                   What to expect:
@@ -245,12 +326,13 @@ const About = () => {
                 </Row>
               </div>
             </div>
-
+            <div className="px-5 lg:px-14 3xl:!px-28">
+              <Banner />
+            </div>
+            <div className="px-5 lg:px-14 3xl:!px-28">
+              <ContactBanner />
+            </div>
             {/*  */}
-            <Banner />
-
-            {/*  */}
-            <ContactBanner />
           </div>
         </div>
       </div>

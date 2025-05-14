@@ -126,7 +126,7 @@ export const FourthSectionScroll = () => {
   return (
     <>
       {/* Mobile */}
-      <h2 className="text-6xl lg:hidden px-5 font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
+      <h2 className="text-6xl lg:hidden px-5 mt-10 font-grotesk-bold font-semibold text-white whitespace-nowrap pr-6">
         My Services
       </h2>
       <div ref={container} className="lg:hidden">

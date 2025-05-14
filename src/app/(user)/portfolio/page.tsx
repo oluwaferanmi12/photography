@@ -26,7 +26,7 @@ const Portfolio = () => {
       image: wedding,
       bg: "#EFFBF9",
       description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+        "Preserving your day with timeless elegance emotion and storytelling that reflects your unique love story",
       cta_href: `/packages/wedding`,
       cta: "View weddings",
     },
@@ -35,7 +35,7 @@ const Portfolio = () => {
       image: birthdays,
       bg: "#F9EFFB",
       description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+        "From first candles to milestone moments every celebration deserves to be remembered with style",
       cta_href: `/packages/birthday`,
       cta: "View birthdays",
     },
@@ -44,7 +44,7 @@ const Portfolio = () => {
       image: lifestyle,
       bg: "#FBEFF2",
       description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good”.",
+        "Capturing the energy vibe and essence of your everyday and once in a lifetime experiences",
       cta_href: `/packages/lifestyle`,
       cta: "View lifestyle and events",
     },
@@ -53,7 +53,7 @@ const Portfolio = () => {
       image: kids,
       bg: "#FBFBEF",
       description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+        "Tiny toes curious eyes and pure joy we frame every precious moment of your little one’s journey",
       cta_href: `/packages/kids`,
       cta: "View kids",
     },
@@ -62,7 +62,7 @@ const Portfolio = () => {
       image: family,
       bg: "#D7D8FF",
       description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+        "Love connection and generations in one frame natural relaxed portraits for your family legacy",
       cta_href: `/packages/family`,
       cta: "View family",
     },
@@ -71,7 +71,7 @@ const Portfolio = () => {
       image: pregnancy,
       bg: "#D7FBFF",
       description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+        "Honoring the beauty of motherhood with graceful and empowering portraits of your journey",
       cta_href: `/packages/pregnancy`,
       cta: "View pregnancy",
     },
@@ -80,7 +80,7 @@ const Portfolio = () => {
       image: videography,
       bg: "#DDFFD7",
       description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good”.",
+        "More than a clip cinematic stories that bring your moments to life again and again",
       cta_href: `/packages/videography`,
       cta: "View videography",
     },
@@ -89,7 +89,7 @@ const Portfolio = () => {
       image: portrait,
       bg: "#FFF9D7",
       description:
-        "From polished headshots to soulful lifestyle captures, I craft images that do more than just “look good” . They speak volumes. Whether for personal branding, professional needs, or intimate memories, every photo session is a curated experience.",
+        "Bold beautiful and uniquely you capturing the essence of personality and confidence",
       cta_href: `/packages/portrait`,
       cta: "View portrait",
     },
@@ -145,7 +145,7 @@ const Portfolio = () => {
                           <h3 className="text-5xl font-playfair text-darker-grey ">
                             {service.title}
                           </h3>
-                          <p className="text-sm text-gray-800 mt-2 leading-relaxed">
+                          <p className="text-base text-gray-800 mt-2 leading-relaxed">
                             {service.description}
                           </p>
                         </div>
@@ -183,7 +183,7 @@ const Portfolio = () => {
                           <h3 className="text-5xl font-playfair text-darker-grey ">
                             {service.title}
                           </h3>
-                          <p className="text-sm text-gray-800 mt-2 leading-relaxed">
+                          <p className="text-base text-gray-800 mt-2 leading-relaxed">
                             {service.description}
                           </p>
                         </div>
@@ -203,7 +203,7 @@ const Portfolio = () => {
           </div>
 
           {/* text */}
-      
+
           <div className="scroller !py-28" ref={scrollerRef}>
             <ul className={`scroller__inner`}>
               <li className="rounded-3xl cursor-pointer py-3 px-6 flex gap-3 items-center ">

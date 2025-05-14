@@ -97,6 +97,11 @@
   --color-yellow-50: #FBFAF7;
   --color-neutral-light: #E5E5E5;
   --color-admin-black-150: #101010;
+  --color-admin-light-50: #EFEEEE;
+  --color-admin-light-50: #EFEEEE;
+  --color-bayfi-grey: #DCDCDC;
+  --color-bayfi-grey-300: #F6F6F6;
+  --color-grayish-500: #4B5563;
 
   --breakpoint-3xl: 1400px;
 
@@ -439,6 +444,16 @@ a {
   overflow: hidden;
   padding-block: 0.2rem;
 }
+
+.about-scroller {
+  max-width: 90vw !important;
+  width: 90vw !important;
+  overflow: hidden;
+  padding-block: 0.2rem;
+  overflow: hidden;
+}
+
+
 
 .scroller__inner {
   display: flex;

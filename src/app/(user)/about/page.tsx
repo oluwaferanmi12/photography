@@ -187,10 +187,7 @@ const About = () => {
 
           {/* common spacing */}
           <div className="flex flex-col gap-32">
-            {/* SCROLLER  */}
-            <div>
-              
-            </div>
+            {/*  */}
             {/* <div>
               <Row gutter={[20, 20]}>
                 <Col xs={24} lg={12}>
@@ -209,7 +206,100 @@ const About = () => {
                 </Col>
               </Row>
             </div> */}
-           
+            <div className="scroller about-scroller !py-28" ref={scrollerRef}>
+              <ul className={`scroller__inner`}>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage1}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage2}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage3}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage4}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage5}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage1}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage2}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage3}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage4}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+                <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
+                  <div className="relative w-[100%] h-[500px] shrink-0">
+                    <Image
+                      src={clientImage5}
+                      className="h-[350px] w-full object-cover max-h-[350px]"
+                      alt="owner_img"
+                    />
+                  </div>
+                </li>
+              </ul>
+            </div>
 
             {/*  */}
             <div className="flex flex-col lg:flex-row relative w-full items-start px-5 lg:px-14 3xl:!px-28">

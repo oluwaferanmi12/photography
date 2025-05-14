@@ -45,11 +45,11 @@ import TextReveal from "@/components/animattions/animated-text-reveal";
 import Button from "@/components/button/button";
 import beforeImage from "@/assets/images/beforeImage.jpg";
 import afterImage from "@/assets/images/afterImage.jpg";
-import headerImg1 from "@/assets/images/home_header/img1.jpg"
-import headerImg2 from "@/assets/images/home_header/img2.jpg"
-import headerImg3 from "@/assets/images/home_header/img3.jpg"
-import headerImg4 from "@/assets/images/home_header/img4.jpg"
-import headerImg5 from "@/assets/images/home_header/img5.jpg"
+import headerImg1 from "@/assets/images/home_header/img1.jpg";
+import headerImg2 from "@/assets/images/home_header/img2.jpg";
+import headerImg3 from "@/assets/images/home_header/img3.jpg";
+import headerImg4 from "@/assets/images/home_header/img4.jpg";
+import headerImg5 from "@/assets/images/home_header/img5.jpg";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -156,7 +156,7 @@ export default function Home() {
               filter: "grayscale(90%) contrast(1.0)",
               transition: "opacity 500ms ease-in-out",
               borderRadius: isDesktop && scrolled ? "32px" : "0px",
-              backgroundRepeat:"no-repeat"
+              backgroundRepeat: "no-repeat",
             }}
           />
 
@@ -250,20 +250,13 @@ export default function Home() {
           </p>
         </div>
 
-        
-
-        {/* THIRD SECTION */}
-        <div className="hidden lg:block">
-          <ImageMasonry />
-        </div>
-
-        {/* FOURTH SECTION */}
-        <FourthSectionScroll />
-
         {/* FIFTH SECTION */}
         <div className="p-5 lg:p-14 3xl:!px-28">
           <Banner />
         </div>
+
+        {/* FOURTH SECTION */}
+        <FourthSectionScroll />
 
         {/* Card cascade   */}
         <div className="lg:hidden">
@@ -280,6 +273,10 @@ export default function Home() {
               />
             );
           })}
+        </div>
+        {/* THIRD SECTION */}
+        <div className="hidden lg:block">
+          <ImageMasonry />
         </div>
 
         {/* SIXTH SECTION */}

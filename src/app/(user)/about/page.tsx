@@ -144,7 +144,6 @@ const About = () => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    border: "2px solid red",
                   }}
                   className="w-full h-[500px] lg:h-[500px] bg-cover bg-center rounded-2xl"
                   aria-label={`victoria-${currentProfileImg}`}

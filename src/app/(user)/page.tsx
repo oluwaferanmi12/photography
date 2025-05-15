@@ -7,19 +7,10 @@ import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
 import image5 from "@/assets/svgs/home-image-5.svg";
-import hero1 from "@/assets/images/hero-1.jpg";
-import hero2 from "@/assets/images/hero-2.jpg";
-import hero3 from "@/assets/images/hero-3.jpg";
-import hero4 from "@/assets/images/hero-4.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import briefIcon from "@/assets/svgs/briefcaseIcon.svg";
 import humerCertified from "@/assets/svgs/humer-certified.svg";
 import circleIcon from "@/assets/svgs/circle-stroke.svg";
-import bgImage1 from "@/assets/images/portfolioBig1.png";
-import bgImage2 from "@/assets/images/about-secondImg--cropped.png";
-import bgImage3 from "@/assets/images/homeHeaderImage--cropped.jpeg";
-import bgImage4 from "@/assets/images/about-page-img1.png";
-import bgImage5 from "@/assets/images/catalogue-header.jpeg";
 import victoria from "@/assets/images/victoria.jpeg";
 import victoria2 from "@/assets/images/victoriaPics/slide2.jpg";
 import victoria3 from "@/assets/images/victoriaPics/slide3.jpg";
@@ -150,7 +141,7 @@ export default function Home() {
           <div
             className={`absolute inset-0 z-0 `}
             style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${currentBg.src})`,
+              backgroundImage: `url(${currentBg.src})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               filter: "grayscale(90%) contrast(1.0)",

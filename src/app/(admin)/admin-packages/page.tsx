@@ -10,7 +10,8 @@ import AdminPageLayout from "@/adminLayouts/admin-page-layout";
 import { useState } from "react";
 import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
 import { Input } from "@/components/inputs/input";
-
+import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitButtons/Button";
+import { useRouter } from "next/navigation";
 
 interface PackageOption {
   name: string;
@@ -28,9 +29,9 @@ const services: Service[] = [
   {
     serviceName: "Weddings",
     packages: [
-      { name: "Basic", price: "$200" },
-      { name: "Classic", price: "$200" },
-      { name: "Premium", price: "$200" },
+      { name: "Basic", price: "200" },
+      { name: "Classic", price: "200" },
+      { name: "Premium", price: "200" },
     ],
     status: true,
     lastUpdated: "Today",
@@ -38,9 +39,9 @@ const services: Service[] = [
   {
     serviceName: "Birthdays",
     packages: [
-      { name: "Basic", price: "$200" },
-      { name: "Classic", price: "$200" },
-      { name: "Premium", price: "$200" },
+      { name: "Basic", price: "200" },
+      { name: "Classic", price: "200" },
+      { name: "Premium", price: "200" },
     ],
     status: true,
     lastUpdated: "Today",
@@ -48,16 +49,22 @@ const services: Service[] = [
   {
     serviceName: "Kids",
     packages: [
-      { name: "Basic", price: "$200" },
-      { name: "Classic", price: "$200" },
-      { name: "Premium", price: "$200" },
+      { name: "Basic", price: "200" },
+      { name: "Classic", price: "200" },
+      { name: "Premium", price: "200" },
     ],
     status: false,
     lastUpdated: "Today",
   },
 ];
 
-const columns: TableColumn<Service>[] = [
+
+export default function Services() {
+  const [openCreateService, setOpenCreateService] = useState(false);
+  const router = useRouter();
+
+
+  const columns: TableColumn<Service>[] = [
   {
     name: "Services",
     selector: (row) => row.serviceName,
@@ -76,7 +83,7 @@ const columns: TableColumn<Service>[] = [
             <span>
               <Image src={dot} alt="dot" />
             </span>
-            {pkg.name} ({pkg.price})
+            {pkg.name} $({pkg.price})
           </div>
         ))}
       </div>
@@ -97,10 +104,17 @@ const columns: TableColumn<Service>[] = [
     name: "Last updated",
     selector: (row) => row.lastUpdated,
   },
-  {
+    {
     name: "",
-    cell: () => (
-      <button className="flex items-center gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50">
+    cell: (row) => (
+      <button
+        className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
+        onClick={() =>
+          router.push(
+            `/admin-packages/${encodeURIComponent(row.serviceName)}?status=${row.status}&packages=${encodeURIComponent(JSON.stringify(row.packages))}`
+          )
+        }
+      >
         <span>
           <Image src={eyeIcon} alt="img" />
         </span>
@@ -108,10 +122,10 @@ const columns: TableColumn<Service>[] = [
       </button>
     ),
   },
+
 ];
 
-export default function Services() {
-    const [openCreateService, setOpenCreateService] = useState(false);
+
   return (
     <AdminPageLayout
       headerProps={{
@@ -124,15 +138,13 @@ export default function Services() {
     >
       <BaseDataTable title="Services" columns={columns} data={services} />
 
-
-
       {/* Create Service DRAWER */}
       <ResponsiveDrawer
-        title="Create a booking link"
+        title="Create a service"
         open={openCreateService}
         onClose={() => setOpenCreateService(false)}
       >
-        <div className="pb-14"> 
+        <div className="pb-14">
           <form>
             <div className="flex flex-col gap-4">
               <div className="w-full flex flex-col gap-3">
@@ -140,27 +152,35 @@ export default function Services() {
                   htmlFor="name"
                   className="text-grayish-500 font-semibold"
                 >
-                  Full Name
+                  Service name
                 </label>
-                <Input variant="admin" placeholder="First name and Last name" />
+                <Input variant="admin" placeholder="Wedding" />
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="tag" className="text-grayish-500 font-semibold">
+                  Tags
+                </label>
+                <Input variant="admin" placeholder="Wedding" />
               </div>
               <div className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="email"
+                  htmlFor="description"
                   className="text-grayish-500 font-semibold"
                 >
-                  Email address
+                  Description
                 </label>
-                <Input variant="admin" placeholder="example@email.com" />
+                <div className="border-bayfi-grey text-[#868D96] placeholder:text-[#868D96] border py-4 px-3 rounded-lg bg-bayfi-grey-300">
+                  <textarea
+                    className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
+                    rows={3}
+                  ></textarea>
+                </div>
               </div>
-              <div className="w-full flex flex-col gap-3">
-                <label htmlFor="phone">Phone number</label>
-                <Input variant="admin" placeholder="+1 999-999-999" />
-              </div>
+
               {/*  */}
             </div>
             <div className="mt-5">
-              <button className="w-full text-white py-4 px-8 rounded-full bg-[#1B1B1B]">Send booking link</button>
+              <AdminSubmitButton text="Create Service" />
             </div>
           </form>
         </div>

@@ -32,8 +32,7 @@ export default function SinglePackage() {
     showFilters= {false}
       headerProps={{
         dashTitle: "Services and Packages",
-        dashDescription:
-          "Supercharge your workflow and handle repetitive tasks the apps you use every day.",
+        showDescript: false,
         buttonTitle: "Add a package",
         buttonOnClick: () => setOpenAddPackage(true),
       }}

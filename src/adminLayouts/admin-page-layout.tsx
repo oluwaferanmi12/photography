@@ -7,7 +7,8 @@ type AdminPageLayoutProps = {
   children: React.ReactNode;
   headerProps: {
     dashTitle: string;
-    dashDescription: string;
+    dashDescription?: string;
+    showDescript?: boolean;
     buttonTitle: string;
     buttonOnClick: () => void;
   };

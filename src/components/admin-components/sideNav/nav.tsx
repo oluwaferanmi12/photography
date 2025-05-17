@@ -35,8 +35,8 @@ const navData = [
   },
   {
     icon: calenderIcon,
-    navLink: "/calender",
-    navTitle: "Calender",
+    navLink: "/calendar",
+    navTitle: "Calendar",
   },
   {
     icon: multiselectionIcon,

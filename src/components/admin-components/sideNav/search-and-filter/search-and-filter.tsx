@@ -6,7 +6,7 @@ import { DropdownFilter } from "@/components/admin-components/sideNav/dropdown-f
 
 export default function SearchAndFilters() {
   const categoryData = ["All", "Wedding", "Makeup", "Lifestyle"];
-  const statusData = ["All", "Pending", "Active", "Successful"];
+  const statusData = ["All", "Pending", "Awaiting", "Confirmed", "Declined", "Resceduled"];
   const groupByData = ["Categories", "Status", "Date Created"];
 
   return (

@@ -56,7 +56,7 @@ const data: Booking[] = [
     packageType: "Wedding",
     packageName: "Basic ($200)",
     dateBooked: "July - 28 - 2025",
-    status: "confirmed",
+    status: "Confirmed",
     created: "Today",
   },
   {

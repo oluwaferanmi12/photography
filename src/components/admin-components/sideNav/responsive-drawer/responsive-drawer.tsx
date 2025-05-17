@@ -53,7 +53,7 @@ export const ResponsiveDrawer = ({
       open={open}
       onClose={onClose}
       height={isMobile ? "85%" : "100%"}
-      width={isMobile ? undefined : 580}
+      width={isMobile ? undefined : 480}
       className="!rounded-tl-xl md:!rounded-l-xl "
       closeIcon={null}
     >

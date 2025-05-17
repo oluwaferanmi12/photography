@@ -7,22 +7,31 @@ type AdminPageLayoutProps = {
   children: React.ReactNode;
   headerProps: {
     dashTitle: string;
-    dashDescription: string;
+    dashDescription?: string;
+    showDescript?: boolean;
     buttonTitle: string;
-    buttonOnClick: () => void
+    buttonOnClick: () => void;
   };
+  showFilters?: boolean;
 };
 
-export default function AdminPageLayout({ children, headerProps }: AdminPageLayoutProps) {
+export default function AdminPageLayout({
+  children,
+  headerProps,
+  showFilters = true,
+}: AdminPageLayoutProps) {
   return (
     <div>
       <div className="m-4 mb-8">
         <AdminHeader {...headerProps} />
       </div>
       <hr />
-      <div className="m-4">
-        <SearchAndFilters />
-      </div>
+      {showFilters && (
+        <div className="m-4">
+          <SearchAndFilters />
+        </div>
+      )}
+
       <div>{children}</div>
     </div>
   );

@@ -14,8 +14,7 @@ import { Input } from "@/components/inputs/input";
 import CustomSelect from "@/components/inputs/custom-select/custom-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-
+import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitButtons/Button";
 
 interface Booking {
   name: string;
@@ -56,7 +55,7 @@ const data: Booking[] = [
     packageType: "Wedding",
     packageName: "Basic ($200)",
     dateBooked: "July - 28 - 2025",
-    status: "confirmed",
+    status: "Confirmed",
     created: "Today",
   },
   {
@@ -88,8 +87,6 @@ export default function Booking() {
   const [selectedService, setSelectedService] = useState("");
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-
-
 
   const handleViewDetails = (row: Booking) => {
     setSelectedBooking(row);
@@ -327,7 +324,7 @@ export default function Booking() {
         open={openBookingDetails}
         onClose={() => setOpenBookingDetails(false)}
       >
-        <div className="pb-14"> 
+        <div className="pb-14">
           <form>
             <div className="flex flex-col gap-4">
               <div className="w-full flex flex-col gap-3">
@@ -407,7 +404,7 @@ export default function Booking() {
               <p className="text-black text-2xl font-medium">$1200.00</p>
             </div>
             <div className="mt-5">
-              <button className="w-full text-white py-4 px-8 rounded-full bg-[#1B1B1B]">Send booking link</button>
+              <AdminSubmitButton text="Send booking link" />
             </div>
           </form>
         </div>

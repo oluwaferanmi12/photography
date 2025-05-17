@@ -29,6 +29,7 @@ export default function SinglePackage() {
   ];
   return (
     <AdminPageLayout
+    showFilters= {false}
       headerProps={{
         dashTitle: "Services and Packages",
         dashDescription:

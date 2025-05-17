@@ -41,7 +41,7 @@ export default function SinglePackage() {
         <div className="flex flex-col gap-5">
           <div className="p-4">
             <h3 className="text-2xl font-semibold mb-4">{singlePackageSlug}</h3>
-            <p>
+            <p className="text-base font-normal text-[#333333]">
               prototyping, and UI design, consistently delivering innovative
               solutions that drive tangible results for stakeholders and users.
               Currently, I lead a dynamic 3-person design team{" "}
@@ -57,6 +57,7 @@ export default function SinglePackage() {
                     planType={pkg.name}
                     planAmount={pkg.price}
                     planBenefits={planBenefit}
+                    // planActiveness={status === "true"}
                   />
                 </Col>
               ))}
@@ -64,9 +65,7 @@ export default function SinglePackage() {
           </div>
         </div>
 
-        <p className="mt-2">
-          Status: {status === "true" ? "Active" : "Inactive"}
-        </p>
+       
       </div>
 
       {/* Create Service DRAWER */}

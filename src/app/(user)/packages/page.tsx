@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import HS4 from "@/assets/images/HS4.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
-import { Modal} from "antd";
+import { Col, Modal, Row } from "antd";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
 import kids_icon from "@/assets/svgs/kids_icon.svg";
 import lifestyle_icon from "@/assets/svgs/lifestyle_icon.svg";
@@ -18,6 +18,7 @@ import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { PlanCards } from "@/components/plans-card/PlanCards";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
+import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 
 const Portfolio = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -34,7 +35,6 @@ const Portfolio = () => {
     setIsSessionFormModalOpen(false);
   };
 
-
   // Submit form onClick
   const handleReserveSpot = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -44,6 +44,32 @@ const Portfolio = () => {
     //   setIsThankYouModalOpen(false);
     // }, 3000);
   };
+
+  const packages = [
+    {
+      name: "Basic",
+      price: 600,
+    },
+    {
+      name: "Classic",
+      price: 600,
+    },
+    {
+      name: "Premium",
+      price: 600,
+    },
+  ];
+
+  const planBenefit = [
+    "Consultation call",
+    "60 min. session",
+    "1 - 2 outfit",
+    "max 4 people",
+    "10 images professional edited and delivered in an online gallery",
+    "$20 per additional image",
+    "$50 per additional person",
+    "$125 per additional hour",
+  ];
 
   return (
     <div>
@@ -73,7 +99,13 @@ const Portfolio = () => {
             </div>
           </div>
           <div className="scroller !py-28" ref={scrollerRef}>
-            <ul className={`scroller__inner ${isSessionFormModalOpen || isThankYouModalOpen ? "pause-scroll" : ""}`}>
+            <ul
+              className={`scroller__inner ${
+                isSessionFormModalOpen || isThankYouModalOpen
+                  ? "pause-scroll"
+                  : ""
+              }`}
+            >
               <li
                 onClick={() => showModal("wedding")}
                 className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
@@ -223,31 +255,75 @@ const Portfolio = () => {
           {/* Third section */}
           <div className="pb-36 flex flex-col gap-20">
             <div>
-              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Weddings</h3>
+              <h3 className="text-6xl lg:text-7xl">Weddings</h3>
               <div className="mt-10">
-                <PlanCards />
+                <Row gutter={[32, 32]}>
+                  {packages.map((pkg: any, idx: number) => (
+                    <Col key={idx} xs={24} md={12} lg={8}>
+                      <PlanCardProps
+                        variant="user"
+                        planType={pkg.name}
+                        planAmount={pkg.price}
+                        planBenefits={planBenefit}
+                      />
+                    </Col>
+                  ))}
+                </Row>
               </div>
             </div>
             <div>
-              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">Birthdays</h3>
+              <h3 className="text-6xl lg:text-7xl">Birthdays</h3>
               <div className="mt-10">
-                <PlanCards />
+                <Row gutter={[32, 32]}>
+                  {packages.map((pkg: any, idx: number) => (
+                    <Col key={idx} xs={24} md={12} lg={8}>
+                      <PlanCardProps
+                        variant="user"
+                        planType={pkg.name}
+                        planAmount={pkg.price}
+                        planBenefits={planBenefit}
+                      />
+                    </Col>
+                  ))}
+                </Row>
               </div>
             </div>
             <div>
-              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">
+              <h3 className="text-6xl lg:text-7xl">
                 Kids & infants
               </h3>
               <div className="mt-10">
-                <PlanCards />
+                <Row gutter={[32, 32]}>
+                  {packages.map((pkg: any, idx: number) => (
+                    <Col key={idx} xs={24} md={12} lg={8}>
+                      <PlanCardProps
+                        variant="user"
+                        planType={pkg.name}
+                        planAmount={pkg.price}
+                        planBenefits={planBenefit}
+                      />
+                    </Col>
+                  ))}
+                </Row>
               </div>
             </div>
             <div>
-              <h3 className="lg:w-[25%] text-6xl lg:text-7xl">
-                Kids & infants
+              <h3 className="text-6xl lg:text-7xl">
+                Lifestyle
               </h3>
               <div className="mt-10">
-                <PlanCards />
+                <Row gutter={[32, 32]}>
+                  {packages.map((pkg: any, idx: number) => (
+                    <Col key={idx} xs={24} md={12} lg={8}>
+                      <PlanCardProps
+                        variant="user"
+                        planType={pkg.name}
+                        planAmount={pkg.price}
+                        planBenefits={planBenefit}
+                      />
+                    </Col>
+                  ))}
+                </Row>
               </div>
             </div>
           </div>

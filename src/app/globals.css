@@ -339,9 +339,17 @@ a {
   background-repeat: no-repeat;
 }
 
-.custom-switch.ant-switch-checked {
+.custom-switch.ant-switch-checked,
+.custom_switch.ant-switch-checked {
   background-color: #D9C9AE !important;
 }
+
+
+/* Style when switch is NOT checked (OFF) */
+.custom_switch:not(.ant-switch-checked) {
+  background-color: grey !important;
+}
+
 
 @media (min-width: 1400px) {
   .footer {

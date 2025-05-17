@@ -4,6 +4,7 @@ import addLine from "@/assets/svgs/add_line.svg";
 import Image from "next/image";
 import breadcrumbHome from "@/assets/svgs/Admin_svgs/breadcrumb_home.svg";
 import chevron_right from "@/assets/svgs/Admin_svgs/chevron_right.svg";
+import { useRouter } from "next/navigation";
 
 export const AdminHeader = ({
   dashTitle,
@@ -18,6 +19,7 @@ export const AdminHeader = ({
   buttonTitle: string;
   buttonOnClick: () => void;
 }) => {
+  const router = useRouter();
   return (
     <>
       <div className="flex justify-between items-center">
@@ -32,7 +34,7 @@ export const AdminHeader = ({
           ) : (
             <div className="flex gap-5 items-center mt-3">
               <span>
-                <Image src={breadcrumbHome} alt="breadcrumb" />
+                <Image className="cursor-pointer" onClick={() => router.push("/admin-packages")} src={breadcrumbHome} alt="breadcrumb" />
               </span>
               <span>
                 <Image src={chevron_right} alt="chevron_right" />

@@ -13,7 +13,7 @@ export default function SinglePackage() {
   const [openAddPackage, setOpenAddPackage] = useState(false);
   const { singlePackageSlug } = useParams();
   const searchParams = useSearchParams();
-  const status = searchParams.get("status");
+  // const status = searchParams.get("status");
   const packagesJson = searchParams.get("packages");
   const packages = packagesJson ? JSON.parse(packagesJson) : [];
 

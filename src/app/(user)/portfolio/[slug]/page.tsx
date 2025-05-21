@@ -1,14 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "next/navigation";
-import HS1 from "@/assets/images/wedding/card1.jpg";
-import HS2 from "@/assets/images/wedding/card2.jpg";
-import HS3 from "@/assets/images/wedding/card3.jpg";
-import HS4 from "@/assets/images/wedding/card4.jpg";
-import HS5 from "@/assets/images/wedding/card5.jpg";
-import HS6 from "@/assets/images/wedding/card6.jpg";
-import HS7 from "@/assets/images/wedding/card7.jpg";
 import { PlanCards } from "@/components/plans-card/PlanCards";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
@@ -27,7 +20,7 @@ const SinglePackages = () => {
         <div className="flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28">
           {/* Package Section */}
           <div>
-            <h3 className="text-7xl capitalize ">{slug} Packages</h3>
+            <h3 className=" text-5xl lg:text-7xl capitalize ">{slug} Packages</h3>
             <div className="mt-10">
               <PlanCards />
             </div>

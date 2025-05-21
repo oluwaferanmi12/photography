@@ -19,7 +19,7 @@ const images = [HS1, HS2, HS4, HS5, HS6, HS3, HS7];
 // === Config ===
 const GAP = 20; // px
 const IMAGE_WIDTH = 350; // desktop size
-const AUTOPLAY_INTERVAL = 3000;
+const AUTOPLAY_INTERVAL = 4000;
 
 
 export default function InfiniteCarousel() {
@@ -96,7 +96,7 @@ export default function InfiniteCarousel() {
         {[...images, ...images].map((src, index) => (
           <div
             key={index}
-            className="mr-5 flex-none w-[300px] sm:w-[320px] md:w-[350px] h-[350px] md:h-[500px] lg:w-[1000px] lg:h-[800px] rounded-xl overflow-hidden shadow"
+            className="mr-5 flex-none w-[250px] sm:w-[320px] md:w-[350px] h-[250px] md:h-[500px] lg:w-[1000px] lg:h-[600px] rounded-xl overflow-hidden shadow"
           >
             <Image
               src={src}

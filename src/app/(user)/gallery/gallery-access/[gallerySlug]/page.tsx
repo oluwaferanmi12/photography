@@ -39,7 +39,7 @@ const GalleryAccessPage = () => {
               <Col xs={{ span: 24, order: 1 }} lg={{ span: 14, order: 2 }}>
                 <div>
                   <h3 className="font-playfair text-4xl mb-8 capitalize"> {pageName} </h3> 
-                  <div className="py-8 px-10 w-full rounded-[20px] bg-[#282824]">
+                  <div className="py-8 px-10 w-full max-w-[80%] rounded-[20px] bg-[#282824]">
                     <div className="flex gap-3 place-items-center">
                       <span>
                         <Image src={loginFormIcon} alt="bas" />

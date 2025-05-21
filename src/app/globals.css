@@ -442,6 +442,9 @@ a {
   }
 }
 
+.no-scrollbar{
+  scrollbar-width: none;
+}
 
 
 /* Packages scroll */

@@ -27,7 +27,7 @@ const Portfolio = () => {
       bg: "#EFFBF9",
       description:
         "Preserving your day with timeless elegance emotion and storytelling that reflects your unique love story",
-      cta_href: `/packages/wedding`,
+      cta_href: `/portfolio/wedding`,
       cta: "View weddings",
     },
     {
@@ -36,7 +36,7 @@ const Portfolio = () => {
       bg: "#F9EFFB",
       description:
         "From first candles to milestone moments every celebration deserves to be remembered with style",
-      cta_href: `/packages/birthday`,
+      cta_href: `/portfolio/birthday`,
       cta: "View birthdays",
     },
     {
@@ -45,7 +45,7 @@ const Portfolio = () => {
       bg: "#FBEFF2",
       description:
         "Capturing the energy vibe and essence of your everyday and once in a lifetime experiences",
-      cta_href: `/packages/lifestyle`,
+      cta_href: `/portfolio/lifestyle`,
       cta: "View lifestyle and events",
     },
     {
@@ -54,7 +54,7 @@ const Portfolio = () => {
       bg: "#FBFBEF",
       description:
         "Tiny toes curious eyes and pure joy we frame every precious moment of your little one’s journey",
-      cta_href: `/packages/kids`,
+      cta_href: `/portfolio/kids`,
       cta: "View kids",
     },
     {
@@ -63,7 +63,7 @@ const Portfolio = () => {
       bg: "#D7D8FF",
       description:
         "Love connection and generations in one frame natural relaxed portraits for your family legacy",
-      cta_href: `/packages/family`,
+      cta_href: `/portfolio/family`,
       cta: "View family",
     },
     {
@@ -72,7 +72,7 @@ const Portfolio = () => {
       bg: "#D7FBFF",
       description:
         "Honoring the beauty of motherhood with graceful and empowering portraits of your journey",
-      cta_href: `/packages/pregnancy`,
+      cta_href: `/portfolio/pregnancy`,
       cta: "View pregnancy",
     },
     {
@@ -81,7 +81,7 @@ const Portfolio = () => {
       bg: "#DDFFD7",
       description:
         "More than a clip cinematic stories that bring your moments to life again and again",
-      cta_href: `/packages/videography`,
+      cta_href: `/portfolio/videography`,
       cta: "View videography",
     },
     {
@@ -90,7 +90,7 @@ const Portfolio = () => {
       bg: "#FFF9D7",
       description:
         "Bold beautiful and uniquely you capturing the essence of personality and confidence",
-      cta_href: `/packages/portrait`,
+      cta_href: `/portfolio/portrait`,
       cta: "View portrait",
     },
   ];

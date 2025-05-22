@@ -1,17 +1,19 @@
+"use client";
+
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import icon from "@/assets/svgs/plans-icons.svg";
 import arrowRight from "@/assets/svgs/right_arrow.svg";
 import { Switch } from "antd";
 import { useRouter } from "next/navigation";
 
 type planCardInterface = {
-  planType: "" | "Basic" | "Classic" | "Premium";
+  planType: "";
   planAmount: number;
   planDescription?: string;
   planBenefits?: string[];
   variant?: "user" | "admin";
-  planActiveness: boolean;
+  planActiveness?: boolean;
 };
 
 export const PlanCardProps: React.FC<planCardInterface> = ({
@@ -22,8 +24,8 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   planActiveness,
   variant = "user",
 }) => {
-  const [isPlanActive, setIsPlanActive] = useState(true);
   const router = useRouter();
+  
   return (
     <div>
       <div

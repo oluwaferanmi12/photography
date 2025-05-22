@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
 import { Input } from "@/components/inputs/input";
 import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitButtons/Button";
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
 import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
@@ -98,103 +98,113 @@ export default function SinglePackage() {
         buttonOnClick: () => setOpenAddPackage(true),
       }}
     >
-      <div className="p-4 text-black">
-        <div className="flex flex-col gap-5">
-          <div className="p-4">
-            <h3 className="text-2xl font-semibold mb-4">{singlePackageSlug}</h3>
-            <p className="text-base font-normal text-[#333333]">
-              {description}
-            </p>
-          </div>
+      <Spin spinning={loading}>
+        <div className="p-10 text-black">
+          <div className="flex flex-col gap-8">
+            <div>
+              <h3 className="text-2xl font-semibold mb-4">
+                {singlePackageSlug}
+              </h3>
+              <p className="text-base font-normal text-[#333333]">
+                {description}
+              </p>
+            </div>
 
-          <div>
-            <Row gutter={[32, 32]}>
-              {packageData.map((pkg: any, idx: number) => (
-                <Col key={idx} xs={24} md={12} lg={8}>
-                  <PlanCardProps
+            <div>
+              {packageData.length ? (
+                <Row gutter={[32, 32]}>
+                  {packageData.map((pkg: any, idx: number) => (
+                    <Col key={idx} xs={24} md={12} lg={8}>
+                      <PlanCardProps
+                        variant="admin"
+                        planType={pkg.title}
+                        planAmount={pkg.price}
+                        planDescription={pkg.description}
+                        planActiveness={pkg.active}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              ) : (
+                <p className="text-lg text-red-500">
+                  No Package is available for this service
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Create Service DRAWER */}
+        <ResponsiveDrawer
+          title="Add a package"
+          open={openAddPackage}
+          onClose={() => setOpenAddPackage(false)}
+        >
+          <div className="pb-14">
+            <form onSubmit={handleCreatePackages}>
+              <div className="flex flex-col gap-4">
+                <div className="w-full flex flex-col gap-3">
+                  <label
+                    htmlFor="name"
+                    className="text-grayish-500 font-semibold"
+                  >
+                    Package name
+                  </label>
+                  <Input
+                    value={packageName}
+                    onChangeInput={(e) => setPackageName(e.target.value)}
                     variant="admin"
-                    planType={pkg.title}
-                    planAmount={pkg.price}
-                    planDescription={pkg.description}
-                    planActiveness={pkg.active}
+                    placeholder="Basic"
                   />
-                </Col>
-              ))}
-            </Row>
-          </div>
-        </div>
-      </div>
-
-      {/* Create Service DRAWER */}
-      <ResponsiveDrawer
-        title="Add a package"
-        open={openAddPackage}
-        onClose={() => setOpenAddPackage(false)}
-      >
-        <div className="pb-14">
-          <form onSubmit={handleCreatePackages}>
-            <div className="flex flex-col gap-4">
-              <div className="w-full flex flex-col gap-3">
-                <label
-                  htmlFor="name"
-                  className="text-grayish-500 font-semibold"
-                >
-                  Package name
-                </label>
-                <Input
-                  value={packageName}
-                  onChangeInput={(e) => setPackageName(e.target.value)}
-                  variant="admin"
-                  placeholder="Wedding"
-                />
-              </div>
-              <div className="w-full flex flex-col gap-3">
-                <label
-                  htmlFor="price"
-                  className="text-grayish-500 font-semibold"
-                >
-                  Price
-                </label>
-                <Input
-                  value={packagePrice?.toString() || ""}
-                  type="number"
-                  onChangeInput={(e) => {
-                    const value = parseFloat(e.target.value);
-                    setPackagePrice(isNaN(value) ? undefined : value);
-                  }}
-                  variant="admin"
-                  placeholder="100"
-                />
-              </div>
-              <div className="w-full flex flex-col gap-3">
-                <label
-                  htmlFor="description"
-                  className="text-grayish-500 font-semibold"
-                >
-                  Description
-                </label>
-                <div className="border-bayfi-grey text-[#868D96] placeholder:text-[#868D96] border py-4 px-3 rounded-lg bg-bayfi-grey-300">
-                  <textarea
-                    value={packageDescription}
-                    placeholder="Package description"
-                    onChange={(e) => setPackageDescription(e.target.value)}
-                    className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
-                    rows={3}
-                  ></textarea>
                 </div>
-              </div>
+                <div className="w-full flex flex-col gap-3">
+                  <label
+                    htmlFor="price"
+                    className="text-grayish-500 font-semibold"
+                  >
+                    Price
+                  </label>
+                  <Input
+                    value={packagePrice?.toString() || ""}
+                    type="number"
+                    onChangeInput={(e) => {
+                      const value = parseFloat(e.target.value);
+                      setPackagePrice(isNaN(value) ? undefined : value);
+                    }}
+                    variant="admin"
+                    placeholder="100"
+                  />
+                </div>
+                <div className="w-full flex flex-col gap-3">
+                  <label
+                    htmlFor="description"
+                    className="text-grayish-500 font-semibold"
+                  >
+                    Description
+                  </label>
+                  <div className="border-bayfi-grey text-[#868D96] placeholder:text-[#868D96] border py-4 px-3 rounded-lg bg-bayfi-grey-300">
+                    <textarea
+                      value={packageDescription}
+                      placeholder="Package description"
+                      onChange={(e) => setPackageDescription(e.target.value)}
+                      className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
+                      rows={3}
+                    ></textarea>
+                  </div>
+                </div>
 
-              {/*  */}
-            </div>
-            <div className="mt-5">
-              <AdminSubmitButton
-                loading={createPackageLoading}
-                text="Create a package"
-              />
-            </div>
-          </form>
-        </div>
-      </ResponsiveDrawer>
+                {/*  */}
+              </div>
+              <div className="mt-5">
+                <AdminSubmitButton
+                  loading={createPackageLoading}
+                  text="Create a package"
+                />
+              </div>
+            </form>
+          </div>
+        </ResponsiveDrawer>
+      </Spin>
     </AdminPageLayout>
   );
 }

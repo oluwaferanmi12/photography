@@ -21,6 +21,9 @@ export default function SinglePackage() {
   const [packageName, setPackageName] = useState("");
   const [packagePrice, setPackagePrice] = useState<number>();
   const [packageDescription, setPackageDescription] = useState("");
+  const [packageNameError, setPackageNameError] = useState("");
+  const [packagePriceError, setPackagePriceError] = useState("");
+  const [packageDescriptionError, setPackageDescriptionError] = useState("");
   const [createPackageLoading, setCreatePackageLoading] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [packageData, setPackageData] = useState([]);
@@ -37,7 +40,7 @@ export default function SinglePackage() {
   // ];
 
   // SINGLE PACKAGES
- 
+
   const singlePackage = async () => {
     setLoading(true);
     try {
@@ -62,6 +65,33 @@ export default function SinglePackage() {
   const handleCreatePackages = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCreatePackageLoading(true);
+
+    let isError = false;
+
+    if (!packageName.trim()) {
+      setPackageNameError("Please enter package name");
+      isError = true;
+    } else {
+      setPackageNameError("");
+    }
+    if (!packageDescription.trim()) {
+      setPackageDescriptionError("Please enter package description");
+      isError = true;
+    } else {
+      setPackageDescriptionError("");
+    }
+    if (!packagePrice) {
+      setPackagePriceError("Please enter package price");
+      isError = true;
+    } else {
+      setPackagePriceError("");
+    }
+
+    if (isError) {
+      setCreatePackageLoading(false);
+      return;
+    }
+
     try {
       await apiCall("post", "/Admin/Services/packages", {
         serviceId: serviceId,
@@ -95,7 +125,7 @@ export default function SinglePackage() {
         buttonOnClick: () => setOpenAddPackage(true),
       }}
     >
-      <Spin spinning={loading}  size="large">
+      <Spin spinning={loading} size="large">
         <div className="p-10 text-black">
           <div className="flex flex-col gap-8">
             <div>
@@ -108,26 +138,29 @@ export default function SinglePackage() {
             </div>
 
             <div>
-              {!loading ? 
-              packageData.length ? (
-                <Row gutter={[32, 32]}>
-                  {packageData.map((pkg: any, idx: number) => (
-                    <Col key={idx} xs={24} md={12} lg={8}>
-                      <PlanCardProps
-                        variant="admin"
-                        planType={pkg.title}
-                        planAmount={pkg.price}
-                        planDescription={pkg.description}
-                        planActiveness={pkg.active}
-                      />
-                    </Col>
-                  ))}
-                </Row>
+              {!loading ? (
+                packageData.length ? (
+                  <Row gutter={[32, 32]}>
+                    {packageData.map((pkg: any, idx: number) => (
+                      <Col key={idx} xs={24} md={12} lg={8}>
+                        <PlanCardProps
+                          variant="admin"
+                          planType={pkg.title}
+                          planAmount={pkg.price}
+                          planDescription={pkg.description}
+                          planActiveness={pkg.active}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                ) : (
+                  <p className="text-lg text-red-500">
+                    No Package is available for this service
+                  </p>
+                )
               ) : (
-                <p className="text-lg text-red-500">
-                  No Package is available for this service
-                </p>
-              ): ""}
+                ""
+              )}
             </div>
           </div>
         </div>
@@ -150,10 +183,16 @@ export default function SinglePackage() {
                   </label>
                   <Input
                     value={packageName}
-                    onChangeInput={(e) => setPackageName(e.target.value)}
+                    onChangeInput={(e) => {
+                      setPackageName(e.target.value);
+                      if (packageNameError) setPackageNameError("");
+                    }}
                     variant="admin"
                     placeholder="Basic"
                   />
+                  {packageNameError && (
+                    <p className="text-red-700">{packageNameError}</p>
+                  )}
                 </div>
                 <div className="w-full flex flex-col gap-3">
                   <label
@@ -168,10 +207,14 @@ export default function SinglePackage() {
                     onChangeInput={(e) => {
                       const value = parseFloat(e.target.value);
                       setPackagePrice(isNaN(value) ? undefined : value);
+                      if (packagePriceError) setPackagePriceError("");
                     }}
                     variant="admin"
                     placeholder="100"
                   />
+                  {packagePriceError && (
+                    <p className="text-red-700">{packagePriceError}</p>
+                  )}
                 </div>
                 <div className="w-full flex flex-col gap-3">
                   <label
@@ -184,11 +227,17 @@ export default function SinglePackage() {
                     <textarea
                       value={packageDescription}
                       placeholder="Package description"
-                      onChange={(e) => setPackageDescription(e.target.value)}
+                      onChange={(e) => {
+                        setPackageDescription(e.target.value);
+                        if (packageDescriptionError) setPackageDescriptionError("");
+                      }}
                       className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
                       rows={3}
                     ></textarea>
                   </div>
+                  {packageDescriptionError && (
+                    <p className="text-red-700">{packageDescriptionError}</p>
+                  )}
                 </div>
 
                 {/*  */}

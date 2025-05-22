@@ -68,6 +68,9 @@ export default function Services() {
   const [serviceName, setServiceName] = useState("");
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
+  const [serviceNameError, setServiceNameError] = useState("");
+  const [tagsError, setTagsError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
@@ -122,7 +125,6 @@ export default function Services() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchServices();
   }, []);
@@ -131,6 +133,35 @@ export default function Services() {
   const handleCreateService = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCreateServiceLoading(true);
+
+    let hasError = false;
+
+    if (!serviceName.trim()) {
+      setServiceNameError("Please include service name");
+      hasError = true;
+    } else {
+      setServiceNameError("");
+    }
+
+    if (!description.trim()) {
+      setDescriptionError("Please include service description");
+      hasError = true;
+    } else {
+      setDescriptionError("");
+    }
+
+    if (!tags.trim()) {
+      setTagsError("Please include tags");
+      hasError = true;
+    } else {
+      setTagsError("");
+    }
+
+    if (hasError) {
+      setCreateServiceLoading(false);
+      return;
+    }
+
     try {
       await apiCall("post", "/Admin/Services", {
         title: serviceName,
@@ -250,10 +281,16 @@ export default function Services() {
                   </label>
                   <Input
                     value={serviceName}
-                    onChangeInput={(e) => setServiceName(e.target.value)}
+                    onChangeInput={(e) => {
+                      setServiceName(e.target.value);
+                      if (serviceNameError) setServiceNameError("");
+                    }}
                     variant="admin"
                     placeholder="Wedding"
                   />
+                  {serviceNameError && (
+                    <p className="text-red-700">{serviceNameError}</p>
+                  )}
                 </div>
                 <div className="w-full flex flex-col gap-3">
                   <label
@@ -264,10 +301,14 @@ export default function Services() {
                   </label>
                   <Input
                     value={tags}
-                    onChangeInput={(e) => setTags(e.target.value)}
+                    onChangeInput={(e) => {
+                      setTags(e.target.value);
+                      if (tagsError) setTags("");
+                    }}
                     variant="admin"
                     placeholder="Wedding"
                   />
+                  {tagsError && <p className="text-red-700">{tagsError}</p>}
                 </div>
                 <div className="w-full flex flex-col gap-3">
                   <label
@@ -279,11 +320,17 @@ export default function Services() {
                   <div className="border-bayfi-grey text-[#868D96] placeholder:text-[#868D96] border py-4 px-3 rounded-lg bg-bayfi-grey-300">
                     <textarea
                       value={description}
-                      onChange={(e) => setDescription(e.target.value)}
+                      onChange={(e) => {
+                        setDescription(e.target.value);
+                        if (descriptionError) setDescriptionError("");
+                      }}
                       className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
                       rows={3}
                     ></textarea>
                   </div>
+                  {descriptionError && (
+                    <p className="text-red-700">{descriptionError}</p>
+                  )}
                 </div>
 
                 {/*  */}

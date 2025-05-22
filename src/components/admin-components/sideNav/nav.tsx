@@ -34,6 +34,11 @@ const navData = [
     navTitle: "Links",
   },
   {
+    icon: dollarSign,
+    navLink: "/admin-portfolio",
+    navTitle: "Portfolio",
+  },
+  {
     icon: calenderIcon,
     navLink: "/calendar",
     navTitle: "Calendar",

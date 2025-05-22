@@ -243,6 +243,7 @@ export default function Services() {
           Details
         </button>
       ),
+       right: true,
     },
   ];
 

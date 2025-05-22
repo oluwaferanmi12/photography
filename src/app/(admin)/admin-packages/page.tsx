@@ -142,10 +142,10 @@ export default function Services() {
       setDescription("");
       setTags("");
       setOpenCreateService(false);
-      fetchServices()
+      fetchServices();
     } catch (error) {
       console.log(error);
-      toast.error("error occured");
+      toast.error("An error occured while creating service");
     } finally {
       setCreateServiceLoading(false);
     }
@@ -161,7 +161,7 @@ export default function Services() {
       name: "Packages",
       minWidth: "500px",
       cell: (row) => (
-        <div className="flex  gap-2">
+        <div className="flex flex-wrap gap-2">
           {row.packages.map((pkg, idx) => (
             <div
               key={idx}
@@ -198,11 +198,11 @@ export default function Services() {
           className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
           onClick={() =>
             router.push(
-              `/admin-packages/${encodeURIComponent(row.serviceName)}?&description=${encodeURIComponent(
+              `/admin-packages/${encodeURIComponent(
+                row.serviceName
+              )}?&description=${encodeURIComponent(
                 row.description
-              )}&serviceId=${encodeURIComponent(
-                row.id
-              )}`
+              )}&serviceId=${encodeURIComponent(row.id)}`
             )
           }
         >
@@ -225,7 +225,7 @@ export default function Services() {
         buttonOnClick: () => setOpenCreateService(true),
       }}
     >
-      <Spin spinning={loading}>
+      <Spin spinning={loading} size="large">
         {services.length ? (
           <BaseDataTable title="Services" columns={columns} data={services} />
         ) : (

@@ -5,6 +5,7 @@ import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Lenis from "@studio-freight/lenis";
 import { useEffect } from "react";
+import { Toaster } from "sonner";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -52,6 +53,7 @@ export default function RootLayout({
         className={`antialiased ${geistMono.variable} ${playFair.variable} `}
       >
         <AntdRegistry>{children}</AntdRegistry>
+        <Toaster richColors  />
       </body>
     </html>
   );

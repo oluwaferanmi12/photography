@@ -11,14 +11,14 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     // get token from localStorage
-    let details: { accessToken: string } = { accessToken: "" };
+    let details: { token: string } = { token: "" };
     try {
       details = JSON.parse(localStorage.getItem("userDetails")!);
     } catch (e) {
       localStorage.removeItem("userDetails");
     }
     config.headers.Authorization = `Bearer ${
-      details?.accessToken ? details.accessToken : ""
+      details?.token ? details.token : ""
     }`;
     return config;
   },

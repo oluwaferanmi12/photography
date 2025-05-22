@@ -8,12 +8,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white h-screen min-h-screen">
+    <div className="bg-white h-dvh min-h-dvh">
       <Row className="h-full">
         <Col xs={4} className="bg-[#F6F4F0] border border-[#EFEEEE] h-full">
           <Nav />
         </Col>
-        <Col xs={20} className="py-4 overflow-y-auto">
+        <Col xs={20} className="py-4 pb-28 overflow-y-auto h-full">
           {children}
         </Col>
       </Row>

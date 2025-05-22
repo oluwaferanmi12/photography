@@ -1,27 +1,31 @@
+"use client";
+
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import icon from "@/assets/svgs/plans-icons.svg";
 import arrowRight from "@/assets/svgs/right_arrow.svg";
 import { Switch } from "antd";
 import { useRouter } from "next/navigation";
 
 type planCardInterface = {
-  planType: "" | "Basic" | "Classic" | "Premium";
+  planType: "";
   planAmount: number;
-  planBenefits: string[];
+  planDescription?: string;
+  planBenefits?: string[];
   variant?: "user" | "admin";
-  // planActiveness: boolean;
+  planActiveness?: boolean;
 };
 
 export const PlanCardProps: React.FC<planCardInterface> = ({
   planType,
   planAmount,
+  planDescription,
   planBenefits,
-  // planActiveness,
+  planActiveness,
   variant = "user",
 }) => {
-  const [isPlanActive, setIsPlanActive] = useState(true);
   const router = useRouter();
+  
   return (
     <div>
       <div
@@ -35,11 +39,11 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
           </span>
           {variant === "admin" && (
             <div className="flex items-center gap-4">
-              <p>{isPlanActive ? "Active" : "Inactive"}</p>
+              <p>{planActiveness ? "Active" : "Inactive"}</p>
               <Switch
-                defaultChecked={true}
-                checked={isPlanActive}
-                onChange={() => setIsPlanActive(!isPlanActive)}
+                defaultChecked={planActiveness}
+                checked={planActiveness}
+                // onChange={() => setIsPlanActive(!isPlanActive)}
                 className="custom_switch"
               />
             </div>
@@ -58,6 +62,7 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
           {variant === "user" ? "/ hr" : ""}
         </div>
         <div className="">
+          {planBenefits ?? planDescription}
           <ul
             className={`list-disc pl-6 ${
               variant === "user"
@@ -65,7 +70,7 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
                 : "text-[#F5F5F5]"
             }`}
           >
-            {planBenefits.map((list, index) => (
+            {planBenefits?.map((list, index) => (
               <li className="text-base" key={index}>
                 {list}
               </li>

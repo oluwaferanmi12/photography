@@ -15,11 +15,8 @@ export default function SinglePackage() {
   const [openAddPackage, setOpenAddPackage] = useState(false);
   const { singlePackageSlug } = useParams();
   const searchParams = useSearchParams();
-  // const status = searchParams.get("status");
-  const packagesJson = searchParams.get("packages");
   const description = searchParams.get("description");
   const serviceId = searchParams.get("serviceId");
-  const packages = packagesJson ? JSON.parse(packagesJson) : [];
 
   const [packageName, setPackageName] = useState("");
   const [packagePrice, setPackagePrice] = useState<number>();
@@ -28,18 +25,19 @@ export default function SinglePackage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [packageData, setPackageData] = useState([]);
 
-  const planBenefit = [
-    "Consultation call",
-    "60 min. session",
-    "1 - 2 outfit",
-    "max 4 people",
-    "10 images professional edited and delivered in an online gallery",
-    "$20 per additional image",
-    "$50 per additional person",
-    "$125 per additional hour",
-  ];
+  // const planBenefit = [
+  //   "Consultation call",
+  //   "60 min. session",
+  //   "1 - 2 outfit",
+  //   "max 4 people",
+  //   "10 images professional edited and delivered in an online gallery",
+  //   "$20 per additional image",
+  //   "$50 per additional person",
+  //   "$125 per additional hour",
+  // ];
 
   // SINGLE PACKAGES
+ 
   const singlePackage = async () => {
     setLoading(true);
     try {
@@ -47,11 +45,10 @@ export default function SinglePackage() {
         "get",
         `Admin/Services/packages/${serviceId}`
       );
-      toast.success("Package loaded Successfully");
       setPackageData(response.data.data.packages);
     } catch (error) {
       console.log(error);
-      toast.error("error occured");
+      toast.error("An error occured while loading data");
     } finally {
       setLoading(false);
     }
@@ -82,7 +79,7 @@ export default function SinglePackage() {
       singlePackage();
     } catch (error) {
       console.log(error);
-      toast.error("error occured");
+      toast.error("An error occured while creating package");
     } finally {
       setCreatePackageLoading(false);
     }
@@ -98,7 +95,7 @@ export default function SinglePackage() {
         buttonOnClick: () => setOpenAddPackage(true),
       }}
     >
-      <Spin spinning={loading}>
+      <Spin spinning={loading}  size="large">
         <div className="p-10 text-black">
           <div className="flex flex-col gap-8">
             <div>
@@ -111,7 +108,8 @@ export default function SinglePackage() {
             </div>
 
             <div>
-              {packageData.length ? (
+              {!loading ? 
+              packageData.length ? (
                 <Row gutter={[32, 32]}>
                   {packageData.map((pkg: any, idx: number) => (
                     <Col key={idx} xs={24} md={12} lg={8}>
@@ -129,7 +127,7 @@ export default function SinglePackage() {
                 <p className="text-lg text-red-500">
                   No Package is available for this service
                 </p>
-              )}
+              ): ""}
             </div>
           </div>
         </div>

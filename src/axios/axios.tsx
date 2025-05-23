@@ -47,15 +47,17 @@ instance.interceptors.request.use(
 export const apiCall = async (
   method: "post" | "get" | "put" | "delete",
   url: string,
-  body?: any
+  body?: any,
+  config?: any
 ) => {
-  if (method == "post") {
-    return await instance.post(url, body);
-  } else if (method == "get") {
-    return await instance.get(url);
-  } else if (method == "put") {
-    return await instance.put(url, body);
+  if (method === "post") {
+    return await instance.post(url, body, config);
+  } else if (method === "get") {
+    return await instance.get(url, config);
+  } else if (method === "put") {
+    return await instance.put(url, body, config);
   } else {
-    return await instance.delete(url);
+    return await instance.delete(url, config);
   }
 };
+

@@ -304,7 +304,7 @@ export default function Services() {
                     value={tags}
                     onChangeInput={(e) => {
                       setTags(e.target.value);
-                      if (tagsError) setTags("");
+                      if (tagsError) setTagsError("");
                     }}
                     variant="admin"
                     placeholder="Wedding"

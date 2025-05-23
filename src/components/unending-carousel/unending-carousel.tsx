@@ -96,12 +96,12 @@ export default function InfiniteCarousel() {
         {[...images, ...images].map((src, index) => (
           <div
             key={index}
-            className="mr-5 flex-none w-[250px] sm:w-[320px] md:w-[350px] h-[250px] md:h-[500px] lg:w-[1000px] lg:h-[600px] rounded-xl overflow-hidden shadow"
+            className="mr-5 flex-none h-[250px] md:h-[500px] lg:h-[600px] rounded-xl overflow-hidden shadow"
           >
             <Image
               src={src}
               alt={`carousel-${index}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         ))}

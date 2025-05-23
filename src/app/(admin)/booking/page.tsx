@@ -166,6 +166,7 @@ export default function Booking() {
           Details
         </button>
       ),
+      right: true,
     },
   ];
 

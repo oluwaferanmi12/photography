@@ -144,7 +144,7 @@ export default function Home() {
               backgroundImage: `url(${currentBg.src})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              filter: "grayscale(90%) contrast(1.0)",
+              // filter: "grayscale(90%) contrast(1.0)",
               transition: "opacity 500ms ease-in-out",
               borderRadius: isDesktop && scrolled ? "32px" : "0px",
               backgroundRepeat: "no-repeat",

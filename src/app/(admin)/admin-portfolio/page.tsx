@@ -13,16 +13,19 @@ import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitB
 import CustomSelect from "@/components/inputs/custom-select/custom-select";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface PortfolioProps {
   portfolioName: string;
   description: string;
   noOfPictures: string;
   status: boolean;
+  id: string
 }
 
 const data: PortfolioProps[] = [
   {
+    id: "1",
     portfolioName: "Weddings",
     description:
       "Stakeholders and users. Currently, I lead a dynamic 3-person design team ",
@@ -30,6 +33,7 @@ const data: PortfolioProps[] = [
     status: true,
   },
   {
+     id: "2",
     portfolioName: "Birthday",
     description:
       "Stakeholders and users. Currently, I lead a dynamic 3-person design team ",
@@ -37,6 +41,7 @@ const data: PortfolioProps[] = [
     status: true,
   },
   {
+     id: "3",
     portfolioName: "Weddings",
     description:
       "Stakeholders and users. Currently, I lead a dynamic 3-person design team ",
@@ -47,25 +52,16 @@ const data: PortfolioProps[] = [
 
 const AdminPortfolio = () => {
   const [openCreatePortfolio, setOpenCreatePortfolio] = useState(false);
-  const [selectedPortfolioDetail, setSelectedPortfolioDetail] =
-    useState<PortfolioProps | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [createPortfolioLoading, setCreatePortfolioLoading] = useState(false);
   const [portfolioName, setPortfolioName] = useState("");
-  const [tags, setTags] = useState("");
+  const [thumbnails, setThumbnails] = useState("");
   const [portfolioDescription, setPortfolioDescription] = useState("");
   const [selectedAttachedService, setSelectedAttachedService] = useState("");
   const [portfolioNameError, setPortfolioNameError] = useState("");
-  const [tagsError, setTagsError] = useState("");
-  const [portfolioDescriptionError, setPortfolioDescriptionError] =
-    useState("");
-  const [selectedAttachedServiceError, setSelectedAttachedServiceError] =
-    useState("");
-
-  const handleViewDetails = (row: PortfolioProps) => {
-    setSelectedPortfolioDetail(row);
-    setDrawerOpen(true);
-  };
+  const [thumbnailsError, setThumbnailError] = useState("");
+  const [portfolioDescriptionError, setPortfolioDescriptionError] = useState("");
+  const [selectedAttachedServiceError, setSelectedAttachedServiceError] = useState("");
+  const router = useRouter();
 
   const columns: TableColumn<PortfolioProps>[] = [
     {
@@ -115,8 +111,16 @@ const AdminPortfolio = () => {
       name: "",
       cell: (row) => (
         <button
-          className="flex cursor-pointer items-center gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
-          onClick={() => handleViewDetails(row)}
+          className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
+          onClick={() =>
+            router.push(
+              `/admin-packages/${encodeURIComponent(
+                row.portfolioName
+              )}?&description=${encodeURIComponent(
+                row.description
+              )}&serviceId=${encodeURIComponent(row.id)}`
+            )
+          }
         >
           <span>
             <Image src={eyeIcon} alt="img" />
@@ -150,11 +154,11 @@ const AdminPortfolio = () => {
       setPortfolioDescriptionError("");
     }
 
-    if (!tags.trim()) {
-      setTagsError("Please include tags");
+    if (!thumbnails.trim()) {
+      setThumbnailError("Please include thumbnails");
       hasError = true;
     } else {
-      setTagsError("");
+      setThumbnailError("");
     }
 
     if (!selectedAttachedService) {
@@ -173,14 +177,14 @@ const AdminPortfolio = () => {
       await apiCall("post", "/Portfolio/Add", {
         title: portfolioName,
         description: portfolioDescription,
-        tags: tags,
+        thumbnails: thumbnails,
         serviceId: selectedAttachedService,
       });
       toast.success("Service Created Successfully");
       setPortfolioName("");
       setPortfolioDescription("");
-      setTags("");
-      setSelectedAttachedService("")
+      setThumbnails("");
+      setSelectedAttachedService("");
       setOpenCreatePortfolio(false);
       // fetchServices();
     } catch (error) {
@@ -248,15 +252,15 @@ const AdminPortfolio = () => {
                   Thumbnail
                 </label>
                 <Input
-                  value={tags}
+                  value={thumbnails}
                   onChangeInput={(e) => {
-                    setTags(e.target.value);
-                    if (tagsError) setTagsError("");
+                    setThumbnails(e.target.value);
+                    if (thumbnailsError) setThumbnailError("");
                   }}
                   variant="admin"
                   placeholder="Wedding"
                 />
-                {tagsError && <p className="text-red-700">{tagsError}</p>}
+                {thumbnailsError && <p className="text-red-700">{thumbnailsError}</p>}
               </div>
               <div className="w-full flex flex-col gap-3">
                 <label

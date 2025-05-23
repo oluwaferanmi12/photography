@@ -1,6 +1,10 @@
-import { useRef } from "react";
-import { UploadIcon } from "lucide-react"; // or your custom icon
+"use client";
+
+
+import { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import uploadIcon from "@/assets/svgs/Admin_svgs/uploadIcon.svg";
+import Image from "next/image";
 
 type ThumbnailUploadProps = {
   onFileSelect: (file: File) => void;
@@ -9,11 +13,13 @@ type ThumbnailUploadProps = {
 
 export default function ThumbnailUpload({ onFileSelect, error }: ThumbnailUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       onFileSelect(file);
+      setPreview(URL.createObjectURL(file));
     }
   };
 
@@ -22,8 +28,15 @@ export default function ThumbnailUpload({ onFileSelect, error }: ThumbnailUpload
     const file = e.dataTransfer.files?.[0];
     if (file) {
       onFileSelect(file);
+      setPreview(URL.createObjectURL(file));
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
 
   return (
     <div className="space-y-3">
@@ -38,14 +51,27 @@ export default function ThumbnailUpload({ onFileSelect, error }: ThumbnailUpload
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
       >
-        <div className="bg-orange-100 rounded-full p-3">
-          <UploadIcon className="text-[#FF6929]" size={32} />
-        </div>
-        <p className="text-[#FF6929] text-sm font-bold">
-            Click to add files <span className="text-[#475467] font-normal">or drag and drop</span>
-        </p>
-        
-        <p className="text-[#475467] text-[12px]">PNG, JPG or GIF (max. 800x400px)</p>
+        {!preview ? (
+          <>
+            <div className="cursor-pointer rounded-full p-3">
+              <Image src={uploadIcon} alt="upload icon" />
+            </div>
+            <p className="text-[#FF6929] text-sm font-bold">
+              Click to add files{" "}
+              <span className="text-[#475467] font-normal">or drag and drop</span>
+            </p>
+            <p className="text-[#475467] text-[12px]">PNG, JPG or GIF (max. 800x400px)</p>
+          </>
+        ) : (
+          <div className="flex flex-col items-center gap-2">
+            <img
+              src={preview}
+              alt="Selected thumbnail"
+              className="h-40 rounded-md object-contain"
+            />
+            <p className="text-sm text-[#FF6929]">Image selected successfully</p>
+          </div>
+        )}
         <input
           type="file"
           accept="image/png, image/jpeg, image/gif"
@@ -55,7 +81,7 @@ export default function ThumbnailUpload({ onFileSelect, error }: ThumbnailUpload
         />
       </div>
 
-      {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
+      {error && <p className="text-sm text-red-700 mt-1">{error}</p>}
     </div>
   );
 }

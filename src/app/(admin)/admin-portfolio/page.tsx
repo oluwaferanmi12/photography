@@ -52,7 +52,7 @@ const AdminPortfolio = () => {
         <div className="flex items-center gap-3">
           {/* <div className="h-10 w-10 rounded-full overflow-hidden bg-[#f2f2f2]">
             <Image
-              src={`/${row.thumbnail}`} // Adjust the path if necessary
+              src={`http://olaitanakinlade.com/${row.thumbnail}`} // Adjust the path if necessary
               alt={row.portfolioName}
               width={40}
               height={40}
@@ -299,7 +299,10 @@ const AdminPortfolio = () => {
                   selectData={attachedServices}
                   defaultOption="Wedding"
                   selectValue={selectedAttachedService}
-                  setSelectedValue={setSelectedAttachedService}
+                  setSelectedValue={(value) => {
+                    setSelectedAttachedService(value);
+                    setSelectedAttachedServiceError(""); // Clear error when selected
+                  }}
                 />
                 {selectedAttachedServiceError && (
                   <p className="text-red-700">{selectedAttachedServiceError}</p>

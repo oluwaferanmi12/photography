@@ -6,10 +6,13 @@ import AdminPageLayout from "@/adminLayouts/admin-page-layout";
 import { Input } from "@/components/inputs/input";
 import "react-datepicker/dist/react-datepicker.css";
 import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitButtons/Button";
+import CalendarSchedule from "@/components/admin-components/sideNav/calendar-view/page";
 
-export default function Calendar() {
-  const [openBookingDetails, setOpenBookingDetails] = useState(false);
 
+
+export default function CalendarInterface() {
+  const [openCalendarDetails, setOpenCalendarDetails] = useState(false);
+ 
   return (
     <AdminPageLayout
       headerProps={{
@@ -17,16 +20,18 @@ export default function Calendar() {
         dashDescription:
           "Supercharge your workflow and handle repetitive tasks the apps you use every day.",
         buttonTitle: "Calendar settings",
-        buttonOnClick: () => setOpenBookingDetails(true),
+        buttonOnClick: () => setOpenCalendarDetails(true),
       }}
     >
-      <div className="p-4"></div>
+      <div className="p-4">
+        <CalendarSchedule />
+      </div>
 
       {/* BOOKING DETAILS DRAWER */}
       <ResponsiveDrawer
         title="Create a booking link"
-        open={openBookingDetails}
-        onClose={() => setOpenBookingDetails(false)}
+        open={openCalendarDetails}
+        onClose={() => setOpenCalendarDetails(false)}
       >
         <div className="pb-14">
           <form>

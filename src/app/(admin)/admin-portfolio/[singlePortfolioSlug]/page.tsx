@@ -4,43 +4,34 @@ import { useParams, useSearchParams } from "next/navigation";
 import AdminPageLayout from "@/adminLayouts/admin-page-layout";
 import { useEffect, useState } from "react";
 import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
-import { Input } from "@/components/inputs/input";
 import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitButtons/Button";
 import { Col, Row, Spin } from "antd";
-import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
 import Image from "next/image";
-import galleryThumbnail from "@/assets/svgs/Admin_svgs/single_gallery_thumbnail.svg"
+import galleryThumbnail from "@/assets/svgs/Admin_svgs/single_gallery_thumbnail.svg";
+import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
 
-export default function SinglePortfolio() {
-  const [openAddPackage, setOpenAddPackage] = useState(false);
-  const { singlePackageSlug } = useParams();
+export default function SingleUploadPortfolio() {
+  const [openUploadPortfolio, setOpenUploadPortfolio] = useState(false);
+  const { singlePortfolioSlug } = useParams();
   const searchParams = useSearchParams();
   const description = searchParams.get("description");
-  const serviceId = searchParams.get("serviceId");
-
-  const [packageName, setPackageName] = useState("");
-  const [packagePrice, setPackagePrice] = useState<number>();
-  const [packageDescription, setPackageDescription] = useState("");
-  const [packageNameError, setPackageNameError] = useState("");
-  const [packagePriceError, setPackagePriceError] = useState("");
-  const [packageDescriptionError, setPackageDescriptionError] = useState("");
-  const [createPackageLoading, setCreatePackageLoading] = useState(false);
+  const portfolioId = searchParams.get("portfolioId");
+  const [uploadPortfolioLoading, setUploadPortfolioLoading] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [packageData, setPackageData] = useState([]);
-
+  const [singlePortfolioData, setSinglePortfolioData] = useState([]);
+  const [thumbnails, setThumbnails] = useState<File[]>([]);
+  const [thumbnailError, setThumbnailError] = useState("");
 
   // SINGLE PACKAGES
 
-  const singlePackage = async () => {
+  const singleUploadPortfolio = async () => {
     setLoading(true);
     try {
-      const response = await apiCall(
-        "get",
-        `Admin/Services/packages/${serviceId}`
-      );
-      setPackageData(response.data.data.packages);
+      const response = await apiCall("get", `Portfolio/Images/${portfolioId}`);
+      console.log(response);
+      setSinglePortfolioData(response.data);
     } catch (error) {
       console.log(error);
       toast.error("An error occured while loading data");
@@ -50,60 +41,54 @@ export default function SinglePortfolio() {
   };
 
   useEffect(() => {
-    singlePackage();
+    singleUploadPortfolio();
   }, []);
 
-  // CREATE SERVICES
-  const handleCreatePackages = async (e: React.FormEvent<HTMLFormElement>) => {
+  // UPLOAD IMAGES
+  const handleUploadImages = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCreatePackageLoading(true);
+    setUploadPortfolioLoading(true);
 
     let isError = false;
 
-    if (!packageName.trim()) {
-      setPackageNameError("Please enter package name");
+    if (thumbnails.length === 0) {
+      setThumbnailError("Please upload at least one image");
       isError = true;
-    } else {
-      setPackageNameError("");
-    }
-    if (!packageDescription.trim()) {
-      setPackageDescriptionError("Please enter package description");
-      isError = true;
-    } else {
-      setPackageDescriptionError("");
-    }
-    if (!packagePrice) {
-      setPackagePriceError("Please enter package price");
-      isError = true;
-    } else {
-      setPackagePriceError("");
-    }
+    } else setThumbnailError("");
 
     if (isError) {
-      setCreatePackageLoading(false);
+      setUploadPortfolioLoading(false);
       return;
     }
 
     try {
-      await apiCall("post", "/Admin/Services/packages", {
-        serviceId: serviceId,
-        title: packageName,
-        description: packageDescription,
-        active: true,
-        details: "",
-        price: packagePrice,
+      const formData = new FormData();
+
+      // Ensure portfolioId is a string
+      if (!portfolioId) {
+        toast.error("Portfolio ID is missing.");
+        return;
+      }
+
+      formData.append("PortfolioId", portfolioId);
+
+      thumbnails.forEach((file) => {
+        formData.append("Images", file);
       });
-      toast.success("Package Created Successfully");
-      setPackageName("");
-      setPackageDescription("");
-      setPackagePrice(undefined);
-      setOpenAddPackage(false);
-      singlePackage();
+
+      await apiCall("post", "/Portfolio/Images", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      toast.success("Upload successful");
+      setThumbnails([]);
+      setOpenUploadPortfolio(false);
+      singleUploadPortfolio();
     } catch (error) {
-      console.log(error);
-      toast.error("An error occured while creating package");
+      console.error(error);
+      toast.error("An error occurred while uploading images");
     } finally {
-      setCreatePackageLoading(false);
+      setUploadPortfolioLoading(false);
     }
   };
 
@@ -113,20 +98,21 @@ export default function SinglePortfolio() {
       headerProps={{
         dashTitle: "Portfolio",
         showDescript: false,
-        buttonTitle: "Upload a picture a package",
-        buttonOnClick: () => setOpenAddPackage(true),
+        buttonTitle: "Upload a picture",
+        subNavTitle: "Gallery",
+        buttonOnClick: () => setOpenUploadPortfolio(true),
       }}
     >
       <Spin spinning={loading} size="large">
         <div className="p-10 text-black">
           <div className="flex flex-col gap-8">
             <div className="flex gap-2">
-                <div>
-                    <Image src={galleryThumbnail} alt="gallery_thumbnail" />
-                </div>
+              <div>
+                <Image src={galleryThumbnail} alt="gallery_thumbnail" />
+              </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-4">
-                  {singlePackageSlug}
+                  {singlePortfolioSlug}
                 </h3>
                 <p className="text-base font-normal text-[#333333]">
                   {description}
@@ -136,23 +122,31 @@ export default function SinglePortfolio() {
 
             <div>
               {!loading ? (
-                packageData.length ? (
+                singlePortfolioData.length ? (
                   <Row gutter={[32, 32]}>
-                    {packageData.map((pkg: any, idx: number) => (
-                      <Col key={idx} xs={24} md={12} lg={8}>
-                        <PlanCardProps
-                          variant="admin"
-                          planType={pkg.title}
-                          planAmount={pkg.price}
-                          planDescription={pkg.description}
-                          planActiveness={pkg.active}
-                        />
-                      </Col>
-                    ))}
+                    {singlePortfolioData.map(
+                      (image: {
+                        portfolioId: string;
+                        imageUrl: string;
+                        id: string;
+                      }) => (
+                        <Col key={image.id} xs={24} md={12} lg={8}>
+                          <div>
+                            <img
+                              src={`http://olaitanakinlade.com/${image.imageUrl}`}
+                              alt="portfolio image"
+                              // width={400} // or any width you want
+                              // height={300} // or adjust as needed
+                              // style={{ objectFit: "cover" }}
+                            />
+                          </div>
+                        </Col>
+                      )
+                    )}
                   </Row>
                 ) : (
                   <p className="text-lg text-red-500">
-                    No Package is available for this service
+                    No Image(s) uploaded
                   </p>
                 )
               ) : (
@@ -165,37 +159,25 @@ export default function SinglePortfolio() {
         {/* Create Service DRAWER */}
         <ResponsiveDrawer
           title="Upload image"
-          open={openAddPackage}
-          onClose={() => setOpenAddPackage(false)}
+          open={openUploadPortfolio}
+          onClose={() => setOpenUploadPortfolio(false)}
         >
           <div className="pb-14">
-            <form onSubmit={handleCreatePackages}>
+            <form onSubmit={handleUploadImages}>
               <div className="flex flex-col gap-4">
-                <div className="w-full flex flex-col gap-3">
-                  <label
-                    htmlFor="name"
-                    className="text-grayish-500 font-semibold"
-                  >
-                    Package name
-                  </label>
-                  <Input
-                    value={packageName}
-                    onChangeInput={(e) => {
-                      setPackageName(e.target.value);
-                      if (packageNameError) setPackageNameError("");
-                    }}
-                    variant="admin"
-                    placeholder="Basic"
-                  />
-                  {packageNameError && (
-                    <p className="text-red-700">{packageNameError}</p>
-                  )}
-                </div>
+                <ThumbnailUpload
+                  onFileSelect={(files) => {
+                    setThumbnails(files);
+                    setThumbnailError("");
+                  }}
+                  error={thumbnailError}
+                  multiple={true}
+                />
                 {/*  */}
               </div>
               <div className="mt-5">
                 <AdminSubmitButton
-                  loading={createPackageLoading}
+                  loading={uploadPortfolioLoading}
                   text="upload picture"
                 />
               </div>

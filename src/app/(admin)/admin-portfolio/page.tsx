@@ -98,11 +98,11 @@ const AdminPortfolio = () => {
           className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
           onClick={() =>
             router.push(
-              `/admin-packages/${encodeURIComponent(
+              `/admin-portfolio/${encodeURIComponent(
                 row.portfolioName
               )}?&description=${encodeURIComponent(
                 row.description
-              )}&serviceId=${encodeURIComponent(row.id)}`
+              )}&portfolioId=${encodeURIComponent(row.id)}`
             )
           }
         >
@@ -260,8 +260,8 @@ const AdminPortfolio = () => {
               </div>
               <div className="w-full flex flex-col gap-3">
                 <ThumbnailUpload
-                  onFileSelect={(file) => {
-                    setThumbnail(file);
+                  onFileSelect={(files) => {
+                    setThumbnail(files[0] || null); // ✅ Only take the first file
                     setThumbnailError("");
                   }}
                   error={thumbnailError}

@@ -122,6 +122,7 @@ export default function SinglePackage() {
         dashTitle: "Services and Packages",
         showDescript: false,
         buttonTitle: "Add a package",
+        subNavTitle: "Packages",
         buttonOnClick: () => setOpenAddPackage(true),
       }}
     >

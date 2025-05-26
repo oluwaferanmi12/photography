@@ -11,11 +11,13 @@ export const AdminHeader = ({
   dashDescription,
   showDescript = true,
   buttonTitle,
+  subNavTitle,
   buttonOnClick,
 }: {
   dashTitle: string;
   dashDescription?: string;
   showDescript?: boolean;
+  subNavTitle?: string;
   buttonTitle: string;
   buttonOnClick: () => void;
 }) => {
@@ -34,13 +36,13 @@ export const AdminHeader = ({
           ) : (
             <div className="flex gap-5 items-center mt-3">
               <span>
-                <Image className="cursor-pointer" onClick={() => router.push("/admin-packages")} src={breadcrumbHome} alt="breadcrumb" />
+                <Image className="cursor-pointer" onClick={() => router.back()} src={breadcrumbHome} alt="breadcrumb" />
               </span>
               <span>
                 <Image src={chevron_right} alt="chevron_right" />
               </span>
               <div className=" rounded-lg bg-[#F2F2F2] text-[#131313] py-2 px-3 text-base font-semibold flex justify-center items-center">
-                Packages
+                {subNavTitle}
               </div>
             </div>
           )}

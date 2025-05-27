@@ -9,6 +9,7 @@ type AdminPageLayoutProps = {
     dashTitle: string;
     dashDescription?: string;
     showDescript?: boolean;
+    subNavTitle?: string;
     buttonTitle: string;
     buttonOnClick: () => void;
   };

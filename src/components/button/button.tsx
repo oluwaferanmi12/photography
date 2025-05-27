@@ -10,6 +10,7 @@ interface ButtonTypes {
   link?: string;
   widthFull?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  textColor?: string;
 }
 
 const Button = ({
@@ -20,6 +21,7 @@ const Button = ({
   text,
   link,
   widthFull,
+  textColor,
   onClick,
 }: ButtonTypes) => {
   const baseStyles = `px-6 py-2 ${
@@ -28,7 +30,7 @@ const Button = ({
 
   const sizeStyles = {
     small: "px-6 py-2",
-    medium: "px-8 py-3",
+    medium: "px-10 py-2",
     large: "px-10 py-4",
   };
 
@@ -47,7 +49,7 @@ const Button = ({
   const ButtonComponent = (
     <button
       onClick={onClick}
-      className={`${baseStyles}   ${sizeStyles[size]} ${variantStyles[variant]} `}
+      className={`${baseStyles} ${textColor}   ${sizeStyles[size]} ${variantStyles[variant]} `}
     >
       {text}
       {children}

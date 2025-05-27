@@ -377,14 +377,15 @@ export default function Home() {
             <p className="text-light-brown text-2xl">
               Swipe to see before & after magic
             </p>
-            <div className="p-4 border mt-14 rounded-3xl dark:bg-neutral-900 bg-neutral-100  border-neutral-200 dark:border-neutral-800 px-4">
+            <div className=" p-1 3xl:p-4 border mt-14 rounded-3xl dark:bg-neutral-900 bg-neutral-100  border-neutral-200 dark:border-neutral-800 3xl:px-4 3xl:w-[900px] h-[80vh] 3xl:h-[100vh]">
               <Compare
                 firstImage={beforeImage}
                 secondImage={afterImage}
-                firstImageClassName="object-cover object-left-top w-full"
-                secondImageClassname="object-cover object-left-top w-full"
-                className="h-[250px] w-full md:h-[500px] md:w-[500px] lg:h-[500px] lg:w-[800px]"
+                firstImageClassName="object-cover w-full"
+                secondImageClassname="object-cover w-full"
+                className="w-full h-full"
                 slideMode="hover"
+                autoplay={true}
               />
             </div>
           </div>

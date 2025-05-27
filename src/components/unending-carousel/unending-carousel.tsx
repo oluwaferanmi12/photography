@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, animate } from 'framer-motion';
-import Image from 'next/image';
+import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, animate } from "framer-motion";
+import Image from "next/image";
 
 // Your images
 import HS1 from "@/assets/images/wedding/card1.jpg";
@@ -12,7 +12,7 @@ import HS4 from "@/assets/images/wedding/card4.jpg";
 import HS5 from "@/assets/images/wedding/card5.jpg";
 import HS6 from "@/assets/images/wedding/card6.jpg";
 import HS7 from "@/assets/images/wedding/card7.jpg";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const images = [HS1, HS2, HS4, HS5, HS6, HS3, HS7];
 
@@ -21,30 +21,46 @@ const GAP = 20; // px
 const IMAGE_WIDTH = 350; // desktop size
 const AUTOPLAY_INTERVAL = 4000;
 
-
 export default function InfiniteCarousel() {
   const x = useMotionValue(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [position, setPosition] = useState(0);
+  const [imageWidth, setImageWidth] = useState(350); // Default desktop size
 
-  const step = IMAGE_WIDTH + GAP;
+  const step = imageWidth + GAP;
   const visibleSetLength = images.length;
   const totalSlides = visibleSetLength * 2;
   const maxOffset = step * visibleSetLength;
 
-  // === Auto-play every 3s ===
+  // Update image width on resize for responsiveness
+  useEffect(() => {
+    const updateWidth = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 640) {
+        setImageWidth(screenWidth - 40); // padding for mobile
+      } else if (screenWidth < 1024) {
+        setImageWidth(300);
+      } else {
+        setImageWidth(350);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       moveNext();
     }, AUTOPLAY_INTERVAL);
     return () => clearInterval(intervalRef.current!);
-  }, []);
+  }, [step]);
 
-  // === Step animation ===
   useEffect(() => {
     const controls = animate(x, -position, {
       duration: 0.6,
-      ease: 'easeInOut',
+      ease: "easeInOut",
     });
     return controls.stop;
   }, [position, x]);
@@ -53,27 +69,24 @@ export default function InfiniteCarousel() {
     setPosition((prev) => {
       const next = prev + step;
       if (next >= maxOffset) {
-        x.set(0); // reset instantly to fake infinite loop
+        x.set(0);
         return step;
-      } else {
-        return next;
       }
+      return next;
     });
   };
 
   const movePrev = () => {
     setPosition((prev) => {
       if (prev - step < 0) {
-        x.set(-maxOffset); // jump to second set
+        x.set(-maxOffset);
         return maxOffset - step;
-      } else {
-        return prev - step;
       }
+      return prev - step;
     });
   };
-
   return (
-   <div className="relative w-full overflow-hidden  mt-28 lg:mt-48">
+    <div className="relative w-full mt-20 overflow-hidden">
       {/* Chevron Controls */}
       <button
         onClick={movePrev}
@@ -89,14 +102,11 @@ export default function InfiniteCarousel() {
       </button>
 
       {/* Carousel */}
-      <motion.div
-        className="flex w-max"
-        style={{ x }}
-      >
+      <motion.div className="flex w-max" style={{ x }}>
         {[...images, ...images].map((src, index) => (
           <div
             key={index}
-            className="mr-5 flex-none h-[250px] md:h-[500px] lg:h-[600px] rounded-xl overflow-hidden shadow"
+            className="mr-5 flex-none h-[650px] md:h-[500px] lg:h-[600px] rounded-xl overflow-hidden shadow"
           >
             <Image
               src={src}

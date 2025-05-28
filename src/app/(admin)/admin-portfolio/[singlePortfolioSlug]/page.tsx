@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useParams, useSearchParams } from "next/navigation";
@@ -11,6 +12,12 @@ import { toast } from "sonner";
 import Image from "next/image";
 import galleryThumbnail from "@/assets/svgs/Admin_svgs/single_gallery_thumbnail.svg";
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
+import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
+
+
+
+
+
 
 export default function SingleUploadPortfolio() {
   const [openUploadPortfolio, setOpenUploadPortfolio] = useState(false);
@@ -111,9 +118,11 @@ export default function SingleUploadPortfolio() {
                 <Image src={galleryThumbnail} alt="gallery_thumbnail" />
               </div>
               <div>
-                <h3 className="text-2xl font-semibold mb-4">
-                  {singlePortfolioSlug}
-                </h3>
+                {typeof singlePortfolioSlug === "string" && (
+                  <h3 className="text-2xl font-semibold mb-4">
+                    {decodeURIComponent(singlePortfolioSlug)}
+                  </h3>
+                )}
                 <p className="text-base font-normal text-[#333333]">
                   {description}
                 </p>
@@ -131,23 +140,25 @@ export default function SingleUploadPortfolio() {
                         id: string;
                       }) => (
                         <Col key={image.id} xs={24} md={12} lg={8}>
-                          <div>
+                          <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
                             <img
                               src={`http://olaitanakinlade.com/${image.imageUrl}`}
                               alt="portfolio image"
+                              className="rounded-3xl object-cover w-full h-full"
                               // width={400} // or any width you want
                               // height={300} // or adjust as needed
                               // style={{ objectFit: "cover" }}
                             />
+                            <span className="absolute right-14 bottom-14">
+                              <Image src={trashBin} className="cursor-pointer" alt="bin" />
+                            </span>
                           </div>
                         </Col>
                       )
                     )}
                   </Row>
                 ) : (
-                  <p className="text-lg text-red-500">
-                    No Image(s) uploaded
-                  </p>
+                  <p className="text-lg text-red-500">No Image(s) uploaded</p>
                 )
               ) : (
                 ""

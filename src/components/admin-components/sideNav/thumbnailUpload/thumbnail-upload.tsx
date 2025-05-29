@@ -9,12 +9,14 @@ type ThumbnailUploadProps = {
   onFileSelect: (files: File[]) => void;
   error?: string;
   multiple?: boolean; // new prop
+  labelTitle?: string
 };
 
 export default function ThumbnailUpload({
   onFileSelect,
   error,
   multiple = false,
+  labelTitle = "Thumbnail"
 }: ThumbnailUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previews, setPreviews] = useState<string[]>([]);
@@ -45,7 +47,7 @@ export default function ThumbnailUpload({
   return (
     <div className="space-y-3">
       <label className="block text-sm font-medium text-gray-700">
-        Thumbnail
+        {labelTitle}
       </label>
 
       <div

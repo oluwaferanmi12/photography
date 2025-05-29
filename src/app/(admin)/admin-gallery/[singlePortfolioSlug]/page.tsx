@@ -6,7 +6,7 @@ import AdminPageLayout from "@/adminLayouts/admin-page-layout";
 import { useEffect, useState } from "react";
 import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
 import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitButtons/Button";
-import { Col, Row, Spin } from "antd";
+import { Col, Row, Spin, Switch } from "antd";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -14,17 +14,12 @@ import galleryThumbnail from "@/assets/svgs/Admin_svgs/single_gallery_thumbnail.
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
 import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
 
-
-
-
-
-
 export default function SingleAdminGallery() {
   const [openUploadPortfolio, setOpenUploadPortfolio] = useState(false);
   const { singlePortfolioSlug } = useParams();
   const searchParams = useSearchParams();
   const description = searchParams.get("description");
-  const portfolioId = searchParams.get("portfolioId");
+  const portfolioId = searchParams.get("clientId");
   const [uploadPortfolioLoading, setUploadPortfolioLoading] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [singlePortfolioData, setSinglePortfolioData] = useState([]);
@@ -103,7 +98,7 @@ export default function SingleAdminGallery() {
     <AdminPageLayout
       showFilters={false}
       headerProps={{
-        dashTitle: "Portfolio",
+        dashTitle: "Client's Gallery",
         showDescript: false,
         buttonTitle: "Upload a picture",
         subNavTitle: "Gallery",
@@ -150,7 +145,11 @@ export default function SingleAdminGallery() {
                               // style={{ objectFit: "cover" }}
                             />
                             <span className="absolute right-14 bottom-14">
-                              <Image src={trashBin} className="cursor-pointer" alt="bin" />
+                              <Image
+                                src={trashBin}
+                                className="cursor-pointer"
+                                alt="bin"
+                              />
                             </span>
                           </div>
                         </Col>
@@ -177,6 +176,7 @@ export default function SingleAdminGallery() {
             <form onSubmit={handleUploadImages}>
               <div className="flex flex-col gap-4">
                 <ThumbnailUpload
+                  labelTitle="Gallery images"
                   onFileSelect={(files) => {
                     setThumbnails(files);
                     setThumbnailError("");
@@ -185,7 +185,14 @@ export default function SingleAdminGallery() {
                   multiple={true}
                 />
                 {/*  */}
+                <div className="flex justify-between items-center">
+                  <p className="text-black text-sm">Has Watermark</p>
+                  <div>
+                    <Switch defaultChecked={true} className="custom-switch" />
+                  </div>
+                </div>
               </div>
+
               <div className="mt-5">
                 <AdminSubmitButton
                   loading={uploadPortfolioLoading}

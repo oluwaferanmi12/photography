@@ -16,9 +16,9 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
 
-interface PortfolioProps {
+interface ClientProps {
   id: string;
-  portfolioName: string;
+  clientName: string;
   description: string;
   noOfPictures: string;
   status: boolean;
@@ -26,34 +26,34 @@ interface PortfolioProps {
 }
 
 const AdminGallery = () => {
-  const [openCreatePortfolio, setOpenCreatePortfolio] = useState(false);
-  const [createPortfolioLoading, setCreatePortfolioLoading] = useState(false);
-  const [portfolioName, setPortfolioName] = useState("");
+  const [openCreateGallery, setOpenCreateGallery] = useState(false);
+  const [createGalleryLoading, setCreateGalleryLoading] = useState(false);
+  const [clientName, setClientName] = useState("");
   const [thumbnail, setThumbnail] = useState<File | null>(null);
-  const [portfolioDescription, setPortfolioDescription] = useState("");
+  const [clientDescription, setClientDescription] = useState("");
   const [selectedAttachedService, setSelectedAttachedService] = useState("");
-  const [portfolioNameError, setPortfolioNameError] = useState("");
+  const [clientNameError, setClientNameError] = useState("");
   const [thumbnailError, setThumbnailError] = useState("");
-  const [portfolioDescriptionError, setPortfolioDescriptionError] =
+  const [clientDescriptionError, setClientDescriptionError] =
     useState("");
   const [selectedAttachedServiceError, setSelectedAttachedServiceError] =
     useState("");
   const [loading, setLoading] = useState<boolean>(true);
-  const [portfolioData, setPortfolioData] = useState<PortfolioProps[]>([]);
+  const [clientData, setClientData] = useState<ClientProps[]>([]);
   const [attachedServices, setAttachedServices] = useState<
     { label: string; value: string }[]
   >([]);
   const router = useRouter();
 
-  const columns: TableColumn<PortfolioProps>[] = [
+  const columns: TableColumn<ClientProps>[] = [
     {
-      name: "Portfolio name",
+      name: "Client name",
       cell: (row) => (
         <div className="flex items-center gap-3">
           {/* <div className="h-10 w-10 rounded-full overflow-hidden bg-[#f2f2f2]">
             <Image
               src={`http://olaitanakinlade.com/${row.thumbnail}`} // Adjust the path if necessary
-              alt={row.portfolioName}
+              alt={row.clientName}
               width={40}
               height={40}
               className="object-cover h-full w-full"
@@ -61,7 +61,7 @@ const AdminGallery = () => {
           </div> */}
           <div>
             <div className="font-medium text-[#292D32]">
-              {row.portfolioName}
+              {row.clientName}
             </div>
           </div>
         </div>
@@ -98,11 +98,11 @@ const AdminGallery = () => {
           className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
           onClick={() =>
             router.push(
-              `/admin-portfolio/${encodeURIComponent(
-                row.portfolioName
+              `/admin-gallery/${encodeURIComponent(
+                row.clientName
               )}?&description=${encodeURIComponent(
                 row.description
-              )}&portfolioId=${encodeURIComponent(row.id)}`
+              )}&clientId=${encodeURIComponent(row.id)}`
             )
           }
         >
@@ -118,19 +118,19 @@ const AdminGallery = () => {
   ];
 
   // Fetch services and their packages
-  const fetchPortfolio = async () => {
+  const fetchClient = async () => {
     try {
-      const portfolioRes = await apiCall("get", "/Portfolio");
-      const formattedData: PortfolioProps[] = portfolioRes.data.map(
+      const clientRes = await apiCall("get", "/Portfolio");
+      const formattedData: ClientProps[] = clientRes.data.map(
         (item: any) => ({
           id: item.id,
-          portfolioName: item.title,
+          clientName: item.title,
           description: item.description,
           noOfPictures: item.imageCount.toString(),
           status: item.isActive,
         })
       );
-      setPortfolioData(formattedData);
+      setClientData(formattedData);
     } catch (error) {
       console.error("Error fetching services:", error);
       toast.error("Failed to load services");
@@ -139,22 +139,22 @@ const AdminGallery = () => {
     }
   };
 
-  // CREATE Portfolio
-  const handleCreatePortfolio = async (e: React.FormEvent<HTMLFormElement>) => {
+  // CREATE Client
+  const handleCreateClient = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCreatePortfolioLoading(true);
+    setCreateGalleryLoading(true);
 
     let hasError = false;
 
-    if (!portfolioName.trim()) {
-      setPortfolioNameError("Please include portfolio name");
+    if (!clientName.trim()) {
+      setClientNameError("Please include client name");
       hasError = true;
-    } else setPortfolioNameError("");
+    } else setClientNameError("");
 
-    if (!portfolioDescription.trim()) {
-      setPortfolioDescriptionError("Please include service description");
+    if (!clientDescription.trim()) {
+      setClientDescriptionError("Please include service description");
       hasError = true;
-    } else setPortfolioDescriptionError("");
+    } else setClientDescriptionError("");
 
     if (!thumbnail) {
       setThumbnailError("Please upload a thumbnail");
@@ -167,14 +167,14 @@ const AdminGallery = () => {
     } else setSelectedAttachedServiceError("");
 
     if (hasError) {
-      setCreatePortfolioLoading(false);
+      setCreateGalleryLoading(false);
       return;
     }
 
     try {
       const formData = new FormData();
-      formData.append("Title", portfolioName);
-      formData.append("Description", portfolioDescription);
+      formData.append("Title", clientName);
+      formData.append("Description", clientDescription);
       formData.append("ServiceId", selectedAttachedService);
       if (thumbnail) {
         formData.append("Thumbnail", thumbnail as File);
@@ -184,18 +184,18 @@ const AdminGallery = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      toast.success("Portfolio created successfully");
-      setPortfolioName("");
-      setPortfolioDescription("");
+      toast.success("Client created successfully");
+      setClientName("");
+      setClientDescription("");
       setThumbnail(null);
       setSelectedAttachedService("");
-      setOpenCreatePortfolio(false);
-      fetchPortfolio();
+      setOpenCreateGallery(false);
+      fetchClient();
     } catch (error) {
       console.log(error);
-      toast.error("An error occurred while creating the portfolio");
+      toast.error("An error occurred while creating the client");
     } finally {
-      setCreatePortfolioLoading(false);
+      setCreateGalleryLoading(false);
     }
   };
 
@@ -213,55 +213,75 @@ const AdminGallery = () => {
   };
 
   useEffect(() => {
-    fetchPortfolio();
+    fetchClient();
     fetchServices();
   }, []);
 
   return (
     <AdminPageLayout
       headerProps={{
-        dashTitle: "Portfolio",
+        dashTitle: "Client's gallery",
         dashDescription:
           "Supercharge your workflow and handle repetitive tasks the apps you use every day.",
-        buttonTitle: "Create a portfolio",
-        buttonOnClick: () => setOpenCreatePortfolio(true),
+        buttonTitle: "Create a gallery",
+        buttonOnClick: () => setOpenCreateGallery(true),
       }}
     >
-      <BaseDataTable columns={columns} data={portfolioData} />
+      <BaseDataTable columns={columns} data={clientData} />
 
       {/* Create Service DRAWER */}
       <ResponsiveDrawer
-        title="Create a portfolio"
-        open={openCreatePortfolio}
-        onClose={() => setOpenCreatePortfolio(false)}
+        title="Create a client"
+        open={openCreateGallery}
+        onClose={() => setOpenCreateGallery(false)}
       >
         <div className="pb-14">
-          <form onSubmit={handleCreatePortfolio}>
+          <form onSubmit={handleCreateClient}>
             <div className="flex flex-col gap-4">
               <div className="w-full flex flex-col gap-3">
                 <label
                   htmlFor="name"
                   className="text-grayish-500 font-semibold"
                 >
-                  Portfolio name
+                  Client&apos;s name
                 </label>
                 <Input
-                  value={portfolioName}
+                  value={clientName}
                   onChangeInput={(e) => {
-                    setPortfolioName(e.target.value);
-                    if (portfolioNameError) setPortfolioNameError("");
+                    setClientName(e.target.value);
+                    if (clientNameError) setClientNameError("");
                   }}
                   variant="admin"
-                  placeholder="Basic"
+                  placeholder="Desire Birthday"
                 />
-                {portfolioNameError && (
-                  <p className="text-red-700">{portfolioNameError}</p>
+                {clientNameError && (
+                  <p className="text-red-700">{clientNameError}</p>
+                )}
+              </div>
+              <div className="w-full flex flex-col gap-3">
+                <label
+                  htmlFor="name"
+                  className="text-grayish-500 font-semibold"
+                >
+                  Email
+                </label>
+                <Input
+                  value={clientName}
+                  onChangeInput={(e) => {
+                    setClientName(e.target.value);
+                    if (clientNameError) setClientNameError("");
+                  }}
+                  variant="admin"
+                  placeholder="desire@example.com"
+                />
+                {clientNameError && (
+                  <p className="text-red-700">{clientNameError}</p>
                 )}
               </div>
               <div className="w-full flex flex-col gap-3">
                 <ThumbnailUpload
                   onFileSelect={(files) => {
-                    setThumbnail(files[0] || null); // ✅ Only take the first file
+                    setThumbnail(files[0] || null);
                     setThumbnailError("");
                   }}
                   error={thumbnailError}
@@ -276,28 +296,28 @@ const AdminGallery = () => {
                 </label>
                 <div className="border-bayfi-grey text-[#868D96] placeholder:text-[#868D96] border py-4 px-3 rounded-lg bg-bayfi-grey-300">
                   <textarea
-                    value={portfolioDescription}
-                    placeholder="Portfolio description"
+                    value={clientDescription}
+                    placeholder="client&apos;s description"
                     onChange={(e) => {
-                      setPortfolioDescription(e.target.value);
-                      if (portfolioDescriptionError)
-                        setPortfolioDescriptionError("");
+                      setClientDescription(e.target.value);
+                      if (clientDescriptionError)
+                        setClientDescriptionError("");
                     }}
                     className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
                     rows={3}
                   ></textarea>
                 </div>
-                {portfolioDescriptionError && (
-                  <p className="text-red-700">{portfolioDescriptionError}</p>
+                {clientDescriptionError && (
+                  <p className="text-red-700">{clientDescriptionError}</p>
                 )}
               </div>
 
               <div className="w-full flex flex-col gap-3">
-                <label htmlFor="phone">Attach service</label>
+                <label htmlFor="phone">Number of edited images</label>
                 <CustomSelect
                   variant="admin"
                   selectData={attachedServices}
-                  defaultOption="Wedding"
+                  defaultOption="20"
                   selectValue={selectedAttachedService}
                   setSelectedValue={(value) => {
                     setSelectedAttachedService(value);
@@ -313,8 +333,8 @@ const AdminGallery = () => {
             </div>
             <div className="mt-5">
               <AdminSubmitButton
-                loading={createPortfolioLoading}
-                text="Create portfolio"
+                loading={createGalleryLoading}
+                text="Create Gallery"
               />
             </div>
           </form>

@@ -25,7 +25,7 @@ interface PortfolioProps {
   thumbnail: string;
 }
 
-const AdminPortfolio = () => {
+const AdminGallery = () => {
   const [openCreatePortfolio, setOpenCreatePortfolio] = useState(false);
   const [createPortfolioLoading, setCreatePortfolioLoading] = useState(false);
   const [portfolioName, setPortfolioName] = useState("");
@@ -324,4 +324,4 @@ const AdminPortfolio = () => {
   );
 };
 
-export default AdminPortfolio;
+export default AdminGallery;

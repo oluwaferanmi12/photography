@@ -19,7 +19,7 @@ import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
 
 
 
-export default function SingleUploadPortfolio() {
+export default function SingleAdminGallery() {
   const [openUploadPortfolio, setOpenUploadPortfolio] = useState(false);
   const { singlePortfolioSlug } = useParams();
   const searchParams = useSearchParams();

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import bas from "@/assets/svgs/BAS_modal_icon.svg";
@@ -7,6 +7,7 @@ import Button from "@/components/button/button";
 import CustomSelect from "../inputs/custom-select/custom-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { apiCall } from "@/axios/axios";
 
 export const ContactFrom = ({
   onSubmit,
@@ -20,16 +21,36 @@ export const ContactFrom = ({
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<Date | null>(null);
+  const [services, setServices] = useState<
+    { label: string; value: string }[]
+  >([]);
 
-  const services = [
-    { label: "Weddings", value: "wedding" },
-    { label: "Birthdays", value: "birthday" },
-    { label: "Videography", value: "videography" },
-    { label: "Kids & infants", value: "kids" },
-    { label: "Lifestyle & events", value: "lifestyle" },
-    { label: "Make up & Gele", value: "makeup" },
-    { label: "Family", value: "family" },
-  ];
+
+const fetchServices = async () => {
+    try {
+      const res = await apiCall("get", "/Admin/Services");
+      const services = res.data.map((service: any) => ({
+        label: service.title,
+        value: service.id,
+      }));
+      setServices(services);
+    } catch (error) {
+    }
+  };
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
+  // const services = [
+  //   { label: "Weddings", value: "wedding" },
+  //   { label: "Birthdays", value: "birthday" },
+  //   { label: "Videography", value: "videography" },
+  //   { label: "Kids & infants", value: "kids" },
+  //   { label: "Lifestyle & events", value: "lifestyle" },
+  //   { label: "Make up & Gele", value: "makeup" },
+  //   { label: "Family", value: "family" },
+  // ];
 
   const packages = [
     { label: "Basic", value: "Basic ($400 plus tax)" },

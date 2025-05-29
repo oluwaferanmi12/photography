@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
@@ -19,12 +19,42 @@ import { PlanCards } from "@/components/plans-card/PlanCards";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
 import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
+import { apiCall } from "@/axios/axios";
+
+interface PackageOption {
+  name: string;
+  price: string;
+  description: string;
+}
+
+interface Service {
+  id: string;
+  serviceName: string;
+  packages: PackageOption[];
+  status: boolean;
+  lastUpdated: string;
+  description: string;
+}
 
 const Portfolio = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [isSessionFormModalOpen, setIsSessionFormModalOpen] = useState(false);
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+
+
+  const serviceIcons: { [key: string]: any } = {
+    wedding: wedding_icon,
+    birthday: birthday_icon,
+    videography: videography_icon,
+    kids: kids_icon,
+    lifestyle: lifestyle_icon,
+    makeup: makeup_icon,
+    family: family_icon,
+  };
 
   const showModal = (service) => {
     setSelectedService(service);
@@ -71,6 +101,62 @@ const Portfolio = () => {
     "$125 per additional hour",
   ];
 
+  // Fetch services and their packages
+  const fetchServices = async () => {
+    try {
+      const serviceRes = await apiCall("get", "/Admin/Services");
+      const servicesData = serviceRes.data;
+
+      console.log("I am service data loooking for service", servicesData);
+
+      // Fetch packages for all services concurrently
+      const enrichedServices = await Promise.all(
+        servicesData.map(async (service: any) => {
+          try {
+            const packageRes = await apiCall(
+              "get",
+              `/Admin/Services/packages/${service.id}`
+            );
+
+            const packages = packageRes?.data?.data?.packages || [];
+
+            return {
+              id: service.id,
+              serviceName: service.title,
+              description: service.description,
+              packages: packages.map((pkg: any) => ({
+                name: pkg.title,
+                price: pkg.price,
+                description: pkg.description,
+              })),
+              status: true, // Or derive from API if available
+              lastUpdated: new Date(service.lastModified).toDateString(),
+            };
+          } catch (err) {
+            console.error("Error fetching packages:", err);
+            return {
+              id: service.id,
+              serviceName: service.title,
+              description: service.description,
+              packages: [],
+              status: true,
+              lastUpdated: new Date(service.lastModified).toDateString(),
+            };
+          }
+        })
+      );
+
+      setServices(enrichedServices);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
@@ -99,7 +185,7 @@ const Portfolio = () => {
             </div>
           </div>
           <div className="scroller !py-28" ref={scrollerRef}>
-            <ul
+            {/* <ul
               className={`scroller__inner ${
                 isSessionFormModalOpen || isThankYouModalOpen
                   ? "pause-scroll"
@@ -249,83 +335,64 @@ const Portfolio = () => {
                 </span>
                 <p className="text-white-100 text-xl">Family</p>
               </li>
+            </ul> */}
+
+            <ul
+              className={`scroller__inner ${
+                isSessionFormModalOpen || isThankYouModalOpen
+                  ? "pause-scroll"
+                  : ""
+              }`}
+            >
+              {[...services, ...services].map((service, index) => {
+                const iconKey = service.serviceName.toLowerCase();
+                const icon = serviceIcons[iconKey];
+
+                return (
+                  <li
+                    key={`${service.serviceName}-${index}`}
+                    onClick={() => showModal(service.serviceName)}
+                    className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center"
+                  >
+                    {icon && (
+                      <span>
+                        <Image
+                          className="w-6 h-6"
+                          src={icon}
+                          alt={`${iconKey}_icon`}
+                        />
+                      </span>
+                    )}
+                    <p className="text-white-100 text-xl">
+                      {service.serviceName}
+                    </p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           {/* Third section */}
           <div className="pb-36 flex flex-col gap-20">
-            <div>
-              <h3 className="text-6xl lg:text-7xl">Weddings</h3>
-              <div className="mt-10">
-                <Row gutter={[32, 32]}>
-                  {packages.map((pkg: any, idx: number) => (
-                    <Col key={idx} xs={24} md={12} lg={8}>
-                      <PlanCardProps
-                        variant="user"
-                        planType={pkg.name}
-                        planAmount={pkg.price}
-                        planBenefits={planBenefit}
-                      />
-                    </Col>
-                  ))}
-                </Row>
+            {services.map((item, idx) => (
+              <div key={idx}>
+                <h3 className="text-6xl lg:text-7xl">{item.serviceName}</h3>
+                <div className="mt-10">
+                  <Row gutter={[32, 32]}>
+                    {item.packages.map((pkg: any, idx: number) => (
+                      <Col key={idx} xs={24} md={12} lg={8}>
+                        <PlanCardProps
+                          variant="user"
+                          planType={pkg.name}
+                          planAmount={pkg.price}
+                          planDescription={pkg.description}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-6xl lg:text-7xl">Birthdays</h3>
-              <div className="mt-10">
-                <Row gutter={[32, 32]}>
-                  {packages.map((pkg: any, idx: number) => (
-                    <Col key={idx} xs={24} md={12} lg={8}>
-                      <PlanCardProps
-                        variant="user"
-                        planType={pkg.name}
-                        planAmount={pkg.price}
-                        planBenefits={planBenefit}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-6xl lg:text-7xl">
-                Kids & infants
-              </h3>
-              <div className="mt-10">
-                <Row gutter={[32, 32]}>
-                  {packages.map((pkg: any, idx: number) => (
-                    <Col key={idx} xs={24} md={12} lg={8}>
-                      <PlanCardProps
-                        variant="user"
-                        planType={pkg.name}
-                        planAmount={pkg.price}
-                        planBenefits={planBenefit}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-6xl lg:text-7xl">
-                Lifestyle
-              </h3>
-              <div className="mt-10">
-                <Row gutter={[32, 32]}>
-                  {packages.map((pkg: any, idx: number) => (
-                    <Col key={idx} xs={24} md={12} lg={8}>
-                      <PlanCardProps
-                        variant="user"
-                        planType={pkg.name}
-                        planAmount={pkg.price}
-                        planBenefits={planBenefit}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

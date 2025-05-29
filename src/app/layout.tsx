@@ -6,6 +6,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Lenis from "@studio-freight/lenis";
 import { useEffect } from "react";
 import { Toaster } from "sonner";
+import { ViewTransitions } from "next-view-transitions";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -43,18 +44,20 @@ export default function RootLayout({
     requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy(); 
+      lenis.destroy();
     };
   }, []);
 
   return (
-    <html lang="en">
-      <body
-        className={`antialiased ${geistMono.variable} ${playFair.variable} `}
-      >
-        <AntdRegistry>{children}</AntdRegistry>
-        <Toaster richColors  />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body
+          className={`antialiased ${geistMono.variable} ${playFair.variable} `}
+        >
+          <AntdRegistry>{children}</AntdRegistry>
+          <Toaster richColors />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

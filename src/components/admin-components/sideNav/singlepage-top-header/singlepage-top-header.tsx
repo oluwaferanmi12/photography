@@ -8,17 +8,20 @@ export const SinglePageTopHeader = ({
   description,
   icon = false,
 }: {
-  img: StaticImageData;
+  img?: StaticImageData;
   singleComponentSlug: string;
   description: string;
   icon?: boolean;
 }) => {
   return (
-    <div className="flex justify-between items-start">
+    <div className="flex justify-between items-start border p-4 rounded-xl">
       <div className="flex gap-2">
-        <div>
-          <Image src={img} alt="gallery_thumbnail" />
-        </div>
+        {img && (
+          <div>
+            <Image src={img ?? ""} alt="gallery_thumbnail" />
+          </div>
+        )}
+
         <div>
           {typeof singleComponentSlug === "string" && (
             <h3 className="text-2xl font-semibold mb-4">

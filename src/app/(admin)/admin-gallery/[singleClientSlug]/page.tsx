@@ -109,7 +109,7 @@ export default function SingleAdminGallery() {
       }}
     >
       <Spin spinning={loading} size="large">
-        <div className="p-10 text-black">
+        <div className="p-4 text-black">
           <div className="flex flex-col gap-8">
             <SinglePageTopHeader
               icon

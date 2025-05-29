@@ -10,6 +10,7 @@ import { Col, Row, Spin } from "antd";
 import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
+import { SinglePageTopHeader } from "@/components/admin-components/sideNav/singlepage-top-header/singlepage-top-header";
 
 export default function SinglePackage() {
   const [openAddPackage, setOpenAddPackage] = useState(false);
@@ -127,16 +128,14 @@ export default function SinglePackage() {
       }}
     >
       <Spin spinning={loading} size="large">
-        <div className="p-10 text-black">
+        <div className="p-4 text-black">
           <div className="flex flex-col gap-8">
-            <div>
-              <h3 className="text-2xl font-semibold mb-4">
-                {singlePackageSlug}
-              </h3>
-              <p className="text-base font-normal text-[#333333]">
-                {description}
-              </p>
-            </div>
+            <SinglePageTopHeader
+              description={description || ""}
+              singleComponentSlug={
+                typeof singlePackageSlug === "string" ? singlePackageSlug : ""
+              }
+            />
 
             <div>
               {!loading ? (
@@ -230,7 +229,8 @@ export default function SinglePackage() {
                       placeholder="Package description"
                       onChange={(e) => {
                         setPackageDescription(e.target.value);
-                        if (packageDescriptionError) setPackageDescriptionError("");
+                        if (packageDescriptionError)
+                          setPackageDescriptionError("");
                       }}
                       className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
                       rows={3}

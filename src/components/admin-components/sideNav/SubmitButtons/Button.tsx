@@ -18,7 +18,7 @@ export const AdminSubmitButton = ({
       type="submit"
       disabled={loading}
       onClick={onClick}
-      className="w-full  cursor-pointer text-white py-4 px-8 rounded-full bg-[#1B1B1B] flex gap-3 justify-center items-center"
+      className="w-full disabled:bg-admin-grey-300 disabled:cursor-not-allowed cursor-pointer text-white py-4 px-8 rounded-full bg-[#1B1B1B] flex gap-3 justify-center items-center"
     >
       {loading && <Spin indicator={antIcon} />}
       {text}

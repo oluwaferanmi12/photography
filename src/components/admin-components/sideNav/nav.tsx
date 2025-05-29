@@ -50,6 +50,11 @@ const navData = [
   },
   {
     icon: settingsIcon,
+    navLink: "/admin-gallery",
+    navTitle: "Gallery",
+  },
+  {
+    icon: settingsIcon,
     navLink: "/settings",
     navTitle: "Settings",
   },

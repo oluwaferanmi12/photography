@@ -14,6 +14,7 @@ import galleryThumbnail from "@/assets/svgs/Admin_svgs/single_gallery_thumbnail.
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
 import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
 import editIcon from "@/assets/svgs/Admin_svgs/admin-edit.svg";
+import { SinglePageTopHeader } from "@/components/admin-components/sideNav/singlepage-top-header/singlepage-top-header";
 
 export default function SingleAdminGallery() {
   const [openUploadClient, setOpenUploadClient] = useState(false);
@@ -110,27 +111,14 @@ export default function SingleAdminGallery() {
       <Spin spinning={loading} size="large">
         <div className="p-10 text-black">
           <div className="flex flex-col gap-8">
-            <div className="flex justify-between items-start">
-              <div className="flex gap-2">
-                <div>
-                  <Image src={galleryThumbnail} alt="gallery_thumbnail" />
-                </div>
-                <div>
-                  {typeof singleClientSlug === "string" && (
-                    <h3 className="text-2xl font-semibold mb-4">
-                      {decodeURIComponent(singleClientSlug)}
-                    </h3>
-                  )}
-                  <p className="text-base font-normal text-[#333333]">
-                    {description}
-                  </p>
-                </div>
-              </div>
-              <div className="border cursor-pointer border-[#EFEEEE] shadow shadow-black/5 rounded-xl flex gap-3 items-center py-2 px-6">
-                <Image src={editIcon} alt="edit_icon" />
-                <p className="text-base font-normal text-[#615F5F]">Edit</p>
-              </div>
-            </div>
+            <SinglePageTopHeader
+              icon
+              img={galleryThumbnail}
+              description={description || ""}
+              singleComponentSlug={
+                typeof singleClientSlug === "string" ? singleClientSlug : ""
+              }
+            />
 
             <div>
               {!loading ? (

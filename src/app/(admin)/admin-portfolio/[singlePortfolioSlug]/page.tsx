@@ -13,11 +13,7 @@ import Image from "next/image";
 import galleryThumbnail from "@/assets/svgs/Admin_svgs/single_gallery_thumbnail.svg";
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
 import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
-
-
-
-
-
+import { SinglePageTopHeader } from "@/components/admin-components/sideNav/singlepage-top-header/singlepage-top-header";
 
 export default function SingleUploadPortfolio() {
   const [openUploadPortfolio, setOpenUploadPortfolio] = useState(false);
@@ -113,22 +109,15 @@ export default function SingleUploadPortfolio() {
       <Spin spinning={loading} size="large">
         <div className="p-10 text-black">
           <div className="flex flex-col gap-8">
-            <div className="flex gap-2">
-              <div>
-                <Image src={galleryThumbnail} alt="gallery_thumbnail" />
-              </div>
-              <div>
-                {typeof singlePortfolioSlug === "string" && (
-                  <h3 className="text-2xl font-semibold mb-4">
-                    {decodeURIComponent(singlePortfolioSlug)}
-                  </h3>
-                )}
-                <p className="text-base font-normal text-[#333333]">
-                  {description}
-                </p>
-              </div>
-            </div>
-
+            <SinglePageTopHeader
+              img={galleryThumbnail}
+              description={description || ""}
+              singleComponentSlug={
+                typeof singlePortfolioSlug === "string"
+                  ? singlePortfolioSlug
+                  : ""
+              }
+            />
             <div>
               {!loading ? (
                 singlePortfolioData.length ? (
@@ -150,7 +139,11 @@ export default function SingleUploadPortfolio() {
                               // style={{ objectFit: "cover" }}
                             />
                             <span className="absolute right-14 bottom-14">
-                              <Image src={trashBin} className="cursor-pointer" alt="bin" />
+                              <Image
+                                src={trashBin}
+                                className="cursor-pointer"
+                                alt="bin"
+                              />
                             </span>
                           </div>
                         </Col>

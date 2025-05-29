@@ -15,25 +15,25 @@ import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUplo
 import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
 
 export default function SingleAdminGallery() {
-  const [openUploadPortfolio, setOpenUploadPortfolio] = useState(false);
-  const { singlePortfolioSlug } = useParams();
+  const [openUploadClient, setOpenUploadClient] = useState(false);
+  const { singleClientSlug } = useParams();
   const searchParams = useSearchParams();
   const description = searchParams.get("description");
-  const portfolioId = searchParams.get("clientId");
-  const [uploadPortfolioLoading, setUploadPortfolioLoading] = useState(false);
+  const clientId = searchParams.get("clientId");
+  const [uploadClientLoading, setUploadClientLoading] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [singlePortfolioData, setSinglePortfolioData] = useState([]);
+  const [singleClientData, setSingleClientData] = useState([]);
   const [thumbnails, setThumbnails] = useState<File[]>([]);
   const [thumbnailError, setThumbnailError] = useState("");
 
   // SINGLE PACKAGES
 
-  const singleUploadPortfolio = async () => {
+  const singleUploadClient = async () => {
     setLoading(true);
     try {
-      const response = await apiCall("get", `Portfolio/Images/${portfolioId}`);
+      const response = await apiCall("get", `Portfolio/Images/${clientId}`);
       console.log(response);
-      setSinglePortfolioData(response.data);
+      setSingleClientData(response.data);
     } catch (error) {
       console.log(error);
       toast.error("An error occured while loading data");
@@ -43,13 +43,13 @@ export default function SingleAdminGallery() {
   };
 
   useEffect(() => {
-    singleUploadPortfolio();
+    singleUploadClient();
   }, []);
 
   // UPLOAD IMAGES
   const handleUploadImages = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setUploadPortfolioLoading(true);
+    setUploadClientLoading(true);
 
     let isError = false;
 
@@ -59,20 +59,20 @@ export default function SingleAdminGallery() {
     } else setThumbnailError("");
 
     if (isError) {
-      setUploadPortfolioLoading(false);
+      setUploadClientLoading(false);
       return;
     }
 
     try {
       const formData = new FormData();
 
-      // Ensure portfolioId is a string
-      if (!portfolioId) {
-        toast.error("Portfolio ID is missing.");
+      // Ensure clientId is a string
+      if (!clientId) {
+        toast.error("Client ID is missing.");
         return;
       }
 
-      formData.append("PortfolioId", portfolioId);
+      formData.append("ClientId", clientId);
 
       thumbnails.forEach((file) => {
         formData.append("Images", file);
@@ -84,13 +84,13 @@ export default function SingleAdminGallery() {
 
       toast.success("Upload successful");
       setThumbnails([]);
-      setOpenUploadPortfolio(false);
-      singleUploadPortfolio();
+      setOpenUploadClient(false);
+      singleUploadClient();
     } catch (error) {
       console.error(error);
       toast.error("An error occurred while uploading images");
     } finally {
-      setUploadPortfolioLoading(false);
+      setUploadClientLoading(false);
     }
   };
 
@@ -102,7 +102,7 @@ export default function SingleAdminGallery() {
         showDescript: false,
         buttonTitle: "Upload a picture",
         subNavTitle: "Gallery",
-        buttonOnClick: () => setOpenUploadPortfolio(true),
+        buttonOnClick: () => setOpenUploadClient(true),
       }}
     >
       <Spin spinning={loading} size="large">
@@ -113,9 +113,9 @@ export default function SingleAdminGallery() {
                 <Image src={galleryThumbnail} alt="gallery_thumbnail" />
               </div>
               <div>
-                {typeof singlePortfolioSlug === "string" && (
+                {typeof singleClientSlug === "string" && (
                   <h3 className="text-2xl font-semibold mb-4">
-                    {decodeURIComponent(singlePortfolioSlug)}
+                    {decodeURIComponent(singleClientSlug)}
                   </h3>
                 )}
                 <p className="text-base font-normal text-[#333333]">
@@ -126,11 +126,11 @@ export default function SingleAdminGallery() {
 
             <div>
               {!loading ? (
-                singlePortfolioData.length ? (
+                singleClientData.length ? (
                   <Row gutter={[32, 32]}>
-                    {singlePortfolioData.map(
+                    {singleClientData.map(
                       (image: {
-                        portfolioId: string;
+                        clientId: string;
                         imageUrl: string;
                         id: string;
                       }) => (
@@ -138,11 +138,8 @@ export default function SingleAdminGallery() {
                           <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
                             <img
                               src={`http://olaitanakinlade.com/${image.imageUrl}`}
-                              alt="portfolio image"
+                              alt="client image"
                               className="rounded-3xl object-cover w-full h-full"
-                              // width={400} // or any width you want
-                              // height={300} // or adjust as needed
-                              // style={{ objectFit: "cover" }}
                             />
                             <span className="absolute right-14 bottom-14">
                               <Image
@@ -169,8 +166,8 @@ export default function SingleAdminGallery() {
         {/* Create Service DRAWER */}
         <ResponsiveDrawer
           title="Upload image"
-          open={openUploadPortfolio}
-          onClose={() => setOpenUploadPortfolio(false)}
+          open={openUploadClient}
+          onClose={() => setOpenUploadClient(false)}
         >
           <div className="pb-14">
             <form onSubmit={handleUploadImages}>
@@ -195,7 +192,7 @@ export default function SingleAdminGallery() {
 
               <div className="mt-5">
                 <AdminSubmitButton
-                  loading={uploadPortfolioLoading}
+                  loading={uploadClientLoading}
                   text="upload picture"
                 />
               </div>

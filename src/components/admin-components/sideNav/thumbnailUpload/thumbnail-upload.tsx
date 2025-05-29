@@ -9,14 +9,16 @@ type ThumbnailUploadProps = {
   onFileSelect: (files: File[]) => void;
   error?: string;
   multiple?: boolean; // new prop
-  labelTitle?: string
+  labelTitle?: string;
+  resetTrigger?: number;
 };
 
 export default function ThumbnailUpload({
   onFileSelect,
   error,
   multiple = false,
-  labelTitle = "Thumbnail"
+  labelTitle = "Thumbnail",
+  resetTrigger,
 }: ThumbnailUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previews, setPreviews] = useState<string[]>([]);
@@ -38,11 +40,20 @@ export default function ThumbnailUpload({
     }
   };
 
+  // Clean up previews on unmount
   useEffect(() => {
     return () => {
       previews.forEach((url) => URL.revokeObjectURL(url));
     };
   }, [previews]);
+
+  // 👇 Reset previews when resetTrigger changes
+  useEffect(() => {
+    setPreviews([]);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""; // Clear the input value
+    }
+  }, [resetTrigger]);
 
   return (
     <div className="space-y-3">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import { Banner } from "@/components/banner/banner";
@@ -16,8 +16,21 @@ import pregnancy from "@/assets/svgs/portfolio_svgs/pregnancy.svg";
 import portrait from "@/assets/svgs/portfolio_svgs/portrait.svg";
 import short_img from "@/assets/images/short_img.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
+import { apiCall } from "@/axios/axios";
+
+interface PortfolioProps {
+  id: string;
+  portfolioName: string;
+  description: string;
+  service: string;
+  // noOfPictures: string;
+  // status: boolean;
+  thumbnail: string;
+}
 
 const Portfolio = () => {
+  const [portfolioData, setPortfolioData] = useState<PortfolioProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   const services = [
@@ -95,6 +108,32 @@ const Portfolio = () => {
     },
   ];
 
+  // Fetch services and their packages
+  const fetchPortfolio = async () => {
+    try {
+      const portfolioRes = await apiCall("get", "/Portfolio");
+      console.log("I am portfolio data", portfolioRes);
+      const formattedData: PortfolioProps[] = portfolioRes.data.map(
+        (item: any) => ({
+          id: item.id,
+          portfolioName: item.title,
+          description: item.description,
+          thumbnail: item.thumbnail,
+          service: item.service,
+        })
+      );
+      setPortfolioData(formattedData);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
@@ -125,35 +164,35 @@ const Portfolio = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-10">
               {/* Column 1 */}
               <div className="flex flex-col gap-6">
-                {services
+                {portfolioData
                   .filter((_, i) => i % 2 === 0)
-                  .map((service, i) => (
+                  .map((portfolio, i) => (
                     <div
                       key={`left-${i}`}
                       className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] min-h-[400px] max-h-[600px] w-full"
-                      style={{ backgroundColor: service.bg }}
+                      style={{ backgroundColor: "#EFFBF9" }}
                     >
                       <span className="w-full overflow-hidden rounded-xl mb-4">
-                        <Image
-                          src={service.image}
-                          alt={service.title}
+                        <img
+                          src={`http://olaitanakinlade.com/${portfolio.thumbnail}`}
+                          alt={portfolio.portfolioName}
                           className="w-full object-cover"
                         />
                       </span>
                       <div className="flex flex-col justify-between flex-1">
                         <div>
                           <h3 className="text-5xl font-playfair text-darker-grey ">
-                            {service.title}
+                            {portfolio.portfolioName}
                           </h3>
                           <p className="text-base text-gray-800 mt-2 leading-relaxed">
-                            {service.description}
+                            {portfolio.description}
                           </p>
                         </div>
                         <div className="mt-4">
                           <Button
                             variant="black"
-                            link={service.cta_href}
-                            text={service.cta}
+                            link={`/portfolio/${portfolio.service}`}
+                            text={portfolio.service}
                           />
                         </div>
                       </div>
@@ -163,35 +202,35 @@ const Portfolio = () => {
 
               {/* Column 2 with mt-20 */}
               <div className="flex flex-col gap-6 lg:mt-20">
-                {services
+                {portfolioData
                   .filter((_, i) => i % 2 !== 0)
-                  .map((service, i) => (
+                  .map((portfolio, i) => (
                     <div
-                      key={`right-${i}`}
+                      key={`left-${i}`}
                       className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] min-h-[400px] max-h-[600px] w-full"
-                      style={{ backgroundColor: service.bg }}
+                      style={{ backgroundColor: "#EFFBF9" }}
                     >
-                      <div className="w-full overflow-hidden rounded-xl mb-4">
-                        <Image
-                          src={service.image}
-                          alt={service.title}
+                      <span className="w-full overflow-hidden rounded-xl mb-4">
+                        <img
+                          src={`http://olaitanakinlade.com/${portfolio.thumbnail}`}
+                          alt={portfolio.portfolioName}
                           className="w-full object-cover"
                         />
-                      </div>
+                      </span>
                       <div className="flex flex-col justify-between flex-1">
                         <div>
                           <h3 className="text-5xl font-playfair text-darker-grey ">
-                            {service.title}
+                            {portfolio.portfolioName}
                           </h3>
                           <p className="text-base text-gray-800 mt-2 leading-relaxed">
-                            {service.description}
+                            {portfolio.description}
                           </p>
                         </div>
                         <div className="mt-4">
                           <Button
                             variant="black"
-                            link={service.cta_href}
-                            text={service.cta}
+                            link={`/portfolio/${portfolio.service}`}
+                            text={portfolio.service}
                           />
                         </div>
                       </div>

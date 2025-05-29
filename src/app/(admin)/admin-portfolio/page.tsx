@@ -43,7 +43,12 @@ const AdminPortfolio = () => {
   const [attachedServices, setAttachedServices] = useState<
     { label: string; value: string }[]
   >([]);
+  const [resetCounter, setResetCounter] = useState(0);
+
   const router = useRouter();
+
+
+
 
   const columns: TableColumn<PortfolioProps>[] = [
     {
@@ -190,6 +195,7 @@ const AdminPortfolio = () => {
       setThumbnail(null);
       setSelectedAttachedService("");
       setOpenCreatePortfolio(false);
+      setResetCounter(prev => prev + 1);
       fetchPortfolio();
     } catch (error) {
       console.log(error);
@@ -261,10 +267,11 @@ const AdminPortfolio = () => {
               <div className="w-full flex flex-col gap-3">
                 <ThumbnailUpload
                   onFileSelect={(files) => {
-                    setThumbnail(files[0] || null); // ✅ Only take the first file
+                    setThumbnail(files[0] || null);
                     setThumbnailError("");
                   }}
                   error={thumbnailError}
+                  resetTrigger={resetCounter}
                 />
               </div>
               <div className="w-full flex flex-col gap-3">

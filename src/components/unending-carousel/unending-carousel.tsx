@@ -5,23 +5,23 @@ import { motion, useMotionValue, animate } from "framer-motion";
 import Image from "next/image";
 
 // Your images
-import HS1 from "@/assets/images/wedding/card1.jpg";
-import HS2 from "@/assets/images/wedding/card2.jpg";
-import HS3 from "@/assets/images/wedding/card3.jpg";
-import HS4 from "@/assets/images/wedding/card4.jpg";
-import HS5 from "@/assets/images/wedding/card5.jpg";
-import HS6 from "@/assets/images/wedding/card6.jpg";
-import HS7 from "@/assets/images/wedding/card7.jpg";
+// import HS1 from "@/assets/images/wedding/card1.jpg";
+// import HS2 from "@/assets/images/wedding/card2.jpg";
+// import HS3 from "@/assets/images/wedding/card3.jpg";
+// import HS4 from "@/assets/images/wedding/card4.jpg";
+// import HS5 from "@/assets/images/wedding/card5.jpg";
+// import HS6 from "@/assets/images/wedding/card6.jpg";
+// import HS7 from "@/assets/images/wedding/card7.jpg";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const images = [HS1, HS2, HS4, HS5, HS6, HS3, HS7];
+// const images = [HS1, HS2, HS4, HS5, HS6, HS3, HS7];
 
 // === Config ===
 const GAP = 20; // px
 const IMAGE_WIDTH = 350; // desktop size
 const AUTOPLAY_INTERVAL = 4000;
 
-export default function InfiniteCarousel() {
+export default function InfiniteCarousel({ images }: { images: string[] }) {
   const x = useMotionValue(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [position, setPosition] = useState(0);
@@ -108,7 +108,7 @@ export default function InfiniteCarousel() {
             key={index}
             className="mr-5 flex-none h-[650px] md:h-[500px] lg:h-[600px] rounded-xl overflow-hidden shadow"
           >
-            <Image
+            <img
               src={src}
               alt={`carousel-${index}`}
               className="w-full h-full object-contain"

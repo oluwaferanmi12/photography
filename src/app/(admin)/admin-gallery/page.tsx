@@ -43,6 +43,8 @@ const AdminGallery = () => {
   const [attachedServices, setAttachedServices] = useState<
     { label: string; value: string }[]
   >([]);
+    const [resetCounter, setResetCounter] = useState(0);
+  
   const router = useRouter();
 
   const columns: TableColumn<ClientProps>[] = [
@@ -190,6 +192,8 @@ const AdminGallery = () => {
       setThumbnail(null);
       setSelectedAttachedService("");
       setOpenCreateGallery(false);
+      setResetCounter(prev => prev + 1);
+
       fetchClient();
     } catch (error) {
       console.log(error);
@@ -285,6 +289,7 @@ const AdminGallery = () => {
                     setThumbnailError("");
                   }}
                   error={thumbnailError}
+                   resetTrigger={resetCounter}
                 />
               </div>
               <div className="w-full flex flex-col gap-3">

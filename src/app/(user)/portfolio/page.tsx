@@ -191,7 +191,7 @@ const Portfolio = () => {
                         <div className="mt-4">
                           <Button
                             variant="black"
-                            link={`/portfolio/${portfolio.service}`}
+                            link={`/portfolio/${portfolio.id}`}
                             text={portfolio.service}
                           />
                         </div>
@@ -229,7 +229,7 @@ const Portfolio = () => {
                         <div className="mt-4">
                           <Button
                             variant="black"
-                            link={`/portfolio/${portfolio.service}`}
+                            link={`/portfolio/${portfolio.id}`}
                             text={portfolio.service}
                           />
                         </div>

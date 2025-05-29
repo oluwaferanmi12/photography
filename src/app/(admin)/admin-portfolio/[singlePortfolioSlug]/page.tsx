@@ -26,10 +26,10 @@ export default function SingleUploadPortfolio() {
   const [singlePortfolioData, setSinglePortfolioData] = useState([]);
   const [thumbnails, setThumbnails] = useState<File[]>([]);
   const [thumbnailError, setThumbnailError] = useState("");
-
+  const [resetCounter, setResetCounter] = useState(0);
   // SINGLE PACKAGES
 
-  const UploadPortfolio = async () => {
+  const GetSinglePortfolio = async () => {
     setLoading(true);
     try {
       const response = await apiCall("get", `Portfolio/Images/${portfolioId}`);
@@ -44,7 +44,7 @@ export default function SingleUploadPortfolio() {
   };
 
   useEffect(() => {
-    UploadPortfolio();
+    GetSinglePortfolio();
   }, []);
 
   // UPLOAD IMAGES
@@ -86,7 +86,8 @@ export default function SingleUploadPortfolio() {
       toast.success("Upload successful");
       setThumbnails([]);
       setOpenUploadPortfolio(false);
-      UploadPortfolio();
+      setResetCounter(prev => prev + 1);
+      GetSinglePortfolio();
     } catch (error) {
       console.error(error);
       toast.error("An error occurred while uploading images");
@@ -100,7 +101,7 @@ export default function SingleUploadPortfolio() {
       await apiCall("post", `/Portfolio/Images/Remove/${portfolioId}/${imageId}`)
 
       toast.success("Image Deleted successfully");
-      UploadPortfolio();
+      GetSinglePortfolio();
     } catch (error) {
       console.error(error);
       toast.error("An error occurred while deleting images");
@@ -186,6 +187,7 @@ export default function SingleUploadPortfolio() {
                   }}
                   error={thumbnailError}
                   multiple={true}
+                  resetTrigger={resetCounter}
                 />
                 {/*  */}
               </div>

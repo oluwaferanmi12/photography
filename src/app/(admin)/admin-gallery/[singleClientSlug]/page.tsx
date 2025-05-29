@@ -28,6 +28,8 @@ export default function SingleAdminGallery() {
   const [thumbnails, setThumbnails] = useState<File[]>([]);
   const [thumbnailError, setThumbnailError] = useState("");
   const [activeTab, setActiveTab] = useState("uploads");
+  const [resetCounter, setResetCounter] = useState(0);
+
   // SINGLE PACKAGES
   console.log("I AM GALLEY SLUG", singleClientSlug);
 
@@ -88,6 +90,7 @@ export default function SingleAdminGallery() {
       toast.success("Upload successful");
       setThumbnails([]);
       setOpenUploadClient(false);
+      setResetCounter((prev) => prev + 1);
       singleUploadClient();
     } catch (error) {
       console.error(error);
@@ -131,9 +134,7 @@ export default function SingleAdminGallery() {
                       : "text-[#757575] text-sm lg:text-base border-[#F3F0EB] "
                   } w-full flex justify-center items-center`}
                 >
-                  <p className="py-3 cursor-pointer">
-                    Uploads
-                  </p>
+                  <p className="py-3 cursor-pointer">Uploads</p>
                 </div>
                 <div
                   onClick={() => setActiveTab("selections")}
@@ -191,7 +192,9 @@ export default function SingleAdminGallery() {
                   </div>
                 ) : (
                   <div>
-                    <h3 className="text-5xl text-amber-600">Client Selections</h3>
+                    <h3 className="text-5xl text-amber-600">
+                      Client Selections
+                    </h3>
                   </div>
                 )}
               </div>
@@ -216,6 +219,7 @@ export default function SingleAdminGallery() {
                   }}
                   error={thumbnailError}
                   multiple={true}
+                  resetTrigger={resetCounter}
                 />
                 {/*  */}
                 <div className="flex justify-between items-center">

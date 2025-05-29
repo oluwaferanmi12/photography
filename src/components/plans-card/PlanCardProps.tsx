@@ -25,12 +25,12 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   variant = "user",
 }) => {
   const router = useRouter();
-  
+
   return (
     <div>
       <div
         className={`p-6 border border-off-white bg-[#0E0E0E] rounded-3xl ${
-          variant === "user" ? "" : "text-[#F5F5F5]"
+          variant === "user" ? "text-[#999999]" : "text-[#F5F5F5]"
         }`}
       >
         <div className="flex justify-between items-center">
@@ -62,20 +62,24 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
           {variant === "user" ? "/ hr" : ""}
         </div>
         <div className="">
-          {planBenefits ?? planDescription}
-          <ul
-            className={`list-disc pl-6 ${
-              variant === "user"
-                ? "marker:text-grey text-grey"
-                : "text-[#F5F5F5]"
-            }`}
-          >
-            {planBenefits?.map((list, index) => (
-              <li className="text-base" key={index}>
-                {list}
-              </li>
-            ))}
-          </ul>
+          {planDescription && (
+            <p>{planDescription}</p>
+          )}
+          {planBenefits && (
+            <ul
+              className={`list-disc pl-6 ${
+                variant === "user"
+                  ? "marker:text-[#999999] text-[#999999]"
+                  : "text-[#F5F5F5]"
+              }`}
+            >
+              {planBenefits?.map((list, index) => (
+                <li className="text-base" key={index}>
+                  {list}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <button

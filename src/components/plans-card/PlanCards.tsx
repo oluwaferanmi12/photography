@@ -30,6 +30,10 @@ export const PlanCards = () => {
                 <li>$20 per additional image</li>
                 <li>$50 per additional person</li>
                 <li>$125 per additional hour</li>
+                {/* Consultation call, 60 min. session, 1 - 2 outfit, max 4 people,
+                10 images professional edited and delivered in an online gallery
+                , $20 per additional image, $50 per additional person, $125 per
+                additional hour. */}
               </ul>
             </div>
 

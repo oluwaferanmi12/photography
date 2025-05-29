@@ -6,11 +6,11 @@ import { usePathname } from "next/navigation";
 import brandLogo from "@/assets/svgs/brand-logo.svg";
 import searchIcon from "@/assets/svgs/searchIcon.svg";
 import Button from "../button/button";
-import { useTransitionRouter } from "next-view-transitions";
+// import { useTransitionRouter } from "next-view-transitions";
 
 export const HomeNav = () => {
   const pathname = usePathname();
-  const router = useTransitionRouter()
+  // const router = useTransitionRouter()
 
   const navItems = [
     {
@@ -51,12 +51,13 @@ export const HomeNav = () => {
                 <div className="relative" key={item.navTitle}>
                   <Link
                    href={item.navLink} 
-                   onClick={(e) => {
-                    e.preventDefault();
-                    router.push(item.navLink, {
-                      onTransitionReady: pageAnimation,
-                    });
-                  }} >
+                  //  onClick={(e) => {
+                  //   e.preventDefault();
+                  //   router.push(item.navLink, {
+                  //     onTransitionReady: pageAnimation,
+                  //   });
+                  // }} 
+                  >
                     <p
                       className={`cursor-pointer font-grotesk-medium text-base ${
                         item.navLink === pathname

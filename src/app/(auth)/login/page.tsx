@@ -27,6 +27,7 @@ export default function Login() {
       toast.success("Authorized Successfully");
       router.push("/booking");
     } catch (error) {
+      toast.error("Something went wrong")
       console.log(error);
     } finally {
       setLoading(false);
@@ -85,7 +86,7 @@ export default function Login() {
                           onClick={handleLogin}
                           type="submit"
                           disabled={loading}
-                          className="bg-black cursor-pointer w-full py-3 text-center rounded-lg"
+                          className="bg-black  disabled:bg-admin-grey-300 disabled:cursor-not-allowed  cursor-pointer w-full py-3 text-center rounded-lg"
                         >
                           Login
                         </button>

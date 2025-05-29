@@ -27,7 +27,7 @@ export default function SingleAdminGallery() {
   const [singleClientData, setSingleClientData] = useState([]);
   const [thumbnails, setThumbnails] = useState<File[]>([]);
   const [thumbnailError, setThumbnailError] = useState("");
-
+  const [activeTab, setActiveTab] = useState("uploads");
   // SINGLE PACKAGES
   console.log("I AM GALLEY SLUG", singleClientSlug);
 
@@ -120,41 +120,81 @@ export default function SingleAdminGallery() {
               }
             />
 
+            {/* SECOND SECTION */}
             <div>
-              {!loading ? (
-                singleClientData.length ? (
-                  <Row gutter={[32, 32]}>
-                    {singleClientData.map(
-                      (image: {
-                        clientId: string;
-                        imageUrl: string;
-                        id: string;
-                      }) => (
-                        <Col key={image.id} xs={24} md={12} lg={8}>
-                          <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
-                            <img
-                              src={`http://olaitanakinlade.com/${image.imageUrl}`}
-                              alt="client image"
-                              className="rounded-3xl object-cover w-full h-full"
-                            />
-                            <span className="absolute right-14 bottom-14">
-                              <Image
-                                src={trashBin}
-                                className="cursor-pointer"
-                                alt="bin"
-                              />
-                            </span>
-                          </div>
-                        </Col>
+              <div className="flex w-full justify-between border-b border-[#F3F0EB]">
+                <div
+                  onClick={() => setActiveTab("uploads")}
+                  className={`${
+                    activeTab === "uploads"
+                      ? "text-base lg:text-lg font-semibold border-b-2 border-[#090909] cursor-pointer text-[#090909]"
+                      : "text-[#757575] text-sm lg:text-base border-[#F3F0EB] "
+                  } w-full flex justify-center items-center`}
+                >
+                  <p className="py-3 cursor-pointer">
+                    Uploads
+                  </p>
+                </div>
+                <div
+                  onClick={() => setActiveTab("selections")}
+                  className={`${
+                    activeTab === "selections"
+                      ? "text-base lg:text-lg font-semibold border-b-2 border-[#090909] cursor-pointer text-[#090909]"
+                      : "text-[#757575] text-sm lg:text-base border-[#F3F0EB]"
+                  } w-full flex justify-center items-center `}
+                >
+                  <p className="py-3  cursor-pointer">
+                    Client&apos;s Selections
+                  </p>
+                </div>
+              </div>
+              {/* TABS OUTPUT */}
+              <div className="mt-5">
+                {activeTab === "uploads" ? (
+                  <div>
+                    {!loading ? (
+                      singleClientData.length ? (
+                        <Row gutter={[32, 32]}>
+                          {singleClientData.map(
+                            (image: {
+                              clientId: string;
+                              imageUrl: string;
+                              id: string;
+                            }) => (
+                              <Col key={image.id} xs={24} md={12} lg={8}>
+                                <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
+                                  <img
+                                    src={`http://olaitanakinlade.com/${image.imageUrl}`}
+                                    alt="client image"
+                                    className="rounded-3xl object-cover w-full h-full"
+                                  />
+                                  <span className="absolute right-14 bottom-14">
+                                    <Image
+                                      src={trashBin}
+                                      className="cursor-pointer"
+                                      alt="bin"
+                                    />
+                                  </span>
+                                </div>
+                              </Col>
+                            )
+                          )}
+                        </Row>
+                      ) : (
+                        <p className="text-lg text-red-500">
+                          No Image(s) uploaded
+                        </p>
                       )
+                    ) : (
+                      ""
                     )}
-                  </Row>
+                  </div>
                 ) : (
-                  <p className="text-lg text-red-500">No Image(s) uploaded</p>
-                )
-              ) : (
-                ""
-              )}
+                  <div>
+                    <h3 className="text-5xl text-amber-600">Client Selections</h3>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

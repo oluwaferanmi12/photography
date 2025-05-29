@@ -29,7 +29,7 @@ export default function SingleUploadPortfolio() {
 
   // SINGLE PACKAGES
 
-  const singleUploadPortfolio = async () => {
+  const UploadPortfolio = async () => {
     setLoading(true);
     try {
       const response = await apiCall("get", `Portfolio/Images/${portfolioId}`);
@@ -44,7 +44,7 @@ export default function SingleUploadPortfolio() {
   };
 
   useEffect(() => {
-    singleUploadPortfolio();
+    UploadPortfolio();
   }, []);
 
   // UPLOAD IMAGES
@@ -86,12 +86,24 @@ export default function SingleUploadPortfolio() {
       toast.success("Upload successful");
       setThumbnails([]);
       setOpenUploadPortfolio(false);
-      singleUploadPortfolio();
+      UploadPortfolio();
     } catch (error) {
       console.error(error);
       toast.error("An error occurred while uploading images");
     } finally {
       setUploadPortfolioLoading(false);
+    }
+  };
+
+  const handleRemoveImage = async (imageId: string) => {
+    try {
+      await apiCall("post", `/Portfolio/Images/Remove/${portfolioId}/${imageId}`)
+
+      toast.success("Image Deleted successfully");
+      UploadPortfolio();
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred while deleting images");
     }
   };
 
@@ -134,15 +146,13 @@ export default function SingleUploadPortfolio() {
                               src={`http://olaitanakinlade.com/${image.imageUrl}`}
                               alt="portfolio image"
                               className="rounded-3xl object-cover w-full h-full"
-                              // width={400} // or any width you want
-                              // height={300} // or adjust as needed
-                              // style={{ objectFit: "cover" }}
                             />
                             <span className="absolute right-14 bottom-14">
                               <Image
                                 src={trashBin}
                                 className="cursor-pointer"
                                 alt="bin"
+                                onClick={() => handleRemoveImage(image.id)}
                               />
                             </span>
                           </div>

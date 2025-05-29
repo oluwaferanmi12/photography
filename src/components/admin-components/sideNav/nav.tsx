@@ -74,7 +74,7 @@ export const Nav = () => {
         <div className="mt-8 flex flex-col gap-5">
           {navData.map((navs) => (
             <Link key={navs.navTitle} href={navs.navLink} className="text-[12px]">
-              <NavWrapper active={pathname === navs.navLink} icon={navs.icon} text={navs.navTitle} />
+              <NavWrapper active={pathname.startsWith(navs.navLink)} icon={navs.icon} text={navs.navTitle} />
             </Link>
           ))}
         </div>

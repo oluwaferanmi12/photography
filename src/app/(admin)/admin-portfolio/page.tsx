@@ -252,7 +252,7 @@ const AdminPortfolio = () => {
                     if (portfolioNameError) setPortfolioNameError("");
                   }}
                   variant="admin"
-                  placeholder="Basic"
+                  placeholder="Wedding"
                 />
                 {portfolioNameError && (
                   <p className="text-red-700">{portfolioNameError}</p>

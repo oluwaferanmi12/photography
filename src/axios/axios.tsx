@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 // Create an instance
 const instance = axios.create({
-  baseURL: "http://olaitanakinlade.com/",
+  baseURL: "https://olaitanakinlade.com/",
 });
 
 // Create interceptors

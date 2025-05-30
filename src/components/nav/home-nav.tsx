@@ -3,7 +3,7 @@ import bottomActive from "@/assets/svgs/nav-rectangle.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import brandLogo from "@/assets/svgs/brand-logo.svg";
+import brandLogo from "@/assets/svgs/new-logo.svg";
 import searchIcon from "@/assets/svgs/searchIcon.svg";
 import Button from "../button/button";
 // import { useTransitionRouter } from "next-view-transitions";

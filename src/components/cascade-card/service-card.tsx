@@ -19,7 +19,6 @@ export const ServiceCard = ({
   service: {
     title: string;
     image: StaticImageData;
-    bg: string;
     description: string;
     cta: string;
     cta_link?: string;
@@ -50,7 +49,6 @@ export const ServiceCard = ({
           >
             <div
               className="w-full md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md"
-              style={{ backgroundColor: service.bg }}
             >
               <span className="">
                 <Image

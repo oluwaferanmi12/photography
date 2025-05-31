@@ -14,7 +14,6 @@ import circleIcon from "@/assets/svgs/circle-stroke.svg";
 import victoria from "@/assets/images/victoria.jpeg";
 import victoria2 from "@/assets/images/victoriaPics/slide2.jpg";
 import victoria3 from "@/assets/images/victoriaPics/slide3.jpg";
-import { Footer } from "@/components/footer/footer";
 import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import ImageMasonry from "@/components/imageMasonry/imageMasonry";
@@ -43,7 +42,7 @@ import headerImg4 from "@/assets/images/home_header/img4.jpg";
 import headerImg5 from "@/assets/images/home_header/img5.jpg";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
-import { FooterTwo } from "@/components/footer/footer";
+import { Footer } from "@/components/footer/footer";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -407,7 +406,7 @@ export default function Home() {
       {/* <GalleryBox /> */}
       <ParallaxScrollax />
       <FooterImages />
-      <FooterTwo />
+      <Footer />
       {/* <Footer /> */}
     </div>
   );

@@ -26,7 +26,7 @@ const footerLinks = [
   },
 ];
 
-export const FooterTwo = () => {
+export const Footer = () => {
   return (
     <div className="bg-[#282824] w-full  px-5 lg:px-20 py-20">
       <div className="flex justify-between">

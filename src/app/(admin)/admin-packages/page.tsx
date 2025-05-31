@@ -14,6 +14,7 @@ import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitB
 import { useRouter } from "next/navigation";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
+import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
 
 interface PackageOption {
   name: string;
@@ -73,6 +74,9 @@ export default function Services() {
   const [descriptionError, setDescriptionError] = useState("");
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [thumbnails, setThumbnails] = useState<File[]>([]);
+  const [thumbnailError, setThumbnailError] = useState("");
+  const [resetCounter, setResetCounter] = useState(0);
   const router = useRouter();
 
   // Fetch services and their packages
@@ -157,21 +161,37 @@ export default function Services() {
       setTagsError("");
     }
 
+    if (thumbnails.length === 0) {
+      setThumbnailError("Please upload at least one image");
+      hasError = true;
+    } else setThumbnailError("");
+
     if (hasError) {
       setCreateServiceLoading(false);
       return;
     }
 
     try {
-      await apiCall("post", "/Admin/Services", {
-        title: serviceName,
-        description: description,
-        tags: tags,
+      const formData = new FormData();
+      formData.append("Title", serviceName);
+      formData.append("Description", description);
+      formData.append("Tags", tags);
+
+      thumbnails.forEach((file) => {
+        formData.append("Images", file);
       });
+
+     
+      await apiCall("post", "/Admin/Services", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       toast.success("Service Created Successfully");
       setServiceName("");
       setDescription("");
       setTags("");
+      setThumbnails([]);
+      setResetCounter((prev) => prev + 1);
       setOpenCreateService(false);
       fetchServices();
     } catch (error) {
@@ -243,7 +263,7 @@ export default function Services() {
           Details
         </button>
       ),
-       right: true,
+      right: true,
     },
   ];
 
@@ -332,6 +352,18 @@ export default function Services() {
                   {descriptionError && (
                     <p className="text-red-700">{descriptionError}</p>
                   )}
+                </div>
+                {/* Images */}
+                <div className="w-full flex flex-col gap-3">
+                  <ThumbnailUpload
+                    onFileSelect={(files) => {
+                      setThumbnails(files);
+                      setThumbnailError("");
+                    }}
+                    error={thumbnailError}
+                    multiple={true}
+                    resetTrigger={resetCounter}
+                  />
                 </div>
 
                 {/*  */}

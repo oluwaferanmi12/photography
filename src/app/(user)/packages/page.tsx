@@ -29,6 +29,12 @@ interface PackageOption {
   description: string;
 }
 
+interface ImageType {
+  serviceId: string;
+  imageUrl: string;
+  id: string;
+}
+
 interface Service {
   id: string;
   serviceName: string;
@@ -36,6 +42,7 @@ interface Service {
   status: boolean;
   lastUpdated: string;
   description: string;
+  images: ImageType[];
 }
 
 const Portfolio = () => {
@@ -129,8 +136,9 @@ const Portfolio = () => {
                 price: pkg.price,
                 description: pkg.description,
               })),
-              status: true, // Or derive from API if available
+              status: true,
               lastUpdated: new Date(service.lastModified).toDateString(),
+              images: service.images || [],
             };
           } catch (err) {
             console.error("Error fetching packages:", err);
@@ -139,6 +147,7 @@ const Portfolio = () => {
               serviceName: service.title,
               description: service.description,
               packages: [],
+              images: [],
               status: true,
               lastUpdated: new Date(service.lastModified).toDateString(),
             };
@@ -222,32 +231,16 @@ const Portfolio = () => {
 
           {/* NEW CARDS */}
           <div className="py-36 flex flex-col gap-20">
-            {/* <PackagesNewCard /> */}
-            <Trail />
-          </div>
-
-          {/* Third section */}
-          {/* <div className="pb-36 flex flex-col gap-20">
-            {services.map((item, idx) => (
-              <div key={idx}>
-                <h3 className="text-6xl lg:text-7xl">{item.serviceName}</h3>
-                <div className="mt-10">
-                  <Row gutter={[32, 32]}>
-                    {item.packages.map((pkg: any, idx: number) => (
-                      <Col key={idx} xs={24} md={12} lg={8}>
-                        <PlanCardProps
-                          variant="user"
-                          planType={pkg.name}
-                          planAmount={pkg.price}
-                          planDescription={pkg.description}
-                        />
-                      </Col>
-                    ))}
-                  </Row>
-                </div>
-              </div>
+            {services.map((service) => (
+              <Trail
+                key={service.id}
+                title={service.serviceName}
+                description={service.description}
+                images={service.images || []}
+                packages={service.packages}
+              />
             ))}
-          </div> */}
+          </div>
         </div>
       </div>
       <div className="px-5 lg:px-14 3xl:!px-28">

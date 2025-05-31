@@ -83,7 +83,7 @@ export const PackagesNewCard: React.FC<TrailProps> = ({
               </Col>
               <Col xs={24} lg={12}>
                 {images.map((img, idx) => (
-                  <div className="overflow-hidden" key={idx}>
+                  <div className="overflow-hidden h-[700px]" key={idx}>
                     <Image
                       src={`https://olaitanakinlade.com/${img.imageUrl}`}
                       alt={`${title}_image_${idx}`}

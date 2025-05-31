@@ -264,7 +264,6 @@ export default function Services() {
           <p>No Service data available</p>
         )}
 
-        {/* Create Service DRAWER */}
         <ResponsiveDrawer
           title="Create a service"
           open={openCreateService}
@@ -333,8 +332,6 @@ export default function Services() {
                     <p className="text-red-700">{descriptionError}</p>
                   )}
                 </div>
-
-                {/*  */}
               </div>
               <div className="mt-5">
                 <AdminSubmitButton

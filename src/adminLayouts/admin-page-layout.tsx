@@ -22,7 +22,7 @@ export default function AdminPageLayout({
   showFilters = true,
 }: AdminPageLayoutProps) {
   return (
-    <div>
+    <div className="">
       <div className="m-4 mb-8">
         <AdminHeader {...headerProps} />
       </div>
@@ -33,7 +33,7 @@ export default function AdminPageLayout({
         </div>
       )}
 
-      <div>{children}</div>
+      <div className="">{children}</div>
     </div>
   );
 }

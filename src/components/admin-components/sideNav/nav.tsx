@@ -65,7 +65,7 @@ export const Nav = () => {
 
 
   return (
-    <div className="min-h-full flex flex-col justify-between p-4">
+    <div className="h-screen min-h-screen w-[300px] max-h-screen flex flex-col justify-between p-4">
       <div>
         <div className="bg-[#1D1C1C] rounded-lg p-4 flex items-center justify-between">
           <Image src={logo} alt="" />

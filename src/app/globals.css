@@ -629,3 +629,11 @@ a {
 .scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* .linear_bg{
+  background-image: url('../assets/images/package-card-linear-bg.png');
+  background-repeat: no-repeat;
+  background-position: cen;
+  position: relative;
+  height: 900px;
+} */

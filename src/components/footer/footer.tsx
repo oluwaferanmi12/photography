@@ -1,7 +1,9 @@
-import { Col, Row } from "antd";
-import Image from "next/image";
 import React from "react";
-import brandLogo from "@/assets/svgs/footer-brand-logo.svg";
+import mail from "@/assets/svgs/mail.svg";
+import arrowRight from "@/assets/svgs/footer-send-arrow.svg";
+import revolver from "@/assets/svgs/world-revolve-icon.svg";
+import Image from "next/image";
+import { Col, Row } from "antd";
 import youtubeIcon from "@/assets/svgs/youtubeIcon.svg";
 import tiktokIcon from "@/assets/svgs/tiktokIcon.svg";
 import linkedinIcon from "@/assets/svgs/linkedinIcon.svg";
@@ -9,93 +11,110 @@ import instagramIcon from "@/assets/svgs/instagramIcon.svg";
 import facebookIcon from "@/assets/svgs/facebookIcon.svg";
 import Link from "next/link";
 
-export const Footer = ({sticky}: {sticky?: boolean}) => {
-  const footerLinks = [
-    {
-      title: "Company",
-      links: [
-        "Company",
-        "Features",
-        "Pricing",
-        "About Us",
-        "Contact",
-        "Pricing",
-      ],
-    },
-    {
-      title: "Resource",
-      links: [
-        "Resource",
-        "Blog",
-        "Customer Stories",
-        "Information",
-        "Legal",
-        "Payments",
-      ],
-    },
-   
-  ];
+const footerLinks = [
+  {
+    title: "Company",
+    links: ["Home", "About us", "Portfolio", "Packages", "Book a session"],
+  },
+  {
+    title: "Support",
+    links: [
+      "Contact us",
+      "Terms and condition",
+      
+    ],
+  },
+];
 
+export const FooterTwo = () => {
   return (
-    <div className={`w-full ${sticky ? " footer sticky top-20" : "" }   px-7 pt-20 bg-[#D9C9AE] text-[#3C3C3B] `}>
-      <Row>
-        <Col xs={24}>
-          <h3 className="text-center text-2xl lg:text-6xl pb-12 border-b border-[#EDEDED66]  ">
-            Hello@Shotbyportable.Com
-          </h3>
-        </Col>
-        <Col xs={24} lg={12}>
-          <div className="pt-10">
+    <div className="bg-[#282824] w-full  px-5 lg:px-20 py-20">
+      <div className="flex justify-between">
+        <div className="flex w-1/2 flex-col gap-3">
+          <h3 className="text-5xl font-normal">Your moment, forever </h3>
+          <p className="text-base text-white/60">
+            From first call to final gallery, I’m here to make it easy and
+            meaningful.
+          </p>
+        </div>
+        <div className="flex flex-col gap-3">
+          <p className="text-[#FFF8F2] tracking-wide text-xl font-semibold">
+            Subscribe to our newletter
+          </p>
+          <div className="w-full items-center flex gap-4 border-b-2 border-bayfi-grey pb-3">
+            <div className="flex gap-3 w-full items-center">
+              <span>
+                <Image src={mail} className="w-4 h-4" alt="mail" />
+              </span>
+              <input
+                type="text"
+                placeholder="Enter your email"
+                className="border-0 focus:border-0 text-[#FFF8F2] text-xl placeholder:text-[#FFF8F2] focus:outline-none bg-transparent"
+              />
+            </div>
+
             <span>
-              <Image src={brandLogo} alt="brand_logo" />
+              <Image src={arrowRight} alt="arrowRight" />
             </span>
-            <p>475 Cherry Dr, Troy, Michigan Onatario, Canada</p>
-            <p>(248) 823-3200</p>
-            <div className="flex gap-3 items-center">
-              <span>
-                <Image src={youtubeIcon} alt="social_links" />
-              </span>
-              <span>
-                <Image src={tiktokIcon} alt="social_links" />
-              </span>
-              <span>
-                <Image src={linkedinIcon} alt="social_links" />
-              </span>
-              <span>
-                <Image src={instagramIcon} alt="social_links" />
-              </span>
-              <span>
-                <Image src={facebookIcon} alt="social_links" />
-              </span>
+          </div>
+        </div>
+      </div>
+      <hr className="border-white/10 my-16" />
+      <Row gutter={[32, 32]}>
+        <Col xs={24} lg={10}>
+          <div className="pt-10 flex flex-col gap-4">
+            <span>
+              <Image src={revolver} alt="brand_logo" />
+            </span>
+            <p className="text-white/60 text-lg w-[80%]">
+              Join hands with Skyline and turn your property goals into reality
+            </p>
+          </div>
+        </Col>
+        <Col xs={24} lg={14}>
+          <div className="flex justify-between items-start w-full">
+            <div className="flex w-full justify-between pt-10 text-[#3C3C3B]">
+              {footerLinks.map((section, index) => (
+                <div key={index} className="flex flex-col gap-4">
+                  <h2 className="text-[#FFF8F2] uppercase font-semibold text-xl   ">
+                    {" "}
+                    {section.title}{" "}
+                  </h2>
+                  {section.links.map((link, idx) => (
+                    <span key={idx}>
+                      <Link className="!text-white/60 text-base" href={"/"}>
+                        {link}
+                      </Link>
+                    </span>
+                  ))}
+                </div>
+              ))}
+              <div className="flex flex-col gap-4">
+                <h2 className="text-[#FFF8F2] font-semibold text-xl   ">
+                  Folow us
+                </h2>
+                <div className="flex gap-3 items-center">
+                  <span>
+                    <Image src={youtubeIcon} alt="social_links" />
+                  </span>
+                  <span>
+                    <Image src={tiktokIcon} alt="social_links" />
+                  </span>
+                  <span>
+                    <Image src={linkedinIcon} alt="social_links" />
+                  </span>
+                  <span>
+                    <Image src={instagramIcon} alt="social_links" />
+                  </span>
+                  <span>
+                    <Image src={facebookIcon} alt="social_links" />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </Col>
-        <Col xs={24} lg={12}>
-          <div className="flex justify-between pt-10 text-[#3C3C3B]">
-            {footerLinks.map((section, index) => (
-              <div key={index} className="flex flex-col gap-4">
-                {section.links.map((link, idx) => (
-                  <span key={idx}>
-                    <Link href={"/"}>{link}</Link>
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </Col>
-        <Col xs={24}>
-          <p className="text-white/30 text-3xl lg:text-9xl py-12 border-b border-[#EDEDED66]">
-            ©Shotbyportable
-          </p>
-        </Col>
       </Row>
-      <div className="flex flex-col lg:flex-row justify-between py-5 text-lg items-center">
-        <p>© Copyright 2025, All Rights Reserved</p>
-        <div className="flex gap-5 items-center">
-          <p>Term of Service</p>
-          <p>Privacy Policy</p>
-        </div>
-      </div>
     </div>
   );
 };

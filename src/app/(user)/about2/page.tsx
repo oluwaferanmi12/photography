@@ -2,6 +2,11 @@ import { Col, Row } from "antd";
 import React from "react";
 import headerImage from "@/assets/images/about__header.jpg";
 import Image from "next/image";
+import { AboutExpectationCard } from "@/components/about-cards/about-expectation-card";
+import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
+import { FooterImages } from "@/components/footer-images/footer-images";
+import { Footer } from "@/components/footer/footer";
+import { AboutPortfolioCard } from "@/components/about-cards/about-portfolio-card";
 
 const page = () => {
   return (
@@ -42,7 +47,7 @@ const page = () => {
                   <div className="overflow-hidden flex justify-end rounded-xl w-full">
                     <Image
                       src={headerImage}
-                      className="object-cover rounded-xl w-[80%] h-full"
+                      className="object-cover rounded-xl h-full"
                       alt="owner"
                     />
                   </div>
@@ -57,7 +62,7 @@ const page = () => {
                   <div className="overflow-hidden rounded-xl w-full">
                     <Image
                       src={headerImage}
-                      className="object-cover rounded-xl w-[80%] h-full"
+                      className="object-cover rounded-xl h-full"
                       alt="owner"
                     />
                   </div>
@@ -65,7 +70,7 @@ const page = () => {
                 <Col xs={24} lg={12}>
                   <div className="flex flex-col gap-10">
                     <h3 className="uppercase text-5xl ">My journey</h3>
-                    <div className="flex flex-col gap-4 w-[80%]">
+                    <div className="flex flex-col gap-4">
                       <p className="text-xl text-white/80">
                         I’m a proud wife, a mother to three amazing girls, and a
                         portrait and lifestyle photographer based in Toronto,
@@ -96,9 +101,19 @@ const page = () => {
                 </Col>
               </Row>
             </div>
+            {/*  */}
+            <AboutExpectationCard />
           </div>
         </div>
       </div>
+      {/* full widths */}
+      <div className="py-28">
+        <AboutPortfolioCard />
+
+      </div>
+      <ParallaxScrollax />
+      <FooterImages />
+      <Footer />
     </div>
   );
 };

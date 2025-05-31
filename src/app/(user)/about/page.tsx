@@ -104,8 +104,6 @@ const About = () => {
     "Visual Poet",
   ];
 
-  console.log("Image pathhhhhhhhhh:", images[currentProfileImg]);
-
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">

@@ -223,7 +223,7 @@ a {
 }
 
 .parallaxBg {
-background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("../assets/images/parallaxBg.jpg");
   background-position: center;
   background-size: cover;
@@ -499,8 +499,6 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
   overflow: hidden;
 }
 
-
-
 .scroller__inner {
   display: flex;
   gap: 1rem;
@@ -543,6 +541,20 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 
 .pause-scroll {
   animation-play-state: paused !important;
+}
+
+/* NEW ABOUT SCROLLER */
+.newAbout_scroller {
+  width: auto;
+  overflow: hidden;
+  overflow: hidden;
+  padding-block: 0;
+}
+
+.newAbout_scroller.scroller {
+  overflow: hidden;
+  -webkit-mask: none !important;
+  mask: none !important;
 }
 
 
@@ -610,10 +622,10 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 }
 
 
-.scrollbar{
+.scrollbar {
   scrollbar-width: none;
 }
 
 .scrollbar::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }

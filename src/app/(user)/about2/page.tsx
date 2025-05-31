@@ -44,25 +44,27 @@ const page = () => {
                   </div>
                 </Col>
                 <Col xs={24} lg={12}>
-                  <div className="overflow-hidden flex justify-end rounded-xl w-full">
+                  <div className="overflow-hidden h-[700px] flex justify-end rounded-xl w-full">
                     <Image
                       src={headerImage}
-                      className="object-cover rounded-xl h-full"
+                      className="object-cover rounded-xl w-full"
                       alt="owner"
                     />
                   </div>
                 </Col>
               </Row>
             </div>
-
+          </div>
+          <div className="py-14 px-6 bg-light-brown w-full my-14"></div>
+          <div className="px-5 lg:px-14 3xl:!px-28 flex flex-col gap-36 my-28">
             {/* VIDEO AREA */}
             <div className="w-full">
               <Row gutter={[32, 32]}>
                 <Col xs={24} lg={12}>
-                  <div className="overflow-hidden rounded-xl w-full">
+                  <div className="overflow-hidden h-[700px] flex justify-end rounded-xl w-full">
                     <Image
                       src={headerImage}
-                      className="object-cover rounded-xl h-full"
+                      className="object-cover rounded-xl w-full"
                       alt="owner"
                     />
                   </div>
@@ -102,14 +104,15 @@ const page = () => {
               </Row>
             </div>
             {/*  */}
-            <AboutExpectationCard />
+              <AboutExpectationCard />
           </div>
+          {/* closing  */}
         </div>
       </div>
+
       {/* full widths */}
       <div className="py-28">
         <AboutPortfolioCard />
-
       </div>
       <ParallaxScrollax />
       <FooterImages />

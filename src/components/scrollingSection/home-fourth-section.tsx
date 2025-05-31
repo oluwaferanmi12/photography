@@ -160,29 +160,39 @@ export const FourthSectionScroll = () => {
             </div>
 
             {/* <div className="flex gap-4 min-w-max pl-6 pr-0"> */}
+
             {services.map((service, i) => (
               <div
                 key={i}
-                className="w-full bg-amber-600 relative h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-6  shadow-md"
+                className="w-full relative h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full flex-shrink-0 p-6 shadow-md"
               >
-                {/* 2) Fill image */}
                 <Image
                   src={service.image}
                   alt={service.title}
                   fill
-                  className="object-cover w-full h-full"
+                  className="object-cover absolute inset-0 w-full h-full"
                   quality={90}
                   priority
                 />
 
-                <div className="absolute left-0 bottom-0 bg-white-100/12 backdrop-blur-md w-full p-4">
-                  <div className="w-full flex justify-between items-center">
-                    <p className="text-white-200 font-playfair text-4xl">
-                      {service.title}
-                    </p>
-                    <Link href={service.cta_link}>
-                      <button className="bg-white/20 flex justify-center items-center text-white text-base py-2 px-8 border cursor-pointer  border-white/10 rounded-xl">View</button>
-                    </Link>
+                <div className="absolute left-0 bottom-0 w-full p-4 backdrop-blur-md bg-black/10">
+                  <div className="mix-blend-exclusion">
+                    {/* Text container with blend mode */}
+                    <div className="mix-blend-exclusion">
+                      <div className="w-full flex justify-between items-center">
+                        <p className="text-white mix-blend-difference font-playfair text-4xl">
+                          {service.title}
+                        </p>
+                        <Link href={service.cta_link}>
+                          <button className="bg-white/20 flex justify-center items-center text-white text-base py-2 px-8 border cursor-pointer border-white/10 rounded-xl mix-blend-difference hover:border-light-brown">
+                            View
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Optional overlay for better contrast */}
+                    {/* <div className="absolute inset-0 bg-black/20 -z-10"></div> */}
                   </div>
                 </div>
               </div>

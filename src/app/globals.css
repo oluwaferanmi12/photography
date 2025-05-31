@@ -222,6 +222,15 @@ a {
   background-image: url("../assets/images/catalogue-header.jpeg");
 }
 
+.parallaxBg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../assets/images/parallaxBg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 750px;
+}
+
 .aboutLandingBG::before,
 .catalogueBG::before,
 .contactBG::before {
@@ -465,7 +474,7 @@ a {
   }
 }
 
-.no-scrollbar{
+.no-scrollbar {
   scrollbar-width: none;
 }
 
@@ -589,9 +598,9 @@ a {
     transform: translateY(-200px) rotate(0deg);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0px) rotate(var(--rotate, 0deg));
     opacity: 1;
   }
 }
-

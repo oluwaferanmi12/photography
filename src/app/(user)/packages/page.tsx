@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import HS4 from "@/assets/images/HS4.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
-import { Col, Modal, Row } from "antd";
+import { Modal } from "antd";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
 import kids_icon from "@/assets/svgs/kids_icon.svg";
 import lifestyle_icon from "@/assets/svgs/lifestyle_icon.svg";
@@ -15,13 +15,10 @@ import makeup_icon from "@/assets/svgs/makeup_icon.svg";
 import birthday_icon from "@/assets/svgs/birthday_icon.svg";
 import family_icon from "@/assets/svgs/makeup_icon.svg";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
-import { PlanCards } from "@/components/plans-card/PlanCards";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
-import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 import { apiCall } from "@/axios/axios";
 import { PackagesNewCard } from "@/components/packages-new-card/packages-new-card";
-import { Trail } from "@/components/packages-new-card/trail";
 
 interface PackageOption {
   name: string;
@@ -232,7 +229,7 @@ const Portfolio = () => {
           {/* NEW CARDS */}
           <div className="py-36 flex flex-col gap-20">
             {services.map((service) => (
-              <Trail
+              <PackagesNewCard 
                 key={service.id}
                 title={service.serviceName}
                 description={service.description}

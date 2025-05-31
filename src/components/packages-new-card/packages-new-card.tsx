@@ -17,7 +17,7 @@ interface TrailProps {
   packages: { name: string; price: string; description: string }[];
 }
 
-export const Trail: React.FC<TrailProps> = ({
+export const PackagesNewCard: React.FC<TrailProps> = ({
   title,
   description,
   images,

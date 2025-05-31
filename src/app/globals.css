@@ -608,3 +608,12 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     opacity: 1;
   }
 }
+
+
+.scrollbar{
+  scrollbar-width: none;
+}
+
+.scrollbar::-webkit-scrollbar {
+  display: none; 
+}

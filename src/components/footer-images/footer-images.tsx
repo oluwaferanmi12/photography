@@ -12,24 +12,25 @@ const images = [image1, image2, image3, image4];
 
 export const FooterImages = () => {
   return (
-    <div className="w-full overflow-x-auto">
-      <div className="flex gap-4 min-w-max px-4 py-8">
-        {images.map((src, index) => (
+    <div className="w-full overflow-x-auto scrollbar">
+      <div className="flex min-w-max">
+        {[...images, ...images].map((src, index) => (
           <div
             key={index}
-            className="relative w-[320px] h-[320px] shrink-0 group"
+            className="relative cursor-pointer w-[320px] h-[320px] shrink-0 group"
           >
             <Image
               src={src}
               alt={`image-${index}`}
               layout="fill"
               objectFit="cover"
-              className="rounded-md"
+              className=""
             />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <Image
                 src={instagramIcon}
                 alt="Instagram Icon"
+                className="cursor-pointer"
                 width={40}
                 height={40}
               />

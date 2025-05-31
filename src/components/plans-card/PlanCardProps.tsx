@@ -63,8 +63,21 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
         </div>
         <div className="">
           {planDescription && (
-            <p>{planDescription}</p>
+            <ul
+              className={`list-disc pl-6 mb-4 ${
+                variant === "user"
+                  ? "marker:text-[#999999] text-[#999999]"
+                  : "text-[#F5F5F5]"
+              }`}
+            >
+              {planDescription.split("*").map((item, index) => (
+                <li className="text-base" key={index}>
+                  {item.trim()}
+                </li>
+              ))}
+            </ul>
           )}
+          
           {planBenefits && (
             <ul
               className={`list-disc pl-6 ${

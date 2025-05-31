@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import HS4 from "@/assets/images/HS4.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
-import { Col, Modal, Row } from "antd";
+import { Modal } from "antd";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
 import kids_icon from "@/assets/svgs/kids_icon.svg";
 import lifestyle_icon from "@/assets/svgs/lifestyle_icon.svg";
@@ -15,16 +15,21 @@ import makeup_icon from "@/assets/svgs/makeup_icon.svg";
 import birthday_icon from "@/assets/svgs/birthday_icon.svg";
 import family_icon from "@/assets/svgs/makeup_icon.svg";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
-import { PlanCards } from "@/components/plans-card/PlanCards";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
-import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 import { apiCall } from "@/axios/axios";
+import { PackagesNewCard } from "@/components/packages-new-card/packages-new-card";
 
 interface PackageOption {
   name: string;
   price: string;
   description: string;
+}
+
+interface ImageType {
+  serviceId: string;
+  imageUrl: string;
+  id: string;
 }
 
 interface Service {
@@ -34,6 +39,7 @@ interface Service {
   status: boolean;
   lastUpdated: string;
   description: string;
+  images: ImageType[];
 }
 
 const Portfolio = () => {
@@ -43,8 +49,6 @@ const Portfolio = () => {
   const [selectedService, setSelectedService] = useState("");
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-
 
   const serviceIcons: { [key: string]: any } = {
     wedding: wedding_icon,
@@ -129,8 +133,9 @@ const Portfolio = () => {
                 price: pkg.price,
                 description: pkg.description,
               })),
-              status: true, // Or derive from API if available
+              status: true,
               lastUpdated: new Date(service.lastModified).toDateString(),
+              images: service.images || [],
             };
           } catch (err) {
             console.error("Error fetching packages:", err);
@@ -139,6 +144,7 @@ const Portfolio = () => {
               serviceName: service.title,
               description: service.description,
               packages: [],
+              images: [],
               status: true,
               lastUpdated: new Date(service.lastModified).toDateString(),
             };
@@ -185,158 +191,6 @@ const Portfolio = () => {
             </div>
           </div>
           <div className="scroller !py-28" ref={scrollerRef}>
-            {/* <ul
-              className={`scroller__inner ${
-                isSessionFormModalOpen || isThankYouModalOpen
-                  ? "pause-scroll"
-                  : ""
-              }`}
-            >
-              <li
-                onClick={() => showModal("wedding")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={wedding_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Weddings</p>
-              </li>
-              <li
-                onClick={() => showModal("birthday")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={birthday_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Birthdays</p>
-              </li>
-              <li
-                onClick={() => showModal("videography")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image
-                    className="w-full h-full"
-                    src={videography_icon}
-                    alt=""
-                  />
-                </span>
-                <p className="text-white-100 text-xl">Videography</p>
-              </li>
-              <li
-                onClick={() => showModal("kids")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={kids_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Kids & infants</p>
-              </li>
-              <li
-                onClick={() => showModal("lifestyle")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image
-                    className="w-full h-full"
-                    src={lifestyle_icon}
-                    alt=""
-                  />
-                </span>
-                <p className="text-white-100 text-xl">Lifestyle & events</p>
-              </li>
-              <li
-                onClick={() => showModal("makeup")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={makeup_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Make up & Gele</p>
-              </li>
-              <li
-                onClick={() => showModal("family")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={family_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Family</p>
-              </li>
-
-              <li
-                onClick={() => showModal("wedding")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={wedding_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Weddings</p>
-              </li>
-              <li
-                onClick={() => showModal("birthday")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={birthday_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Birthdays</p>
-              </li>
-              <li
-                onClick={() => showModal("videography")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image
-                    className="w-full h-full"
-                    src={videography_icon}
-                    alt=""
-                  />
-                </span>
-                <p className="text-white-100 text-xl">Videography</p>
-              </li>
-              <li
-                onClick={() => showModal("kids")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={kids_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Kids & infants</p>
-              </li>
-              <li
-                onClick={() => showModal("lifestyle")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image
-                    className="w-full h-full"
-                    src={lifestyle_icon}
-                    alt=""
-                  />
-                </span>
-                <p className="text-white-100 text-xl">Lifestyle & events</p>
-              </li>
-              <li
-                onClick={() => showModal("makeup")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={makeup_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Make up & Gele</p>
-              </li>
-              <li
-                onClick={() => showModal("family")}
-                className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center "
-              >
-                <span>
-                  <Image className="w-full h-full" src={family_icon} alt="" />
-                </span>
-                <p className="text-white-100 text-xl">Family</p>
-              </li>
-            </ul> */}
-
             <ul
               className={`scroller__inner ${
                 isSessionFormModalOpen || isThankYouModalOpen
@@ -372,26 +226,16 @@ const Portfolio = () => {
             </ul>
           </div>
 
-          {/* Third section */}
-          <div className="pb-36 flex flex-col gap-20">
-            {services.map((item, idx) => (
-              <div key={idx}>
-                <h3 className="text-6xl lg:text-7xl">{item.serviceName}</h3>
-                <div className="mt-10">
-                  <Row gutter={[32, 32]}>
-                    {item.packages.map((pkg: any, idx: number) => (
-                      <Col key={idx} xs={24} md={12} lg={8}>
-                        <PlanCardProps
-                          variant="user"
-                          planType={pkg.name}
-                          planAmount={pkg.price}
-                          planDescription={pkg.description}
-                        />
-                      </Col>
-                    ))}
-                  </Row>
-                </div>
-              </div>
+          {/* NEW CARDS */}
+          <div className="py-36 flex flex-col gap-20">
+            {services.map((service) => (
+              <PackagesNewCard 
+                key={service.id}
+                title={service.serviceName}
+                description={service.description}
+                images={service.images || []}
+                packages={service.packages}
+              />
             ))}
           </div>
         </div>

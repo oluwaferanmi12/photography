@@ -42,6 +42,7 @@ import headerImg3 from "@/assets/images/home_header/img3.jpg";
 import headerImg4 from "@/assets/images/home_header/img4.jpg";
 import headerImg5 from "@/assets/images/home_header/img5.jpg";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
+import { FooterImages } from "@/components/footer-images/footer-images";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -404,6 +405,7 @@ export default function Home() {
       {/* Seventh Section */}
       {/* <GalleryBox /> */}
       <ParallaxScrollax />
+      <FooterImages />
       <Footer />
     </div>
   );

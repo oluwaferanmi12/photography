@@ -21,6 +21,7 @@ import { ContactFrom } from "@/components/contact-form/contact-form";
 import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 import { apiCall } from "@/axios/axios";
 import { PackagesNewCard } from "@/components/packages-new-card/packages-new-card";
+import { Trail } from "@/components/packages-new-card/trail";
 
 interface PackageOption {
   name: string;
@@ -221,7 +222,8 @@ const Portfolio = () => {
 
           {/* NEW CARDS */}
           <div className="py-36 flex flex-col gap-20">
-            <PackagesNewCard />
+            {/* <PackagesNewCard /> */}
+            <Trail />
           </div>
 
           {/* Third section */}

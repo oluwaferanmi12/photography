@@ -630,6 +630,12 @@ a {
   display: none;
 }
 
+.gradient-border-button {
+  border: 2px solid transparent;
+  border-image: linear-gradient(to right, #FFFFFF66 40%, #FFFFFF00 0.01%, #FFFFFF00 0.01%, #FFFFFF1A 10%);
+  border-image-slice: 1;
+}
+
 /* .linear_bg{
   background-image: url('../assets/images/package-card-linear-bg.png');
   background-repeat: no-repeat;

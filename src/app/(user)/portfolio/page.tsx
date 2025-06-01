@@ -114,7 +114,6 @@ const Portfolio = () => {
   const fetchPortfolio = async () => {
     try {
       const portfolioRes = await apiCall("get", "/Portfolio");
-      console.log("I am portfolio data", portfolioRes);
       const formattedData: PortfolioProps[] = portfolioRes.data.map(
         (item: any) => ({
           id: item.id,

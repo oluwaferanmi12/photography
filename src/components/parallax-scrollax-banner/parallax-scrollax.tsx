@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const ParallaxScrollax = () => {
   return (
-    <div className="parallaxBg w-full flex items-center justify-center p-24">
+    <div className="parallaxBg w-full flex items-center justify-center p-5 lg:p-24">
       <div className="w-full flex flex-col gap-3 items-center justify-center">
         <p className="text-white font-semibold text-5xl uppercase">
           Moments fade.
@@ -12,7 +12,7 @@ export const ParallaxScrollax = () => {
         <p className="text-white font-semibold text-5xl uppercase">
           Memories don’t.
         </p>
-        <p className="text-[#C5B79E] text-xl font-semibold uppercase">
+        <p className="text-[#C5B79E] text-xl text-center lg:text-left font-semibold uppercase">
           Let’s create images you’ll love — with care every step of the way.
         </p>
         <div className="mt-8">

@@ -29,8 +29,8 @@ const footerLinks = [
 export const Footer = () => {
   return (
     <div className="bg-[#282824] w-full  px-5 lg:px-20 py-20">
-      <div className="flex justify-between">
-        <div className="flex w-1/2 flex-col gap-3">
+      <div className="flex flex-col gap-6 lg:flex-row justify-between">
+        <div className="flex 3xl:w-1/2 flex-col gap-3">
           <h3 className="text-5xl font-normal">Your moment, forever </h3>
           <p className="text-base text-white/60">
             From first call to final gallery, I’m here to make it easy and
@@ -73,7 +73,7 @@ export const Footer = () => {
         </Col>
         <Col xs={24} lg={14}>
           <div className="flex justify-between items-start w-full">
-            <div className="flex w-full justify-between pt-10 text-[#3C3C3B]">
+            <div className="flex flex-wrap gap-5 lg:gap-0  w-full justify-between pt-10 text-[#3C3C3B]">
               {footerLinks.map((section, index) => (
                 <div key={index} className="flex flex-col gap-4">
                   <h2 className="text-[#FFF8F2] uppercase font-semibold text-xl   ">
@@ -91,7 +91,7 @@ export const Footer = () => {
               ))}
               <div className="flex flex-col gap-4">
                 <h2 className="text-[#FFF8F2] font-semibold text-xl   ">
-                  Folow us
+                  Follow us
                 </h2>
                 <div className="flex gap-3 items-center">
                   <span>

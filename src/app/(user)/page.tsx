@@ -41,6 +41,11 @@ import headerImg5 from "@/assets/images/home_header/img5.jpg";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
+import footerBrand from "@/assets/svgs/footer-brand-icon.svg";
+
+
+
+
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -156,34 +161,13 @@ export default function Home() {
             <Row className="w-full px-5 lg:px-20">
               <Col xs={24} xl={12}>
                 <div>
-                  <div className="hidden lg:flex items-center gap-2">
-                    {imageMap.map((img, index) => (
-                      <div
-                        key={index}
-                        className={`p-1 ${
-                          activeIndex === index
-                            ? "border-2 border-light-brown"
-                            : "border-2 border-transparent"
-                        } rounded-full transition-all`}
-                      >
-                        <Image
-                          src={img.thumbnail}
-                          alt=""
-                          onClick={() =>
-                            handleImageClick(img.background, index)
-                          }
-                          className="hover:opacity-80 transition-opacity cursor-pointer"
-                          width={65}
-                          height={65}
-                          style={{ filter: "none" }}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="lg:my-6 text-white text-5xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
+                  {/* <div className="lg:my-6 text-white text-5xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
                     <p>Timeless Looks.</p>
                     <p>Lasting Emotions.</p>
-                  </div>
+                  </div> */}
+                  <span>
+                    <Image src={footerBrand} className="w-1/2" alt="brand_logo" />
+                  </span>
                   <div className="mt-12">
                     <p className="text-[#E6EAEE] text-xl font-grotesk-regular lg:w-3/4 min[1400px]-[60%]">
                       Whether you’re stepping in front of the lens for the first
@@ -250,7 +234,7 @@ export default function Home() {
         <FourthSectionScroll />
 
         {/* Card cascade   */}
-        <div className="lg:hidden">
+        <div className="hidden">
           {cardData.map((item, index) => {
             const targetScale = 1 - (cardData.length - index) * 0.05;
             return (

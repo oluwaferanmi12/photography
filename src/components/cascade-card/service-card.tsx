@@ -40,7 +40,7 @@ export const ServiceCard = ({
       <Row justify={"center"}>
         <Col xs={24} md={18} lg={16}>
           <motion.div
-            className="rounded-lg px-8 min-w-full py-10 my-8  min-h-[500px]"
+            className="rounded-lg  px-8 min-w-full py-10 my-8  min-h-[500px]"
             style={{
               scale: newScale,
               position: "relative",
@@ -48,7 +48,7 @@ export const ServiceCard = ({
             }}
           >
             <div
-              className="w-full md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md"
+              className="w-full md:min-w-[280px] bg-white lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md"
             >
               <span className="">
                 <Image

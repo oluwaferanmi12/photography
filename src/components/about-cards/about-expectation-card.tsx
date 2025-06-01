@@ -14,18 +14,18 @@ import clientImage5 from "@/assets/images/about_marq/img5.jpg";
 export const AboutExpectationCard = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   return (
-    <div className="p-14 rounded-3xl bg-light-brown">
+    <div className="p-5 lg:p-14 rounded-3xl bg-light-brown">
       <div className="w-full flex justify-between items-center">
         <div>
-          <p className="text-darker-grey font-playfair text-5xl leading-relaxed -tracking-wider">
+          <p className="text-darker-grey font-playfair text-3xl lg:text-5xl lg:leading-relaxed lg:-tracking-wider">
             What to expect when you
           </p>
-          <p className="text-darker-grey font-playfair text-5xl leading-relaxed -tracking-wider">
+          <p className="text-darker-grey font-playfair text-3xl lg:text-5xl lg:leading-relaxed lg:-tracking-wider">
             work with me
           </p>
         </div>
         <span>
-          <Image src={arrowRight} alt="arrow" />
+          <Image className="hidden lg:block" src={arrowRight} alt="arrow" />
         </span>
       </div>
       <div className="mt-10">

@@ -16,7 +16,7 @@ export const ParallaxScrollax = () => {
           Let’s create images you’ll love — with care every step of the way.
         </p>
         <div className="mt-8">
-          <button className="flex justify-center text-[#222222] text-lg gap-3 items-center bg-white rounded-full py-5 px-8">
+          <button className="flex justify-center text-[#222222] text-lg gap-3 items-center bg-white rounded-full py-5 px-8 -z-[10]">
             Book a session now
             <span>
               <Image className="w-3 h-3" src={rightArrow} alt="icon" />

@@ -228,7 +228,7 @@ const Portfolio = () => {
           {/* NEW CARDS */}
           <div className="py-36 flex flex-col gap-20">
             {services.map((service) =>
-              service.packages.length === 1 ? (
+              service.packages.length <= 1 ? (
                 <PackageCardWithOneImage
                   key={service.id}
                   title={service.serviceName}

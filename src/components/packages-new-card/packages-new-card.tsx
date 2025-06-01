@@ -26,7 +26,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
 }) => {
   return (
     <UserPackagesLayout>
-      <Row gutter={[40, 40]}>
+      <Row align={"stretch"} gutter={[40, 40]}>
         <Col xs={24} lg={12}>
           <div>
             <div className="p-6">
@@ -57,15 +57,18 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
         </Col>
         <Col xs={24} lg={12}>
           {images.length > 1 ? (
-            <div className="overflow-x-scroll scrollbar flex gap-2 shrink-0">
+            <div className="flex scrollbar gap-5 relative w-full h-full overflow-x-scroll">
               {images.map((img, idx) => (
-                <div className="overflow-hidden h-[300px]" key={idx}>
+                <div
+                  className="w-[70%] rounded-xl cursor-pointer overflow-hidden h-[700px] shrink-0 "
+                  key={idx}
+                >
                   <Image
                     src={`https://olaitanakinlade.com/${img.imageUrl}`}
                     alt={`${title}_image_${idx}`}
                     width={500}
                     height={500}
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full rounded-xl object-cover"
                   />
                 </div>
               ))}
@@ -111,16 +114,19 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
             <p className="text-sm text-[#F8F8F8B2]/70 my-2">{description}</p>
           </div>
         </Col>
-        <Col xs={24} lg={12}>
-          <div className="overflow-x-auto scrollbar flex gap-4 shrink-0">
+        <Col xs={24} lg={16}>
+          <div className="flex scrollbar gap-5 relative w-full h-full overflow-x-scroll">
             {images.map((img, idx) => (
-              <div key={idx} className="overflow-hidden h-[300px]">
+              <div
+                className="w-[70%] rounded-xl cursor-pointer overflow-hidden h-[700px] shrink-0 "
+                key={idx}
+              >
                 <Image
                   src={`https://olaitanakinlade.com/${img.imageUrl}`}
                   alt={`${title}_image_${idx}`}
                   width={500}
                   height={500}
-                  className="w-full h-full object-cover rounded-xl"
+                  className="w-full rounded-xl object-cover"
                 />
               </div>
             ))}

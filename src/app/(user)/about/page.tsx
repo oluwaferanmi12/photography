@@ -1,7 +1,7 @@
 "use client";
 
 import { Col, Row } from "antd";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import headerImage from "@/assets/images/about__header.jpg";
 import Image from "next/image";
 import { AboutExpectationCard } from "@/components/about-cards/about-expectation-card";
@@ -10,9 +10,27 @@ import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
 import { AboutPortfolioCard } from "@/components/about-cards/about-portfolio-card";
 import starIcon from "@/assets/svgs/star-icon.svg";
+import { motion, useScroll, useTransform as transform } from "framer-motion";
 
 const About = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const defaultColor = "#2A2A2A80";
+  const changeColor = "#FFFFFFCC";
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef, // Ref to the scrollable container
+    offset: ["start end", "end start"], // This helps map scroll from start to end
+  });
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange((latest) => {
+      console.log("Current scrollYProgress:", latest);
+    });
+
+    // Cleanup the subscription when the component unmounts
+    return () => unsubscribe();
+  }, [scrollYProgress]);
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
@@ -28,24 +46,31 @@ const About = () => {
                     <h3 className="uppercase text-3xl lg:text-5xl ">
                       Victoria akinade
                     </h3>
-                    <div className="flex flex-col gap-4">
-                      <p className=" text-lg lg:text-xl text-white/80">
-                        I’m a proud wife, a mother to three amazing girls, and a
+                    <div ref={containerRef} className="flex flex-col gap-4">
+                      <motion.div className="text-lg lg:text-xl">
+                        {`I’m a proud wife, a mother to three amazing girls, and a
                         portrait and lifestyle photographer based in Toronto,
-                        Ontario.
-                      </p>
-                      <p className="text-[#4C4C4CCC]/80  text-lg lg:text-xl">
-                        I love capturing love, family, and the everyday moments
+                        Ontario. I love capturing love, family, and the everyday moments
                         that make life special — from growing bellies and
                         birthdays to graduations and weddings. My style is warm
                         and natural. I focus on real emotions and genuine
                         connections. Whether it&apos;s a quiet glance or a big
-                        laugh, I want you to have photos that feel like you.
-                      </p>
-                      <p className="text-[#4C4C4CCC]/80  text-lg lg:text-xl">
-                        I don’t just take pictures. I help you hold on to
-                        memories.
-                      </p>
+                        laugh, I want you to have photos that feel like you.  I don’t just take pictures. I help you hold on to
+                        memories.`
+                          .split("")
+                          .map((item, index, root) => {
+                            const color = transform(
+                              scrollYProgress,
+                              [0, (index + 1) / root.length],
+                              [changeColor, changeColor]
+                            );
+                            return (
+                              <motion.span key={index} style={{ color }}>
+                                {item}
+                              </motion.span>
+                            );
+                          })}
+                      </motion.div>
                     </div>
                   </div>
                 </Col>
@@ -129,8 +154,38 @@ const About = () => {
                     <h3 className="uppercase text-3xl lg:text-5xl ">
                       My journey
                     </h3>
-                    <div className="flex flex-col gap-4">
-                      <p className=" text-lg lg:text-xl text-white/80">
+                    <div ref={containerRef} className="flex flex-col gap-4">
+                      <motion.div className="text-lg lg:text-xl leading-relaxed">
+                        {`My journey began as a makeup artist, where I mastered
+                        the art of enhancing beauty and paying attention to the
+                        smallest details But I didn’t just want to prepare moments. I wanted to
+                        hold onto them. To freeze emotion in its purest form.
+                        That desire to do more led me to pick up a camera and
+                        everything changed. What started as passion became
+                        purpose. As a graduate of Humber College in Photography
+                        with over five years of experience, I’ve transformed
+                        instinct into craft. My approach blends creativity,
+                        emotion, and technical precision to tell stories that go
+                        beyond the surface. Every session is intentional. Every
+                        frame is a reflection of something real. I don’t just
+                        take photos. I create powerful visual experiences.
+                        Because beauty deserves to be seen. And moments deserve
+                        to be remembered.`
+                          .split("")
+                          .map((item, index, root) => {
+                            const color = transform(
+                              scrollYProgress,
+                              [0, (index + 1) / root.length],
+                              [defaultColor, changeColor]
+                            );
+                            return (
+                              <motion.span key={index} style={{ color }}>
+                                {item}
+                              </motion.span>
+                            );
+                          })}
+                      </motion.div>
+                      {/* <p className=" text-lg lg:text-xl text-white/80">
                         My journey began as a makeup artist, where I mastered
                         the art of enhancing beauty and paying attention to the
                         smallest details
@@ -149,7 +204,7 @@ const About = () => {
                         take photos. I create powerful visual experiences.
                         Because beauty deserves to be seen. And moments deserve
                         to be remembered.
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </Col>

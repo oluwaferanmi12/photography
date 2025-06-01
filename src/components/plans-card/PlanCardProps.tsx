@@ -11,7 +11,6 @@ type planCardInterface = {
   planType: "";
   planAmount: number;
   planDescription?: string;
-  planBenefits?: string[];
   variant?: "user" | "admin";
   planActiveness?: boolean;
 };
@@ -20,7 +19,6 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   planType,
   planAmount,
   planDescription,
-  planBenefits,
   planActiveness,
   variant = "user",
 }) => {
@@ -29,15 +27,17 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   return (
     <div>
       <div
-        className={`p-6 border border-off-white bg-[#0E0E0E] rounded-3xl ${
-          variant === "user" ? "text-[#999999]" : "text-[#F5F5F5]"
+        className={`p-6 border border-off-white  rounded-3xl ${
+          variant === "user"
+            ? "text-[#999999] bg-[#F8F8F805]"
+            : "text-[#F5F5F5] bg-[#0E0E0E]"
         }`}
       >
-        <div className="flex justify-between items-center">
-          <span>
-            <Image src={icon} className=" " alt="icon" />
-          </span>
-          {variant === "admin" && (
+        {variant === "admin" && (
+          <div className="flex justify-between items-center">
+            <span>
+              <Image src={icon} className=" " alt="icon" />
+            </span>
             <div className="flex items-center gap-4">
               <p>{planActiveness ? "Active" : "Inactive"}</p>
               <Switch
@@ -47,10 +47,10 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
                 className="custom_switch"
               />
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        <p className={`mt-3 text-xl text-white`}>{planType}</p>
+        <p className={`mt-3 ${variant === "user" ? "text-[#F8F8F8F2]/95" : ""} text-xl text-white`}>{planType}</p>
         <div
           className={`flex  my-5 items-center text-5xl border p-6 rounded-xl ${
             variant === "user"
@@ -73,22 +73,6 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
               {planDescription.split("*").map((item, index) => (
                 <li className="text-base" key={index}>
                   {item.trim()}
-                </li>
-              ))}
-            </ul>
-          )}
-          
-          {planBenefits && (
-            <ul
-              className={`list-disc pl-6 ${
-                variant === "user"
-                  ? "marker:text-[#999999] text-[#999999]"
-                  : "text-[#F5F5F5]"
-              }`}
-            >
-              {planBenefits?.map((list, index) => (
-                <li className="text-base" key={index}>
-                  {list}
                 </li>
               ))}
             </ul>

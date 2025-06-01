@@ -18,7 +18,7 @@ import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
 import { apiCall } from "@/axios/axios";
-import { PackagesNewCard } from "@/components/packages-new-card/packages-new-card";
+import { PackageCardWithOneImage, PackageCardWithMultipleImages } from "@/components/packages-new-card/packages-new-card";
 
 interface PackageOption {
   name: string;
@@ -228,7 +228,7 @@ const Portfolio = () => {
 
           {/* NEW CARDS */}
           <div className="py-36 flex flex-col gap-20">
-            {services.map((service) => (
+            {/* {services.map((service) => (
               <PackagesNewCard 
                 key={service.id}
                 title={service.serviceName}
@@ -236,7 +236,26 @@ const Portfolio = () => {
                 images={service.images || []}
                 packages={service.packages}
               />
-            ))}
+            ))} */}
+            {services.map((service) =>
+              service.packages.length > 1 ? (
+                <PackageCardWithMultipleImages
+                  key={service.id}
+                  title={service.serviceName}
+                  description={service.description}
+                  images={service.images || []}
+                  packages={service.packages}
+                />
+              ) : (
+                <PackageCardWithOneImage
+                  key={service.id}
+                  title={service.serviceName}
+                  description={service.description}
+                  images={service.images || []}
+                  packages={service.packages}
+                />
+              )
+            )}
           </div>
         </div>
       </div>

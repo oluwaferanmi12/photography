@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { GalleryBox } from "@/components/galleryBox/gallery-box";
-import { Footer } from "@/components/footer/footer";
 import { Banner } from "@/components/banner/banner";
 import Image from "next/image";
 import Button from "@/components/button/button";
@@ -17,6 +15,10 @@ import portrait from "@/assets/svgs/portfolio_svgs/portrait.svg";
 import short_img from "@/assets/images/short_img.jpg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import { apiCall } from "@/axios/axios";
+import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
+import { FooterImages } from "@/components/footer-images/footer-images";
+import { Footer } from "@/components/footer/footer";
+
 
 interface PortfolioProps {
   id: string;
@@ -284,7 +286,9 @@ const Portfolio = () => {
         </div>
       </div>
 
-      <GalleryBox />
+      <ParallaxScrollax />
+            <FooterImages />
+            <Footer /> 
       <Footer />
     </div>
   );

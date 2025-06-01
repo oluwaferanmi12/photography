@@ -14,7 +14,6 @@ import circleIcon from "@/assets/svgs/circle-stroke.svg";
 import victoria from "@/assets/images/victoria.jpeg";
 import victoria2 from "@/assets/images/victoriaPics/slide2.jpg";
 import victoria3 from "@/assets/images/victoriaPics/slide3.jpg";
-import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import ImageMasonry from "@/components/imageMasonry/imageMasonry";
 import { Banner } from "@/components/banner/banner";
@@ -29,7 +28,6 @@ import cascadeImage2 from "@/assets/svgs/masonryImages/mobile/card2.svg";
 import cascadeImage3 from "@/assets/svgs/masonryImages/mobile/card3.svg";
 import cascadeImage4 from "@/assets/svgs/masonryImages/mobile/card4.svg";
 import scrollDown from "@/assets/svgs/scroll-down-icon.svg";
-import { AnimatedTestimonial } from "@/components/animated-testimonials/animated-testimonial";
 import { Compare } from "@/components/ui/compare";
 import TextReveal from "@/components/animattions/animated-text-reveal";
 import Button from "@/components/button/button";
@@ -391,14 +389,6 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
-
-        {/* Sixth Section */}
-        <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
-          <h3 className="text-4xl lg:text-5xl lg:text-center">
-            Words from my clients
-          </h3>
-          <AnimatedTestimonial />
         </div>
       </div>
 

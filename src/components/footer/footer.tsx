@@ -1,7 +1,7 @@
 import React from "react";
 import mail from "@/assets/svgs/mail.svg";
 import arrowRight from "@/assets/svgs/footer-send-arrow.svg";
-import revolver from "@/assets/svgs/world-revolve-icon.svg";
+import footerBrand from "@/assets/svgs/footer-brand-icon.svg";
 import Image from "next/image";
 import { Col, Row } from "antd";
 import youtubeIcon from "@/assets/svgs/youtubeIcon.svg";
@@ -64,10 +64,10 @@ export const Footer = () => {
         <Col xs={24} lg={10}>
           <div className="pt-10 flex flex-col gap-4">
             <span>
-              <Image src={revolver} alt="brand_logo" />
+              <Image src={footerBrand} alt="brand_logo" />
             </span>
             <p className="text-white/60 text-lg w-[80%]">
-              Join hands with Skyline and turn your property goals into reality
+              For those who want more than just a photo. I help you pause time, preserve your story and remember how it felt.
             </p>
           </div>
         </Col>

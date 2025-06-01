@@ -7,10 +7,11 @@ import calendar from "@/assets/svgs/calendar_template.svg";
 import { Col, Modal, Row } from "antd";
 import { ContactFrom } from "@/components/contact-form/contact-form";
 import { ContactBanner } from "@/components/banner/contact-banner";
-import { GalleryBox } from "@/components/galleryBox/gallery-box";
 import { Footer } from "@/components/footer/footer";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
+import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
+import { FooterImages } from "@/components/footer-images/footer-images";
 
 const SessionPage = () => {
   const [selectedService, setSelectedService] = useState("");
@@ -73,7 +74,8 @@ const SessionPage = () => {
           <ContactBanner />
         </div>
       </div>
-      <GalleryBox />
+      <ParallaxScrollax />
+      <FooterImages />
       <Footer />
       {/* AFTER FORM FILLING MODAL */}
       <Modal

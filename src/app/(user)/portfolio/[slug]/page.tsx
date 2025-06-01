@@ -2,9 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { PlanCards } from "@/components/plans-card/PlanCards";
-import { GalleryBox } from "@/components/galleryBox/gallery-box";
-import { Footer } from "@/components/footer/footer";
 import InfiniteCarousel from "@/components/unending-carousel/unending-carousel";
 import { Banner } from "@/components/banner/banner";
 import Button from "@/components/button/button";
@@ -13,7 +10,9 @@ import rollingImage from "@/assets/svgs/rollingImage.svg";
 import { apiCall } from "@/axios/axios";
 import { Col, Row } from "antd";
 import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
-
+import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
+import { FooterImages } from "@/components/footer-images/footer-images";
+import { Footer } from "@/components/footer/footer";
 interface PortfolioProps {
   id: string;
   portfolioName: string;
@@ -95,7 +94,7 @@ const SinglePackages = () => {
   useEffect(() => {
     if (attachedServices.length > 0 && portfolioData.length > 0 && slug) {
       const matchedPortfolio = portfolioData.find((info) => info.id === slug);
-      console.log("i am matched port ", matchedPortfolio)
+      console.log("i am matched port ", matchedPortfolio);
 
       if (matchedPortfolio) {
         const matchedService = attachedServices.find(
@@ -217,7 +216,8 @@ const SinglePackages = () => {
         </div>
       </div>
 
-      <GalleryBox />
+      <ParallaxScrollax />
+      <FooterImages />
       <Footer />
     </div>
   );

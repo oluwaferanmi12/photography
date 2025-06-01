@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import React from "react";
-import { GalleryBox } from "@/components/galleryBox/gallery-box";
-import { Footer } from "@/components/footer/footer";
 // import rollingImage from "@/assets/svgs/rollingImage.svg";
 import card1 from "@/assets/images/gallery/card1.jpg";
 import card2 from "@/assets/images/gallery/card2.jpg";
@@ -17,6 +15,9 @@ import card9 from "@/assets/images/gallery/card9.jpg";
 import { Row, Col } from "antd";
 import { GalleryCard } from "@/components/gallery-card/gallery-card";
 import Pagination from "@/components/pagination/pagination";
+import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
+import { FooterImages } from "@/components/footer-images/footer-images";
+import { Footer } from "@/components/footer/footer";
 
 const Gallery = () => {
   const galleryData = [
@@ -118,7 +119,9 @@ const Gallery = () => {
           />
         </div>
       </section>
-      <GalleryBox />
+      <ParallaxScrollax />
+      <FooterImages />
+      <Footer />
       <Footer />
     </div>
   );

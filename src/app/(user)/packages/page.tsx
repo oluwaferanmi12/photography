@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { GalleryBox } from "@/components/galleryBox/gallery-box";
-import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import HS4 from "@/assets/images/HS4.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
@@ -18,7 +16,13 @@ import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
 import { apiCall } from "@/axios/axios";
-import { PackageCardWithOneImage, PackageCardWithMultipleImages } from "@/components/packages-new-card/packages-new-card";
+import {
+  PackageCardWithOneImage,
+  PackageCardWithMultipleImages,
+} from "@/components/packages-new-card/packages-new-card";
+import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
+import { FooterImages } from "@/components/footer-images/footer-images";
+import { Footer } from "@/components/footer/footer";
 
 interface PackageOption {
   name: string;
@@ -253,10 +257,9 @@ const Portfolio = () => {
         {/* contact banner */}
         <ContactBanner />
       </div>
-
-      <GalleryBox />
-      <Footer />
-
+      <ParallaxScrollax />
+      <FooterImages />
+      <Footer /> 
       {/* MODAL */}
       <Modal
         open={isSessionFormModalOpen}

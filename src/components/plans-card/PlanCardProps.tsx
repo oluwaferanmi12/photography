@@ -28,7 +28,7 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   return (
     <div>
       <div
-        className={`p-6 border border-off-white  rounded-3xl ${
+        className={`p-6  border border-off-white  rounded-3xl ${
           variant === "user"
             ? "text-[#999999] bg-[#F8F8F805]"
             : "text-[#F5F5F5] bg-[#0E0E0E]"

@@ -19,7 +19,6 @@ import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
 
-
 interface PortfolioProps {
   id: string;
   portfolioName: string;
@@ -287,8 +286,7 @@ const Portfolio = () => {
       </div>
 
       <ParallaxScrollax />
-            <FooterImages />
-            <Footer /> 
+      <FooterImages />
       <Footer />
     </div>
   );

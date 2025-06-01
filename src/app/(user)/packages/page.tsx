@@ -138,7 +138,6 @@ const Portfolio = () => {
               images: service.images || [],
             };
           } catch (err) {
-            console.error("Error fetching packages:", err);
             return {
               id: service.id,
               serviceName: service.title,

@@ -284,7 +284,6 @@ export default function Services() {
           <p>No Service data available</p>
         )}
 
-        {/* Create Service DRAWER */}
         <ResponsiveDrawer
           title="Create a service"
           open={openCreateService}

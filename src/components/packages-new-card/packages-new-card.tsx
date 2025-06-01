@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import dummyIcon from "@/assets/svgs/dummy-packages-icon.svg";
 import stoneDot from "@/assets/svgs/stone-dots.svg";
+import { PlanCardProps } from "../plans-card/PlanCardProps";
 
 interface ImageType {
   serviceId: string;
@@ -14,7 +15,7 @@ interface PackagesProps {
   title: string;
   description: string;
   images: ImageType[];
-  packages: { name: string; price: string; description: string }[];
+  packages: { name: string; price: number; description: string }[];
 }
 
 export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
@@ -25,42 +26,29 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
 }) => {
   return (
     <UserPackagesLayout>
-      <Row gutter={[32, 32]}>
+      <Row gutter={[40, 40]}>
         <Col xs={24} lg={12}>
           <div>
             <div className="p-6">
               <span>
                 <Image src={dummyIcon} alt="dummy_icon" />
               </span>
-              <p className="text-5xl font-bold mt-4 text-[#F8F8F8F2]/95">
-                {title}
+              <p className="text-5xl font-bold text-[#F8F8F8F2]/95">{title}</p>
+              <p className="text-sm font-normal mt-4 text-[#F8F8F8B2]/70 my-2">
+                {description}
               </p>
-              <p className="text-sm text-[#F8F8F8B2]/70 my-2">{description}</p>
             </div>
 
             <div>
               <Row gutter={[32, 32]}>
                 {packages.map((pkg, idx) => (
-                  <Col xs={24} lg={8} key={idx}>
-                    <div className="bg-[#F8F8F805] p-6 rounded-xl flex flex-col gap-5">
-                      <p>{pkg.name}</p>
-                      <p className="text-5xl text-[#D9C9AE] font-light mb-4">
-                        ${pkg.price}
-                      </p>
-                      <div className="flex gap-2">
-                        <span>
-                          <Image src={stoneDot} alt="stoneDot" />
-                        </span>
-                        <p>{pkg.name}</p>
-                      </div>
-                      <div className="w-40">
-                        <div className="relative inline-block p-[1.5px] rounded-full bg-gradient-to-br from-white/40 via-white/5 to-white/10 shadow-[0px_2px_16px_0px_rgba(248,248,248,0.06)]">
-                          <button className="px-6 py-2 rounded-full bg-black/30 backdrop-blur-md text-white font-semibold h-full">
-                            Get started
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                  <Col xs={24} key={idx}>
+                    <PlanCardProps
+                      variant="user"
+                      planType={pkg.name}
+                      planAmount={pkg.price}
+                      planDescription={pkg.description}
+                    />
                   </Col>
                 ))}
               </Row>
@@ -68,24 +56,35 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
           </div>
         </Col>
         <Col xs={24} lg={12}>
-          {images.map((img, idx) => (
-            <div className="overflow-hidden h-[700px]" key={idx}>
-              <Image
-                src={`https://olaitanakinlade.com/${img.imageUrl}`}
-                alt={`${title}_image_${idx}`}
-                width={500}
-                height={500}
-                className="w-full h-full object-cover rounded-2xl"
-              />
-            </div>
-          ))}
-          {/* <div className="overflow-hidden">
+          {images.length > 1 ? (
+            <div className="overflow-x-scroll scrollbar flex gap-2 shrink-0">
+              {images.map((img, idx) => (
+                <div className="overflow-hidden h-[300px]" key={idx}>
                   <Image
-                    src={image1}
-                    className="w-full h-auto object-cover"
-                    alt="image"
+                    src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                    alt={`${title}_image_${idx}`}
+                    width={500}
+                    height={500}
+                    className="w-full h-full object-cover rounded-xl"
                   />
-                </div> */}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              {images.map((img, idx) => (
+                <div className="overflow-hidden h-[700px]" key={idx}>
+                  <Image
+                    src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                    alt={`${title}_image_${idx}`}
+                    width={500}
+                    height={500}
+                    className="w-full h-full object-cover rounded-4xl"
+                  />
+                </div>
+              ))}
+            </>
+          )}
         </Col>
       </Row>
     </UserPackagesLayout>
@@ -100,9 +99,9 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
 }) => {
   return (
     <UserPackagesLayout>
-      <Row gutter={[32, 32]}>
+      <Row align={"stretch"} gutter={[32, 32]}>
         <Col xs={24} lg={8}>
-          <div className="p-6">
+          <div className="p-6 h-full">
             <span>
               <Image src={dummyIcon} alt="dummy_icon" />
             </span>
@@ -121,7 +120,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
                   alt={`${title}_image_${idx}`}
                   width={500}
                   height={500}
-                  className="w-full h-full object-cover rounded-2xl"
+                  className="w-full h-full object-cover rounded-xl"
                 />
               </div>
             ))}
@@ -132,25 +131,12 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
         <Row gutter={[32, 32]}>
           {packages.map((pkg, idx) => (
             <Col xs={24} lg={8} key={idx}>
-              <div className="bg-[#F8F8F805] p-6 rounded-xl flex flex-col gap-5">
-                <p>{pkg.name}</p>
-                <p className="text-5xl text-[#D9C9AE] font-light mb-4">
-                  ${pkg.price}
-                </p>
-                <div className="flex gap-2">
-                  <span>
-                    <Image src={stoneDot} alt="stoneDot" />
-                  </span>
-                  <p>{pkg.name}</p>
-                </div>
-                <div className="w-40">
-                  <div className="relative inline-block p-[1.5px] rounded-full bg-gradient-to-br from-white/40 via-white/5 to-white/10 shadow-[0px_2px_16px_0px_rgba(248,248,248,0.06)]">
-                    <button className="px-6 py-2 rounded-full bg-black/30 backdrop-blur-md text-white font-semibold h-full">
-                      Get started
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <PlanCardProps
+                variant="user"
+                planType={pkg.name}
+                planAmount={pkg.price}
+                planDescription={pkg.description}
+              />
             </Col>
           ))}
         </Row>
@@ -172,7 +158,7 @@ const UserPackagesLayout = ({ children }) => {
 
       {/* Inner content */}
       <div className="relative z-10">
-        <div className="rounded-4xl w-full p-[1.5px] relative inline-block bg-gradient-to-br from-white/40 via-white/5 to-white/10 shadow-[0px_2px_16px_0px_rgba(248,248,248,0.08)]">
+        <div className="rounded-4xl w-full p-[1.5px] relative inline-block bg-gradient-to-br from-white/30 via-white/15 to-white/30 shadow-[0px_2px_16px_0px_rgba(248,248,248,0.08)]">
           <div className="rounded-4xl bg-[#282828CC] p-3 backdrop-blur-md text-white font-semibold w-full h-full">
             {children}
           </div>

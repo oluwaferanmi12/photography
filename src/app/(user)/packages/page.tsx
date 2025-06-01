@@ -22,7 +22,7 @@ import { PackageCardWithOneImage, PackageCardWithMultipleImages } from "@/compon
 
 interface PackageOption {
   name: string;
-  price: string;
+  price: number;
   description: string;
 }
 
@@ -228,18 +228,9 @@ const Portfolio = () => {
 
           {/* NEW CARDS */}
           <div className="py-36 flex flex-col gap-20">
-            {/* {services.map((service) => (
-              <PackagesNewCard 
-                key={service.id}
-                title={service.serviceName}
-                description={service.description}
-                images={service.images || []}
-                packages={service.packages}
-              />
-            ))} */}
             {services.map((service) =>
-              service.packages.length > 1 ? (
-                <PackageCardWithMultipleImages
+              service.packages.length === 1 ? (
+                <PackageCardWithOneImage
                   key={service.id}
                   title={service.serviceName}
                   description={service.description}
@@ -247,7 +238,7 @@ const Portfolio = () => {
                   packages={service.packages}
                 />
               ) : (
-                <PackageCardWithOneImage
+                <PackageCardWithMultipleImages
                   key={service.id}
                   title={service.serviceName}
                   description={service.description}

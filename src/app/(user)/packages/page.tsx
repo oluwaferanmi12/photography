@@ -230,7 +230,7 @@ const Portfolio = () => {
           </div>
 
           {/* NEW CARDS */}
-          <div className="py-36 flex flex-col gap-20">
+          <div className="py-36 flex flex-col gap-20 ">
             {services.map((service) =>
               service.packages.length <= 1 ? (
                 <PackageCardWithOneImage
@@ -252,10 +252,6 @@ const Portfolio = () => {
             )}
           </div>
         </div>
-      </div>
-      <div className="px-5 lg:px-14 3xl:!px-28">
-        {/* contact banner */}
-        <ContactBanner />
       </div>
       <ParallaxScrollax />
       <FooterImages />

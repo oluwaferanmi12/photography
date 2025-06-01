@@ -26,70 +26,77 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
 }) => {
   return (
     <UserPackagesLayout>
-      <Row align={"stretch"} gutter={[40, 40]}>
-        <Col xs={24} lg={12}>
-          <div>
-            <div className="p-6">
-              <span>
-                <Image src={dummyIcon} alt="dummy_icon" />
-              </span>
-              <p className="text-5xl font-bold text-[#F8F8F8F2]/95">{title}</p>
-              <p className="text-sm font-normal mt-4 text-[#F8F8F8B2]/70 my-2">
-                {description}
-              </p>
-            </div>
-
+      <div>
+        <Row >
+          <Col xs={22} lg={12}>
             <div>
-              <Row gutter={[32, 32]}>
-                {packages.map((pkg, idx) => (
-                  <Col xs={24} key={idx}>
-                    <PlanCardProps
-                      variant="user"
-                      planType={pkg.name}
-                      planAmount={pkg.price}
-                      planDescription={pkg.description}
+              <div className="lg:p-6">
+                <span>
+                  <Image src={dummyIcon} alt="dummy_icon" />
+                </span>
+                <p className="text-3xl lg:text-5xl font-bold text-[#F8F8F8F2]/95">
+                  {title}
+                </p>
+                <p className="text-sm font-normal mt-4 text-[#F8F8F8B2]/70 my-2">
+                  {description}
+                </p>
+              </div>
+
+              <div>
+                <Row gutter={[32, 32]}>
+                  {packages.map((pkg, idx) => (
+                    <Col xs={24} key={idx}>
+                      <PlanCardProps
+                        variant="user"
+                        planType={pkg.name}
+                        planAmount={pkg.price}
+                        planDescription={pkg.description}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            </div>
+          </Col>
+          <Col xs={24} lg={12}>
+            {images.length > 1 ? (
+              <div className="flex scrollbar gap-5 relative w-full h-full overflow-x-scroll">
+                {images.map((img, idx) => (
+                  <div
+                    className="w-[90%] lg:w-[70%] rounded-xl cursor-pointer overflow-hidden h-full lg:h-[700px] shrink-0 "
+                    key={idx}
+                  >
+                    <Image
+                      src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                      alt={`${title}_image_${idx}`}
+                      width={500}
+                      height={500}
+                      className="w-full rounded-xl object-cover"
                     />
-                  </Col>
+                  </div>
                 ))}
-              </Row>
-            </div>
-          </div>
-        </Col>
-        <Col xs={24} lg={12}>
-          {images.length > 1 ? (
-            <div className="flex scrollbar gap-5 relative w-full h-full overflow-x-scroll">
-              {images.map((img, idx) => (
-                <div
-                  className="w-[70%] rounded-xl cursor-pointer overflow-hidden h-[700px] shrink-0 "
-                  key={idx}
-                >
-                  <Image
-                    src={`https://olaitanakinlade.com/${img.imageUrl}`}
-                    alt={`${title}_image_${idx}`}
-                    width={500}
-                    height={500}
-                    className="w-full rounded-xl object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <>
-              {images.map((img, idx) => (
-                <div className="overflow-hidden h-[700px]" key={idx}>
-                  <Image
-                    src={`https://olaitanakinlade.com/${img.imageUrl}`}
-                    alt={`${title}_image_${idx}`}
-                    width={500}
-                    height={500}
-                    className="w-full h-full object-cover rounded-4xl"
-                  />
-                </div>
-              ))}
-            </>
-          )}
-        </Col>
-      </Row>
+              </div>
+            ) : (
+              <>
+                {images.map((img, idx) => (
+                  <div
+                    className="overflow-hidden h-full  lg:h-[700px]"
+                    key={idx}
+                  >
+                    <Image
+                      src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                      alt={`${title}_image_${idx}`}
+                      width={500}
+                      height={500}
+                      className="w-full h-full object-cover rounded-4xl"
+                    />
+                  </div>
+                ))}
+              </>
+            )}
+          </Col>
+        </Row>
+      </div>
     </UserPackagesLayout>
   );
 };
@@ -108,17 +115,17 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
             <span>
               <Image src={dummyIcon} alt="dummy_icon" />
             </span>
-            <p className="text-5xl font-bold mt-4 text-[#F8F8F8F2]/95">
+            <p className="text-3xl lg:text-5xl font-bold mt-4 text-[#F8F8F8F2]/95">
               {title}
             </p>
             <p className="text-sm text-[#F8F8F8B2]/70 my-2">{description}</p>
           </div>
         </Col>
-        <Col xs={24} lg={16}>
+        <Col xs={0} md={24} lg={16} className="">
           <div className="flex scrollbar gap-5 relative w-full h-full overflow-x-scroll">
             {images.map((img, idx) => (
               <div
-                className="w-[70%] rounded-xl cursor-pointer overflow-hidden h-[700px] shrink-0 "
+                className=":w-[70%] rounded-xl cursor-pointer overflow-hidden h-[400px] shrink-0 "
                 key={idx}
               >
                 <Image
@@ -133,7 +140,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
           </div>
         </Col>
       </Row>
-      <div className="mt-14">
+      <div className="lg:mt-14">
         <Row gutter={[32, 32]}>
           {packages.map((pkg, idx) => (
             <Col xs={24} lg={8} key={idx}>
@@ -146,6 +153,26 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
             </Col>
           ))}
         </Row>
+      </div>
+      <div className="mt-10 lg:hidden">
+        <Col xs={24} lg={0}>
+          <div className="flex scrollbar gap-5 relative w-full h-full overflow-x-scroll">
+            {images.map((img, idx) => (
+              <div
+                className="w-[90%] lg:w-[70%] rounded-xl cursor-pointer overflow-hidden h-full lg:h-[700px] shrink-0 "
+                key={idx}
+              >
+                <Image
+                  src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                  alt={`${title}_image_${idx}`}
+                  width={500}
+                  height={500}
+                  className="w-full h-full rounded-xl object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </Col>
       </div>
     </UserPackagesLayout>
   );

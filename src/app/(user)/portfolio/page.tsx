@@ -140,13 +140,20 @@ const Portfolio = () => {
             <div className="flex flex-col gap-4">
               <h2 className="text-5xl lg:text-7xl">Explore my</h2>
               <div className="flex gap-5 items-center">
-                <div className="overflow-hidden rounded-full w-20 h-20 lg:w-[200px] lg:h-[100px]">
+                {/* <div className="overflow-hidden rounded-full w-20 h-20 lg:w-[200px] lg:h-[100px]">
                   <Image
                     src={short_img}
                     className=" object-cover w-full "
                     alt="img"
                   />
-                </div>
+                </div> */}
+                <span>
+                  <Image
+                    src={short_img}
+                    className="rounded-full object-cover w-[150px] h-[80px]"
+                    alt="img"
+                  />
+                </span>
                 <h2 className=" italic text-5xl lg:text-7xl ">Portfolio</h2>
               </div>
             </div>
@@ -167,7 +174,7 @@ const Portfolio = () => {
                   .map((portfolio, i) => (
                     <div
                       key={`left-${i}`}
-                      className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] min-h-[400px] max-h-[600px] w-full"
+                      className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] min-h-[400px] max-h-[600px] w-full cursor-pointer "
                       style={{ backgroundColor: "#EFFBF9" }}
                     >
                       <span className="w-full overflow-hidden rounded-xl mb-4">
@@ -179,7 +186,7 @@ const Portfolio = () => {
                       </span>
                       <div className="flex flex-col justify-between flex-1">
                         <div>
-                          <h3 className="text-5xl font-playfair text-darker-grey ">
+                          <h3 className="text-3xl lg:text-5xl font-playfair text-darker-grey ">
                             {portfolio.portfolioName}
                           </h3>
                           <p className="text-base text-gray-800 mt-2 leading-relaxed">
@@ -217,7 +224,7 @@ const Portfolio = () => {
                       </span>
                       <div className="flex flex-col justify-between flex-1">
                         <div>
-                          <h3 className="text-5xl font-playfair text-darker-grey ">
+                          <h3 className="text-3xl lg:text-5xl font-playfair text-darker-grey ">
                             {portfolio.portfolioName}
                           </h3>
                           <p className="text-base text-gray-800 mt-2 leading-relaxed">

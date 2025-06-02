@@ -115,8 +115,6 @@ const Portfolio = () => {
       const serviceRes = await apiCall("get", "/Admin/Services");
       const servicesData = serviceRes.data;
 
-      console.log("I am service data loooking for service", servicesData);
-
       // Fetch packages for all services concurrently
       const enrichedServices = await Promise.all(
         servicesData.map(async (service: any) => {
@@ -172,7 +170,7 @@ const Portfolio = () => {
         <div className="px-5 lg:px-14 3xl:!px-28">
           <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
             <div className="flex flex-col gap-8 lg:w-1/2">
-              <h2 className="text-7xl">Explore my</h2>
+              <h2 className="text-5xl lg:text-7xl">Explore my</h2>
               <div className="flex gap-5 items-center">
                 <span>
                   <Image
@@ -181,7 +179,7 @@ const Portfolio = () => {
                     alt="img"
                   />
                 </span>
-                <h2 className=" italic text-7xl ">Packages</h2>
+                <h2 className=" italic text-5xl lg:text-7xl ">Packages</h2>
               </div>
             </div>
             <div className="lg:w-[70%] text-xl text-light-brown">

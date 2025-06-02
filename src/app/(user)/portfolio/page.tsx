@@ -136,18 +136,18 @@ const Portfolio = () => {
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
         <div className="px-5 lg:px-14 3xl:!px-28">
-          <div className="flex flex-col mt-28 lg:mt-48 lg:flex-row lg:justify-between items-center">
+          <div className="flex flex-col mt-28 lg:mt-48 lg:flex-row lg:justify-between lg:items-center">
             <div className="flex flex-col gap-4">
-              <h2 className="text-7xl">Explore my</h2>
+              <h2 className="text-5xl lg:text-7xl">Explore my</h2>
               <div className="flex gap-5 items-center">
-                <span>
+                <div className="overflow-hidden rounded-full w-20 h-20 lg:w-[200px] lg:h-[100px]">
                   <Image
                     src={short_img}
-                    className="rounded-full object-cover w-[200px] h-[100px]"
+                    className=" object-cover w-full "
                     alt="img"
                   />
-                </span>
-                <h2 className=" italic text-7xl ">Portfolio</h2>
+                </div>
+                <h2 className=" italic text-5xl lg:text-7xl ">Portfolio</h2>
               </div>
             </div>
             <span className="hidden lg:flex">
@@ -158,7 +158,7 @@ const Portfolio = () => {
               />
             </span>
           </div>
-          <div className="my-14">
+          <div className="my-6 lg:my-14">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-10">
               {/* Column 1 */}
               <div className="flex flex-col gap-6">

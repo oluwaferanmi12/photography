@@ -191,15 +191,15 @@ const Portfolio = () => {
               </p>
             </div>
           </div>
-          <div className="scroller !py-28" ref={scrollerRef}>
+          <div className="scroller !py-14 lg:!py-28" ref={scrollerRef}>
             <ul
-              className={`scroller__inner ${
+              className={` scroller__inner ${
                 isSessionFormModalOpen || isThankYouModalOpen
                   ? "pause-scroll"
                   : ""
               }`}
             >
-              {[...services, ...services].map((service, index) => {
+              {[...services, ...services, ...services, ...services, ...services, ...services, ...services, ...services,].map((service, index) => {
                 const iconKey = service.serviceName.toLowerCase();
                 const icon = serviceIcons[iconKey];
 

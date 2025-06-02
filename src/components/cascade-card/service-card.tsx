@@ -4,6 +4,7 @@ import Image, { StaticImageData } from "next/image";
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@/components/button/button";
+import { CreateSlug } from "@/lib/create-slug";
 
 export const ServiceCard = ({
   currentIndex,
@@ -17,15 +18,13 @@ export const ServiceCard = ({
   targetScale: number;
   progress: any;
   service: {
+    id: string;
     title: string;
-    image: StaticImageData;
+    image: string;
     description: string;
-    cta: string;
-    cta_link?: string;
   };
 }) => {
   const container = useRef(null);
-
 
   const newScale = useTransform(progress, range, [1, targetScale]);
   return (
@@ -47,13 +46,13 @@ export const ServiceCard = ({
               top: `calc(-5vh + ${currentIndex * 25}px)`,
             }}
           >
-            <div
-              className="w-full md:min-w-[280px] bg-white lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md"
-            >
+            <div className="w-full md:min-w-[280px] bg-white lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md">
               <span className="">
-                <Image
-                  src={service.image}
+                <img
+                  src={`https://olaitanakinlade.com/${service.image}`}
                   alt={service.title}
+                  width={200}
+                  height={200}
                   className="rounded-[20px] h-[196px] w-full object-cover"
                 />
               </span>
@@ -66,7 +65,11 @@ export const ServiceCard = ({
                 </p>
               </div>
               <div>
-              <Button variant="filled" text={service.cta} link={service.cta_link}  />
+                <Button
+                  variant="filled"
+                  text={service.title}
+                  link={`'https://olaitanakinlade.com/packages/${CreateSlug(service.title)}`}
+                />
               </div>
             </div>
           </motion.div>

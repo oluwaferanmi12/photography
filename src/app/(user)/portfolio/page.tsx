@@ -24,8 +24,6 @@ interface PortfolioProps {
   portfolioName: string;
   description: string;
   service: string;
-  // noOfPictures: string;
-  // status: boolean;
   thumbnail: string;
 }
 

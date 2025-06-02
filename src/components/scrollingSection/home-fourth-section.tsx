@@ -1,23 +1,30 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
-import wedding from "@/assets/images/wedding-1.jpg";
-import birthdays from "@/assets/svgs/portfolio_svgs/birthdays.svg";
-import lifestyle from "@/assets/svgs/portfolio_svgs/lifestyle.svg";
-import family from "@/assets/svgs/portfolio_svgs/family.svg";
-import videography from "@/assets/svgs/portfolio_svgs/videography.svg";
-import kids from "@/assets/images/kid-1.jpg";
-// import pregnancy from "@/assets/svgs/portfolio_svgs/pregnancy.svg";
-// import portrait from "@/assets/svgs/portfolio_svgs/portrait.svg";
-
-import Image from "next/image";
+// import Image from "next/image";
 import Button from "../button/button";
 import { ServiceCard } from "@/components/cascade-card/service-card";
 import Link from "next/link";
+import { apiCall } from "@/axios/axios";
+import { CreateSlug } from "@/lib/create-slug";
+
+interface PortfolioProps {
+  id: string;
+  title: string;
+  description: string;
+  service: string;
+  image: string;
+}
 
 export const FourthSectionScroll = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const container = useRef<HTMLDivElement | null>(null);
+  const [portfolioData, setPortfolioData] = useState<PortfolioProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [sectionHeight, setSectionHeight] = useState<number>(300);
+
 
   const mobileScroll = useScroll({
     target: container,
@@ -41,82 +48,74 @@ export const FourthSectionScroll = () => {
       scrollPercentage = "-200%";
     }
   }
+
+
   const x = useTransform(
     desktopScroll.scrollYProgress,
     [0, 1],
     ["1%", scrollPercentage]
   );
-  //   -25%
-  // -200%
 
-  const services = [
-    {
-      title: "Weddings",
-      image: wedding,
-      description:
-        "Elegant and timeless wedding photography that captures the love, joy, and unforgettable moments of your special day.",
-      cta_link: "/packages/wedding",
-      cta: "View weddings",
-    },
-    {
-      title: "Birthdays",
-      image: birthdays,
-      description:
-        "Celebrate another trip around the sun with vibrant, fun, and candid shots that showcase the energy and excitement of the moment.",
-      cta_link: "/packages/birthday",
-      cta: "View birthdays",
-    },
-    {
-      title: "Kids",
-      image: kids,
-      description:
-        "Playful and tender portraits of your little ones — capturing their personalities and milestones as they grow.",
-      cta_link: "/packages/kid",
-      cta: "View kids",
-    },
-    {
-      title: "Lifestyle and Others",
-      image: lifestyle,
-      description:
-        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-      cta_link: "/packages/lifestyle",
-      cta: "View lifestyle",
-    },
-    {
-      title: "Family",
-      image: family,
-      description:
-        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-      cta_link: "/packages/family",
-      cta: "View family",
-    },
-    {
-      title: "Videography",
-      image: videography,
-      description:
-        "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-      cta_link: "/packages/family",
-      cta: "View family",
-    },
-    // {
-    //   title: "Pregnancy",
-    //   image: pregnancy,
-    //   bg: "#F0F9FF",
-    //   description:
-    //     "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-    //   cta_link: "/packages/pregnancy",
-    //     cta: "View pregnancy",
-    // },
-    // {
-    //   title: "Portrait",
-    //   image: portrait,
-    //   bg: "#F0F9FF",
-    //   description:
-    //     "From stylish lifestyle shoots to creative concepts, I bring ideas to life with depth, color, and meaning.",
-    //   cta_link: "/packages/portrait",
-    //     cta: "View portrait",
-    // },
-  ];
+//   const x = useTransform(
+//   desktopScroll.scrollYProgress,
+//   [0, 1],
+//   ["0%", `-${portfolioData.length * 100}%`] // Adjust scroll distance based on image count
+// );
+
+  // NEW SCROLL TO CALCULATE HEIGHT
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (!container.current) return;
+
+      const itemWidth = 300; // approx width of each card in px
+      const gap = 32; // approx gap between items (Tailwind `gap-8`)
+      const totalWidth = portfolioData.length * (itemWidth + gap);
+      const viewportWidth = window.innerWidth;
+
+      // Decide how many "scroll pages" to give based on overflow
+      const scrollPages = Math.ceil(totalWidth / viewportWidth);
+      const dynamicHeight = Math.max(scrollPages * 100, 100); // minimum 100vh
+
+      setSectionHeight(dynamicHeight);
+    };
+
+    if (portfolioData.length) {
+      updateHeight();
+      window.addEventListener("resize", updateHeight);
+    }
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, [portfolioData]);
+
+  // DYNAMIC DATA
+  // Fetch services and their packages
+  const fetchPortfolio = async () => {
+    try {
+      const portfolioRes = await apiCall("get", "/Portfolio");
+      const formattedData: PortfolioProps[] = portfolioRes.data.map(
+        (item: any) => ({
+          id: item.id,
+          title: item.title,
+          description: item.description,
+          image: item.thumbnail,
+          service: item.service,
+        })
+      );
+      setPortfolioData(formattedData);
+      console.log("Image", portfolioRes);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
 
   return (
     <>
@@ -125,8 +124,8 @@ export const FourthSectionScroll = () => {
         My Services
       </h2>
       <div ref={container} className="lg:hidden">
-        {services.slice(0, 4).map((service, index) => {
-          const targetScale = 1 - (services.length - index) * 0.05;
+        {portfolioData.slice(0, 4).map((service, index) => {
+          const targetScale = 1 - (portfolioData.length - index) * 0.05;
           return (
             <ServiceCard
               currentIndex={index}
@@ -143,11 +142,12 @@ export const FourthSectionScroll = () => {
       <section
         ref={targetRef}
         className="relative hidden lg:block h-[300vh] py-10 "
+         style={{ height: `${sectionHeight}vh` }}
       >
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <motion.div
             style={{ x }}
-            className="flex items-center ml-5 lg:ml-14 3xl:!ml-28 gap-4 "
+            className="flex items-center ml-5 lg:ml-14 3xl:!ml-28 gap-8 "
           >
             <div className="flex flex-col gap-5">
               <h2 className="text-6xl font-grotesk-bold font-semibold text-white whitespace-nowrap ">
@@ -161,18 +161,15 @@ export const FourthSectionScroll = () => {
 
             {/* <div className="flex gap-4 min-w-max pl-6 pr-0"> */}
 
-            {services.map((service, i) => (
+            {portfolioData.map((service, i) => (
               <div
                 key={i}
                 className="w-full relative h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full flex-shrink-0 p-6 shadow-md"
               >
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
+                <img
+                  src={`https://olaitanakinlade.com/${service.image}`}
+                  alt={CreateSlug(service.title)}
                   className="object-cover absolute inset-0 w-full h-full"
-                  quality={90}
-                  priority
                 />
 
                 <div className="absolute left-0 bottom-0 w-full p-4 backdrop-blur-md bg-black/10">
@@ -183,7 +180,7 @@ export const FourthSectionScroll = () => {
                         <p className="text-white mix-blend-difference font-playfair text-4xl">
                           {service.title}
                         </p>
-                        <Link href={service.cta_link}>
+                        <Link href={`/packages/${CreateSlug(service.title)}`}>
                           <button className="bg-white/20 flex justify-center items-center text-white text-base py-2 px-8 border cursor-pointer border-white/10 rounded-xl mix-blend-difference hover:border-light-brown">
                             View
                           </button>

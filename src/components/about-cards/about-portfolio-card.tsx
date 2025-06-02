@@ -6,11 +6,11 @@ import Image from "next/image";
 
 export const AboutPortfolioCard = () => {
   return (
-    <div className="px-5 lg:px-14 pt-28 lg:py-28 bg-[#222222] ">
+    <div className="px-5 lg:px-14 p-5 lg:py-28 bg-[#222222] ">
       <Row gutter={[32, 32]}>
         <Col xs={24} lg={12}>
-          <div className="flex flex-col gap-10 lg:justify-between h-[550px]">
-            <p className="text-[#EAE5DC] text-3xl lg:text-4xl lg:w-[80%] ">
+          <div className="flex flex-col gap-10 lg:justify-between lg:h-[550px]">
+            <p className="text-[#EAE5DC] text-2xl lg:text-4xl lg:w-[80%] ">
               “<span className="font-semibold">Hello, Madam Portable</span> —
               this is a job well done. Every minute of the event was beautifully
               captured. I could feel the whole day again just by watching. Great
@@ -20,7 +20,7 @@ export const AboutPortfolioCard = () => {
           </div>
         </Col>
         <Col xs={24} lg={12}>
-          <div className="overflow-hidden h-[550px] w-full">
+          <div className="overflow-hidden  max-h-[550px] w-full">
            <Image src={MI6} className="w-full object-cover" alt="testifier" />
           </div>
         </Col>

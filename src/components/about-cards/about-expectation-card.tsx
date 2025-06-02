@@ -17,12 +17,12 @@ export const AboutExpectationCard = () => {
     <div className="p-5 lg:p-14 rounded-3xl bg-light-brown">
       <div className="w-full flex justify-between items-center">
         <div>
-          <p className="text-darker-grey font-playfair text-3xl lg:text-5xl lg:leading-relaxed lg:-tracking-wider">
-            What to expect when you
+          <p className="text-darker-grey font-playfair text-3xl lg:text-5xl lg:w-[75%] lg:leading-relaxed lg:-tracking-wider">
+            What to expect when you work with me
           </p>
-          <p className="text-darker-grey font-playfair text-3xl lg:text-5xl lg:leading-relaxed lg:-tracking-wider">
+          {/* <p className="text-darker-grey font-playfair text-3xl lg:text-5xl lg:leading-relaxed lg:-tracking-wider">
             work with me
-          </p>
+          </p> */}
         </div>
         <span>
           <Image className="hidden lg:block" src={arrowRight} alt="arrow" />

@@ -39,7 +39,7 @@ const About = () => {
             <div className="w-full">
               <Row align={"middle"} gutter={[32, 32]}>
                 <Col xs={24} lg={12}>
-                  <div className="flex flex-col gap-10">
+                  <div className="flex flex-col gap-4 lg:gap-10">
                     <div className="bg-[#282824] w-40 rounded-lg flex items-center justify-center py-2 px-8">
                       <p className=" text-[#F3EEE6] ">About me</p>
                     </div>
@@ -136,7 +136,7 @@ const About = () => {
               </ul>
             </div>
           </div>
-          <div className="px-5 lg:px-14 3xl:!px-28 flex flex-col gap-36 my-28">
+          <div className="px-5 lg:px-14 3xl:!px-28 flex flex-col gap-36 my-14">
             {/* VIDEO AREA */}
             <div className="w-full">
               <Row gutter={[32, 32]}>
@@ -150,7 +150,7 @@ const About = () => {
                   </div>
                 </Col>
                 <Col xs={24} lg={12}>
-                  <div className="flex flex-col gap-10">
+                  <div className="flex flex-col gap-4 lg:gap-10">
                     <h3 className="uppercase text-3xl lg:text-5xl ">
                       My journey
                     </h3>

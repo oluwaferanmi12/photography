@@ -8,8 +8,8 @@ import { Switch } from "antd";
 import stoneDot from "@/assets/svgs/stone-dots.svg";
 
 type planCardInterface = {
-  planType: string;
-  planAmount: number;
+  planType?: string;
+  planAmount?: number;
   planDescription?: string;
   variant?: "user" | "admin";
   planActiveness?: boolean;
@@ -22,11 +22,10 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   planActiveness,
   variant = "user",
 }) => {
-
   return (
     <div>
       <div
-        className={`p-6  border border-off-white  rounded-3xl ${
+        className={` py-2 px-6  border border-off-white  rounded-3xl ${
           variant === "user"
             ? "text-[#999999] bg-[#F8F8F805] w-full max-w-[500px]"
             : "text-[#F5F5F5] bg-[#0E0E0E]"
@@ -55,16 +54,19 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
         >
           {planType}
         </p>
-        <div
-          className={`flex items-center text-5xl p-6 rounded-xl ${
-            variant === "user"
-              ? "border-0 text-[#EAECF0] font-light"
-              : "border border-[#E9EBF8] mt-5"
-          }  `}
-        >
-          $ {planAmount}
-          {variant === "user" ? "/ hr" : ""}
-        </div>
+        {planAmount && (
+          <div
+            className={`flex items-center text-5xl p-6 rounded-xl ${
+              variant === "user"
+                ? "border-0 text-[#EAECF0] font-light"
+                : "border border-[#E9EBF8] mt-5"
+            }  `}
+          >
+            $ {planAmount}
+            {variant === "user" ? "/ hr" : ""}
+          </div>
+        )}
+
         <div className="">
           {variant === "user" ? (
             <>
@@ -73,7 +75,9 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
                   <span>
                     <Image src={stoneDot} alt="stoneDot" />
                   </span>
-                  <p className="text-[#F8F8F880] text-base font-normal">{item.trim()}</p>
+                  <p className="text-[#F8F8F880] text-base font-normal">
+                    {item.trim()}
+                  </p>
                 </div>
               ))}
             </>

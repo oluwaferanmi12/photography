@@ -12,8 +12,8 @@ interface ImageType {
 }
 
 interface PackagesProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   images: ImageType[];
   packages: { name: string; price: number; description: string }[];
 }
@@ -32,7 +32,11 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
             <div className="h-full">
               <div className="p-6">
                 <span>
-                  <Image src={dummyIcon} className="w-20 h-20 md:h-auto md:w-auto" alt="dummy_icon" />
+                  <Image
+                    src={dummyIcon}
+                    className="w-20 h-20 md:h-auto md:w-auto"
+                    alt="dummy_icon"
+                  />
                 </span>
                 <p className="text-3xl lg:text-5xl font-bold text-[#F8F8F8F2]/95">
                   {title}
@@ -40,6 +44,18 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                 <p className="text-sm font-normal text-[#F8F8F8B2]/70 my-2">
                   {description}
                 </p>
+                {/*  */}
+                <div>
+                  {packages.map((pkg, idx) => (
+                    <p
+                      className="text-[#D9C9AE] font-light  text-5xl"
+                      key={idx}
+                    >
+                      {" "}
+                      ${pkg.price}{" "}
+                    </p>
+                  ))}
+                </div>
               </div>
 
               <div>
@@ -48,8 +64,8 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                     <Col xs={24} key={idx}>
                       <PlanCardProps
                         variant="user"
-                        planType={pkg.name}
-                        planAmount={pkg.price}
+                        // planType={pkg.name}
+                        // planAmount={pkg.price}
                         planDescription={pkg.description}
                       />
                     </Col>

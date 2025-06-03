@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation";
 const navData = [
   {
     icon: homeOutline,
-    navLink: "/dashboard",
+    navLink: "/admin-dashboard",
     navTitle: "Dashboard",
   },
   {
@@ -25,12 +25,12 @@ const navData = [
   },
   {
     icon: dollarSign,
-    navLink: "/transaction",
+    navLink: "/admin-transaction",
     navTitle: "Transaction",
   },
   {
     icon: dollarSign,
-    navLink: "/links",
+    navLink: "/admin-links",
     navTitle: "Links",
   },
   {
@@ -55,7 +55,7 @@ const navData = [
   },
   {
     icon: settingsIcon,
-    navLink: "/settings",
+    navLink: "/admin-settings",
     navTitle: "Settings",
   },
 ];

@@ -10,7 +10,7 @@ import CalendarSchedule from "@/components/admin-components/sideNav/calendar-vie
 
 
 
-export default function CalendarInterface() {
+export default function AdminCalendar() {
   const [openCalendarDetails, setOpenCalendarDetails] = useState(false);
  
   return (

@@ -31,7 +31,7 @@ export const MobileNav = () => {
   ];
 
   return (
-    <div className="w-full z-50 fixed top-0 py-12 px-5 ">
+    <div className="w-full !z-[10000] fixed top-0 py-12 px-5 ">
       <div className="flex justify-between items-center w-full ">
         <span>
           <Image src={brandLogo} alt="logo" />
@@ -43,7 +43,7 @@ export const MobileNav = () => {
           >
             <p>Menu</p>
             <span>
-              <Image src={hamburger} alt="hamburger" />
+              <Image src={hamburger} className="!z-50" alt="hamburger" />
             </span>
           </button>
         </div>

@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export const ParallaxScrollax = () => {
   return (
-    <div className="parallaxBg w-full -z-[-0.5] flex items-center justify-center p-5 lg:p-24">
-      <div className="w-full -z-[-0.5] flex flex-col gap-3 items-center justify-center">
+    <div className="parallaxBg w-full -z-10 flex items-center justify-center p-5 lg:p-24">
+      <div className="w-full flex flex-col gap-3 items-center justify-center">
         <p className="text-white text-center font-semibold text-5xl uppercase">
           Moments fade.
         </p>
@@ -16,7 +16,7 @@ export const ParallaxScrollax = () => {
           Let’s create images you’ll love — with care every step of the way.
         </p>
         <div className="mt-8">
-          <button className="flex justify-center text-[#222222] text-lg gap-3 items-center bg-white rounded-full py-3 lg:py-5 px-8 -z-[0.5]">
+          <button className="flex justify-center text-[#222222] text-lg gap-3 items-center bg-white rounded-full py-3 lg:py-5 px-8 -z-10 ">
             Book a session now
             <span>
               <Image className="w-3 h-3" src={rightArrow} alt="icon" />

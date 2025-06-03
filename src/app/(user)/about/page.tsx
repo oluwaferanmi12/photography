@@ -86,7 +86,7 @@ const About = () => {
               </Row>
             </div>
           </div>
-          <div className="py-14 px-6 bg-light-brown flex justify-center  w-full my-14">
+          <div className=" py-6 lg:py-10 px-6 bg-light-brown flex justify-center  w-full my-14">
             <div
               style={{ width: "100vw" }}
               className=" scroller w-full"

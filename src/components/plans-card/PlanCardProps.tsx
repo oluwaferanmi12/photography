@@ -5,7 +5,6 @@ import React from "react";
 import icon from "@/assets/svgs/plans-icons.svg";
 import arrowRight from "@/assets/svgs/right_arrow.svg";
 import { Switch } from "antd";
-import { useRouter } from "next/navigation";
 import stoneDot from "@/assets/svgs/stone-dots.svg";
 
 type planCardInterface = {
@@ -23,14 +22,13 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   planActiveness,
   variant = "user",
 }) => {
-  const router = useRouter();
 
   return (
     <div>
       <div
         className={`p-6  border border-off-white  rounded-3xl ${
           variant === "user"
-            ? "text-[#999999] bg-[#F8F8F805]"
+            ? "text-[#999999] bg-[#F8F8F805] w-full max-w-[500px]"
             : "text-[#F5F5F5] bg-[#0E0E0E]"
         }`}
       >
@@ -71,7 +69,7 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
           {variant === "user" ? (
             <>
               {planDescription?.split("*").map((item, index) => (
-                <div className="flex gap-2" key={index}>
+                <div className="flex gap-2 items-center" key={index}>
                   <span>
                     <Image src={stoneDot} alt="stoneDot" />
                   </span>

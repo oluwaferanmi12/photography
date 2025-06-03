@@ -136,7 +136,7 @@ const About = () => {
               </ul>
             </div>
           </div>
-          <div className="px-5 lg:px-14 3xl:!px-28 flex flex-col gap-36 my-14">
+          <div className="px-5 lg:px-14 3xl:!px-28 flex flex-col gap-20 lg:gap-36 lg:my-14">
             {/* VIDEO AREA */}
             <div className="w-full">
               <Row gutter={[32, 32]}>

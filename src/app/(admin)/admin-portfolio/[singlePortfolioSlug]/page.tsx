@@ -144,7 +144,7 @@ export default function SingleUploadPortfolio() {
                         <Col key={image.id} xs={24} md={12} lg={8}>
                           <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
                             <img
-                              src={`http://olaitanakinlade.com/${image.imageUrl}`}
+                              src={`https://olaitanakinlade.com/${image.imageUrl}`}
                               alt="portfolio image"
                               className="rounded-3xl object-cover w-full h-full"
                             />

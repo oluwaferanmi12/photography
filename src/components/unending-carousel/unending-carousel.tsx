@@ -108,9 +108,11 @@ export default function InfiniteCarousel({ images }: { images: string[] }) {
             key={index}
             className="mr-5 flex-none h-[650px] md:h-[500px] lg:h-[600px] rounded-xl overflow-hidden shadow"
           >
-            <img
+            <Image
               src={src}
               alt={`carousel-${index}`}
+              height={500}
+              width={500}
               className="w-full h-full object-contain"
             />
           </div>

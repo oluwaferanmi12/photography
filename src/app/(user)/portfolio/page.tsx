@@ -179,7 +179,7 @@ const Portfolio = () => {
                     >
                       <span className="w-full overflow-hidden rounded-xl mb-4">
                         <img
-                          src={`http://olaitanakinlade.com/${portfolio.thumbnail}`}
+                          src={`https://olaitanakinlade.com/${portfolio.thumbnail}`}
                           alt={portfolio.portfolioName}
                           className="w-full object-cover"
                         />
@@ -217,7 +217,7 @@ const Portfolio = () => {
                     >
                       <span className="w-full overflow-hidden rounded-xl mb-4">
                         <img
-                          src={`http://olaitanakinlade.com/${portfolio.thumbnail}`}
+                          src={`https://olaitanakinlade.com/${portfolio.thumbnail}`}
                           alt={portfolio.portfolioName}
                           className="w-full object-cover"
                         />

@@ -177,7 +177,7 @@ const SinglePackages = () => {
       <div className="pb-28">
         <InfiniteCarousel
           images={singlePortfolioData.map(
-            (img) => `http://olaitanakinlade.com/${img.imageUrl}`
+            (img) => `https://olaitanakinlade.com/${img.imageUrl}`
           )}
         />
       </div>
@@ -185,7 +185,7 @@ const SinglePackages = () => {
         <Banner />
       </div>
 
-      <div className="flex flex-col gap-14 justify-center items-center">
+      <div className="flex flex-col mb-14 gap-14 justify-center items-center">
         <div className="flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28">
           {/* Package Section */}
           <div>

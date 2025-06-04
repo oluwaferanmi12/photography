@@ -57,7 +57,7 @@ const AdminPortfolio = () => {
         <div className="flex items-center gap-3">
           {/* <div className="h-10 w-10 rounded-full overflow-hidden bg-[#f2f2f2]">
             <Image
-              src={`http://olaitanakinlade.com/${row.thumbnail}`} // Adjust the path if necessary
+              src={`https://olaitanakinlade.com/${row.thumbnail}`} // Adjust the path if necessary
               alt={row.portfolioName}
               width={40}
               height={40}

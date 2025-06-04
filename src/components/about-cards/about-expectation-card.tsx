@@ -5,11 +5,12 @@ import arrowRight from "@/assets/svgs/black-top-arrow.svg";
 import globe from "@/assets/svgs/globe-black-bg.svg";
 import Image from "next/image";
 import { Col, Row } from "antd";
-import clientImage1 from "@/assets/images/about_marq/img1.jpg";
-import clientImage2 from "@/assets/images/about_marq/img2.jpg";
-import clientImage3 from "@/assets/images/about_marq/img3.jpg";
-import clientImage4 from "@/assets/images/about_marq/img4.jpg";
-import clientImage5 from "@/assets/images/about_marq/img5.jpg";
+import clientImage1 from "@/assets/svgs/about-expect1.svg";
+import clientImage2 from "@/assets/svgs/about-expect2.svg";
+import clientImage3 from "@/assets/svgs/about-expect3.svg";
+import clientImage4 from "@/assets/images/victoriaPics/victoria.jpeg";
+
+
 import Link from "next/link";
 
 export const AboutExpectationCard = () => {
@@ -85,96 +86,79 @@ export const AboutExpectationCard = () => {
           ref={scrollerRef}
         >
           <ul className={`scroller__inner`}>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
                 <Image
                   src={clientImage1}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
+                  className="h-[350px] w-full object-contain max-h-[350px]"
                   alt="owner_img"
                 />
               </div>
             </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
                 <Image
                   src={clientImage2}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
+                  className="h-[350px] w-full object-contain max-h-[350px]"
                   alt="owner_img"
                 />
               </div>
             </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
                 <Image
                   src={clientImage3}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
+                  className="h-[350px] w-full object-contain max-h-[350px]"
                   alt="owner_img"
                 />
               </div>
             </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
                 <Image
                   src={clientImage4}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
+                  className="h-[350px] w-full object-contain max-h-[350px]"
                   alt="owner_img"
                 />
               </div>
             </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
-                <Image
-                  src={clientImage5}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
-                  alt="owner_img"
-                />
-              </div>
-            </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
                 <Image
                   src={clientImage1}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
+                  className="h-[350px] w-full object-contain max-h-[350px]"
                   alt="owner_img"
                 />
               </div>
             </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
                 <Image
                   src={clientImage2}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
+                  className="h-[350px] w-full object-contain max-h-[350px]"
                   alt="owner_img"
                 />
               </div>
             </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
                 <Image
                   src={clientImage3}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
+                  className="h-[350px] w-full object-contain max-h-[350px]"
                   alt="owner_img"
                 />
               </div>
             </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
                 <Image
                   src={clientImage4}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
+                  className="h-[350px] w-full object-contain max-h-[350px]"
                   alt="owner_img"
                 />
               </div>
             </li>
-            <li className="rounded-3xl w-full cursor-pointer flex gap-3 items-center ">
-              <div className="relative w-full shrink-0">
-                <Image
-                  src={clientImage5}
-                  className="h-[350px] w-[600px] object-cover max-h-[350px]"
-                  alt="owner_img"
-                />
-              </div>
-            </li>
+           
           </ul>
         </div>
       </div>

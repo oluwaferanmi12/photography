@@ -560,6 +560,10 @@ a {
   mask: none !important;
 }
 
+.newAbout_scroller .scroller__inner {
+  gap: 10px !important;
+}
+
 
 .sessionForm_modal .ant-modal-content {
   position: relative;

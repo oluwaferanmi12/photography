@@ -11,6 +11,10 @@ import { Footer } from "@/components/footer/footer";
 import { AboutPortfolioCard } from "@/components/about-cards/about-portfolio-card";
 import starIcon from "@/assets/svgs/star-icon.svg";
 import { motion, useScroll, useTransform as transform } from "framer-motion";
+import facebookIcon from "@/assets/svgs/about-Facebook.svg"
+import InstagramIcon from "@/assets/svgs/about-Instagram.svg"
+import youtubeIcon from "@/assets/svgs/about-Youtube.svg"
+import Xicon from "@/assets/svgs/about-X.svg"
 
 const About = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -72,10 +76,24 @@ const About = () => {
                           })}
                       </motion.div>
                     </div>
+                    <div className="flex gap-2">
+                      <span>
+                        <Image src={facebookIcon} alt="social_icon" />
+                      </span>
+                      <span>
+                        <Image src={InstagramIcon} alt="social_icon" />
+                      </span>
+                      <span>
+                        <Image src={youtubeIcon} alt="social_icon" />
+                      </span>
+                      <span>
+                        <Image src={Xicon} alt="social_icon" />
+                      </span>
+                    </div>
                   </div>
                 </Col>
                 <Col xs={24} lg={12}>
-                  <div className="overflow-hidden h-[700px] flex justify-end rounded-xl w-full">
+                  <div className="overflow-hidden lg:h-[700px] flex justify-end rounded-xl w-full">
                     <Image
                       src={headerImage}
                       className="object-cover rounded-xl w-full"
@@ -89,7 +107,7 @@ const About = () => {
           <div className=" py-6 lg:py-10 px-6 bg-light-brown flex justify-center  w-full my-14">
             <div
               style={{ width: "100vw" }}
-              className=" scroller w-full"
+              className="scroller w-full"
               ref={scrollerRef}
             >
               <ul className={`scroller__inner`}>
@@ -141,7 +159,7 @@ const About = () => {
             <div className="w-full">
               <Row gutter={[32, 32]}>
                 <Col xs={24} lg={12}>
-                  <div className="overflow-hidden h-[700px] flex justify-end rounded-xl w-full">
+                  <div className="overflow-hidden lg:h-[700px] flex justify-end rounded-xl w-full">
                     <Image
                       src={headerImage}
                       className="object-cover rounded-xl w-full"

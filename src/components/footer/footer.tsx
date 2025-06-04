@@ -128,21 +128,21 @@ export const Footer = () => {
                   Follow us
                 </h2>
                 <div className="flex gap-3 items-center">
-                  <span>
+                  <Link href=''>
                     <Image className="cursor-pointer" src={youtubeIcon} alt="social_links" />
-                  </span>
-                  <span>
+                  </Link>
+                  <Link href='https://www.tiktok.com/@shotbyportable'>
                     <Image className="cursor-pointer" src={tiktokIcon} alt="social_links" />
-                  </span>
-                  <span>
+                  </Link>
+                  <Link href='https://www.linkedin.com/in/victoria-akinade-402944175/'>
                     <Image className="cursor-pointer" src={linkedinIcon} alt="social_links" />
-                  </span>
-                  <span>
+                  </Link>
+                  <Link href='https://www.instagram.com/shotbyportable/'>
                     <Image className="cursor-pointer" src={instagramIcon} alt="social_links" />
-                  </span>
-                  <span>
+                  </Link>
+                  <Link href='https://www.facebook.com/victhoria.hajarlah'>
                     <Image className="cursor-pointer" src={facebookIcon} alt="social_links" />
-                  </span>
+                  </Link>
                 </div>
               </div>
             </div>

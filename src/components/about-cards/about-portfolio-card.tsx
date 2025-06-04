@@ -10,7 +10,7 @@ export const AboutPortfolioCard = () => {
       <Row gutter={[32, 32]}>
         <Col xs={24} lg={12}>
           <div className="flex flex-col gap-10 lg:justify-between lg:h-[550px]">
-            <p className="text-[#EAE5DC] text-2xl lg:text-4xl lg:w-[80%] ">
+            <p className="text-[#EAE5DC] text-2xl lg:text-3xl 3xl:w-[90%]">
               “<span className="font-semibold">Hello, Madam Portable</span> —
               this is a job well done. Every minute of the event was beautifully
               captured. I could feel the whole day again just by watching. Great
@@ -20,7 +20,7 @@ export const AboutPortfolioCard = () => {
           </div>
         </Col>
         <Col xs={24} lg={12}>
-          <div className="overflow-hidden  max-h-[550px] w-full">
+          <div className="overflow-hidden h-full  max-h-[550px] w-full">
            <Image src={MI6} className="w-full object-cover" alt="testifier" />
           </div>
         </Col>

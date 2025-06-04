@@ -15,6 +15,7 @@ import facebookIcon from "@/assets/svgs/about-Facebook.svg"
 import InstagramIcon from "@/assets/svgs/about-Instagram.svg"
 import youtubeIcon from "@/assets/svgs/about-Youtube.svg"
 import Xicon from "@/assets/svgs/about-X.svg"
+import Link from "next/link";
 
 const About = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -77,18 +78,18 @@ const About = () => {
                       </motion.div>
                     </div>
                     <div className="flex gap-2">
-                      <span>
+                      <Link href='https://www.facebook.com/victhoria.hajarlah'>
                         <Image src={facebookIcon} alt="social_icon" />
-                      </span>
-                      <span>
+                      </Link>
+                      <Link href='https://www.instagram.com/shotbyportable/'>
                         <Image src={InstagramIcon} alt="social_icon" />
-                      </span>
-                      <span>
+                      </Link>
+                      <Link href=''>
                         <Image src={youtubeIcon} alt="social_icon" />
-                      </span>
-                      <span>
+                      </Link>
+                      <Link href=''>
                         <Image src={Xicon} alt="social_icon" />
-                      </span>
+                      </Link>
                     </div>
                   </div>
                 </Col>

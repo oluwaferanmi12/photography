@@ -10,6 +10,7 @@ import clientImage2 from "@/assets/images/about_marq/img2.jpg";
 import clientImage3 from "@/assets/images/about_marq/img3.jpg";
 import clientImage4 from "@/assets/images/about_marq/img4.jpg";
 import clientImage5 from "@/assets/images/about_marq/img5.jpg";
+import Link from "next/link";
 
 export const AboutExpectationCard = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -24,9 +25,9 @@ export const AboutExpectationCard = () => {
             work with me
           </p> */}
         </div>
-        <span>
+        <Link href={'/portfolio'}>
           <Image className="hidden lg:block" src={arrowRight} alt="arrow" />
-        </span>
+        </Link>
       </div>
       <div className="mt-10">
         <Row>

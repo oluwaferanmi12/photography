@@ -14,14 +14,40 @@ import Link from "next/link";
 const footerLinks = [
   {
     title: "Company",
-    links: ["Home", "About us", "Portfolio", "Packages", "Book a session"],
+    linksProps: [
+      {
+        footNavTitle: "Home",
+        footNavLink: "/",
+      },
+      {
+        footNavTitle: "About us",
+        footNavLink: "/about",
+      },
+      {
+        footNavTitle: "Porfolio",
+        footNavLink: "/portfolio",
+      },
+      {
+        footNavTitle: "Packages",
+        footNavLink: "/packages",
+      },
+      {
+        footNavTitle: "Book a session",
+        footNavLink: "/session",
+      },
+    ],
   },
   {
     title: "Support",
-    links: [
-      "Contact us",
-      "Terms and condition",
-      
+    linksProps: [
+      {
+        footNavTitle: "Contact us",
+        footNavLink: "",
+      },
+      {
+        footNavTitle: "Terms and condition",
+        footNavLink: "",
+      },
     ],
   },
 ];
@@ -54,7 +80,11 @@ export const Footer = () => {
             </div>
 
             <span>
-              <Image src={arrowRight} alt="arrowRight" />
+              <Image
+                src={arrowRight}
+                className="cursor-pointer hover:border-4 hover:border-light-brown rounded-full"
+                alt="arrowRight"
+              />
             </span>
           </div>
         </div>
@@ -67,7 +97,8 @@ export const Footer = () => {
               <Image src={footerBrand} alt="brand_logo" />
             </span>
             <p className="text-white/60 text-lg w-[80%]">
-              For those who want more than just a photo. I help you pause time, preserve your story and remember how it felt.
+              For those who want more than just a photo. I help you pause time,
+              preserve your story and remember how it felt.
             </p>
           </div>
         </Col>
@@ -80,10 +111,13 @@ export const Footer = () => {
                     {" "}
                     {section.title}{" "}
                   </h2>
-                  {section.links.map((link, idx) => (
+                  {section.linksProps.map((footerItems, idx) => (
                     <span key={idx}>
-                      <Link className="!text-white/60 text-base" href={"/"}>
-                        {link}
+                      <Link
+                        className="!text-white/60 text-base"
+                        href={`${footerItems.footNavLink}`}
+                      >
+                        {footerItems.footNavTitle}
                       </Link>
                     </span>
                   ))}
@@ -95,19 +129,19 @@ export const Footer = () => {
                 </h2>
                 <div className="flex gap-3 items-center">
                   <span>
-                    <Image src={youtubeIcon} alt="social_links" />
+                    <Image className="cursor-pointer" src={youtubeIcon} alt="social_links" />
                   </span>
                   <span>
-                    <Image src={tiktokIcon} alt="social_links" />
+                    <Image className="cursor-pointer" src={tiktokIcon} alt="social_links" />
                   </span>
                   <span>
-                    <Image src={linkedinIcon} alt="social_links" />
+                    <Image className="cursor-pointer" src={linkedinIcon} alt="social_links" />
                   </span>
                   <span>
-                    <Image src={instagramIcon} alt="social_links" />
+                    <Image className="cursor-pointer" src={instagramIcon} alt="social_links" />
                   </span>
                   <span>
-                    <Image src={facebookIcon} alt="social_links" />
+                    <Image className="cursor-pointer" src={facebookIcon} alt="social_links" />
                   </span>
                 </div>
               </div>

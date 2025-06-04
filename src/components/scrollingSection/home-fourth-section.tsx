@@ -142,7 +142,7 @@ export const FourthSectionScroll = () => {
                         <p className="text-white mix-blend-difference font-playfair text-4xl">
                           {service.title}
                         </p>
-                        <Link href={`/packages/${CreateSlug(service.title)}`}>
+                        <Link href={`/portfolio/${CreateSlug(service.title)}`}>
                           <button className="bg-white/20 flex justify-center items-center text-white text-base py-2 px-8 border cursor-pointer border-white/10 rounded-xl mix-blend-difference hover:border-light-brown">
                             View
                           </button>

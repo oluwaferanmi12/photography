@@ -23,8 +23,6 @@ export const FourthSectionScroll = () => {
   const container = useRef<HTMLDivElement | null>(null);
   const [portfolioData, setPortfolioData] = useState<PortfolioProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [sectionHeight, setSectionHeight] = useState<number>(300);
-
 
   const mobileScroll = useScroll({
     target: container,
@@ -49,46 +47,11 @@ export const FourthSectionScroll = () => {
     }
   }
 
-
   const x = useTransform(
     desktopScroll.scrollYProgress,
     [0, 1],
     ["1%", scrollPercentage]
   );
-
-//   const x = useTransform(
-//   desktopScroll.scrollYProgress,
-//   [0, 1],
-//   ["0%", `-${portfolioData.length * 100}%`] // Adjust scroll distance based on image count
-// );
-
-  // NEW SCROLL TO CALCULATE HEIGHT
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (!container.current) return;
-
-      const itemWidth = 300; // approx width of each card in px
-      const gap = 32; // approx gap between items (Tailwind `gap-8`)
-      const totalWidth = portfolioData.length * (itemWidth + gap);
-      const viewportWidth = window.innerWidth;
-
-      // Decide how many "scroll pages" to give based on overflow
-      const scrollPages = Math.ceil(totalWidth / viewportWidth);
-      const dynamicHeight = Math.max(scrollPages * 100, 100); // minimum 100vh
-
-      setSectionHeight(dynamicHeight);
-    };
-
-    if (portfolioData.length) {
-      updateHeight();
-      window.addEventListener("resize", updateHeight);
-    }
-
-    return () => {
-      window.removeEventListener("resize", updateHeight);
-    };
-  }, [portfolioData]);
 
   // DYNAMIC DATA
   // Fetch services and their packages
@@ -142,7 +105,6 @@ export const FourthSectionScroll = () => {
       <section
         ref={targetRef}
         className="relative hidden lg:block h-[300vh] py-10 "
-         style={{ height: `${sectionHeight}vh` }}
       >
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <motion.div

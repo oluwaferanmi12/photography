@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@/components/button/button";
 import { CreateSlug } from "@/lib/create-slug";
 import { apiCall } from "@/axios/axios";
+import Link from "next/link";
 
 interface PortfolioProps {
   id: string;
@@ -39,61 +40,75 @@ export const ServiceCard = ({
 
   const newScale = useTransform(progress, range, [1, targetScale]);
 
-   const fetchPortfolio = async () => {
-      try {
-        const portfolioRes = await apiCall("get", "/Portfolio");
-        const formattedData: PortfolioProps[] = portfolioRes.data.map(
-          (item: any) => ({
-            id: item.id,
-            title: item.title,
-            description: item.description,
-            image: item.thumbnail,
-            service: item.service,
-          })
-        );
-        setPortfolioData(formattedData);
-        console.log("Image", portfolioRes);
-      } catch (error) {
-        console.error("Error fetching services:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    useEffect(() => {
-      fetchPortfolio();
-    }, []);
+  const fetchPortfolio = async () => {
+    try {
+      const portfolioRes = await apiCall("get", "/Portfolio");
+      const formattedData: PortfolioProps[] = portfolioRes.data.map(
+        (item: any) => ({
+          id: item.id,
+          title: item.title,
+          description: item.description,
+          image: item.thumbnail,
+          service: item.service,
+        })
+      );
+      setPortfolioData(formattedData);
+      console.log("Image", portfolioRes);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
 
   return (
     <div
       ref={container}
-      className="h-screen flex items-center justify-center cursor-pointer"
+      className="h-screen p-6 cursor-pointer"
       style={{
         position: "sticky",
         top: "0px",
       }}
     >
       <Row justify={"center"}>
-        <Col xs={24} md={18} lg={16}>
+        <Col xs={24}>
           <motion.div
-            className="rounded-lg  px-8 min-w-full py-10 my-8  min-h-[500px]"
+            className="w-full  min-w-full min-h-[500px]"
             style={{
               scale: newScale,
               position: "relative",
               top: `calc(-5vh + ${currentIndex * 25}px)`,
             }}
           >
-            <div className="w-full md:min-w-[280px] bg-white lg:min-w-[280px] max-w-[500px] 3xl:w-full  flex-shrink-0 p-4 flex flex-col gap-6 justify-between rounded-3xl shadow-md">
-              <span className="">
-                <img
-                  src={`https://olaitanakinlade.com/${service.image}`}
-                  alt={service.title}
-                  width={200}
-                  height={200}
-                  className="rounded-[20px] h-[196px] w-full object-cover"
-                />
-              </span>
-              <div>
+            <div className="w-full relative h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full flex-shrink-0  shadow-md">
+              <img
+                src={`https://olaitanakinlade.com/${service.image}`}
+                alt={service.title}
+                className="object-cover absolute rounded-2xl inset-0 w-full h-full"
+              />
+
+              <div className="absolute left-0 bottom-0 w-full p-4 backdrop-blur-md bg-black/10 rounded-b-2xl">
+                <div className="mix-blend-exclusion">
+                  {/* Text container with blend mode */}
+                  <div className="mix-blend-exclusion">
+                    <div className="w-full flex justify-between items-center">
+                      <h3 className="text-4xl font-playfair font-light text-darker-grey">
+                        {service.title}
+                      </h3>
+                      <Link href={`/portfolio/${service.id}`}>
+                        <button className="bg-white/20 flex justify-center items-center text-white text-base py-2 px-8 border cursor-pointer border-white/10 rounded-xl mix-blend-difference hover:border-light-brown">
+                          View
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <div>
                 <h3 className="text-4xl font-playfair font-light text-darker-grey">
                   {service.title}
                 </h3>
@@ -105,7 +120,7 @@ export const ServiceCard = ({
                 variant="filled"
                 text={service.title}
                 link={`portfolio/${service.id}`}
-              />
+              /> */}
             </div>
           </motion.div>
         </Col>

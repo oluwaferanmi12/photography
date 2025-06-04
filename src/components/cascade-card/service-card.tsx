@@ -1,10 +1,19 @@
 "use client";
 import { Col, Row } from "antd";
 import Image, { StaticImageData } from "next/image";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@/components/button/button";
 import { CreateSlug } from "@/lib/create-slug";
+import { apiCall } from "@/axios/axios";
+
+interface PortfolioProps {
+  id: string;
+  title: string;
+  description: string;
+  service: string;
+  image: string;
+}
 
 export const ServiceCard = ({
   currentIndex,
@@ -25,8 +34,36 @@ export const ServiceCard = ({
   };
 }) => {
   const container = useRef(null);
+  const [portfolioData, setPortfolioData] = useState<PortfolioProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const newScale = useTransform(progress, range, [1, targetScale]);
+
+   const fetchPortfolio = async () => {
+      try {
+        const portfolioRes = await apiCall("get", "/Portfolio");
+        const formattedData: PortfolioProps[] = portfolioRes.data.map(
+          (item: any) => ({
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            image: item.thumbnail,
+            service: item.service,
+          })
+        );
+        setPortfolioData(formattedData);
+        console.log("Image", portfolioRes);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    useEffect(() => {
+      fetchPortfolio();
+    }, []);
+
   return (
     <div
       ref={container}
@@ -64,13 +101,11 @@ export const ServiceCard = ({
                   {service.description}
                 </p>
               </div>
-              <div>
-                <Button
-                  variant="filled"
-                  text={service.title}
-                  link={`portfolio/${CreateSlug(service.title)}`}
-                />
-              </div>
+              <Button
+                variant="filled"
+                text={service.title}
+                link={`portfolio/${service.id}`}
+              />
             </div>
           </motion.div>
         </Col>

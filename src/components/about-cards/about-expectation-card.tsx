@@ -158,6 +158,78 @@ export const AboutExpectationCard = () => {
                 />
               </div>
             </li>
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
+                <Image
+                  src={clientImage1}
+                  className="h-[350px] w-full object-contain max-h-[350px]"
+                  alt="owner_img"
+                />
+              </div>
+            </li>
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
+                <Image
+                  src={clientImage2}
+                  className="h-[350px] w-full object-contain max-h-[350px]"
+                  alt="owner_img"
+                />
+              </div>
+            </li>
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
+                <Image
+                  src={clientImage3}
+                  className="h-[350px] w-full object-contain max-h-[350px]"
+                  alt="owner_img"
+                />
+              </div>
+            </li>
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
+                <Image
+                  src={clientImage4}
+                  className="h-[350px] w-full object-contain max-h-[350px]"
+                  alt="owner_img"
+                />
+              </div>
+            </li>
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
+                <Image
+                  src={clientImage1}
+                  className="h-[350px] w-full object-contain max-h-[350px]"
+                  alt="owner_img"
+                />
+              </div>
+            </li>
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
+                <Image
+                  src={clientImage2}
+                  className="h-[350px] w-full object-contain max-h-[350px]"
+                  alt="owner_img"
+                />
+              </div>
+            </li>
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
+                <Image
+                  src={clientImage3}
+                  className="h-[350px] w-full object-contain max-h-[350px]"
+                  alt="owner_img"
+                />
+              </div>
+            </li>
+            <li className="rounded-3xl cursor-pointer flex gap-3 items-center ">
+              <div className="relative">
+                <Image
+                  src={clientImage4}
+                  className="h-[350px] w-full object-contain max-h-[350px]"
+                  alt="owner_img"
+                />
+              </div>
+            </li>
            
           </ul>
         </div>

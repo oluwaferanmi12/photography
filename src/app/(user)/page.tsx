@@ -41,10 +41,7 @@ import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
 import footerBrand from "@/assets/svgs/footer-brand-icon.svg";
-
-
-
-
+import { ImagesSliderDemo } from "@/components/header-images-carousel/images-slider";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -127,8 +124,9 @@ export default function Home() {
 
   return (
     <div className="relative w-full">
+      <ImagesSliderDemo />
       <motion.div
-        className="h-screen min-h-screen relative top-0 z-[1] transition-all w-full"
+        className="h-screen lg:hidden min-h-screen relative top-0 z-[1] transition-all w-full"
         animate={{
           padding: isDesktop && scrolled ? "28px" : "0px",
         }}
@@ -138,7 +136,6 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           animate={{
             borderRadius: isDesktop && scrolled ? "32px" : "0px",
-            // border: isDesktop && scrolled ? "2px solid #D9C9AE82" : "none",
           }}
         >
           <div
@@ -147,7 +144,6 @@ export default function Home() {
               backgroundImage: `url(${currentBg.src})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              // filter: "grayscale(90%) contrast(1.0)",
               transition: "opacity 500ms ease-in-out",
               borderRadius: isDesktop && scrolled ? "32px" : "0px",
               backgroundRepeat: "no-repeat",
@@ -159,12 +155,12 @@ export default function Home() {
             <Row className="w-full px-5 lg:px-20">
               <Col xs={24} xl={12}>
                 <div>
-                  {/* <div className="lg:my-6 text-white text-5xl lg:text-8xl flex flex-col gap-5 font-grotesk-regular">
-                    <p>Timeless Looks.</p>
-                    <p>Lasting Emotions.</p>
-                  </div> */}
                   <span>
-                    <Image src={footerBrand} className="w-1/2" alt="brand_logo" />
+                    <Image
+                      src={footerBrand}
+                      className="w-1/2"
+                      alt="brand_logo"
+                    />
                   </span>
                   <div className="mt-12">
                     <p className="text-[#E6EAEE] text-xl font-grotesk-regular lg:w-3/4 min[1400px]-[60%]">
@@ -207,10 +203,6 @@ export default function Home() {
           ref={nextSectionRef}
           className="flex flex-col gap-10 lg:justify-center lg:items-center px-5 lg:px-0"
         >
-          {/* <h3 className="lg:text-center w-full lg:w-1/2 lg:leading-20 text-white text-5xl lg:text-8xl ">
-            Photography that leaves a lasting impression
-          </h3> */}
-
           <div className="flex flex-col items-center justify-center">
             <TextReveal>Photography that leaves a</TextReveal>
             <TextReveal>lasting impression</TextReveal>

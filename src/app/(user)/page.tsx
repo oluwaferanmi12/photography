@@ -33,11 +33,10 @@ import TextReveal from "@/components/animattions/animated-text-reveal";
 import Button from "@/components/button/button";
 import beforeImage from "@/assets/images/beforeImage.jpg";
 import afterImage from "@/assets/images/afterImage.jpg";
-import headerImg1 from "@/assets/images/home_header/img1.jpg";
-import headerImg2 from "@/assets/images/home_header/img2.jpg";
-import headerImg3 from "@/assets/images/home_header/img3.jpg";
-import headerImg4 from "@/assets/images/home_header/img4.jpg";
-import headerImg5 from "@/assets/images/home_header/img5.jpg";
+import headerImg1 from "@/assets/images/home_header/img1.svg";
+import headerImg2 from "@/assets/images/home_header/img2.svg";
+import headerImg3 from "@/assets/images/home_header/img3.svg";
+import headerImg4 from "@/assets/images/home_header/img4.svg";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
@@ -87,7 +86,6 @@ export default function Home() {
       { thumbnail: image2, background: headerImg2 },
       { thumbnail: image3, background: headerImg3 },
       { thumbnail: image4, background: headerImg4 },
-      { thumbnail: image5, background: headerImg5 },
     ],
     []
   );
@@ -108,10 +106,10 @@ export default function Home() {
     setScrolled(latest > 10);
   });
 
-  const handleImageClick = (bgImg: StaticImageData, index: number) => {
-    setCurrentBg(bgImg);
-    setActiveIndex(index);
-  };
+  // const handleImageClick = (bgImg: StaticImageData, index: number) => {
+  //   setCurrentBg(bgImg);
+  //   setActiveIndex(index);
+  // };
 
   const images = [victoria, victoria2, victoria3];
 

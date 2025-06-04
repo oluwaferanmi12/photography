@@ -35,7 +35,7 @@ const Button = ({
   };
 
   const variantStyles = {
-    filled: "bg-light-brown font-semibold text-darker-grey",
+    filled: "bg-light-brown hover:bg-transparent font-semibold text-darker-grey",
     black: "bg-darker-grey text-white",
     bordered: `border ${
       borderVariant === "light"

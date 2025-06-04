@@ -68,7 +68,7 @@ export const ServiceCard = ({
                 <Button
                   variant="filled"
                   text={service.title}
-                  link={`'https://olaitanakinlade.com/packages/${CreateSlug(service.title)}`}
+                  link={`portfolio/${CreateSlug(service.title)}`}
                 />
               </div>
             </div>

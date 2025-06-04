@@ -96,7 +96,7 @@ export const ServiceCard = ({
                   {/* Text container with blend mode */}
                   <div className="mix-blend-exclusion">
                     <div className="w-full flex justify-between items-center">
-                      <h3 className="text-4xl font-playfair font-light text-darker-grey">
+                      <h3 className="text-4xl text-white mix-blend-difference font-playfair font-light">
                         {service.title}
                       </h3>
                       <Link href={`/portfolio/${service.id}`}>

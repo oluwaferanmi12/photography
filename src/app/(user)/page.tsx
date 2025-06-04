@@ -346,7 +346,7 @@ export default function Home() {
             </div>
           </div>
           {/*  */}
-          <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center mt-28">
+          <div className="flex flex-col mx-5 lg:px-0 lg:justify-center lg:items-center">
             <h3 className="text-4xl lg:text-6xl">Playground</h3>
             <p className="text-light-brown text-2xl">
               Swipe to see before & after magic

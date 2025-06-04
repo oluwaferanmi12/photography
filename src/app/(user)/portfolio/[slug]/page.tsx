@@ -151,7 +151,11 @@ const SinglePackages = () => {
           <div className="flex flex-wrap gap-y-5 gap-3">
             <Button
               variant="filled"
-              text={`Book a ${singlePortfolioInfo?.service} session`}
+              text={`Book ${
+                /^[aeiou]/i.test(singlePortfolioInfo?.service || "")
+                  ? "an"
+                  : "a"
+              } ${singlePortfolioInfo?.service || ""} session`}
             />
             <Button
               variant="bordered"

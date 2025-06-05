@@ -139,7 +139,7 @@ const SinglePackages = () => {
     <div>
       <div className="px-5 pt-36  lg:px-14 3xl:!px-28">
         <div>
-          <p className="text-[#FBFAF7] font-playfair text-5xl lg:text-6xl">
+          <p className="text-[#FBFAF7] capitalize font-playfair text-5xl lg:text-6xl">
             {" "}
             {singlePortfolioInfo?.portfolioName}{" "}
           </p>
@@ -174,7 +174,7 @@ const SinglePackages = () => {
           </span>
         </div>
       </div>
-      <div className="pb-28">
+      <div className=" pb-10 lg:pb-28">
         <InfiniteCarousel
           images={singlePortfolioData.map(
             (img) => `https://olaitanakinlade.com/${img.imageUrl}`

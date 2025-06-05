@@ -68,7 +68,7 @@ export const ServiceCard = ({
   return (
     <div
       ref={container}
-      className="h-screen p-6 cursor-pointer"
+      className=" p-6 cursor-pointer"
       style={{
         position: "sticky",
         top: "0px",

@@ -254,7 +254,7 @@ export default function Home() {
         </div>
 
         {/* SIXTH SECTION */}
-        <div className="flex flex-col mt-20 mx-5 lg:px-0 gap-28 lg:justify-center lg:items-center">
+        <div className="flex flex-col lg:mt-20 mx-5 lg:px-0 gap-28 lg:justify-center lg:items-center">
           <div className="text-white relative flex flex-col gap-10 lg:justify-center lg:items-center lg:text-center">
             <h2 className="text-5xl lg:text-6xl">Meet Victoria</h2>
 

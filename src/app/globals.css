@@ -239,6 +239,13 @@ a {
   position: relative;
   height: 750px;
   overflow: hidden;
+
+  /* iOS fallback */
+  @supports (-webkit-touch-callout: none) {
+    .parallaxBg {
+      display: hidden;
+    }
+  }
 }
 
 .parallaxBg::before {
@@ -256,11 +263,8 @@ a {
 
   /* iOS fallback */
   @supports (-webkit-touch-callout: none) {
-    .parallaxBg::before {
-      position: absolute;
-      background-attachment: scroll;
-      /* Optional: Add some transform for parallax effect */
-      transform: translate3d(0, 0, 0);
+    .parallaxBg {
+      display: hidden;
     }
   }
 

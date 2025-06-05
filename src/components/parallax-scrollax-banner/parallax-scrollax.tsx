@@ -1,9 +1,14 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
 import rightArrow from "@/assets/svgs/black-top-arrow.svg";
 import Image from "next/image";
 import Link from "next/link";
 
+
+
 export const ParallaxScrollax = () => {
+
   return (
     // <div className="parallaxBg w-full z-10 flex items-center justify-center p-5 lg:p-24">
     //   <div className="w-full flex flex-col gap-3 items-center justify-center">

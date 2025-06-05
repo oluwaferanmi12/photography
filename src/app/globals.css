@@ -222,7 +222,7 @@ a {
   background-image: url("../assets/images/catalogue-header.jpeg");
 }
 
-.parallaxBg {
+/* .parallaxBg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("../assets/images/parallaxBg.jpg");
   background-position: center;
@@ -233,7 +233,45 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+} */
+
+.parallaxBg {
+  position: relative;
+  height: 750px;
+  overflow: hidden;
 }
+
+.parallaxBg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../assets/images/parallaxBg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  
+  /* iOS fallback */
+  @supports (-webkit-touch-callout: none) {
+    position: fixed;
+    height: 100vh;
+    z-index: -1;
+  }
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 
 .aboutLandingBG::before,
 .catalogueBG::before,

@@ -43,6 +43,15 @@ import { Footer } from "@/components/footer/footer";
 import footerBrand from "@/assets/svgs/footer-brand-icon.svg";
 import { ImagesSliderDemo } from "@/components/header-images-carousel/images-slider";
 
+
+
+
+
+
+
+
+
+
 export default function Home() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);

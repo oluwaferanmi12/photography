@@ -122,7 +122,6 @@ const Gallery = () => {
       <ParallaxScrollax />
       <FooterImages />
       <Footer />
-      <Footer />
     </div>
   );
 };

@@ -206,7 +206,7 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col pt-28 pb-56">
+      <div className="flex flex-col pt-28 pb-28 lg:pb-56">
         {/* Second section  */}
         <div
           ref={nextSectionRef}

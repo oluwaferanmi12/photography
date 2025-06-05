@@ -248,7 +248,7 @@ const Portfolio = () => {
 
           {/* text */}
 
-          <div className="scroller !py-28" ref={scrollerRef}>
+          <div className="scroller lg:!py-28" ref={scrollerRef}>
             <ul className={`scroller__inner`}>
               <li className="rounded-3xl cursor-pointer py-3 px-6 flex gap-3 items-center ">
                 <h3 className="text-5xl 3xl:text-8xl text-white lg:w-1/2">
@@ -283,7 +283,7 @@ const Portfolio = () => {
             </ul>
           </div>
           {/* BANNER */}
-          <div className="my-36">
+          <div className="my-14 lg:my-36">
             <Banner />
           </div>
         </div>

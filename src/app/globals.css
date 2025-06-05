@@ -256,8 +256,9 @@ a {
   
   /* iOS fallback */
   @supports (-webkit-touch-callout: none) {
-    position: fixed;
-    height: 100vh;
+    position: fixed;  
+    height: 750px;
+    /* height: 100vh; */
     z-index: -1;
   }
 }

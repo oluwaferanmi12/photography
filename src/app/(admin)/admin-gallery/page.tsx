@@ -19,6 +19,9 @@ import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUplo
 interface ClientProps {
   id: string;
   clientName: string;
+  clientEmail: string;
+  password: string;
+  links: string;
   description: string;
   noOfPictures: string;
   status: boolean;
@@ -29,10 +32,12 @@ const AdminGallery = () => {
   const [openCreateGallery, setOpenCreateGallery] = useState(false);
   const [createGalleryLoading, setCreateGalleryLoading] = useState(false);
   const [clientName, setClientName] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [clientDescription, setClientDescription] = useState("");
   const [selectedAttachedService, setSelectedAttachedService] = useState("");
   const [clientNameError, setClientNameError] = useState("");
+  const [clientEmailError, setClientEmailError] = useState("");
   const [thumbnailError, setThumbnailError] = useState("");
   const [clientDescriptionError, setClientDescriptionError] =
     useState("");
@@ -40,27 +45,20 @@ const AdminGallery = () => {
     useState("");
   const [loading, setLoading] = useState<boolean>(true);
   const [clientData, setClientData] = useState<ClientProps[]>([]);
-  const [attachedServices, setAttachedServices] = useState<
-    { label: string; value: string }[]
-  >([]);
+  // const [attachedServices, setAttachedServices] = useState<
+  //   { label: string; value: string }[]
+  // >([]);
     const [resetCounter, setResetCounter] = useState(0);
   
   const router = useRouter();
 
+
+
   const columns: TableColumn<ClientProps>[] = [
     {
-      name: "Client name",
+      name: "Clients",
       cell: (row) => (
         <div className="flex items-center gap-3">
-          {/* <div className="h-10 w-10 rounded-full overflow-hidden bg-[#f2f2f2]">
-            <Image
-              src={`https://olaitanakinlade.com/${row.thumbnail}`} // Adjust the path if necessary
-              alt={row.clientName}
-              width={40}
-              height={40}
-              className="object-cover h-full w-full"
-            />
-          </div> */}
           <div>
             <div className="font-medium text-[#292D32]">
               {row.clientName}
@@ -71,9 +69,28 @@ const AdminGallery = () => {
       sortable: true,
     },
     {
-      name: "Description",
-      cell: (row) => <div className="text-[#292D32]">{row.description}</div>,
+      name: "Email",
+      cell: (row) => <div className="text-[#292D32]">{row.clientEmail}</div>,
       grow: 2,
+    },
+    // {
+    //   name: "Description",
+    //   cell: (row) => <div className="text-[#292D32]">{row.description}</div>,
+    //   grow: 2,
+    // },
+
+    {
+      name: "Password",
+      cell: (row) => (
+        <div className="text-[#292D32] text-right">{row.password}</div>
+      ),
+    },
+
+    {
+      name: "Links",
+      cell: (row) => (
+        <div className="text-[#292D32] text-right">{row.links}</div>
+      ),
     },
 
     {
@@ -82,6 +99,7 @@ const AdminGallery = () => {
         <div className="text-[#292D32] text-right">{row.noOfPictures}</div>
       ),
     },
+
     {
       name: "Status",
       cell: (row) => (
@@ -122,11 +140,14 @@ const AdminGallery = () => {
   // Fetch services and their packages
   const fetchClient = async () => {
     try {
-      const clientRes = await apiCall("get", "/Portfolio");
-      const formattedData: ClientProps[] = clientRes.data.map(
+      const clientRes = await apiCall("get", "/Gallery");
+      console.log(clientRes);
+
+      const formattedData: ClientProps[] = clientRes.data.data.gallery.map(
         (item: any) => ({
           id: item.id,
-          clientName: item.title,
+          clientName: item.name,
+          clientEmail: item.email,
           description: item.description,
           noOfPictures: item.imageCount.toString(),
           status: item.isActive,
@@ -153,6 +174,11 @@ const AdminGallery = () => {
       hasError = true;
     } else setClientNameError("");
 
+    if (!clientEmail.trim()) {
+      setClientEmailError("Please include client email");
+      hasError = true;
+    } else setClientEmailError("");
+
     if (!clientDescription.trim()) {
       setClientDescriptionError("Please include service description");
       hasError = true;
@@ -163,10 +189,10 @@ const AdminGallery = () => {
       hasError = true;
     } else setThumbnailError("");
 
-    if (!selectedAttachedService) {
-      setSelectedAttachedServiceError("Please select a service");
-      hasError = true;
-    } else setSelectedAttachedServiceError("");
+    // if (!selectedAttachedService) {
+    //   setSelectedAttachedServiceError("Please select a service");
+    //   hasError = true;
+    // } else setSelectedAttachedServiceError("");
 
     if (hasError) {
       setCreateGalleryLoading(false);
@@ -175,19 +201,20 @@ const AdminGallery = () => {
 
     try {
       const formData = new FormData();
-      formData.append("Title", clientName);
+      formData.append("Name", clientName);
+      formData.append("Email", clientEmail);
       formData.append("Description", clientDescription);
-      formData.append("ServiceId", selectedAttachedService);
       if (thumbnail) {
         formData.append("Thumbnail", thumbnail as File);
       }
 
-      await apiCall("post", "/Portfolio/Add", formData, {
+      await apiCall("post", "/Gallery", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       toast.success("Client created successfully");
       setClientName("");
+      setClientEmail("");
       setClientDescription("");
       setThumbnail(null);
       setSelectedAttachedService("");
@@ -203,22 +230,22 @@ const AdminGallery = () => {
     }
   };
 
-  const fetchServices = async () => {
-    try {
-      const res = await apiCall("get", "/Admin/Services");
-      const services = res.data.map((service: any) => ({
-        label: service.title,
-        value: service.id,
-      }));
-      setAttachedServices(services);
-    } catch (error) {
-      toast.error("Failed to fetch services");
-    }
-  };
+  // const fetchServices = async () => {
+  //   try {
+  //     const res = await apiCall("get", "/Admin/Services");
+  //     const services = res.data.map((service: any) => ({
+  //       label: service.title,
+  //       value: service.id,
+  //     }));
+  //     setAttachedServices(services);
+  //   } catch (error) {
+  //     toast.error("Failed to fetch services");
+  //   }
+  // };
 
   useEffect(() => {
     fetchClient();
-    fetchServices();
+    // fetchServices();
   }, []);
 
   return (
@@ -264,22 +291,22 @@ const AdminGallery = () => {
               </div>
               <div className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="name"
+                  htmlFor="email"
                   className="text-grayish-500 font-semibold"
                 >
                   Email
                 </label>
                 <Input
-                  value={clientName}
+                  value={clientEmail}
                   onChangeInput={(e) => {
-                    setClientName(e.target.value);
-                    if (clientNameError) setClientNameError("");
+                    setClientEmail(e.target.value);
+                    if (clientEmailError) setClientEmailError("");
                   }}
                   variant="admin"
                   placeholder="desire@example.com"
                 />
-                {clientNameError && (
-                  <p className="text-red-700">{clientNameError}</p>
+                {clientEmailError && (
+                  <p className="text-red-700">{clientEmailError}</p>
                 )}
               </div>
               <div className="w-full flex flex-col gap-3">
@@ -321,7 +348,7 @@ const AdminGallery = () => {
                 <label htmlFor="phone">Number of edited images</label>
                 <CustomSelect
                   variant="admin"
-                  selectData={attachedServices}
+                  selectData={[]}
                   defaultOption="20"
                   selectValue={selectedAttachedService}
                   setSelectedValue={(value) => {

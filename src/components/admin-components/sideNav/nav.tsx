@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import logo from "@/assets/svgs/brand-logo.svg";
 import Image from "next/image";
@@ -7,6 +7,7 @@ import homeOutline from "@/assets/svgs/home_1_line.svg";
 import dollarSign from "@/assets/svgs/Admin_svgs/dollar_icon.svg";
 import calenderIcon from "@/assets/svgs/Admin_svgs/calender_icon.svg";
 import multiselectionIcon from "@/assets/svgs/Admin_svgs/multiselection_icon.svg";
+import portfolioIcon from "@/assets/svgs/Admin_svgs/portfolio-navIcon.svg";
 import settingsIcon from "@/assets/svgs/Admin_svgs/gearsIcon.svg";
 import biDirection from "@/assets/svgs/selector_vertical_line.svg";
 import Link from "next/link";
@@ -17,6 +18,31 @@ const navData = [
     icon: homeOutline,
     navLink: "/admin-dashboard",
     navTitle: "Dashboard",
+  },
+  {
+    icon: multiselectionIcon,
+    navLink: "/admin-packages",
+    navTitle: "Packages",
+  },
+  {
+    icon: portfolioIcon,
+    navLink: "/admin-portfolio",
+    navTitle: "Portfolio",
+  },
+   {
+    icon: portfolioIcon,
+    navLink: "/admin-gallery",
+    navTitle: "Gallery",
+  },
+  {
+    icon: settingsIcon,
+    navLink: "/admin-settings",
+    navTitle: "Settings",
+  },
+  {
+    icon: calenderIcon,
+    navLink: "/calendar",
+    navTitle: "Calendar",
   },
   {
     icon: homeOutline,
@@ -33,36 +59,10 @@ const navData = [
     navLink: "/admin-links",
     navTitle: "Links",
   },
-  {
-    icon: dollarSign,
-    navLink: "/admin-portfolio",
-    navTitle: "Portfolio",
-  },
-  {
-    icon: calenderIcon,
-    navLink: "/calendar",
-    navTitle: "Calendar",
-  },
-  {
-    icon: multiselectionIcon,
-    navLink: "/admin-packages",
-    navTitle: "Packages",
-  },
-  {
-    icon: settingsIcon,
-    navLink: "/admin-gallery",
-    navTitle: "Gallery",
-  },
-  {
-    icon: settingsIcon,
-    navLink: "/admin-settings",
-    navTitle: "Settings",
-  },
 ];
 
 export const Nav = () => {
   const pathname = usePathname();
-
 
   return (
     <div className="h-screen min-h-screen w-[300px] max-h-screen flex flex-col justify-between p-4">
@@ -73,8 +73,16 @@ export const Nav = () => {
         </div>
         <div className="mt-8 flex flex-col gap-5">
           {navData.map((navs) => (
-            <Link key={navs.navTitle} href={navs.navLink} className="text-[12px]">
-              <NavWrapper active={pathname.startsWith(navs.navLink)} icon={navs.icon} text={navs.navTitle} />
+            <Link
+              key={navs.navTitle}
+              href={navs.navLink}
+              className="text-[12px]"
+            >
+              <NavWrapper
+                active={pathname.startsWith(navs.navLink)}
+                icon={navs.icon}
+                text={navs.navTitle}
+              />
             </Link>
           ))}
         </div>
@@ -98,9 +106,21 @@ export const Nav = () => {
   );
 };
 
-const NavWrapper = ({ icon, text, active }: { icon: string; text: string, active: boolean }) => {
+const NavWrapper = ({
+  icon,
+  text,
+  active,
+}: {
+  icon: string;
+  text: string;
+  active: boolean;
+}) => {
   return (
-    <div className={`${active ? "text-white bg-black p-3 rounded-xl" : "text-[#5F6368]"} flex cursor-pointer items-center gap-2 `}>
+    <div
+      className={`${
+        active ? "text-white bg-black p-3 rounded-xl" : "text-[#5F6368]"
+      } flex cursor-pointer items-center gap-2 `}
+    >
       <div>
         <Image src={icon} alt="" />
       </div>

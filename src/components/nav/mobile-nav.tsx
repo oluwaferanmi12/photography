@@ -88,37 +88,51 @@ export const MobileNav = () => {
           </div>
           <div className="w-full mt-28">
             <Link href={"/session"}>
-              <button onClick={onClose} className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey">
+              <button
+                onClick={onClose}
+                className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey"
+              >
                 Book a session
               </button>
             </Link>
           </div>
 
           <div className="flex gap-4 mt-8 text-xl">
-            <Link href="/">
-              <span>
-                <Image src={facebook} alt="social_links" />
-              </span>
+            <Link href="https://www.facebook.com/victhoria.hajarlah">
+              <Image
+                className="cursor-pointer"
+                src={facebook}
+                alt="social_links"
+              />
             </Link>
-            <Link href="/">
-              <span>
-                <Image src={instagram} alt="social_links" />
-              </span>
+            <Link href="https://www.instagram.com/shotbyportable/">
+              <Image
+                className="cursor-pointer"
+                src={instagram}
+                alt="social_links"
+              />
             </Link>
-            <Link href="/">
-              <span>
-                <Image src={linkedin} alt="social_links" />
-              </span>
+
+            <Link href="https://www.linkedin.com/in/victoria-akinade-402944175/">
+              <Image
+                className="cursor-pointer"
+                src={linkedin}
+                alt="social_links"
+              />
             </Link>
-            <Link href="/">
-              <span>
-                <Image src={youtube} alt="social_links" />
-              </span>
+            <Link href="">
+              <Image
+                className="cursor-pointer"
+                src={youtube}
+                alt="social_links"
+              />
             </Link>
-            <Link href="/">
-              <span>
-                <Image src={tiktok} alt="social_links" />
-              </span>
+            <Link href="https://www.tiktok.com/@shotbyportable">
+              <Image
+                className="cursor-pointer"
+                src={tiktok}
+                alt="social_links"
+              />
             </Link>
           </div>
         </Drawer>

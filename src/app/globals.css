@@ -105,6 +105,13 @@
   --color-grayish-700: #C3C3C2;
   --color-white-200: #ECECEB;
 
+  --color-purple-secondary-600: #5900D9;
+  --color-purple-secondary-500: #6200EE;
+  --color-badges-color2: #F7F8FA;
+  --color-calendar-gray: #212121;
+
+  --color-gray-500: #757575;
+
   --breakpoint-3xl: 1400px;
 
   --color-sidebar-ring: var(--sidebar-ring);

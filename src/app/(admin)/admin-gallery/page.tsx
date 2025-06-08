@@ -35,24 +35,18 @@ const AdminGallery = () => {
   const [clientEmail, setClientEmail] = useState("");
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [clientDescription, setClientDescription] = useState("");
-  const [selectedAttachedService, setSelectedAttachedService] = useState("");
+  const [noOfPictures, setNoOfPictures] = useState<number>();
   const [clientNameError, setClientNameError] = useState("");
   const [clientEmailError, setClientEmailError] = useState("");
   const [thumbnailError, setThumbnailError] = useState("");
-  const [clientDescriptionError, setClientDescriptionError] =
-    useState("");
-  const [selectedAttachedServiceError, setSelectedAttachedServiceError] =
-    useState("");
+  const [clientDescriptionError, setClientDescriptionError] = useState("");
+  const [noOfPicturesError, setNoOfPicturesError] = useState("");
+
   const [loading, setLoading] = useState<boolean>(true);
   const [clientData, setClientData] = useState<ClientProps[]>([]);
-  // const [attachedServices, setAttachedServices] = useState<
-  //   { label: string; value: string }[]
-  // >([]);
-    const [resetCounter, setResetCounter] = useState(0);
-  
+  const [resetCounter, setResetCounter] = useState(0);
+
   const router = useRouter();
-
-
 
   const columns: TableColumn<ClientProps>[] = [
     {
@@ -60,9 +54,7 @@ const AdminGallery = () => {
       cell: (row) => (
         <div className="flex items-center gap-3">
           <div>
-            <div className="font-medium text-[#292D32]">
-              {row.clientName}
-            </div>
+            <div className="font-medium text-[#292D32]">{row.clientName}</div>
           </div>
         </div>
       ),
@@ -189,10 +181,12 @@ const AdminGallery = () => {
       hasError = true;
     } else setThumbnailError("");
 
-    // if (!selectedAttachedService) {
-    //   setSelectedAttachedServiceError("Please select a service");
-    //   hasError = true;
-    // } else setSelectedAttachedServiceError("");
+    if (!noOfPictures) {
+      setNoOfPicturesError("Please enter package price");
+      hasError = true;
+    } else {
+      setNoOfPicturesError("");
+    }
 
     if (hasError) {
       setCreateGalleryLoading(false);
@@ -204,6 +198,9 @@ const AdminGallery = () => {
       formData.append("Name", clientName);
       formData.append("Email", clientEmail);
       formData.append("Description", clientDescription);
+      if (noOfPictures !== undefined) {
+        formData.append("ImageCount", noOfPictures.toString());
+      }
       if (thumbnail) {
         formData.append("Thumbnail", thumbnail as File);
       }
@@ -217,9 +214,9 @@ const AdminGallery = () => {
       setClientEmail("");
       setClientDescription("");
       setThumbnail(null);
-      setSelectedAttachedService("");
+      setNoOfPictures(undefined);
       setOpenCreateGallery(false);
-      setResetCounter(prev => prev + 1);
+      setResetCounter((prev) => prev + 1);
 
       fetchClient();
     } catch (error) {
@@ -316,7 +313,7 @@ const AdminGallery = () => {
                     setThumbnailError("");
                   }}
                   error={thumbnailError}
-                   resetTrigger={resetCounter}
+                  resetTrigger={resetCounter}
                 />
               </div>
               <div className="w-full flex flex-col gap-3">
@@ -329,11 +326,10 @@ const AdminGallery = () => {
                 <div className="border-bayfi-grey text-[#868D96] placeholder:text-[#868D96] border py-4 px-3 rounded-lg bg-bayfi-grey-300">
                   <textarea
                     value={clientDescription}
-                    placeholder="client&apos;s description"
+                    placeholder="client's description"
                     onChange={(e) => {
                       setClientDescription(e.target.value);
-                      if (clientDescriptionError)
-                        setClientDescriptionError("");
+                      if (clientDescriptionError) setClientDescriptionError("");
                     }}
                     className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
                     rows={3}
@@ -346,19 +342,17 @@ const AdminGallery = () => {
 
               <div className="w-full flex flex-col gap-3">
                 <label htmlFor="phone">Number of edited images</label>
-                <CustomSelect
-                  variant="admin"
-                  selectData={[]}
-                  defaultOption="20"
-                  selectValue={selectedAttachedService}
-                  setSelectedValue={(value) => {
-                    setSelectedAttachedService(value);
-                    setSelectedAttachedServiceError(""); // Clear error when selected
+                <Input
+                  value={noOfPictures?.toString() || ""}
+                  type="number"
+                  onChangeInput={(e) => {
+                    const value = parseFloat(e.target.value);
+                    setNoOfPictures(isNaN(value) ? undefined : value);
+                    if (noOfPicturesError) setNoOfPicturesError("");
                   }}
+                  variant="admin"
+                  placeholder="20"
                 />
-                {selectedAttachedServiceError && (
-                  <p className="text-red-700">{selectedAttachedServiceError}</p>
-                )}
               </div>
 
               {/*  */}

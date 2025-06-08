@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import rollingImage from "@/assets/svgs/rollingImage.svg";
 import card1 from "@/assets/images/gallery/card1.jpg";
 import card2 from "@/assets/images/gallery/card2.jpg";
@@ -18,64 +18,124 @@ import Pagination from "@/components/pagination/pagination";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
+import { apiCall } from "@/axios/axios";
+import { toast } from "sonner";
+
+interface ClientProps {
+  id: string;
+  clientName: string;
+  clientEmail: string;
+  password: string;
+  links: string;
+  description: string;
+  noOfPictures: string;
+  status: boolean;
+  thumbnail: string;
+  date: string;
+}
 
 const Gallery = () => {
-  const galleryData = [
-    {
-      imgSrc: card1,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-    {
-      imgSrc: card2,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-    {
-      imgSrc: card3,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-    {
-      imgSrc: card4,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-    {
-      imgSrc: card5,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-    {
-      imgSrc: card6,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-    {
-      imgSrc: card7,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-    {
-      imgSrc: card8,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-    {
-      imgSrc: card9,
-      galleryTitle: "Desire's deciation",
-      date: "April 15 2025",
-      noOfPhoto: 150,
-    },
-  ];
+  const [clientData, setClientData] = useState<ClientProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  // Fetch services and their packages
+  const fetchClient = async () => {
+    try {
+      const clientRes = await apiCall("get", "/Gallery");
+      console.log(clientRes);
+
+      const formattedData: ClientProps[] = clientRes.data.data.gallery.map(
+        (item: any) => {
+          const date = new Date(item.dateModified);
+          const formattedDate = date
+            .toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+            .replace(",", "");
+
+          return {
+            id: item.id,
+            clientName: item.name,
+            // clientEmail: item.email,
+            // description: item.description,
+            noOfPictures: item.imageCount.toString(),
+            thumbnail: item.thumbnail,
+            date: formattedDate, // formatted here
+            // status: item.isActive,
+          };
+        }
+      );
+      setClientData(formattedData);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+      toast.error("Failed to load services");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchClient();
+  }, []);
+
+  // const galleryData = [
+  //   {
+  //     imgSrc: card1,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  //   {
+  //     imgSrc: card2,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  //   {
+  //     imgSrc: card3,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  //   {
+  //     imgSrc: card4,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  //   {
+  //     imgSrc: card5,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  //   {
+  //     imgSrc: card6,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  //   {
+  //     imgSrc: card7,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  //   {
+  //     imgSrc: card8,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  //   {
+  //     imgSrc: card9,
+  //     galleryTitle: "Desire's deciation",
+  //     date: "April 15 2025",
+  //     noOfPhoto: 150,
+  //   },
+  // ];
   return (
     <div>
       <div className="flex flex-col gap-14 justify-center items-center ">
@@ -99,12 +159,12 @@ const Gallery = () => {
       <section className="bg-[#F4F3EA] mt-28 flex flex-col gap-14 justify-center items-center px-5 lg:px-14 3xl:!px-28  pt-20 pb-32">
         <div>
           <Row gutter={[32, 32]}>
-            {galleryData.map((item, index) => (
+            {clientData.map((item, index) => (
               <Col key={index} xs={24} md={8}>
                 <GalleryCard
-                  imgSrc={item.imgSrc}
-                  no_of_photos={item.noOfPhoto}
-                  cardTitle={item.galleryTitle}
+                  imgSrc={item.thumbnail}
+                  no_of_photos={item.noOfPictures}
+                  cardTitle={item.clientName}
                   photoDate={item.date}
                 />
               </Col>

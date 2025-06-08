@@ -5,8 +5,8 @@ import galleryLock from "@/assets/svgs/gallery-lock.svg";
 import { useRouter } from "next/navigation";
 
 type GalleryCardProps = {
-  imgSrc: StaticImageData;
-  no_of_photos: number;
+  imgSrc: string;
+  no_of_photos: string;
   cardTitle: string;
   photoDate: string;
 };
@@ -30,11 +30,11 @@ export const GalleryCard = ({
       onClick={handleCardClick}
     >
       <div className="relative h-[250px] rounded-[20px]">
-        <Image
-          src={imgSrc}
+        <img
+          src={`https://olaitanakinlade.com/${imgSrc}`}
           className="w-full object-cover max-h-[250px] rounded-[20px]"
           alt="gallery_img"
-          fill
+          // fill
         />
         <div className="absolute top-2 left-2">
           <span>

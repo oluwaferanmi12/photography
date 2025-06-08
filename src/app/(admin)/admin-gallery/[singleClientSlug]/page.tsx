@@ -29,14 +29,13 @@ export default function SingleAdminGallery() {
   const [thumbnailError, setThumbnailError] = useState("");
   const [activeTab, setActiveTab] = useState("uploads");
   const [resetCounter, setResetCounter] = useState(0);
+  const [hasWatermark, setHasWaterMark] = useState(true)
 
   // SINGLE PACKAGES
-  console.log("I AM GALLEY SLUG", singleClientSlug);
-
   const singleUploadClient = async () => {
     setLoading(true);
     try {
-      const response = await apiCall("get", `Portfolio/Images/${clientId}`);
+      const response = await apiCall("get", `Gallery/${clientId}`);
       console.log(response);
       setSingleClientData(response.data);
     } catch (error) {
@@ -77,13 +76,14 @@ export default function SingleAdminGallery() {
         return;
       }
 
-      formData.append("ClientId", clientId);
+      formData.append("GalleryId", clientId);
+      formData.append("HasWatermark", hasWatermark.toString());
 
       thumbnails.forEach((file) => {
         formData.append("Images", file);
       });
 
-      await apiCall("post", "/Portfolio/Images", formData, {
+      await apiCall("post", "/Gallery/Images", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -225,7 +225,7 @@ export default function SingleAdminGallery() {
                 <div className="flex justify-between items-center">
                   <p className="text-black text-sm">Has Watermark</p>
                   <div>
-                    <Switch defaultChecked={true} className="custom-switch" />
+                    <Switch checked={hasWatermark} onChange={() => setHasWaterMark(!hasWatermark)} className="custom-switch" />
                   </div>
                 </div>
               </div>

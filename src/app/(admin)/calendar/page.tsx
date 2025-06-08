@@ -6,7 +6,18 @@ import AdminPageLayout from "@/adminLayouts/admin-page-layout";
 import { Input } from "@/components/inputs/input";
 import "react-datepicker/dist/react-datepicker.css";
 import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitButtons/Button";
-import CalendarSchedule from "@/components/admin-components/sideNav/calendar-view/page";
+import CalendarSchedule from "@/components/admin-components/sideNav/calendar-view/calendarView";
+import WeeklyCalendar from "@/components/admin-components/sideNav/weekly-view/weekly-view";
+
+const sampleEvents = [
+  {
+    id: 1,
+    title: "Wedding",
+    tag: "Premium",
+    startDatetime: "2025-06-05T10:44:00",
+    endDatetime: "2025-06-05T12:00:00",
+  },
+];
 
 export default function AdminCalendar() {
   const [openCalendarDetails, setOpenCalendarDetails] = useState(false);
@@ -62,6 +73,10 @@ export default function AdminCalendar() {
             {activeTab === "calendar-view" ? (
               <div>
                 <CalendarSchedule />
+              </div>
+            ) : activeTab === "weekly-view" ? (
+              <div>
+                <WeeklyCalendar events={sampleEvents} />;
               </div>
             ) : (
               <div>

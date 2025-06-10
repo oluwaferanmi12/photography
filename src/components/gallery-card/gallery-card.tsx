@@ -26,13 +26,13 @@ export const GalleryCard = ({
 
   return (
     <div
-      className="bg-white p-3 rounded-3xl flex flex-col gap-4 cursor-pointer"
+      className="bg-white p-3 w-full rounded-3xl flex flex-col gap-4 cursor-pointer"
       onClick={handleCardClick}
     >
       <div className="relative h-[250px] rounded-[20px]">
         <img
           src={`https://olaitanakinlade.com/${imgSrc}`}
-          className="w-full object-cover max-h-[250px] rounded-[20px]"
+          className="w-full  object-cover max-h-[250px] rounded-[20px]"
           alt="gallery_img"
           // fill
         />

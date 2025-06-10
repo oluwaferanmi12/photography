@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.2",
+    "@schedule-x/events-service": "^2.32.0",
+    "@schedule-x/react": "^2.32.0",
+    "@schedule-x/theme-default": "^2.32.0",
     "@studio-freight/lenis": "^1.0.42",
     "@tabler/icons-react": "^3.31.0",
     "@tsparticles/engine": "^3.8.1",

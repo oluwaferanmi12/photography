@@ -52,7 +52,7 @@ export const HomeNav = () => {
                   <Link href={item.navLink}>
                     <p
                       className={`cursor-pointer font-grotesk-medium text-base ${
-                        item.navLink === pathname
+                        pathname.startsWith(item.navLink)
                           ? "text-white font-bold"
                           : "text-[#FAFAFA]"
                       }`}
@@ -61,7 +61,7 @@ export const HomeNav = () => {
                     </p>
                   </Link>
 
-                  {pathname === item.navLink && (
+                  {pathname.startsWith(item.navLink) && (
                     <div className="absolute flex justify-center w-full">
                       <Image src={bottomActive} alt="" />
                     </div>

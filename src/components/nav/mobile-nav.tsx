@@ -71,12 +71,12 @@ export const MobileNav = () => {
                   href={path}
                   onClick={onClose}
                   className={`${
-                    pathname === path
+                   pathname.startsWith(path)
                       ? "text-5xl font-semibold text-[#D9C9AE] flex gap-2 items-center"
                       : "text-3xl font-light text-[#F3EEE6]"
                   } font-playfair transition-all duration-200`}
                 >
-                  {pathname === path && (
+                  {pathname.startsWith(path) && (
                     <span>
                       <Image src={navDot} alt="dot" />
                     </span>

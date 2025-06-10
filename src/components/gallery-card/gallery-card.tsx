@@ -5,6 +5,7 @@ import galleryLock from "@/assets/svgs/gallery-lock.svg";
 import { useRouter } from "next/navigation";
 
 type GalleryCardProps = {
+  cardId: string;
   imgSrc: string;
   no_of_photos: string;
   cardTitle: string;
@@ -13,6 +14,7 @@ type GalleryCardProps = {
 
 export const GalleryCard = ({
   imgSrc,
+  cardId,
   no_of_photos,
   cardTitle,
   photoDate,
@@ -20,8 +22,14 @@ export const GalleryCard = ({
   const router = useRouter();
 
   const handleCardClick = () => {
-    const gallerySlug = encodeURIComponent(cardTitle.toLowerCase().replace(/ /g, "-"));
-    router.push(`/gallery/gallery-access/${gallerySlug}`);
+    const gallerySlug = encodeURIComponent(
+      cardTitle.toLowerCase().replace(/ /g, "-")
+    );
+    const encodedImgSrc = encodeURIComponent(imgSrc);
+    const encodedId = encodeURIComponent(cardId);
+    router.push(
+      `/gallery/gallery-access/${gallerySlug}?imgSrc=${encodedImgSrc}&id=${encodedId}`
+    );
   };
 
   return (
@@ -32,9 +40,8 @@ export const GalleryCard = ({
       <div className="relative h-[250px] rounded-[20px]">
         <img
           src={`https://olaitanakinlade.com/${imgSrc}`}
-          className="w-full  object-cover max-h-[250px] rounded-[20px]"
+          className="min-w-full  object-cover max-h-[250px] rounded-[20px]"
           alt="gallery_img"
-          // fill
         />
         <div className="absolute top-2 left-2">
           <span>

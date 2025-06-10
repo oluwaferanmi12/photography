@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { Footer } from "@/components/footer/footer";
 import { Row, Col } from "antd";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import famImg from "@/assets/images/gallery_famImg.jpg";
 import loginFormIcon from "@/assets/svgs/login-form-icon.svg";
 import { Input } from "@/components/inputs/input";
@@ -12,13 +12,18 @@ import Button from "@/components/button/button";
 
 const GalleryAccessPage = () => {
   const params = useParams();
+  const searchParams = useSearchParams();
   const gallerySlug = params?.gallerySlug as string;
+  const imgSrc = searchParams.get('imgSrc');
+  const id = searchParams.get('id');
   const pageName = gallerySlug.replace(/-/g, ' ');
   const router = useRouter();
 
   const handleAccessLogin = () => {
     const singlePageSlug = encodeURIComponent(pageName.toLowerCase().replace(/ /g, "-"));
-    router.push(`/gallery/${singlePageSlug}`)
+   const encodedId = encodeURIComponent(id || '');
+    
+    router.push(`/gallery/${singlePageSlug}?id=${encodedId}`);
   }
 
   return (
@@ -30,9 +35,11 @@ const GalleryAccessPage = () => {
               <Col  xs={{ span: 24, order: 2 }} lg={{ span: 10, order: 1 }}>
                 <div>
                   <Image
-                    src={famImg}
+                    src={imgSrc ? `https://olaitanakinlade.com/${decodeURIComponent(imgSrc)}` : famImg}
                     className="h-[700px] rounded-3xl object-cover"
                     alt=""
+                    width={700}
+                    height={700}
                   />
                 </div>
               </Col>

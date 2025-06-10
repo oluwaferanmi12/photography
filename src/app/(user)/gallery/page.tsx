@@ -2,16 +2,6 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-// import rollingImage from "@/assets/svgs/rollingImage.svg";
-import card1 from "@/assets/images/gallery/card1.jpg";
-import card2 from "@/assets/images/gallery/card2.jpg";
-import card3 from "@/assets/images/gallery/card3.jpg";
-import card4 from "@/assets/images/gallery/card4.jpg";
-import card5 from "@/assets/images/gallery/card5.jpg";
-import card6 from "@/assets/images/gallery/card6.jpg";
-import card7 from "@/assets/images/gallery/card7.jpg";
-import card8 from "@/assets/images/gallery/card8.jpg";
-import card9 from "@/assets/images/gallery/card9.jpg";
 import { Row, Col } from "antd";
 import { GalleryCard } from "@/components/gallery-card/gallery-card";
 import Pagination from "@/components/pagination/pagination";
@@ -80,7 +70,6 @@ const Gallery = () => {
     fetchClient();
   }, []);
 
-  // const galleryData = [
   //   {
   //     imgSrc: card1,
   //     galleryTitle: "Desire's deciation",
@@ -162,6 +151,7 @@ const Gallery = () => {
             {clientData.map((item, index) => (
               <Col key={index} xs={24} md={8}>
                 <GalleryCard
+                  cardId={item.id}
                   imgSrc={item.thumbnail}
                   no_of_photos={item.noOfPictures}
                   cardTitle={item.clientName}

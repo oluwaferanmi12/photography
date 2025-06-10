@@ -675,3 +675,17 @@ a {
   height: 800px;
   max-height: 90vh;
 }
+
+
+.sx__calendar-header{
+  display: none !important;
+}
+
+.sx__time-grid-event{
+  cursor: pointer !important;
+}
+
+.sx__time-grid-event-title{
+  font-size: 16px !important;
+}
+

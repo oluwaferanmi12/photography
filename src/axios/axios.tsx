@@ -12,8 +12,11 @@ instance.interceptors.request.use(
   (config) => {
     // get token from localStorage
     let details: { token: string } = { token: "" };
+    const isGalleryRef = window.location.pathname.includes("gallery");
     try {
-      details = JSON.parse(localStorage.getItem("userDetails")!);
+      details = isGalleryRef
+        ? JSON.parse(localStorage.getItem("user-gallery-detail")!)
+        : JSON.parse(localStorage.getItem("userDetails")!);
     } catch (e) {
       localStorage.removeItem("userDetails");
     }
@@ -60,4 +63,3 @@ export const apiCall = async (
     return await instance.delete(url, config);
   }
 };
-

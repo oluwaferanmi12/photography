@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
+import { ModalWrapper } from "@/components/modal-wrapper/modal-wrapper";
 
 interface PackageOption {
   name: string;
@@ -77,6 +78,9 @@ export default function Services() {
   const [thumbnails, setThumbnails] = useState<File[]>([]);
   const [thumbnailError, setThumbnailError] = useState("");
   const [resetCounter, setResetCounter] = useState(0);
+  const [idSelected, setIdSelected] = useState("");
+  const [modalActive, setModalActive] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const router = useRouter();
 
   // Fetch services and their packages
@@ -181,7 +185,6 @@ export default function Services() {
         formData.append("Images", file);
       });
 
-     
       await apiCall("post", "/Admin/Services", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -199,6 +202,22 @@ export default function Services() {
       toast.error("An error occured while creating service");
     } finally {
       setCreateServiceLoading(false);
+    }
+  };
+
+  const handleDeleteService = async () => {
+    try {
+      setDeleteLoading(true);
+      const result = await apiCall(
+        `post`,
+        `/Admin/Services/Remove/${idSelected}`
+      );
+      toast.success("Service deleted");
+      setModalActive(false);
+      fetchServices();
+    } catch (e) {
+    } finally {
+      setDeleteLoading(false);
     }
   };
 
@@ -245,23 +264,34 @@ export default function Services() {
     {
       name: "",
       cell: (row) => (
-        <button
-          className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
-          onClick={() =>
-            router.push(
-              `/admin-packages/${encodeURIComponent(
-                row.serviceName
-              )}?&description=${encodeURIComponent(
-                row.description
-              )}&serviceId=${encodeURIComponent(row.id)}`
-            )
-          }
-        >
-          <span>
-            <Image src={eyeIcon} alt="img" />
-          </span>
-          Details
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
+            onClick={() =>
+              router.push(
+                `/admin-packages/${encodeURIComponent(
+                  row.serviceName
+                )}?&description=${encodeURIComponent(
+                  row.description
+                )}&serviceId=${encodeURIComponent(row.id)}`
+              )
+            }
+          >
+            <span>
+              <Image src={eyeIcon} alt="img" />
+            </span>
+            Details
+          </button>
+          <p
+            onClick={() => {
+              setModalActive(true);
+              setIdSelected(row.id);
+            }}
+            className="text-[red] cursor-pointer"
+          >
+            Delete
+          </p>
+        </div>
       ),
       right: true,
     },
@@ -277,6 +307,36 @@ export default function Services() {
         buttonOnClick: () => setOpenCreateService(true),
       }}
     >
+      <ModalWrapper
+        onCancel={() => {
+          setModalActive(false);
+        }}
+        open={modalActive}
+        headerText="Confirmation Modal"
+      >
+        <div className="my-3">
+          <p className="text-2xl font-grotesk-semi-bold">
+            Are you sure you want to delete ?
+          </p>
+          <div className="flex items-center gap-3 mt-4">
+            <button
+              disabled={deleteLoading}
+              className="bg-[#1B1B1B] cursor-pointer py-2 px-4 rounded-lg text-white"
+              onClick={handleDeleteService}
+            >
+              {deleteLoading ? "Loading..." : "Proceed"}
+            </button>
+            <button
+              onClick={() => {
+                setModalActive(false);
+              }}
+              className="cursor-pointer"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </ModalWrapper>
       <Spin spinning={loading} size="large">
         {services.length ? (
           <BaseDataTable title="Services" columns={columns} data={services} />

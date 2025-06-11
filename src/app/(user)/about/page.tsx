@@ -59,7 +59,7 @@ const About = () => {
                         that make life special — from growing bellies and
                         birthdays to graduations and weddings. My style is warm
                         and natural. I focus on real emotions and genuine
-                        connections. Whether it&apos;s a quiet glance or a big
+                        connections. Whether it's a quiet glance or a big
                         laugh, I want you to have photos that feel like you.  I don’t just take pictures. I help you hold on to
                         memories.`
                           .split("")

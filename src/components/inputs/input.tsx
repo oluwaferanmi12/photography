@@ -11,7 +11,7 @@ export const Input = ({
   variant: "user" | "admin";
   value?: string;
   type?: "text" | "number";
-  onChangeInput? : (e) => void;
+  onChangeInput? : (e:React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const userStyle =
     "border-[#575252] placeholder:text-[#BABABA] border px-5 py-2 rounded-xl ";

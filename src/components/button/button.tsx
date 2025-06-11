@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 interface ButtonTypes {
-  variant?: "bordered" | "filled" | "black" ;
+  variant?: "bordered" | "filled" | "black";
   borderVariant?: "light" | "dark" | "yellow";
   size?: "small" | "medium" | "large";
   children?: React.ReactNode;
@@ -11,6 +11,7 @@ interface ButtonTypes {
   widthFull?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   textColor?: string;
+  loading?: boolean;
 }
 
 const Button = ({
@@ -23,6 +24,7 @@ const Button = ({
   widthFull,
   textColor,
   onClick,
+  loading,
 }: ButtonTypes) => {
   const baseStyles = `px-6 py-2 ${
     widthFull ? "w-full" : "w-auto"
@@ -35,7 +37,8 @@ const Button = ({
   };
 
   const variantStyles = {
-    filled: "bg-light-brown hover:bg-transparent hover:border hover:border-white hover:text-white font-semibold text-darker-grey",
+    filled:
+      "bg-light-brown hover:bg-transparent hover:border hover:border-white hover:text-white font-semibold text-darker-grey",
     black: "bg-darker-grey text-white",
     bordered: `border ${
       borderVariant === "light"
@@ -48,10 +51,11 @@ const Button = ({
 
   const ButtonComponent = (
     <button
+      disabled={loading}
       onClick={onClick}
       className={`${baseStyles} ${textColor}   ${sizeStyles[size]} ${variantStyles[variant]} `}
     >
-      {text}
+      {loading ? "Loading..." : text}
       {children}
     </button>
   );

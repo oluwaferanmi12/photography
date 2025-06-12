@@ -14,9 +14,10 @@ instance.interceptors.request.use(
     let details: { token: string } = { token: "" };
     const isGalleryRef = window.location.pathname.includes("gallery");
     try {
-      details = isGalleryRef
-        ? JSON.parse(localStorage.getItem("user-gallery-detail")!)
-        : JSON.parse(localStorage.getItem("userDetails")!);
+      details = JSON.parse(localStorage.getItem("userDetails")!);
+        // details = isGalleryRef
+        //   ? JSON.parse(localStorage.getItem("user-gallery-detail")!)
+        //   : JSON.parse(localStorage.getItem("userDetails")!);
     } catch (e) {
       localStorage.removeItem("userDetails");
     }

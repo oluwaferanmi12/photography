@@ -6,7 +6,7 @@ import eyeIcon from "@/assets/svgs/eyeIcon.svg";
 import dot from "@/assets/svgs/dots.svg";
 import blueDot from "@/assets/svgs/blue-dot.svg";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ResponsiveDrawer } from "@/components/admin-components/sideNav/responsive-drawer/responsive-drawer";
 import { Col, Row } from "antd";
 import AdminPageLayout from "@/adminLayouts/admin-page-layout";
@@ -15,6 +15,13 @@ import CustomSelect from "@/components/inputs/custom-select/custom-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AdminSubmitButton } from "@/components/admin-components/sideNav/SubmitButtons/Button";
+import { apiCall } from "@/axios/axios";
+import {
+  GetBookingInterface,
+  MainBookingInterface,
+} from "../../../../interface/interface";
+import moment from "moment";
+import { toast } from "sonner";
 
 interface Booking {
   name: string;
@@ -27,87 +34,45 @@ interface Booking {
   created: string;
 }
 
-const data: Booking[] = [
-  {
-    name: "Stephen curry",
-    email: "Stephen@portable.com",
-    phone: "(416) 7311 793",
-    packageType: "Wedding",
-    packageName: "Basic ($200)",
-    dateBooked: "July - 28 - 2025",
-    status: "Pending",
-    created: "Today",
-  },
-  {
-    name: "Stephen curry",
-    email: "Stephen@portable.com",
-    phone: "(416) 7311 793",
-    packageType: "Wedding",
-    packageName: "Basic ($200)",
-    dateBooked: "July - 28 - 2025",
-    status: "Awaiting",
-    created: "Today",
-  },
-  {
-    name: "Stephen curry",
-    email: "Stephen@portable.com",
-    phone: "(416) 7311 793",
-    packageType: "Wedding",
-    packageName: "Basic ($200)",
-    dateBooked: "July - 28 - 2025",
-    status: "Confirmed",
-    created: "Today",
-  },
-  {
-    name: "Stephen curry",
-    email: "Stephen@portable.com",
-    phone: "(416) 7311 793",
-    packageType: "Wedding",
-    packageName: "Basic ($200)",
-    dateBooked: "July - 28 - 2025",
-    status: "Declined",
-    created: "Today",
-  },
-  {
-    name: "Stephen curry",
-    email: "Stephen@portable.com",
-    phone: "(416) 7311 793",
-    packageType: "Wedding",
-    packageName: "Basic ($200)",
-    dateBooked: "July - 28 - 2025",
-    status: "Resceduled",
-    created: "Today",
-  },
-];
-
 export default function Booking() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+  const [selectedBooking, setSelectedBooking] = useState<GetBookingInterface>();
   const [openBookingDetails, setOpenBookingDetails] = useState(false);
   const [selectedService, setSelectedService] = useState("");
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [bookings, setBookings] = useState<MainBookingInterface[]>([]);
+  const [confirmLoading, setConfirmLoading] = useState(false);
 
-  const handleViewDetails = (row: Booking) => {
-    setSelectedBooking(row);
+  const handleViewDetails = () => {
     setDrawerOpen(true);
   };
 
-  const columns: TableColumn<Booking>[] = [
+  const getBooking = async () => {
+    try {
+      const result = await apiCall("get", "/Bookings");
+      setBookings(result.data);
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    getBooking();
+  }, []);
+
+  const columns: TableColumn<MainBookingInterface>[] = [
     {
       name: "Name",
       cell: (row) => (
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-[#101010] text-[#FFF0EA] flex items-center justify-center text-xs font-medium">
-            {row.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")
-              .toUpperCase()}
-          </div>
           <div>
-            <div className="font-medium text-[#292D32]">{row.name}</div>
-            <div className="text-admin-grey text-xs">{row.email}</div>
+            <div className="font-medium text-[#292D32]">
+              {" "}
+              {row.bookings[0].name}
+            </div>
+            <div className="text-admin-grey text-xs">
+              {" "}
+              {row.bookings[0].email}
+            </div>
           </div>
         </div>
       ),
@@ -116,19 +81,21 @@ export default function Booking() {
     },
     {
       name: "Phone number",
-      cell: (row) => <div className="text-[#292D32]">{row.phone}</div>,
+      cell: (row) => (
+        <div className="text-[#292D32]"> {row.bookings[0].phone}</div>
+      ),
     },
     {
       name: "Package",
       cell: (row) => (
         <div>
-          <div className="text-[#292D32]">{row.packageType}</div>
+          <div className="text-[#292D32]"> {row.bookings[0].package}</div>
           <div className="flex items-center gap-1 text-xs mt-1">
             <div className="bg-white font-medium border border-[#D0D5DD] px-2 py-0.5 rounded-md text-[#344054] flex gap-1 items-center">
               <span>
                 <Image src={dot} alt="dot" />
               </span>
-              {row.packageName}
+              {row.bookings[0].package}
             </div>
           </div>
         </div>
@@ -136,29 +103,43 @@ export default function Booking() {
     },
     {
       name: "Date booked",
-      cell: (row) => <div className="text-[#292D32]">{row.dateBooked}</div>,
+      cell: (row) => <div className="text-[#292D32]"> {row.date}</div>,
     },
     {
       name: "Status",
       cell: (row) => (
         <div className="inline-flex gap-1 items-center border border-[#B2DDFF] px-2 py-1 rounded-full bg-[#EFF8FF] text-[#175CD3] text-xs font-medium">
-          <span>
-            <Image src={blueDot} alt="dot" />
-          </span>
-          {row.status}
+          {row.bookings[0].status === 3 && (
+            <span>
+              <Image src={blueDot} alt="dot" />
+            </span>
+          )}
+
+          {row.bookings[0].status === 3
+            ? "Confirmed"
+            : row.bookings[0].status === 2
+            ? "Pending"
+            : row.bookings[0].status === 1
+            ? "Paid"
+            : "Not paid"}
+
+          {row.bookings[0].status === 3 ? "Success" : "Pending"}
         </div>
       ),
     },
     {
       name: "Date created",
-      cell: (row) => <div className="text-[#292D32]">{row.created}</div>,
+      cell: (row) => <div className="text-[#292D32]">{row.date}</div>,
     },
     {
       name: "",
       cell: (row) => (
         <button
           className="flex cursor-pointer items-center gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
-          onClick={() => handleViewDetails(row)}
+          onClick={() => {
+            setSelectedBooking(row.bookings[0]);
+            handleViewDetails();
+          }}
         >
           <span>
             <Image src={eyeIcon} alt="img" />
@@ -187,6 +168,17 @@ export default function Booking() {
     { label: "Pro+", value: "Pro+ ($1500 plus tax)" },
   ];
 
+  const handleConfirmBooking = async (id: string) => {
+    try {
+      setConfirmLoading(true);
+      const result = await apiCall("post", `/Bookings/confirm/${id}`);
+      toast.success("Reservation Booked");
+    } catch (e) {
+    } finally {
+      setConfirmLoading(false);
+    }
+  };
+
   return (
     <AdminPageLayout
       headerProps={{
@@ -197,7 +189,7 @@ export default function Booking() {
         buttonOnClick: () => setOpenBookingDetails(true),
       }}
     >
-      <BaseDataTable columns={columns} data={data} />
+      <BaseDataTable columns={columns} data={bookings} />
 
       {/* INDIVIDUAL DETAILS DRAWER */}
       <ResponsiveDrawer
@@ -212,7 +204,7 @@ export default function Booking() {
                 <div className="flex flex-col gap-2">
                   <p className="text-[12px] text-white">Service booked</p>
                   <p className="text-lg font-semibold">
-                    {selectedBooking.packageType}
+                    {selectedBooking.package}
                   </p>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -221,7 +213,13 @@ export default function Booking() {
                     <span>
                       <Image src={blueDot} alt="dot" />
                     </span>
-                    {selectedBooking.status}
+                    {selectedBooking.status === 3
+                      ? "Confirmed"
+                      : selectedBooking.status === 2
+                      ? "Pending"
+                      : selectedBooking.status === 1
+                      ? "Paid"
+                      : "Not paid"}
                   </div>
                 </div>
               </div>
@@ -231,18 +229,17 @@ export default function Booking() {
                     <span>
                       <Image src={dot} alt="dot" />
                     </span>
-                    {selectedBooking.packageName}
-                  </div>
-                  <div className="bg-white font-medium border border-[#D0D5DD] px-2 py-0.5 rounded-md text-[#344054] flex gap-1 items-center">
-                    <span>
-                      <Image src={dot} alt="dot" />
-                    </span>
-                    Make up ($50)
+                    {selectedBooking.package}
                   </div>
                 </div>
-                <p className="text-3xl font-bold my-2">$1200.00</p>
+                <p className="text-3xl font-bold my-2">
+                  ${selectedBooking.amount}
+                </p>
                 <p className="text-base text-white">
-                  On the 20th February 2025, 12:00PM
+                  {moment(selectedBooking.start).format(
+                    "[On the] Do MMMM YYYY, h:mmA"
+                  )}{" "}
+                  - {moment(selectedBooking.end).format("h:mmA")}
                 </p>
               </div>
             </div>
@@ -286,7 +283,7 @@ export default function Booking() {
                   </Col>
                   <Col span={12}>
                     <p className="text-right text-[#494949] text-sm font-medium">
-                      02-14-2025 9:30
+                      {}
                     </p>
                   </Col>
                 </Row>
@@ -298,22 +295,29 @@ export default function Booking() {
                   </Col>
                   <Col span={12}>
                     <p className="text-right text-[#494949] text-sm font-medium">
-                      0998709888776
+                      {selectedBooking.paymentReference}
                     </p>
                   </Col>
                 </Row>
               </div>
             </div>
             <div className="flex justify-between items-center gap-2">
-              <button className="bg-[#058503] text-white p-4 rounded-full w-full">
-                Confirm booking
-              </button>
-              <button className="bg-[#F4F3EA] text-black p-4 rounded-full w-full">
-                Reschedule
-              </button>
-              <button className="border border-[#D80027] text-[#D80027] p-4 rounded-full w-full">
-                Decline
-              </button>
+              {selectedBooking.status === 2 && (
+                <button
+                  disabled={confirmLoading}
+                  onClick={() => {
+                    handleConfirmBooking(selectedBooking.id);
+                  }}
+                  className="bg-[#058503] text-white p-4 rounded-full w-full"
+                >
+                  {confirmLoading ? "Loading..." : "Confirm booking"}
+                </button>
+              )}
+              {selectedBooking.status === 2 && (
+                <button className="border border-[#D80027] text-[#D80027] p-4 rounded-full w-full">
+                  Decline
+                </button>
+              )}
             </div>
           </div>
         )}
@@ -402,7 +406,9 @@ export default function Booking() {
             </div>
             <div className="flex justify-between mt-3">
               <p className="text-[#292D32] text-xl font-normal">Total</p>
-              <p className="text-black text-2xl font-medium">$1200.00</p>
+              <p className="text-black text-2xl font-medium">
+                ${selectedBooking?.amount}
+              </p>
             </div>
             <div className="mt-5">
               <AdminSubmitButton text="Send booking link" />

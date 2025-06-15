@@ -23,3 +23,30 @@ export interface BookingCalendar {
     dateAndTime: DatesTimeInterface[],
     id: string
 }
+
+export interface GetBookingInterface {
+    address: string
+    amount: number
+    description: string
+    email: number
+    end: number
+    id: string
+    meetingUrl: string | null
+    name: string
+    package: string
+    packageId: string
+    paid: boolean
+    paymentReference: string
+    phone: string
+    service: string
+    slotId: string
+    slotTitle: string
+    start: string
+    status: number
+    timezone: string
+}
+
+export interface MainBookingInterface {
+    date: string;
+    bookings: GetBookingInterface[]
+}

@@ -33,7 +33,7 @@ export interface Scheduletype {
   day: DaysType;
   included?: boolean;
 }
-[];
+
 
 export type UpdateType = "start" | "end" | "checked";
 

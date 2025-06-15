@@ -90,12 +90,12 @@ const SessionPage = () => {
     const dateObject = new Date(selectedDate!);
     console.log(selectedDuration, "Selected duration heree");
     const startTimestamp = dateObject.setHours(
-      selectedDuration?.start!,
+      selectedDuration?.start ?? 0,
       0,
       0,
       0
     );
-    const endTimestamp = dateObject.setHours(selectedDuration?.end!, 0, 0, 0);
+    const endTimestamp = dateObject.setHours(selectedDuration?.end ?? 0, 0, 0, 0);
     const expectedPayload = { ...payload };
     expectedPayload.timezone = moment.tz.guess();
     expectedPayload.slotId = selectedSlot?.id ?? "";

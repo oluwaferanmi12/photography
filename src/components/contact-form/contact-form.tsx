@@ -21,9 +21,9 @@ export const ContactFrom = ({
   onSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedService: string;
   setSelectedService: (val: string) => void;
-  createPayload ?: CreateBookingInterface;
-  setCreatePayload ?: (val: CreateBookingInterface) => void;
-  handleCreateBooking ?: (e: React.FormEvent<HTMLFormElement>) => void;
+  createPayload?: CreateBookingInterface;
+  setCreatePayload?: (val: CreateBookingInterface) => void;
+  handleCreateBooking?: (e: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -124,13 +124,12 @@ export const ContactFrom = ({
                 <label htmlFor="firstname">Full Name</label>
                 <Input
                   onChangeInput={(e) => {
-                    if(setCreatePayload && createPayload){
+                    if (setCreatePayload && createPayload) {
                       setCreatePayload({
                         ...createPayload,
                         name: e.target.value,
                       });
                     }
-                    
                   }}
                   variant="user"
                   placeholder="Enter your first name"
@@ -142,13 +141,12 @@ export const ContactFrom = ({
               <label htmlFor="email">Email address</label>
               <Input
                 onChangeInput={(e) => {
-                  if(setCreatePayload && createPayload){
+                  if (setCreatePayload && createPayload) {
                     setCreatePayload({
                       ...createPayload,
                       email: e.target.value,
                     });
                   }
-                  
                 }}
                 variant="user"
                 placeholder="Example@email.com"
@@ -159,13 +157,12 @@ export const ContactFrom = ({
               <label htmlFor="phone">Phone number</label>
               <Input
                 onChangeInput={(e) => {
-                  if(createPayload && setCreatePayload){
+                  if (createPayload && setCreatePayload) {
                     setCreatePayload({
                       ...createPayload,
                       phone: e.target.value,
                     });
                   }
-                  
                 }}
                 variant="user"
                 placeholder="+1 999-999-999"
@@ -205,10 +202,12 @@ export const ContactFrom = ({
                 <select
                   onChange={(e) => {
                     setPackageSelected(e.target.value);
-                    setCreatePayload({
-                      ...createPayload,
-                      packageId: e.target.value,
-                    });
+                    if (setCreatePayload && createPayload) {
+                      setCreatePayload({
+                        ...createPayload,
+                        packageId: e.target.value,
+                      });
+                    }
                   }}
                   value={packageSelected}
                   className="w-full border border-[#575252] text-left text-[#BABABA] px-5 py-2 rounded-xl bg-transparent flex justify-between items-center"
@@ -238,13 +237,12 @@ export const ContactFrom = ({
                 <label htmlFor="phone">Location</label>
                 <Input
                   onChangeInput={(e) => {
-                    if(setCreatePayload && createPayload){
+                    if (setCreatePayload && createPayload) {
                       setCreatePayload({
                         ...createPayload,
                         address: e.target.value,
                       });
                     }
-                    
                   }}
                   variant="user"
                   placeholder="Enter location"
@@ -257,13 +255,12 @@ export const ContactFrom = ({
                 <label htmlFor="phone">Description</label>
                 <Input
                   onChangeInput={(e) => {
-                    if(setCreatePayload && createPayload){
+                    if (setCreatePayload && createPayload) {
                       setCreatePayload({
                         ...createPayload,
                         description: e.target.value,
                       });
                     }
-                   
                   }}
                   variant="user"
                   placeholder="Description"

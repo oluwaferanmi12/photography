@@ -44,11 +44,18 @@ export default function AdminCalendar() {
   const [scheduleDate, setScheduleDate] = useState<Scheduletype[]>([
     { timeSchedule: { from: 0, end: 0 }, day: "Sat" },
   ]);
+  const [editScheduleDate, setEditScheduleDate] = useState<Scheduletype[]>([
+    { timeSchedule: { from: 0, end: 0 }, day: "Sat" },
+  ]);
   const [availability, setAvailability] = useState(60);
   const [calendarLoading, setCalendarLoading] = useState(true);
   const [bookingCalendars, setBookingCalendars] = useState<BookingCalendar[]>(
     []
   );
+  const [title, setTitle] = useState("");
+  const [showEditCalendar, setShowEditCalendar] = useState(false);
+  const [selectedBookingCalendar, setSelectedBookingCalendar] =
+    useState<BookingCalendar>();
   const handleViewDetails = () => {};
 
   const getBookingCalender = async () => {
@@ -73,9 +80,10 @@ export default function AdminCalendar() {
   const handleUpdateObject = (
     index: number,
     type: UpdateType,
-    value: number | boolean
+    value: number | boolean,
+    editType?: boolean
   ) => {
-    const splittedArray = [...scheduleDate];
+    const splittedArray = editType ? [...editScheduleDate] : [...scheduleDate];
     if (type === "checked") {
       splittedArray[index].included = value as boolean;
     } else if (type === "end") {
@@ -86,29 +94,63 @@ export default function AdminCalendar() {
 
     setScheduleDate([...splittedArray]);
   };
-  const handleAddNextObject = (indexClicked: number) => {
+  const handleAddNextObject = (indexClicked: number, editType?: boolean) => {
     // Check the schedule date to resolve the next value, get the last date and then do the needful
     const lastObject = scheduleDate[indexClicked];
-    setScheduleDate((prev) => [
-      ...prev,
-      {
-        day: resolveNextDay(lastObject.day),
-        timeSchedule: { from: 0, end: 0 },
-        included: true,
-      },
-    ]);
+    editType
+      ? setEditScheduleDate((prev) => [
+          ...prev,
+          {
+            day: resolveNextDay(lastObject.day),
+            timeSchedule: { from: 0, end: 0 },
+            included: true,
+          },
+        ])
+      : setScheduleDate((prev) => [
+          ...prev,
+          {
+            day: resolveNextDay(lastObject.day),
+            timeSchedule: { from: 0, end: 0 },
+            included: true,
+          },
+        ]);
   };
 
-  const handleRemove = (index: number) => {
-    const splittedArray = [...scheduleDate];
+  const handleRemove = (index: number, editType?: boolean) => {
+    const splittedArray = editType ? [...editScheduleDate] : [...scheduleDate];
     splittedArray.splice(index, 1);
     setScheduleDate(splittedArray);
+  };
+
+  const handleEditBooking = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const payload = {
+      ...selectedBookingCalendar,
+      dates: editScheduleDate
+        .filter((item) => item.included)
+        .map((item) => ({
+          day: item.day,
+          timeSchedule: [
+            { start: item.timeSchedule.from, end: item.timeSchedule.end },
+          ],
+        })),
+    };
+    // Now w etry to update the slot
+    try {
+      const result = await apiCall(
+        "post",
+        `/Bookings/UpdateSlot/${selectedBookingCalendar?.id}`,
+        payload
+      );
+      getBookingCalender();
+      toast.success("Slot updated");
+    } catch (e) {}
   };
 
   const handleCreateCalendar = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload = {
-      title: " ",
+      title: title,
       description: " ",
       availability: availability,
       dailyLimits: 24,
@@ -118,12 +160,15 @@ export default function AdminCalendar() {
         .filter((item) => item.included)
         .map((item) => ({
           day: item.day,
-          timeSchedule: [item.timeSchedule],
+          timeSchedule: [
+            { start: item.timeSchedule.from, end: item.timeSchedule.end },
+          ],
         })),
     };
     try {
       const result = await apiCall("post", "Bookings/Calendar", payload);
       toast.success("Success");
+      getBookingCalender();
     } catch (e) {}
   };
 
@@ -147,7 +192,9 @@ export default function AdminCalendar() {
     {
       name: "Slot Type",
       cell: (row) => (
-        <div className="text-[#292D32]">{row.availability} hr</div>
+        <div className="text-[#292D32]">
+          {Math.ceil(row.availability / 60)} hr
+        </div>
       ),
     },
     {
@@ -180,17 +227,30 @@ export default function AdminCalendar() {
       cell: (row) => (
         <button
           className="flex cursor-pointer items-center gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
-          onClick={() => handleViewDetails()}
+          onClick={() => {
+            setShowEditCalendar(true);
+            // re organixe the data
+            const spreadData = [...row.dateAndTime];
+            const editedData = spreadData.map((item) => ({
+              day: item.day,
+              timeSchedule: {
+                from: item.timeSchedule[0].start,
+                end: item.timeSchedule[0].end,
+              },
+              included: true,
+            }));
+            setEditScheduleDate(editedData as unknown as Scheduletype[]);
+            setSelectedBookingCalendar(row);
+          }}
         >
-          <span>
-            <Image src={eyeIcon} alt="img" />
-          </span>
-          Details
+          Edit
         </button>
       ),
       right: true,
     },
   ];
+
+
   return (
     <AdminPageLayout
       headerProps={{
@@ -283,10 +343,27 @@ export default function AdminCalendar() {
       <ResponsiveDrawer
         title="Create a booking link"
         open={openCalendarDetails}
-        onClose={() => setOpenCalendarDetails(false)}
+        onClose={() => {
+          setTitle("");
+          setOpenCalendarDetails(false);
+        }}
       >
         <div className="pb-14">
           <form onSubmit={handleCreateCalendar}>
+            <div className="flex flex-col">
+              <p className="text-[#344054] text-base mb-1 font-grotesk-medium">
+                Title
+              </p>
+              <div>
+                <input
+                  value={title}
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                  className="bg-[#F6F3EF] px-4 py-3 text-[#667085] rounded-lg w-full"
+                />
+              </div>
+            </div>
             <div className="flex flex-col">
               <p className="text-[#344054] text-base mb-1 font-grotesk-medium">
                 Timer count
@@ -332,6 +409,91 @@ export default function AdminCalendar() {
 
             <div className="mt-5">
               <AdminSubmitButton text="Create availability" />
+            </div>
+          </form>
+        </div>
+      </ResponsiveDrawer>
+      {/* Edit Booking calendar  */}
+      <ResponsiveDrawer
+        title="Edit booking link"
+        open={showEditCalendar}
+        onClose={() => {
+          setShowEditCalendar(false);
+        }}
+      >
+        <div className="pb-14">
+          <form onSubmit={handleEditBooking}>
+            <div className="flex flex-col">
+              <p className="text-[#344054] text-base mb-1 font-grotesk-medium">
+                Title
+              </p>
+              <div>
+                <input
+                  value={selectedBookingCalendar?.title}
+                  onChange={(e) => {
+                    if (selectedBookingCalendar) {
+                      setSelectedBookingCalendar({
+                        ...selectedBookingCalendar,
+                        title: e.target.value,
+                      });
+                    }
+                    setTitle(e.target.value);
+                  }}
+                  className="bg-[#F6F3EF] px-4 py-3 text-[#667085] rounded-lg w-full"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <p className="text-[#344054] text-base mb-1 font-grotesk-medium">
+                Timer count
+              </p>
+              <div>
+                <select
+                  value={selectedBookingCalendar?.availability}
+                  onChange={(e) => {
+                    if (selectedBookingCalendar) {
+                      setSelectedBookingCalendar({
+                        ...selectedBookingCalendar,
+                        availability: +e.target.value,
+                      });
+                    }
+                  }}
+                  className="bg-[#F6F3EF] px-4 py-3 text-[#667085] rounded-lg w-full"
+                >
+                  <option value={60}>1 hour</option>
+                  <option value={120}>2 hour</option>
+                  <option value={180}>3 hour</option>
+                  <option value={240}>4 hour</option>
+                  <option value={300}>5 hour</option>
+                </select>
+              </div>
+            </div>
+            <div className="mt-4">
+              <p className="text-[#344054]  text-base mb-1 font-grotesk-medium">
+                Date Availability
+              </p>
+              <div className="bg-[#ECECEB] p-4 rounded-lg">
+                <div className="bg-[#FFFFFF] p-4 rounded-lg">
+                  {editScheduleDate.map((item, index, root) => {
+                    return (
+                      <TimeSchedule
+                        handleRemove={handleRemove}
+                        handleUpdate={handleUpdateObject}
+                        key={index}
+                        objectLength={root.length}
+                        schedule={item}
+                        handleAddNextObject={handleAddNextObject}
+                        index={index}
+                        updateType
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-5">
+              <AdminSubmitButton text="Update" />
             </div>
           </form>
         </div>

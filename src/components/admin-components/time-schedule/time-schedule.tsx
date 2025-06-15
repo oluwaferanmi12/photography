@@ -15,17 +15,20 @@ export const TimeSchedule = ({
   objectLength,
   handleUpdate,
   handleRemove,
+  updateType,
 }: {
-  handleAddNextObject: (val: number) => void;
+  handleAddNextObject: (val: number, val_2?: boolean) => void;
   index: number;
   schedule: Scheduletype;
   objectLength: number;
   handleUpdate: (
     val: number,
     type: UpdateType,
-    value: number | boolean
+    value: number | boolean,
+    editType?: boolean
   ) => void;
-  handleRemove: (val: number) => void;
+  handleRemove: (val: number, editType?: boolean) => void;
+  updateType?: boolean;
 }) => {
   return (
     <>
@@ -36,7 +39,12 @@ export const TimeSchedule = ({
               <Image
                 className="cursor-pointer"
                 onClick={() => {
-                  handleUpdate(index, "checked", !schedule.included);
+                  handleUpdate(
+                    index,
+                    "checked",
+                    !schedule.included,
+                    !!updateType
+                  );
                 }}
                 src={schedule.included ? checkedIcon : checkUnfilld}
                 alt=""
@@ -50,8 +58,9 @@ export const TimeSchedule = ({
                 <Image src={timerStart} alt="" />
               </span>
               <input
+                value={schedule.timeSchedule.from}
                 onChange={(e) => {
-                  handleUpdate(index, "start", +e.target.value);
+                  handleUpdate(index, "start", +e.target.value, !!updateType);
                 }}
                 placeholder="From"
                 className="border text-sm font-grotesk-semi-bold p-2 w-[100px] border-[#D0D5DD] rounded-lg"
@@ -62,8 +71,9 @@ export const TimeSchedule = ({
                 <Image src={timerPause} alt="" />
               </span>
               <input
+                value={schedule.timeSchedule.end}
                 onChange={(e) => {
-                  handleUpdate(index, "end", +e.target.value);
+                  handleUpdate(index, "end", +e.target.value, !!updateType);
                 }}
                 placeholder="To"
                 className="border text-sm font-grotesk-semi-bold p-2 w-[100px] border-[#D0D5DD] rounded-lg"
@@ -75,7 +85,7 @@ export const TimeSchedule = ({
           <div className="flex items-center justify-center gap-2 ">
             {objectLength === index + 1 && !!index && (
               <Image
-                onClick={() => handleRemove(index)}
+                onClick={() => handleRemove(index, !!updateType)}
                 className="w-[20px] cursor-pointer h-[20px]"
                 src={cancelIcon}
                 alt=""
@@ -85,7 +95,7 @@ export const TimeSchedule = ({
             {objectLength === index + 1 && (
               <Image
                 onClick={() => {
-                  handleAddNextObject(index);
+                  handleAddNextObject(index, updateType);
                 }}
                 className="w-[20px] cursor-pointer h-[20px]"
                 src={roundedAdd}

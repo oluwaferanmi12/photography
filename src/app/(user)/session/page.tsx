@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HS4 from "@/assets/images/HS4.png";
 import calendar from "@/assets/svgs/calendar_template.svg";
 import { Col, Modal, Row } from "antd";
@@ -13,14 +13,101 @@ import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
 import UserCalendar from "@/components/schedule-date/user-pick-date";
+import { apiCall } from "@/axios/axios";
+import {
+  BookingCalendar,
+  TimeScheduleInterface,
+} from "../../../../interface/interface";
+import moment from "moment-timezone";
+
+export interface CreateBookingInterface {
+  slotId: string;
+  start: string;
+  end: string;
+  email: string;
+  name: string;
+  description: string;
+  packageId: string;
+  phone: string;
+  address: string;
+  timezone: string;
+}
 
 const SessionPage = () => {
   const [selectedService, setSelectedService] = useState("");
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
+  const [slots, setSlots] = useState<BookingCalendar[]>([]);
+  const [selectedSlot, setSelectedSlot] = useState<BookingCalendar>();
+  const [packages, setPackages] = useState();
+  const [selectedDate, setSelectedDate] = useState<Date>();
+  const [payload, setPayload] = useState({
+    slotId: "",
+    start: "",
+    end: "",
+    email: "",
+    name: "",
+    description: "",
+    packageId: "",
+    phone: "",
+    address: "",
+    timezone: "",
+  });
+  const [selectedDuration, setSelectedDuration] =
+    useState<TimeScheduleInterface>();
 
   const handleReserveSpot = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsThankYouModalOpen(true); // Open the thank you modal
+  };
+
+  const getBookingSlots = async () => {
+    try {
+      const result = await apiCall("get", "/Bookings/Calendar");
+      setSlots(result.data);
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    getBookingSlots();
+  }, []);
+
+  useEffect(() => {
+    console.log(selectedDate);
+  }, [selectedDate]);
+
+  function toLocalISOString(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hour = String(date.getHours()).padStart(2, "0");
+    const minute = String(date.getMinutes()).padStart(2, "0");
+    const second = String(date.getSeconds()).padStart(2, "0");
+    return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+  }
+
+  const handleBookSession = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const dateObject = new Date(selectedDate!);
+    console.log(selectedDuration, "Selected duration heree");
+    const startTimestamp = dateObject.setHours(
+      selectedDuration?.start!,
+      0,
+      0,
+      0
+    );
+    const endTimestamp = dateObject.setHours(selectedDuration?.end!, 0, 0, 0);
+    const expectedPayload = { ...payload };
+    expectedPayload.timezone = moment.tz.guess();
+    expectedPayload.slotId = selectedSlot?.id ?? "";
+    expectedPayload.start = toLocalISOString(new Date(startTimestamp));
+    expectedPayload.end = toLocalISOString(new Date(endTimestamp));
+
+    console.log(expectedPayload, "Expected paylod valu ehere");
+
+    try {
+      // Modify the payload to look like what is expected in the backend
+      const result = await apiCall("post", "/Bookings", expectedPayload);
+    } catch (e) {}
   };
 
   return (
@@ -54,7 +141,40 @@ const SessionPage = () => {
           {/* Next Section */}
           <Row gutter={[24, 24]} className="mb-14">
             <Col xs={24} md={12}>
-              <UserCalendar />
+              {/* Now show the sessions available  */}
+              {selectedSlot ? (
+                <UserCalendar
+                  setSelectedDuration={setSelectedDuration}
+                  selectedDuration={selectedDuration!}
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
+                  slot={selectedSlot}
+                />
+              ) : (
+                <div className="bg-[#0E0E0E] p-4 rounded-lg min-h-[200px] border border-[#2D2C2C]">
+                  <p className="text-2xl text-[#F5F5F5] font-grotesk-semi-bold">
+                    Choose Meeting duration
+                  </p>
+                  <div className="flex flex-wrap gap-2 items-center mt-4">
+                    {slots.map((item) => {
+                      return (
+                        <span
+                          key={item.id}
+                          onClick={() => {
+                            setSelectedSlot(item);
+                          }}
+                          className="border cursor-pointer border-[#2D2C2C] text-[#BABABA] rounded-full px-4 py-2"
+                        >
+                          {item.availability} min
+                        </span>
+                      );
+                    })}
+                  </div>
+
+                  <div></div>
+                </div>
+              )}
+
               {/* <span>
                 <Image
                   src={calendar}
@@ -65,6 +185,9 @@ const SessionPage = () => {
             </Col>
             <Col xs={24} md={12}>
               <ContactFrom
+                handleCreateBooking={handleBookSession}
+                setCreatePayload={setPayload}
+                createPayload={payload}
                 selectedService={selectedService}
                 setSelectedService={() => setSelectedService("")}
                 onSubmit={handleReserveSpot}

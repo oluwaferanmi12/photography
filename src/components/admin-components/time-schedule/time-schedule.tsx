@@ -15,7 +15,7 @@ export const TimeSchedule = ({
   objectLength,
   handleUpdate,
   handleRemove,
-  updateType,
+  updateType, 
 }: {
   handleAddNextObject: (val: number, val_2?: boolean) => void;
   index: number;

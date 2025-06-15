@@ -11,6 +11,7 @@ import { Input } from "@/components/inputs/input";
 import Button from "@/components/button/button";
 import { toast } from "sonner";
 import { apiCall } from "@/axios/axios";
+import { baseUrl } from "@/lib/base-url";
 
 const GalleryAccessPage = () => {
   const params = useParams();
@@ -57,9 +58,7 @@ const GalleryAccessPage = () => {
                   <Image
                     src={
                       imgSrc
-                        ? `https://olaitanakinlade.com/${decodeURIComponent(
-                            imgSrc
-                          )}`
+                        ? `${baseUrl + decodeURIComponent(imgSrc)}`
                         : famImg
                     }
                     className="h-[700px] rounded-3xl object-cover"

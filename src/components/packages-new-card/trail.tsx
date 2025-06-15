@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import dummyIcon from "@/assets/svgs/dummy-packages-icon.svg";
 import stoneDot from "@/assets/svgs/stone-dots.svg";
+import { baseUrl } from "@/lib/base-url";
 
 interface ImageType {
   serviceId: string;
@@ -85,7 +86,7 @@ export const Trail: React.FC<TrailProps> = ({
                 {images.map((img, idx) => (
                   <div className="overflow-hidden" key={idx}>
                     <Image
-                      src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                      src={`${baseUrl + img.imageUrl}`}
                       alt={`${title}_image_${idx}`}
                       width={500}
                       height={500}

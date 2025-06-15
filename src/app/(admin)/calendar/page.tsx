@@ -27,7 +27,7 @@ const sampleEvents = [
   },
 ];
 
-type DaysType = "Sat" | "Sun" | "Mon" | "Tue" | "Wed" | "Thur" | "Fri";
+type DaysType = "Saturday" | "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
 export interface Scheduletype {
   timeSchedule: { from: number; end: number };
   day: DaysType;
@@ -40,12 +40,12 @@ export type UpdateType = "start" | "end" | "checked";
 export default function AdminCalendar() {
   const [openCalendarDetails, setOpenCalendarDetails] = useState(false);
   const [activeTab, setActiveTab] = useState("calendar-view");
-  const days: DaysType[] = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thur", "Fri"];
+  const days: DaysType[] = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   const [scheduleDate, setScheduleDate] = useState<Scheduletype[]>([
-    { timeSchedule: { from: 0, end: 0 }, day: "Sat" },
+    { timeSchedule: { from: 0, end: 0 }, day: "Saturday" },
   ]);
   const [editScheduleDate, setEditScheduleDate] = useState<Scheduletype[]>([
-    { timeSchedule: { from: 0, end: 0 }, day: "Sat" },
+    { timeSchedule: { from: 0, end: 0 }, day: "Saturday" },
   ]);
   const [availability, setAvailability] = useState(60);
   const [calendarLoading, setCalendarLoading] = useState(true);
@@ -153,6 +153,7 @@ export default function AdminCalendar() {
       title: title,
       description: " ",
       availability: availability,
+      dateAvailability: 2,
       dailyLimits: 24,
       timezone: moment.tz.guess(),
       autoConfirm: false,

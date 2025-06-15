@@ -7,6 +7,7 @@ import Button from "@/components/button/button";
 import { CreateSlug } from "@/lib/create-slug";
 import { apiCall } from "@/axios/axios";
 import Link from "next/link";
+import { baseUrl } from "@/lib/base-url";
 
 interface PortfolioProps {
   id: string;
@@ -86,7 +87,7 @@ export const ServiceCard = ({
           >
             <div className="w-full relative h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full flex-shrink-0  shadow-md">
               <img
-                src={`https://olaitanakinlade.com/${service.image}`}
+                src={`${baseUrl + service.image}`}
                 alt={service.title}
                 className="object-cover absolute rounded-2xl inset-0 w-full h-full"
               />

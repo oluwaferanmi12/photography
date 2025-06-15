@@ -9,6 +9,7 @@ import { ServiceCard } from "@/components/cascade-card/service-card";
 import Link from "next/link";
 import { apiCall } from "@/axios/axios";
 import { CreateSlug } from "@/lib/create-slug";
+import { baseUrl } from "@/lib/base-url";
 
 interface PortfolioProps {
   id: string;
@@ -129,7 +130,7 @@ export const FourthSectionScroll = () => {
                 className="w-full relative h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full flex-shrink-0 p-6 shadow-md"
               >
                 <img
-                  src={`https://olaitanakinlade.com/${service.image}`}
+                  src={`${baseUrl + service.image}`}
                   alt={CreateSlug(service.title)}
                   className="object-cover absolute inset-0 w-full h-full"
                 />

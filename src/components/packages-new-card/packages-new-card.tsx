@@ -4,6 +4,7 @@ import React from "react";
 import dummyIcon from "@/assets/svgs/dummy-packages-icon.svg";
 import stoneDot from "@/assets/svgs/stone-dots.svg";
 import { PlanCardProps } from "../plans-card/PlanCardProps";
+import { baseUrl } from "@/lib/base-url";
 
 interface ImageType {
   serviceId: string;
@@ -84,7 +85,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                       key={idx}
                     >
                       <img
-                        src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                        src={`${baseUrl + img.imageUrl}`}
                         alt={`${title}_image_${idx}`}
                         className="w-full rounded-[48px] lg:rounded-4xl object-cover"
                       />
@@ -99,7 +100,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                       key={idx}
                     >
                       <img
-                        src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                        src={`${baseUrl + img.imageUrl}`}
                         alt={`${title}_image_${idx}`}
                         className="w-full h-full object-cover rounded-4xl"
                       />
@@ -143,7 +144,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
                 key={idx}
               >
                 <Image
-                  src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                  src={`${baseUrl + img.imageUrl}`}
                   alt={`${title}_image_${idx}`}
                   width={500}
                   height={500}
@@ -177,7 +178,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
                 key={idx}
               >
                 <Image
-                  src={`https://olaitanakinlade.com/${img.imageUrl}`}
+                  src={`${baseUrl + img.imageUrl}`}
                   alt={`${title}_image_${idx}`}
                   width={500}
                   height={500}

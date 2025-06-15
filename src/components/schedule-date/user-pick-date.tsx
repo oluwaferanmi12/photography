@@ -53,6 +53,7 @@ export default function UserCalendar({
             <div
               onClick={() => {
                 setSelectedIndex(index);
+                
                 setSelectedDuration(item.timeSchedule[0]);
               }}
               key={index}

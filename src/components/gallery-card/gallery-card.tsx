@@ -3,6 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import React from "react";
 import galleryLock from "@/assets/svgs/gallery-lock.svg";
 import { useRouter } from "next/navigation";
+import { baseUrl } from "@/lib/base-url";
 
 type GalleryCardProps = {
   cardId: string;
@@ -39,7 +40,7 @@ export const GalleryCard = ({
     >
       <div className="relative h-[250px] rounded-[20px]">
         <img
-          src={`https://olaitanakinlade.com/${imgSrc}`}
+          src={`${baseUrl + imgSrc}`}
           className="min-w-full  object-cover max-h-[250px] rounded-[20px]"
           alt="gallery_img"
         />

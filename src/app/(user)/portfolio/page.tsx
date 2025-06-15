@@ -18,6 +18,7 @@ import { apiCall } from "@/axios/axios";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
+import { baseUrl } from "@/lib/base-url";
 
 interface PortfolioProps {
   id: string;
@@ -179,7 +180,7 @@ const Portfolio = () => {
                     >
                       <span className="w-full overflow-hidden rounded-xl mb-4">
                         <img
-                          src={`https://olaitanakinlade.com/${portfolio.thumbnail}`}
+                          src={`${baseUrl + portfolio.thumbnail}`}
                           alt={portfolio.portfolioName}
                           className="w-full object-cover"
                         />
@@ -217,7 +218,7 @@ const Portfolio = () => {
                     >
                       <span className="w-full overflow-hidden rounded-xl mb-4">
                         <img
-                          src={`https://olaitanakinlade.com/${portfolio.thumbnail}`}
+                          src={`${baseUrl + portfolio.thumbnail}`}
                           alt={portfolio.portfolioName}
                           className="w-full object-cover"
                         />

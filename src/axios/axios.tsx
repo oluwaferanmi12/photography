@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 // Create an instance
 const instance = axios.create({
-  baseURL: "https://olaitanakinlade.com/",
+  baseURL: "https://hni.eastus.cloudapp.azure.com/",
 });
 
 // Create interceptors
@@ -15,9 +15,9 @@ instance.interceptors.request.use(
     const isGalleryRef = window.location.pathname.includes("gallery");
     try {
       details = JSON.parse(localStorage.getItem("userDetails")!);
-        // details = isGalleryRef
-        //   ? JSON.parse(localStorage.getItem("user-gallery-detail")!)
-        //   : JSON.parse(localStorage.getItem("userDetails")!);
+      // details = isGalleryRef
+      //   ? JSON.parse(localStorage.getItem("user-gallery-detail")!)
+      //   : JSON.parse(localStorage.getItem("userDetails")!);
     } catch (e) {
       localStorage.removeItem("userDetails");
     }

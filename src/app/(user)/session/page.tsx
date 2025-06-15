@@ -12,6 +12,7 @@ import rollingImage from "@/assets/svgs/rollingImage.svg";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
+import UserCalendar from "@/components/schedule-date/user-pick-date";
 
 const SessionPage = () => {
   const [selectedService, setSelectedService] = useState("");
@@ -53,13 +54,14 @@ const SessionPage = () => {
           {/* Next Section */}
           <Row gutter={[24, 24]} className="mb-14">
             <Col xs={24} md={12}>
-              <span>
+              <UserCalendar />
+              {/* <span>
                 <Image
                   src={calendar}
                   className="w-full lg:w-[90%]"
                   alt="calendar template"
                 />
-              </span>
+              </span> */}
             </Col>
             <Col xs={24} md={12}>
               <ContactFrom

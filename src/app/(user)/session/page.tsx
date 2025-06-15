@@ -19,6 +19,7 @@ import {
   TimeScheduleInterface,
 } from "../../../../interface/interface";
 import moment from "moment-timezone";
+import { toast } from "sonner";
 
 export interface CreateBookingInterface {
   slotId: string;
@@ -95,18 +96,22 @@ const SessionPage = () => {
       0,
       0
     );
-    const endTimestamp = dateObject.setHours(selectedDuration?.end ?? 0, 0, 0, 0);
+    const endTimestamp = dateObject.setHours(
+      selectedDuration?.end ?? 0,
+      0,
+      0,
+      0
+    );
     const expectedPayload = { ...payload };
     expectedPayload.timezone = moment.tz.guess();
     expectedPayload.slotId = selectedSlot?.id ?? "";
     expectedPayload.start = toLocalISOString(new Date(startTimestamp));
     expectedPayload.end = toLocalISOString(new Date(endTimestamp));
 
-    console.log(expectedPayload, "Expected paylod valu ehere");
-
     try {
       // Modify the payload to look like what is expected in the backend
       const result = await apiCall("post", "/Bookings", expectedPayload);
+      toast.success("Reservation successful");
     } catch (e) {}
   };
 

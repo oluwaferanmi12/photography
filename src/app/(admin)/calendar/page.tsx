@@ -97,23 +97,27 @@ export default function AdminCalendar() {
   const handleAddNextObject = (indexClicked: number, editType?: boolean) => {
     // Check the schedule date to resolve the next value, get the last date and then do the needful
     const lastObject = scheduleDate[indexClicked];
-    editType
-      ? setEditScheduleDate((prev) => [
-          ...prev,
-          {
-            day: resolveNextDay(lastObject.day),
-            timeSchedule: { from: 0, end: 0 },
-            included: true,
-          },
-        ])
-      : setScheduleDate((prev) => [
-          ...prev,
-          {
-            day: resolveNextDay(lastObject.day),
-            timeSchedule: { from: 0, end: 0 },
-            included: true,
-          },
-        ]);
+    if(editType){
+      setEditScheduleDate((prev) => [
+        ...prev,
+        {
+          day: resolveNextDay(lastObject.day),
+          timeSchedule: { from: 0, end: 0 },
+          included: true,
+        },
+      ]);
+    }else{
+      setScheduleDate((prev) => [
+        ...prev,
+        {
+          day: resolveNextDay(lastObject.day),
+          timeSchedule: { from: 0, end: 0 },
+          included: true,
+        },
+      ]);
+    }
+       
+       
   };
 
   const handleRemove = (index: number, editType?: boolean) => {

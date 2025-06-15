@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer/footer";
 import { Row, Col } from "antd";
 import { useParams, useSearchParams } from "next/navigation";
 import { apiCall } from "@/axios/axios";
+import { baseUrl } from "@/lib/base-url";
 
 interface ImagesProps {
   id: string;
@@ -71,7 +72,7 @@ const GallerySinglePage = () => {
                   <Col key={idx} xs={24} lg={12}>
                     <div>
                       <Image
-                        src={`https://olaitanakinlade.com/${item.imageUrl}`}
+                        src={`${baseUrl + item.imageUrl}`}
                         className="w-full h-[500px] min-h-[500px] object-cover"
                         alt="img"
                         width={500}

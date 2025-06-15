@@ -265,6 +265,7 @@ const Portfolio = () => {
         centered
       >
         <ContactFrom
+        
           onSubmit={handleReserveSpot}
           selectedService={selectedService}
           setSelectedService={setSelectedService}

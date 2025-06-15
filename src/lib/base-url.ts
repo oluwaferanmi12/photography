@@ -1,0 +1,1 @@
+export const baseUrl = "https://hni.eastus.cloudapp.azure.com/";

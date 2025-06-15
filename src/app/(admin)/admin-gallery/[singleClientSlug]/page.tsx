@@ -15,6 +15,7 @@ import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUplo
 import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
 import editIcon from "@/assets/svgs/Admin_svgs/admin-edit.svg";
 import { SinglePageTopHeader } from "@/components/admin-components/sideNav/singlepage-top-header/singlepage-top-header";
+import { baseUrl } from "@/lib/base-url";
 
 export default function SingleAdminGallery() {
   const [openUploadClient, setOpenUploadClient] = useState(false);
@@ -29,7 +30,7 @@ export default function SingleAdminGallery() {
   const [thumbnailError, setThumbnailError] = useState("");
   const [activeTab, setActiveTab] = useState("uploads");
   const [resetCounter, setResetCounter] = useState(0);
-  const [hasWatermark, setHasWaterMark] = useState(true)
+  const [hasWatermark, setHasWaterMark] = useState(true);
 
   // SINGLE PACKAGES
   const singleUploadClient = async () => {
@@ -165,7 +166,7 @@ export default function SingleAdminGallery() {
                               <Col key={image.id} xs={24} md={12} lg={8}>
                                 <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
                                   <img
-                                    src={`https://olaitanakinlade.com/${image.imageUrl}`}
+                                    src={` ${baseUrl + image.imageUrl}`}
                                     alt="client image"
                                     className="rounded-3xl object-cover w-full h-full"
                                   />
@@ -225,7 +226,11 @@ export default function SingleAdminGallery() {
                 <div className="flex justify-between items-center">
                   <p className="text-black text-sm">Has Watermark</p>
                   <div>
-                    <Switch checked={hasWatermark} onChange={() => setHasWaterMark(!hasWatermark)} className="custom-switch" />
+                    <Switch
+                      checked={hasWatermark}
+                      onChange={() => setHasWaterMark(!hasWatermark)}
+                      className="custom-switch"
+                    />
                   </div>
                 </div>
               </div>

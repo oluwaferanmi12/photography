@@ -13,6 +13,7 @@ import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
+import { baseUrl } from "@/lib/base-url";
 interface PortfolioProps {
   id: string;
   portfolioName: string;
@@ -176,9 +177,7 @@ const SinglePackages = () => {
       </div>
       <div className=" pb-10 lg:pb-28">
         <InfiniteCarousel
-          images={singlePortfolioData.map(
-            (img) => `https://olaitanakinlade.com/${img.imageUrl}`
-          )}
+          images={singlePortfolioData.map((img) => `${baseUrl + img.imageUrl}`)}
         />
       </div>
       <div className="p-5 lg:p-14 3xl:!px-28">

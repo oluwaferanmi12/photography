@@ -8,35 +8,66 @@ import CustomSelect from "../inputs/custom-select/custom-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { apiCall } from "@/axios/axios";
+import { CreateBookingInterface } from "@/app/(user)/session/page";
 
 export const ContactFrom = ({
   onSubmit,
   selectedService,
   setSelectedService,
+  createPayload,
+  setCreatePayload,
+  handleCreateBooking,
 }: {
   onSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedService: string;
   setSelectedService: (val: string) => void;
+  createPayload?: CreateBookingInterface;
+  setCreatePayload?: (val: CreateBookingInterface) => void;
+  handleCreateBooking?: (e: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<Date | null>(null);
-  const [services, setServices] = useState<
-    { label: string; value: string }[]
+  const [services, setServices] = useState<{ label: string; value: string }[]>(
+    []
+  );
+  const [apiPackages, setApiPackages] = useState<
+    { id: string; title: string }[]
   >([]);
+  const [apiServices, setApiServices] = useState<
+    { id: string; title: string }[]
+  >([]);
+  const [apiServiceSelected, setApiServiceSelected] = useState("");
+  const [packageSelected, setPackageSelected] = useState("");
 
-
-const fetchServices = async () => {
+  const fetchServices = async () => {
     try {
       const res = await apiCall("get", "/Admin/Services");
       const services = res.data.map((service: any) => ({
         label: service.title,
         value: service.id,
       }));
+      setApiServices(res.data);
       setServices(services);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
+
+  const getPackages = async () => {
+    try {
+      const result = await apiCall(
+        "get",
+        `/Admin/Services/packages/${apiServiceSelected}`
+      );
+      setApiPackages(result.data.data.packages);
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    if (apiServiceSelected) {
+      console.log(apiServiceSelected, "Api service selected");
+      getPackages();
+    }
+  }, [apiServiceSelected]);
 
   useEffect(() => {
     fetchServices();
@@ -86,107 +117,155 @@ const fetchServices = async () => {
         </span>
       </div>
       <div className="forms text-[#BABABA]">
-        <form>
+        <form onSubmit={handleCreateBooking}>
           <div className="flex flex-col gap-4">
             <div className="flex gap-5">
               <div className="w-1/2 flex flex-col gap-3">
-                <label htmlFor="firstname">First name</label>
-                <Input variant="user" placeholder="Enter your first name" />
-              </div>
-              <div className="w-1/2 flex flex-col gap-3">
-                <label htmlFor="lastname">Last name</label>
-                <Input variant="user" placeholder="Enter your last name" />
+                <label htmlFor="firstname">Full Name</label>
+                <Input
+                  onChangeInput={(e) => {
+                    if (setCreatePayload && createPayload) {
+                      setCreatePayload({
+                        ...createPayload,
+                        name: e.target.value,
+                      });
+                    }
+                  }}
+                  variant="user"
+                  placeholder="Enter your first name"
+                />
               </div>
             </div>
             {/* Email */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="email">Email address</label>
-              <Input variant="user" placeholder="Example@email.com" />
+              <Input
+                onChangeInput={(e) => {
+                  if (setCreatePayload && createPayload) {
+                    setCreatePayload({
+                      ...createPayload,
+                      email: e.target.value,
+                    });
+                  }
+                }}
+                variant="user"
+                placeholder="Example@email.com"
+              />
             </div>
             {/* Phone Number */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Phone number</label>
-              <Input variant="user" placeholder="+1 999-999-999" />
+              <Input
+                onChangeInput={(e) => {
+                  if (createPayload && setCreatePayload) {
+                    setCreatePayload({
+                      ...createPayload,
+                      phone: e.target.value,
+                    });
+                  }
+                }}
+                variant="user"
+                placeholder="+1 999-999-999"
+              />
             </div>
             {/* Services */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Select Services</label>
-              <CustomSelect
-                variant="user"
-                selectData={services}
-                defaultOption="Select services"
-                selectValue={selectedService}
-                setSelectedValue={setSelectedService}
-              />
+              <div>
+                <select
+                  onChange={(e) => {
+                    console.log("E", e.target.value);
+                    setApiServiceSelected(e.target.value);
+                    // setCreatePayload({
+                    //   ...createPayload,
+                    //   : e.target.value,
+                    // });
+                  }}
+                  value={apiServiceSelected}
+                  className="w-full border border-[#575252] text-left text-[#BABABA] px-5 py-2 rounded-xl bg-transparent flex justify-between items-center"
+                >
+                  <option value={""}>Select Services</option>
+                  {apiServices.map((item) => {
+                    return (
+                      <option value={item.id} key={item.id}>
+                        {item.title}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </div>
             {/* Package */}
             <div className="w-full flex flex-col gap-3">
               <label htmlFor="phone">Select package</label>
-              <CustomSelect
+              <div>
+                <select
+                  onChange={(e) => {
+                    setPackageSelected(e.target.value);
+                    if (setCreatePayload && createPayload) {
+                      setCreatePayload({
+                        ...createPayload,
+                        packageId: e.target.value,
+                      });
+                    }
+                  }}
+                  value={packageSelected}
+                  className="w-full border border-[#575252] text-left text-[#BABABA] px-5 py-2 rounded-xl bg-transparent flex justify-between items-center"
+                >
+                  <option value={""}>Select package</option>
+                  {apiPackages.map((item) => {
+                    return (
+                      <option value={item.id} key={item.id}>
+                        {item.title}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              {/* <CustomSelect
                 variant="user"
                 selectValue={selectedPackage}
                 setSelectedValue={setSelectedPackage}
                 defaultOption="Select package"
                 selectData={packages}
-              />
+              /> */}
             </div>
             {/* DATE AND PREFERRED TIME */}
             <div className="flex gap-5">
-              <div className="w-1/2 flex flex-col gap-3">
-                <label htmlFor="phone">Date</label>
-                {/* <div className="border border-[#575252] rounded-xl px-5 py-2">
-                  <input
-                    type="date"
-                    className="w-full bg-transparent text-[#BABABA] placeholder:text-[#BABABA] focus:outline-none appearance-none"
-                    placeholder="Select date"
-                  />
-                </div> */}
-                <div className="border border-[#575252] rounded-xl px-5 py-2 w-full">
-                  <DatePicker
-                    selected={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
-                    dateFormat="MMMM d, yyyy"
-                    placeholderText="Select date"
-                    className="w-full bg-transparent text-[#BABABA] placeholder:text-[#BABABA] focus:outline-none"
-                    calendarClassName="bg-[#1a1a1a] text-[#BABABA] rounded-xl border-[#575252]"
-                  />
-                </div>
-              </div>
-              <div className="w-1/2 flex flex-col gap-3">
-                <label htmlFor="phone">Time</label>
-                {/* <div className="border-[#575252] placeholder:text-[#BABABA] border px-5 py-2 rounded-xl ">
-                  <input
-                    type="time"
-                    className="bg-transparent focus:outline-0  w-full"
-                    placeholder="Select time"
-                  />
-                </div> */}
-                <div className="border border-[#575252] rounded-xl px-5 py-2 w-full">
-                  <DatePicker
-                    selected={selectedTime}
-                    onChange={(date) => setSelectedTime(date)}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={15}
-                    timeCaption="Time"
-                    dateFormat="h:mm aa"
-                    placeholderText="Select time"
-                    className="w-full bg-transparent text-[#BABABA] placeholder:text-[#BABABA] focus:outline-none"
-                    calendarClassName="bg-[#1a1a1a] text-[#BABABA] rounded-xl border-[#575252]"
-                  />
-                </div>
+              {/* Location */}
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="phone">Location</label>
+                <Input
+                  onChangeInput={(e) => {
+                    if (setCreatePayload && createPayload) {
+                      setCreatePayload({
+                        ...createPayload,
+                        address: e.target.value,
+                      });
+                    }
+                  }}
+                  variant="user"
+                  placeholder="Enter location"
+                />
               </div>
             </div>
-            {/* Location */}
-            <div className="w-full flex flex-col gap-3">
-              <label htmlFor="phone">Location</label>
-              <CustomSelect
-                variant="user"
-                selectValue={selectedPackage}
-                setSelectedValue={setSelectedPackage}
-                defaultOption="Provide your location"
-                selectData={locations}
-              />
+            <div className="flex gap-5">
+              {/* Location */}
+              <div className="w-full flex flex-col gap-3">
+                <label htmlFor="phone">Description</label>
+                <Input
+                  onChangeInput={(e) => {
+                    if (setCreatePayload && createPayload) {
+                      setCreatePayload({
+                        ...createPayload,
+                        description: e.target.value,
+                      });
+                    }
+                  }}
+                  variant="user"
+                  placeholder="Description"
+                />
+              </div>
             </div>
           </div>
           <div className="mt-8 lg:w-1/2">
@@ -195,7 +274,7 @@ const fetchServices = async () => {
               widthFull
               size="large"
               text="Reserve a spot"
-              onClick={onSubmit}
+              // onClick={onSubmit}
             />
           </div>
         </form>

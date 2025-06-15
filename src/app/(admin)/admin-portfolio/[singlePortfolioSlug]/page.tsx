@@ -14,6 +14,7 @@ import galleryThumbnail from "@/assets/svgs/Admin_svgs/single_gallery_thumbnail.
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
 import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
 import { SinglePageTopHeader } from "@/components/admin-components/sideNav/singlepage-top-header/singlepage-top-header";
+import { baseUrl } from "@/lib/base-url";
 
 export default function SingleUploadPortfolio() {
   const [openUploadPortfolio, setOpenUploadPortfolio] = useState(false);
@@ -86,7 +87,7 @@ export default function SingleUploadPortfolio() {
       toast.success("Upload successful");
       setThumbnails([]);
       setOpenUploadPortfolio(false);
-      setResetCounter(prev => prev + 1);
+      setResetCounter((prev) => prev + 1);
       GetSinglePortfolio();
     } catch (error) {
       console.error(error);
@@ -98,7 +99,10 @@ export default function SingleUploadPortfolio() {
 
   const handleRemoveImage = async (imageId: string) => {
     try {
-      await apiCall("post", `/Portfolio/Images/Remove/${portfolioId}/${imageId}`)
+      await apiCall(
+        "post",
+        `/Portfolio/Images/Remove/${portfolioId}/${imageId}`
+      );
 
       toast.success("Image Deleted successfully");
       GetSinglePortfolio();
@@ -144,7 +148,9 @@ export default function SingleUploadPortfolio() {
                         <Col key={image.id} xs={24} md={12} lg={8}>
                           <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
                             <img
-                              src={`https://olaitanakinlade.com/${image.imageUrl}`}
+                              src={`${
+                                baseUrl + image.imageUrl
+                              }`}
                               alt="portfolio image"
                               className="rounded-3xl object-cover w-full h-full"
                             />

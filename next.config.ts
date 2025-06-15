@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "olaitanakinlade.com",
+        hostname: "hni.eastus.cloudapp.azure.com",
         port: "",
         pathname: "/**",
       },

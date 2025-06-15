@@ -21,9 +21,9 @@ export const ContactFrom = ({
   onSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedService: string;
   setSelectedService: (val: string) => void;
-  createPayload: CreateBookingInterface;
-  setCreatePayload: (val: CreateBookingInterface) => void;
-  handleCreateBooking: (e: React.FormEvent<HTMLFormElement>) => void;
+  createPayload ?: CreateBookingInterface;
+  setCreatePayload ?: (val: CreateBookingInterface) => void;
+  handleCreateBooking ?: (e: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -124,10 +124,13 @@ export const ContactFrom = ({
                 <label htmlFor="firstname">Full Name</label>
                 <Input
                   onChangeInput={(e) => {
-                    setCreatePayload({
-                      ...createPayload,
-                      name: e.target.value,
-                    });
+                    if(setCreatePayload && createPayload){
+                      setCreatePayload({
+                        ...createPayload,
+                        name: e.target.value,
+                      });
+                    }
+                    
                   }}
                   variant="user"
                   placeholder="Enter your first name"
@@ -139,10 +142,13 @@ export const ContactFrom = ({
               <label htmlFor="email">Email address</label>
               <Input
                 onChangeInput={(e) => {
-                  setCreatePayload({
-                    ...createPayload,
-                    email: e.target.value,
-                  });
+                  if(setCreatePayload && createPayload){
+                    setCreatePayload({
+                      ...createPayload,
+                      email: e.target.value,
+                    });
+                  }
+                  
                 }}
                 variant="user"
                 placeholder="Example@email.com"
@@ -153,10 +159,13 @@ export const ContactFrom = ({
               <label htmlFor="phone">Phone number</label>
               <Input
                 onChangeInput={(e) => {
-                  setCreatePayload({
-                    ...createPayload,
-                    phone: e.target.value,
-                  });
+                  if(createPayload && setCreatePayload){
+                    setCreatePayload({
+                      ...createPayload,
+                      phone: e.target.value,
+                    });
+                  }
+                  
                 }}
                 variant="user"
                 placeholder="+1 999-999-999"
@@ -229,10 +238,13 @@ export const ContactFrom = ({
                 <label htmlFor="phone">Location</label>
                 <Input
                   onChangeInput={(e) => {
-                    setCreatePayload({
-                      ...createPayload,
-                      address: e.target.value,
-                    });
+                    if(setCreatePayload && createPayload){
+                      setCreatePayload({
+                        ...createPayload,
+                        address: e.target.value,
+                      });
+                    }
+                    
                   }}
                   variant="user"
                   placeholder="Enter location"
@@ -245,10 +257,13 @@ export const ContactFrom = ({
                 <label htmlFor="phone">Description</label>
                 <Input
                   onChangeInput={(e) => {
-                    setCreatePayload({
-                      ...createPayload,
-                      description: e.target.value,
-                    });
+                    if(setCreatePayload && createPayload){
+                      setCreatePayload({
+                        ...createPayload,
+                        description: e.target.value,
+                      });
+                    }
+                   
                   }}
                   variant="user"
                   placeholder="Description"

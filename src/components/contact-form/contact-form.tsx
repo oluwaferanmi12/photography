@@ -63,8 +63,19 @@ export const ContactFrom = ({
   };
 
   useEffect(() => {
+    const urlParam = new URLSearchParams(window.location.search);
+    const packageId = urlParam.get("packageId");
+    const serviceId = urlParam.get("serviceId");
+    if (apiServices.length) {
+      setApiServiceSelected(serviceId ?? "");
+    }
+    if (apiPackages.length) {
+      setPackageSelected(packageId ?? "");
+    }
+  }, [apiPackages, apiServices]);
+
+  useEffect(() => {
     if (apiServiceSelected) {
-      console.log(apiServiceSelected, "Api service selected");
       getPackages();
     }
   }, [apiServiceSelected]);
@@ -174,7 +185,6 @@ export const ContactFrom = ({
               <div>
                 <select
                   onChange={(e) => {
-                    console.log("E", e.target.value);
                     setApiServiceSelected(e.target.value);
                     // setCreatePayload({
                     //   ...createPayload,

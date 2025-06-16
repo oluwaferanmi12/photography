@@ -149,6 +149,7 @@ export default function SinglePackage() {
                           planAmount={pkg.price}
                           planDescription={pkg.description}
                           planActiveness={pkg.active}
+                          packages={pkg}
                         />
                       </Col>
                     ))}

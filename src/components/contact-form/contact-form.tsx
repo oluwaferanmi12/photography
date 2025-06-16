@@ -67,10 +67,10 @@ export const ContactFrom = ({
     const packageId = urlParam.get("packageId");
     const serviceId = urlParam.get("serviceId");
     if (apiServices.length) {
-      setApiServiceSelected(serviceId!);
+      setApiServiceSelected(serviceId ?? "");
     }
     if (apiPackages.length) {
-      setPackageSelected(packageId!);
+      setPackageSelected(packageId ?? "");
     }
   }, [apiPackages, apiServices]);
 

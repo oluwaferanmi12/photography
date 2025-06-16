@@ -202,6 +202,7 @@ const SinglePackages = () => {
                           planType={pkg.title}
                           planAmount={pkg.price}
                           planDescription={pkg.description}
+                          packages={pkg}
                         />
                       </Col>
                     ))}

@@ -6,6 +6,7 @@ import icon from "@/assets/svgs/plans-icons.svg";
 import arrowRight from "@/assets/svgs/right_arrow.svg";
 import { Switch } from "antd";
 import stoneDot from "@/assets/svgs/stone-dots.svg";
+import { useRouter } from "next/navigation";
 
 type planCardInterface = {
   planType?: string;
@@ -13,6 +14,7 @@ type planCardInterface = {
   planDescription?: string;
   variant?: "user" | "admin";
   planActiveness?: boolean;
+  packages?: any;
 };
 
 export const PlanCardProps: React.FC<planCardInterface> = ({
@@ -21,7 +23,9 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   planDescription,
   planActiveness,
   variant = "user",
+  packages,
 }) => {
+  const router = useRouter();
   return (
     <div>
       <div
@@ -95,8 +99,15 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
         {/* Ending Buttons */}
         {variant === "user" ? (
           <div className="relative mt-5 inline-block p-[1.5px] rounded-full bg-gradient-to-br from-white/40 via-white/5 to-white/10 shadow-[0px_2px_16px_0px_rgba(248,248,248,0.06)]">
-            <button className="px-6 py-2 rounded-full bg-black/30 backdrop-blur-md text-white font-semibold h-full">
-              Get started
+            <button
+              onClick={() => {
+                router.push(
+                  `/session?serviceId=${packages.serviceId}&packageId=${packages.id}`
+                );
+              }}
+              className="px-6 py-2 rounded-full bg-black/30 backdrop-blur-md text-white font-semibold h-full"
+            >
+              Book now
             </button>
           </div>
         ) : (

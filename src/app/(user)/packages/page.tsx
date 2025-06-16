@@ -134,6 +134,8 @@ const Portfolio = () => {
                 name: pkg.title,
                 price: pkg.price,
                 description: pkg.description,
+                id: pkg.id,
+                serviceId: pkg.serviceId
               })),
               status: true,
               lastUpdated: new Date(service.lastModified).toDateString(),
@@ -199,7 +201,16 @@ const Portfolio = () => {
                   : ""
               }`}
             >
-              {[...services, ...services, ...services, ...services, ...services, ...services, ...services, ...services,].map((service, index) => {
+              {[
+                ...services,
+                ...services,
+                ...services,
+                ...services,
+                ...services,
+                ...services,
+                ...services,
+                ...services,
+              ].map((service, index) => {
                 const iconKey = service.serviceName.toLowerCase();
                 const icon = serviceIcons[iconKey];
 
@@ -228,7 +239,7 @@ const Portfolio = () => {
           </div>
 
           {/* NEW CARDS */}
-          <div className="pb-20  lg:pb-36 flex flex-col gap-20 ">
+          <div className="pb-20 lg:pb-36 flex flex-col gap-20 ">
             {services.map((service) =>
               service.packages.length <= 1 ? (
                 <PackageCardWithOneImage
@@ -237,6 +248,7 @@ const Portfolio = () => {
                   description={service.description}
                   images={service.images || []}
                   packages={service.packages}
+                  service={service}
                 />
               ) : (
                 <PackageCardWithMultipleImages
@@ -245,6 +257,7 @@ const Portfolio = () => {
                   description={service.description}
                   images={service.images || []}
                   packages={service.packages}
+                  service={service}
                 />
               )
             )}
@@ -253,7 +266,7 @@ const Portfolio = () => {
       </div>
       <ParallaxScrollax />
       <FooterImages />
-      <Footer /> 
+      <Footer />
       {/* MODAL */}
       <Modal
         open={isSessionFormModalOpen}

@@ -17,6 +17,7 @@ interface PackagesProps {
   description?: string;
   images: ImageType[];
   packages: { name: string; price: number; description: string }[];
+  service?: any;
 }
 
 export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
@@ -24,7 +25,9 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
   description,
   images,
   packages,
+  service,
 }) => {
+  // console.log(service, "Service value hereee");
   return (
     <UserPackagesLayout>
       <div>
@@ -68,6 +71,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                         // planType={pkg.name}
                         // planAmount={pkg.price}
                         planDescription={pkg.description}
+                        packages={pkg}
                       />
                     </Col>
                   ))}
@@ -164,6 +168,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
                 planType={pkg.name}
                 planAmount={pkg.price}
                 planDescription={pkg.description}
+                packages={pkg}
               />
             </Col>
           ))}

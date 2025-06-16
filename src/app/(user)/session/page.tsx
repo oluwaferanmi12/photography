@@ -76,9 +76,7 @@ const SessionPage = () => {
     getBookingSlots();
   }, []);
 
-  useEffect(() => {
-    console.log(selectedDate);
-  }, [selectedDate]);
+
 
   function toLocalISOString(date: Date): string {
     const year = date.getFullYear();
@@ -93,7 +91,6 @@ const SessionPage = () => {
   const handleBookSession = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const dateObject = new Date(selectedDate!);
-    console.log(selectedDuration, "Selected duration heree");
     const startTimestamp = dateObject.setHours(
       selectedDuration?.start ?? 0,
       0,
@@ -119,6 +116,8 @@ const SessionPage = () => {
       setIsThankYouModalOpen(true);
     } catch (e) {}
   };
+
+
 
   return (
     <div>

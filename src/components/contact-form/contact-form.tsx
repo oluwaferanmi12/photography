@@ -66,10 +66,10 @@ export const ContactFrom = ({
     const urlParam = new URLSearchParams(window.location.search);
     const packageId = urlParam.get("packageId");
     const serviceId = urlParam.get("serviceId");
-    if (apiServices.length) {
+    if (apiServices.length && serviceId) {
       setApiServiceSelected(serviceId ?? "");
     }
-    if (apiPackages.length) {
+    if (apiPackages.length && packageId) {
       setPackageSelected(packageId ?? "");
     }
   }, [apiPackages, apiServices]);

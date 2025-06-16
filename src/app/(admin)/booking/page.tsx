@@ -122,8 +122,6 @@ export default function Booking() {
             : row.bookings[0].status === 1
             ? "Paid"
             : "Not paid"}
-
-          {row.bookings[0].status === 3 ? "Success" : "Pending"}
         </div>
       ),
     },
@@ -171,7 +169,9 @@ export default function Booking() {
   const handleConfirmBooking = async (id: string) => {
     try {
       setConfirmLoading(true);
-      const result = await apiCall("post", `/Bookings/confirm/${id}`);
+      const result = await apiCall("post", `/Bookings/confirm/${id}`, {
+        meetingLink: " ",
+      });
       toast.success("Reservation Booked");
     } catch (e) {
     } finally {
@@ -204,7 +204,7 @@ export default function Booking() {
                 <div className="flex flex-col gap-2">
                   <p className="text-[12px] text-white">Service booked</p>
                   <p className="text-lg font-semibold">
-                    {selectedBooking.package}
+                    {selectedBooking.service}
                   </p>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -302,7 +302,8 @@ export default function Booking() {
               </div>
             </div>
             <div className="flex justify-between items-center gap-2">
-              {selectedBooking.status === 2 && (
+              {(selectedBooking.status === 2 ||
+                selectedBooking.status === 0) && (
                 <button
                   disabled={confirmLoading}
                   onClick={() => {

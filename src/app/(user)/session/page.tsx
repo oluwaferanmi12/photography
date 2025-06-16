@@ -65,6 +65,10 @@ const SessionPage = () => {
     try {
       const result = await apiCall("get", "/Bookings/Calendar");
       setSlots(result.data);
+      const defaultObject = result.data.find(
+        (item) => item.id === "c9faa70f-d02f-4b8d-9696-4b7c8e94a54c"
+      );
+      setSelectedSlot(defaultObject);
     } catch (e) {}
   };
 
@@ -112,6 +116,7 @@ const SessionPage = () => {
       // Modify the payload to look like what is expected in the backend
       const result = await apiCall("post", "/Bookings", expectedPayload);
       toast.success("Reservation successful");
+      setIsThankYouModalOpen(true);
     } catch (e) {}
   };
 

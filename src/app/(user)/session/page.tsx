@@ -66,7 +66,7 @@ const SessionPage = () => {
       const result = await apiCall("get", "/Bookings/Calendar");
       setSlots(result.data);
       const defaultObject = result.data.find(
-        (item) => item.id === "c9faa70f-d02f-4b8d-9696-4b7c8e94a54c"
+        (item) => item.id === "f59418e8-441f-4e3a-a362-a92082555497"
       );
       setSelectedSlot(defaultObject);
     } catch (e) {}

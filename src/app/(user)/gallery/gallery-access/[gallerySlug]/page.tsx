@@ -74,7 +74,7 @@ const GalleryAccessPage = () => {
                     {" "}
                     {pageName}{" "}
                   </h3>
-                  <div className="py-8 px-10 w-full max-w-[80%] rounded-[20px] bg-[#282824]">
+                  <div className="py-8 px-10 w-full lg:w-[80%] rounded-[20px] bg-[#282824]">
                     <div className="flex gap-3 place-items-center">
                       <span>
                         <Image src={loginFormIcon} alt="bas" />

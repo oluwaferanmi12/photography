@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Footer } from "@/components/footer/footer";
-import { Row, Col } from "antd";
+import { Row, Col, Grid } from "antd";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import famImg from "@/assets/images/gallery_famImg.jpg";
 import loginFormIcon from "@/assets/svgs/login-form-icon.svg";
@@ -24,6 +24,10 @@ const GalleryAccessPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [buttonLoading, setButtonLoading] = useState(false);
+  const { useBreakpoint } = Grid;
+  const screens = useBreakpoint();
+
+
 
   const handleAccessLogin = async () => {
     // do validation
@@ -31,7 +35,6 @@ const GalleryAccessPage = () => {
     //   toast.error("All Fields are required");
     //   return;
     // }
-
     try {
       // const result = await apiCall("post", "Account/login", {
       //   password,
@@ -44,7 +47,7 @@ const GalleryAccessPage = () => {
       const encodedId = encodeURIComponent(id || "");
 
       router.push(`/gallery/${singlePageSlug}?id=${encodedId}`);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   return (
@@ -52,7 +55,7 @@ const GalleryAccessPage = () => {
       <div className="flex flex-col gap-14 justify-center items-center ">
         <div className="flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28 !py-28">
           <div className="my-14 relative w-full">
-            <Row gutter={[32, 32]}>
+            <Row align={screens.lg ? 'middle' : 'top'} gutter={[32, 32]}>
               <Col xs={{ span: 24, order: 2 }} lg={{ span: 10, order: 1 }}>
                 <div>
                   <Image

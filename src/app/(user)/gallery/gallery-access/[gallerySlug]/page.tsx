@@ -52,7 +52,7 @@ const GalleryAccessPage = () => {
       <div className="flex flex-col gap-14 justify-center items-center ">
         <div className="flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28 !py-28">
           <div className="my-14 relative w-full">
-            <Row align={"middle"} gutter={[32, 32]}>
+            <Row gutter={[32, 32]}>
               <Col xs={{ span: 24, order: 2 }} lg={{ span: 10, order: 1 }}>
                 <div>
                   <Image

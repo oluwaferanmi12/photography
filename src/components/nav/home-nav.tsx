@@ -4,10 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import brandLogo from "@/assets/svgs/new-logo.svg";
-import instagramIcon from "@/assets/svgs/navbar-instagram.svg";
-import facebookIcon from "@/assets/svgs/navbar-facebook.svg";
-import tiktokIcon from "@/assets/svgs/navbar-tiktok.svg";
+// import instagramIcon from "@/assets/svgs/navbar-instagram.svg";
+// import facebookIcon from "@/assets/svgs/navbar-facebook.svg";
+// import tiktokIcon from "@/assets/svgs/navbar-tiktok.svg";
+import youtubeIcon from "@/assets/svgs/youtubeIcon.svg";
+import tiktokIcon from "@/assets/svgs/tiktokIcon.svg";
+import linkedinIcon from "@/assets/svgs/linkedinIcon.svg";
+import instagramIcon from "@/assets/svgs/instagramIcon.svg";
+import facebookIcon from "@/assets/svgs/facebookIcon.svg";
 import Button from "../button/button";
+
 
 export const HomeNav = () => {
   const pathname = usePathname();
@@ -51,11 +57,10 @@ export const HomeNav = () => {
                 <div className="relative" key={item.navTitle}>
                   <Link href={item.navLink}>
                     <p
-                      className={`cursor-pointer font-grotesk-medium text-base ${
-                        pathname.startsWith(item.navLink)
+                      className={`cursor-pointer font-grotesk-medium text-base ${pathname.startsWith(item.navLink)
                           ? "text-white font-bold"
                           : "text-[#FAFAFA]"
-                      }`}
+                        }`}
                     >
                       {item.navTitle}
                     </p>
@@ -74,7 +79,24 @@ export const HomeNav = () => {
             <Button variant="filled" link="/session" text="Book a session" />
           </div>
         </div>
-        <div className="flex gap-8 items-center">
+        <div className="flex gap-3 items-center">
+          <Link href='https://www.youtube.com/@Shotbyportable'>
+            <Image className="cursor-pointer" src={youtubeIcon} alt="social_links" />
+          </Link>
+          <Link href='https://www.tiktok.com/@shotbyportable'>
+            <Image className="cursor-pointer" src={tiktokIcon} alt="social_links" />
+          </Link>
+          <Link href='https://www.linkedin.com/in/victoria-akinade-402944175/'>
+            <Image className="cursor-pointer" src={linkedinIcon} alt="social_links" />
+          </Link>
+          <Link href='https://www.instagram.com/shotbyportable/'>
+            <Image className="cursor-pointer" src={instagramIcon} alt="social_links" />
+          </Link>
+          <Link href='https://www.facebook.com/victhoria.hajarlah'>
+            <Image className="cursor-pointer" src={facebookIcon} alt="social_links" />
+          </Link>
+        </div>
+        {/* <div className="flex gap-8 items-center">
           <Link href="https://www.instagram.com/shotbyportable/">
             <Image
               className="cursor-pointer"
@@ -96,7 +118,7 @@ export const HomeNav = () => {
               alt="social_links"
             />
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

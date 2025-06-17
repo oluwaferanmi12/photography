@@ -120,7 +120,7 @@ export const MobileNav = () => {
                 alt="social_links"
               />
             </Link>
-            <Link href="">
+            <Link href="https://www.youtube.com/@Shotbyportable">
               <Image
                 className="cursor-pointer"
                 src={youtube}

@@ -128,7 +128,7 @@ export const Footer = () => {
                   Follow us
                 </h2>
                 <div className="flex gap-3 items-center">
-                  <Link href=''>
+                  <Link href='https://www.youtube.com/@Shotbyportable'>
                     <Image className="cursor-pointer" src={youtubeIcon} alt="social_links" />
                   </Link>
                   <Link href='https://www.tiktok.com/@shotbyportable'>

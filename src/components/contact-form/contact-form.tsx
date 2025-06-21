@@ -17,6 +17,7 @@ export const ContactFrom = ({
   createPayload,
   setCreatePayload,
   handleCreateBooking,
+  setShowTerms,
 }: {
   onSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedService: string;
@@ -24,6 +25,7 @@ export const ContactFrom = ({
   createPayload?: CreateBookingInterface;
   setCreatePayload?: (val: CreateBookingInterface) => void;
   handleCreateBooking?: (e: React.FormEvent<HTMLFormElement>) => void;
+  setShowTerms?: (val: boolean) => void;
 }) => {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -282,7 +284,15 @@ export const ContactFrom = ({
             </div>
             <p className="text-[#D9C9AE]">
               By reserving a spot, you agree to our service terms regarding
-              cancellations, deposits, and late arrivals. <span className="text-white cursor-pointer">Read here</span>
+              cancellations, deposits, and late arrivals.{" "}
+              <span
+                className="text-white cursor-pointer"
+                onClick={() => {
+                  setShowTerms && setShowTerms(true);
+                }}
+              >
+                Read here
+              </span>
             </p>
           </div>
           <div className="mt-8 lg:w-1/2">

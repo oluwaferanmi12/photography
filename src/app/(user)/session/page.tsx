@@ -15,6 +15,7 @@ import { FooterImages } from "@/components/footer-images/footer-images";
 import UserCalendar from "@/components/schedule-date/user-pick-date";
 import { apiCall } from "@/axios/axios";
 import {
+  BookedSlotInterface,
   BookingCalendar,
   TimeScheduleInterface,
 } from "../../../../interface/interface";
@@ -37,11 +38,12 @@ export interface CreateBookingInterface {
 const SessionPage = () => {
   const [selectedService, setSelectedService] = useState("");
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
-  const [showTerms , setShowTerms] = useState(true)
+  const [showTerms , setShowTerms] = useState(false)
   const [slots, setSlots] = useState<BookingCalendar[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<BookingCalendar>();
   const [packages, setPackages] = useState();
   const [selectedDate, setSelectedDate] = useState<Date>();
+  const [bookedSlots, setBookedSlots] = useState<BookedSlotInterface[]>([])
   const [payload, setPayload] = useState({
     slotId: "",
     start: "",
@@ -66,6 +68,7 @@ const SessionPage = () => {
     try {
       const result = await apiCall("get", "/Bookings/Calendar");
       setSlots(result.data);
+      setBookedSlots(result.data.bookedSlots)
       const defaultObject = result.data.find(
         (item) => item.id === "f59418e8-441f-4e3a-a362-a92082555497"
       );
@@ -201,6 +204,7 @@ const SessionPage = () => {
                 selectedService={selectedService}
                 setSelectedService={() => setSelectedService("")}
                 onSubmit={handleReserveSpot}
+                setShowTerms={setShowTerms}
               />
             </Col>
           </Row>

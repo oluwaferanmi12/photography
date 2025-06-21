@@ -13,7 +13,7 @@ import moment from "moment-timezone";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
 import Image from "next/image";
-import { BookingCalendar } from "../../../../interface/interface";
+import { BookingCalendar, Scheduletype } from "../../../../interface/interface";
 import DataTable, { TableColumn } from "react-data-table-component";
 import eyeIcon from "@/assets/svgs/eyeIcon.svg";
 
@@ -27,42 +27,77 @@ const sampleEvents = [
   },
 ];
 
-type DaysType = "Saturday" | "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
-export interface Scheduletype {
-  timeSchedule: { from: number; end: number };
-  day: DaysType;
-  included?: boolean;
-}
-
+export type DaysType =
+  | "Saturday"
+  | "Sunday"
+  | "Monday"
+  | "Tuesday"
+  | "Wednesday"
+  | "Thursday"
+  | "Friday";
+// export interface Scheduletype {
+//   timeSchedule: { start: number; end: number };
+//   day: DaysType;
+// }
 
 export type UpdateType = "start" | "end" | "checked";
 
 export default function AdminCalendar() {
   const [openCalendarDetails, setOpenCalendarDetails] = useState(false);
   const [activeTab, setActiveTab] = useState("calendar-view");
-  const days: DaysType[] = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  const days: DaysType[] = [
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+  ];
   const [scheduleDate, setScheduleDate] = useState<Scheduletype[]>([
-    { timeSchedule: { from: 0, end: 0 }, day: "Saturday" },
+    { timeSchedule: [{ start: 0, end: 0 }], day: "Saturday" },
   ]);
   const [editScheduleDate, setEditScheduleDate] = useState<Scheduletype[]>([
-    { timeSchedule: { from: 0, end: 0 }, day: "Saturday" },
+    { timeSchedule: [{ start: 0, end: 0 }], day: "Saturday" },
   ]);
   const [availability, setAvailability] = useState(60);
   const [calendarLoading, setCalendarLoading] = useState(true);
-  const [bookingCalendars, setBookingCalendars] = useState<BookingCalendar[]>(
-    []
-  );
+  const [bookingCalendars, setBookingCalendars] = useState<BookingCalendar>();
+
   const [title, setTitle] = useState("");
   const [showEditCalendar, setShowEditCalendar] = useState(false);
+  const [schedules, setSchedules] = useState<Scheduletype>();
   const [selectedBookingCalendar, setSelectedBookingCalendar] =
     useState<BookingCalendar>();
   const handleViewDetails = () => {};
+
+  const handleCanResolveNext = (currentDay: DaysType) => {
+    const daysFilled = bookingCalendars?.dateAndTime.map((item) => item.day);
+    // check if the current day has the correct next value and if it does return true
+    const currentDayIndex = daysFilled?.indexOf(currentDay);
+    if (currentDay === "Friday") return true;
+    if (daysFilled && (currentDayIndex ?? 0) + 1 < daysFilled?.length) {
+      const currentDay = daysFilled[currentDayIndex ?? 0];
+      const dayNextValue = daysFilled[(currentDayIndex ?? 0) + 1];
+      // Now i need to find the position from the original day
+      const realDayIndex = days.indexOf(currentDay as DaysType);
+      // we need to get the correct day and see if it matches the correct one that should go with it
+      //  now check if it's not the last day in the days
+
+      if (days[realDayIndex + 1] === dayNextValue) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  };
 
   const getBookingCalender = async () => {
     try {
       setCalendarLoading(true);
       const result = await apiCall("get", "/Bookings/Calendar");
-      setBookingCalendars(result.data);
+      setBookingCalendars(result.data.calendar);
+      // arrange scheudle
     } catch (e) {
     } finally {
       setCalendarLoading(false);
@@ -83,73 +118,71 @@ export default function AdminCalendar() {
     value: number | boolean,
     editType?: boolean
   ) => {
-    const splittedArray = editType ? [...editScheduleDate] : [...scheduleDate];
-    if (type === "checked") {
-      splittedArray[index].included = value as boolean;
-    } else if (type === "end") {
-      splittedArray[index].timeSchedule.end = value as number;
-    } else if (type === "start") {
-      splittedArray[index].timeSchedule.from = value as number;
-    }
+    const existingBookedArray = { ...bookingCalendars! };
 
-    setScheduleDate([...splittedArray]);
-  };
-  const handleAddNextObject = (indexClicked: number, editType?: boolean) => {
-    // Check the schedule date to resolve the next value, get the last date and then do the needful
-    const lastObject = scheduleDate[indexClicked];
-    if(editType){
-      setEditScheduleDate((prev) => [
-        ...prev,
-        {
-          day: resolveNextDay(lastObject.day),
-          timeSchedule: { from: 0, end: 0 },
-          included: true,
-        },
-      ]);
-    }else{
-      setScheduleDate((prev) => [
-        ...prev,
-        {
-          day: resolveNextDay(lastObject.day),
-          timeSchedule: { from: 0, end: 0 },
-          included: true,
-        },
-      ]);
+    if (existingBookedArray.dateAndTime) {
+      if (type === "checked") {
+        // splittedArray[index].included = value as boolean;
+      } else if (type === "end") {
+        existingBookedArray.dateAndTime[index].timeSchedule[0].end =
+          value as number;
+      } else if (type === "start") {
+        existingBookedArray.dateAndTime[index].timeSchedule[0].start =
+          value as number;
+      }
     }
-       
-       
+    setBookingCalendars(existingBookedArray);
+  };
+  const handleAddNextObject = (
+    dayClicked: DaysType,
+    indexClicked: number,
+    editType?: boolean
+  ) => {
+    // Check the schedule date to resolve the next value, get the last date and then do the needful
+    const splittedObject = { ...bookingCalendars! };
+
+    // if this function is triggered then it definitely means something is missing after , so all i have to do is just to basically get the next value
+    // update object
+    splittedObject.dateAndTime = [
+      ...splittedObject.dateAndTime.slice(0, indexClicked + 1),
+      { day: resolveNextDay(dayClicked), timeSchedule: [{ start: 0, end: 0 }] },
+      ...splittedObject.dateAndTime.slice(indexClicked + 1),
+    ];
+    setBookingCalendars({ ...splittedObject });
   };
 
   const handleRemove = (index: number, editType?: boolean) => {
-    const splittedArray = editType ? [...editScheduleDate] : [...scheduleDate];
-    splittedArray.splice(index, 1);
-    setScheduleDate(splittedArray);
+    const splittedObject = { ...bookingCalendars! };
+    if (splittedObject.dateAndTime) {
+      splittedObject.dateAndTime.splice(index, 1);
+    }
+    setBookingCalendars(splittedObject);
   };
 
-  const handleEditBooking = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const payload = {
-      ...selectedBookingCalendar,
-      dates: editScheduleDate
-        .filter((item) => item.included)
-        .map((item) => ({
-          day: item.day,
-          timeSchedule: [
-            { start: item.timeSchedule.from, end: item.timeSchedule.end },
-          ],
-        })),
-    };
-    // Now w etry to update the slot
-    try {
-      const result = await apiCall(
-        "post",
-        `/Bookings/UpdateSlot/${selectedBookingCalendar?.id}`,
-        payload
-      );
-      getBookingCalender();
-      toast.success("Slot updated");
-    } catch (e) {}
-  };
+  // const handleEditBooking = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const payload = {
+  //     ...selectedBookingCalendar,
+  //     dates: editScheduleDate
+  //       .filter((item) => item.included)
+  //       .map((item) => ({
+  //         day: item.day,
+  //         timeSchedule: [
+  //           { start: item.timeSchedule.from, end: item.timeSchedule.end },
+  //         ],
+  //       })),
+  //   };
+  //   // Now w etry to update the slot
+  //   try {
+  //     const result = await apiCall(
+  //       "post",
+  //       `/Bookings/UpdateSlot/${selectedBookingCalendar?.id}`,
+  //       payload
+  //     );
+  //     getBookingCalender();
+  //     toast.success("Slot updated");
+  //   } catch (e) {}
+  // };
 
   const handleCreateCalendar = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -161,14 +194,14 @@ export default function AdminCalendar() {
       dailyLimits: 24,
       timezone: moment.tz.guess(),
       autoConfirm: false,
-      dates: scheduleDate
-        .filter((item) => item.included)
-        .map((item) => ({
-          day: item.day,
-          timeSchedule: [
-            { start: item.timeSchedule.from, end: item.timeSchedule.end },
-          ],
-        })),
+      // dates: scheduleDate
+      //   .filter((item) => item.included)
+      //   .map((item) => ({
+      //     day: item.day,
+      //     timeSchedule: [
+      //       { start: item.timeSchedule.from, end: item.timeSchedule.end },
+      //     ],
+      //   })),
     };
     try {
       const result = await apiCall("post", "Bookings/Calendar", payload);
@@ -255,7 +288,6 @@ export default function AdminCalendar() {
     },
   ];
 
-
   return (
     <AdminPageLayout
       headerProps={{
@@ -319,7 +351,7 @@ export default function AdminCalendar() {
       </div> */}
 
       <div className="p-4">
-        <DataTable
+        {/* <DataTable
           columns={columns}
           data={bookingCalendars}
           pagination
@@ -341,7 +373,7 @@ export default function AdminCalendar() {
               },
             },
           }}
-        />
+        /> */}
       </div>
 
       {/* CALENDER DETAILS DRAWER */}
@@ -355,7 +387,7 @@ export default function AdminCalendar() {
       >
         <div className="pb-14">
           <form onSubmit={handleCreateCalendar}>
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <p className="text-[#344054] text-base mb-1 font-grotesk-medium">
                 Title
               </p>
@@ -368,36 +400,17 @@ export default function AdminCalendar() {
                   className="bg-[#F6F3EF] px-4 py-3 text-[#667085] rounded-lg w-full"
                 />
               </div>
-            </div>
-            <div className="flex flex-col">
-              <p className="text-[#344054] text-base mb-1 font-grotesk-medium">
-                Timer count
-              </p>
-              <div>
-                <select
-                  value={availability}
-                  onChange={(e) => {
-                    setAvailability(+e.target.value);
-                  }}
-                  className="bg-[#F6F3EF] px-4 py-3 text-[#667085] rounded-lg w-full"
-                >
-                  <option value={60}>1 hour</option>
-                  <option value={120}>2 hour</option>
-                  <option value={180}>3 hour</option>
-                  <option value={240}>4 hour</option>
-                  <option value={300}>5 hour</option>
-                </select>
-              </div>
-            </div>
+            </div> */}
             <div className="mt-4">
               <p className="text-[#344054]  text-base mb-1 font-grotesk-medium">
                 Date Availability
               </p>
               <div className="bg-[#ECECEB] p-4 rounded-lg">
                 <div className="bg-[#FFFFFF] p-4 rounded-lg">
-                  {scheduleDate.map((item, index, root) => {
+                  {bookingCalendars?.dateAndTime.map((item, index, root) => {
                     return (
                       <TimeSchedule
+                        handleCanResolveNext={handleCanResolveNext}
                         handleRemove={handleRemove}
                         handleUpdate={handleUpdateObject}
                         key={index}
@@ -405,6 +418,7 @@ export default function AdminCalendar() {
                         schedule={item}
                         handleAddNextObject={handleAddNextObject}
                         index={index}
+                        bookingCalendars={bookingCalendars}
                       />
                     );
                   })}
@@ -419,7 +433,7 @@ export default function AdminCalendar() {
         </div>
       </ResponsiveDrawer>
       {/* Edit Booking calendar  */}
-      <ResponsiveDrawer
+      {/* <ResponsiveDrawer
         title="Edit booking link"
         open={showEditCalendar}
         onClose={() => {
@@ -446,31 +460,6 @@ export default function AdminCalendar() {
                   }}
                   className="bg-[#F6F3EF] px-4 py-3 text-[#667085] rounded-lg w-full"
                 />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <p className="text-[#344054] text-base mb-1 font-grotesk-medium">
-                Timer count
-              </p>
-              <div>
-                <select
-                  value={selectedBookingCalendar?.availability}
-                  onChange={(e) => {
-                    if (selectedBookingCalendar) {
-                      setSelectedBookingCalendar({
-                        ...selectedBookingCalendar,
-                        availability: +e.target.value,
-                      });
-                    }
-                  }}
-                  className="bg-[#F6F3EF] px-4 py-3 text-[#667085] rounded-lg w-full"
-                >
-                  <option value={60}>1 hour</option>
-                  <option value={120}>2 hour</option>
-                  <option value={180}>3 hour</option>
-                  <option value={240}>4 hour</option>
-                  <option value={300}>5 hour</option>
-                </select>
               </div>
             </div>
             <div className="mt-4">
@@ -502,7 +491,7 @@ export default function AdminCalendar() {
             </div>
           </form>
         </div>
-      </ResponsiveDrawer>
+      </ResponsiveDrawer> */}
     </AdminPageLayout>
   );
 }

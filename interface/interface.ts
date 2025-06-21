@@ -1,10 +1,17 @@
+import { DaysType } from "@/app/(admin)/calendar/page";
+
 export interface TimeScheduleInterface {
     start: number;
     end: number;
 }
 
 export interface DatesTimeInterface {
-    day: string,
+    day: DaysType,
+    timeSchedule: TimeScheduleInterface[]
+}
+
+export interface Scheduletype {
+    day: DaysType,
     timeSchedule: TimeScheduleInterface[]
 }
 
@@ -49,4 +56,14 @@ export interface GetBookingInterface {
 export interface MainBookingInterface {
     date: string;
     bookings: GetBookingInterface[]
+}
+
+export interface BookedSlotInterface {
+    date: string,
+    bookings: SlotBookingInterface[]
+}
+
+export interface SlotBookingInterface {
+    start: string,
+    end: string
 }

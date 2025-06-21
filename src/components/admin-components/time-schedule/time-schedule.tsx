@@ -6,7 +6,8 @@ import cancelIcon from "@/assets/svgs/cancel-x-icon.svg";
 import roundedAdd from "@/assets/svgs/rounded-add-icon.svg";
 import { Col, Row } from "antd";
 import Image from "next/image";
-import { Scheduletype, UpdateType } from "@/app/(admin)/calendar/page";
+import { DaysType, UpdateType } from "@/app/(admin)/calendar/page";
+import { BookingCalendar, Scheduletype } from "../../../../interface/interface";
 
 export const TimeSchedule = ({
   handleAddNextObject,
@@ -15,9 +16,11 @@ export const TimeSchedule = ({
   objectLength,
   handleUpdate,
   handleRemove,
-  updateType, 
+  updateType,
+  bookingCalendars,
+  handleCanResolveNext,
 }: {
-  handleAddNextObject: (val: number, val_2?: boolean) => void;
+  handleAddNextObject: (day: DaysType, val: number, val_2?: boolean) => void;
   index: number;
   schedule: Scheduletype;
   objectLength: number;
@@ -29,27 +32,28 @@ export const TimeSchedule = ({
   ) => void;
   handleRemove: (val: number, editType?: boolean) => void;
   updateType?: boolean;
+  bookingCalendars: BookingCalendar;
+  handleCanResolveNext: (val: DaysType) => boolean;
 }) => {
   return (
     <>
       <Row className="mb-3" align={"middle"} justify={"center"}>
         <Col xs={20}>
           <div className="flex items-center justify-between">
-            <span>
+            {/* <span>
               <Image
                 className="cursor-pointer"
                 onClick={() => {
                   handleUpdate(
                     index,
                     "checked",
-                    !schedule.included,
                     !!updateType
                   );
                 }}
                 src={schedule.included ? checkedIcon : checkUnfilld}
                 alt=""
               />
-            </span>
+            </span> */}
             <p className="text-[#344054] text-sm font-grotesk-semi-bold">
               {schedule.day}
             </p>
@@ -58,7 +62,9 @@ export const TimeSchedule = ({
                 <Image src={timerStart} alt="" />
               </span>
               <input
-                value={schedule.timeSchedule.from}
+                value={
+                  bookingCalendars.dateAndTime[index].timeSchedule[0].start
+                }
                 onChange={(e) => {
                   handleUpdate(index, "start", +e.target.value, !!updateType);
                 }}
@@ -71,7 +77,7 @@ export const TimeSchedule = ({
                 <Image src={timerPause} alt="" />
               </span>
               <input
-                value={schedule.timeSchedule.end}
+                value={bookingCalendars.dateAndTime[index].timeSchedule[0].end}
                 onChange={(e) => {
                   handleUpdate(index, "end", +e.target.value, !!updateType);
                 }}
@@ -83,7 +89,7 @@ export const TimeSchedule = ({
         </Col>
         <Col xs={4}>
           <div className="flex items-center justify-center gap-2 ">
-            {objectLength === index + 1 && !!index && (
+            {!!index && (
               <Image
                 onClick={() => handleRemove(index, !!updateType)}
                 className="w-[20px] cursor-pointer h-[20px]"
@@ -92,10 +98,11 @@ export const TimeSchedule = ({
               />
             )}
 
-            {objectLength === index + 1 && (
+            {/* Now , i need to determine if i can add something else to the day , like say adding a date in between the objects */}
+            {!handleCanResolveNext(schedule.day) && (
               <Image
                 onClick={() => {
-                  handleAddNextObject(index, updateType);
+                  handleAddNextObject(schedule.day, index, updateType);
                 }}
                 className="w-[20px] cursor-pointer h-[20px]"
                 src={roundedAdd}

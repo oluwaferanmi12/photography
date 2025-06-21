@@ -16,7 +16,9 @@ export const ContactBanner = () => {
           Contact me and let’s create a special one for you
         </p>
         <div className="lg:w-1/2">
-          <Button variant="filled" widthFull text="Contact me" size="large" />
+          <Button onClick={() => {
+            window.location.href = "mailto:bookings@shotbyportable.com";
+          }} variant="filled" widthFull text="Contact me" size="large" />
         </div>
       </div>
 

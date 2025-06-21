@@ -3,7 +3,7 @@ import bottomActive from "@/assets/svgs/nav-rectangle.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import brandLogo from "@/assets/svgs/new-logo.svg";
+import brandLogo from "@/assets/svgs/footer-brand-icon.svg";
 // import instagramIcon from "@/assets/svgs/navbar-instagram.svg";
 // import facebookIcon from "@/assets/svgs/navbar-facebook.svg";
 // import tiktokIcon from "@/assets/svgs/navbar-tiktok.svg";

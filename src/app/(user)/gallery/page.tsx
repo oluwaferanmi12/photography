@@ -32,8 +32,7 @@ const Gallery = () => {
   const fetchClient = async () => {
     try {
       const clientRes = await apiCall("get", "/Gallery");
-      console.log(clientRes);
-
+      
       const formattedData: ClientProps[] = clientRes.data.data.gallery.map(
         (item: any) => {
           const date = new Date(item.dateModified);

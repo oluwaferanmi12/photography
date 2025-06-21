@@ -257,6 +257,9 @@ export const ContactFrom = ({
                   variant="user"
                   placeholder="Enter location"
                 />
+                <p className="text-sm text-[#FFFFFF] font-grotesk-regular">
+                  Location outside of gta or Toronto may attract extra charges
+                </p>
               </div>
             </div>
             <div className="flex gap-5">
@@ -277,6 +280,10 @@ export const ContactFrom = ({
                 />
               </div>
             </div>
+            <p className="text-[#D9C9AE]">
+              By reserving a spot, you agree to our service terms regarding
+              cancellations, deposits, and late arrivals. <span className="text-white cursor-pointer">Read here</span>
+            </p>
           </div>
           <div className="mt-8 lg:w-1/2">
             <Button

@@ -31,16 +31,16 @@ const GalleryAccessPage = () => {
 
   const handleAccessLogin = async () => {
     // do validation
-    // if (!email || !password) {
-    //   toast.error("All Fields are required");
-    //   return;
-    // }
+    if (!email || !password) {
+      toast.error("All Fields are required");
+      return;
+    }
     try {
-      // const result = await apiCall("post", "Account/login", {
-      //   password,
-      //   userName: email,
-      // });
-      // localStorage.setItem("user-gallery-detail", JSON.stringify(result.data));
+      const result = await apiCall("post", "Account/login", {
+        password,
+        userName: email,
+      });
+      localStorage.setItem("user-gallery-detail", JSON.stringify(result.data));
       const singlePageSlug = encodeURIComponent(
         pageName.toLowerCase().replace(/ /g, "-")
       );

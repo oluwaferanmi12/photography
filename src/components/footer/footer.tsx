@@ -42,7 +42,8 @@ const footerLinks = [
     linksProps: [
       {
         footNavTitle: "Contact us",
-        footNavLink: "",
+        footNavLink: "mailto:bookings@shotbyportable.com",
+       
       },
       {
         footNavTitle: "Terms and condition",
@@ -113,12 +114,18 @@ export const Footer = () => {
                   </h2>
                   {section.linksProps.map((footerItems, idx) => (
                     <span key={idx}>
-                      <Link
-                        className="!text-white/60 text-base"
-                        href={`${footerItems.footNavLink}`}
-                      >
-                        {footerItems.footNavTitle}
-                      </Link>
+                      {footerItems.footNavTitle.includes("contact") ? (
+                        <a href="mailto:bookings@shotbyportable.com">
+                          {footerItems.footNavTitle}
+                        </a>
+                      ) : (
+                        <Link
+                          className="!text-white/60 text-base"
+                          href={`${footerItems.footNavLink}`}
+                        >
+                          {footerItems.footNavTitle}
+                        </Link>
+                      )}
                     </span>
                   ))}
                 </div>
@@ -128,20 +135,40 @@ export const Footer = () => {
                   Follow us
                 </h2>
                 <div className="flex gap-3 items-center">
-                  <Link href='https://www.youtube.com/@Shotbyportable'>
-                    <Image className="cursor-pointer" src={youtubeIcon} alt="social_links" />
+                  <Link href="https://www.youtube.com/@Shotbyportable">
+                    <Image
+                      className="cursor-pointer"
+                      src={youtubeIcon}
+                      alt="social_links"
+                    />
                   </Link>
-                  <Link href='https://www.tiktok.com/@shotbyportable'>
-                    <Image className="cursor-pointer" src={tiktokIcon} alt="social_links" />
+                  <Link href="https://www.tiktok.com/@shotbyportable">
+                    <Image
+                      className="cursor-pointer"
+                      src={tiktokIcon}
+                      alt="social_links"
+                    />
                   </Link>
-                  <Link href='https://www.linkedin.com/in/victoria-akinade-402944175/'>
-                    <Image className="cursor-pointer" src={linkedinIcon} alt="social_links" />
+                  <Link href="https://www.linkedin.com/in/victoria-akinade-402944175/">
+                    <Image
+                      className="cursor-pointer"
+                      src={linkedinIcon}
+                      alt="social_links"
+                    />
                   </Link>
-                  <Link href='https://www.instagram.com/shotbyportable/'>
-                    <Image className="cursor-pointer" src={instagramIcon} alt="social_links" />
+                  <Link href="https://www.instagram.com/shotbyportable/">
+                    <Image
+                      className="cursor-pointer"
+                      src={instagramIcon}
+                      alt="social_links"
+                    />
                   </Link>
-                  <Link href='https://www.facebook.com/victhoria.hajarlah'>
-                    <Image className="cursor-pointer" src={facebookIcon} alt="social_links" />
+                  <Link href="https://www.facebook.com/victhoria.hajarlah">
+                    <Image
+                      className="cursor-pointer"
+                      src={facebookIcon}
+                      alt="social_links"
+                    />
                   </Link>
                 </div>
               </div>

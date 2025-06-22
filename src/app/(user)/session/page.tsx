@@ -67,19 +67,51 @@ const SessionPage = () => {
   };
 
   // New handler for day selection
+  // const handleDaySelect = (dayName: string, times: number[]) => {
+  //   setSelectedDayName(dayName);
+  //   setAvailableTimes(times);
+
+  //   // Auto-select first time if available
+  //   if (times.length > 0 && !selectedDuration) {
+  //     setSelectedDuration({
+  //       start: times[0],
+  //       end: times[0] + 1
+  //     });
+  //   }
+  // };
+
+
+  const isTimeBooked = (date: Date, hour: number): boolean => {
+    if (!bookedSlots.length) return false;
+
+    const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    const bookingsForDate = bookedSlots.find(slot => slot.date === dateString);
+
+    if (!bookingsForDate) return false;
+
+    return bookingsForDate.bookings.some(booking => {
+      const bookingHour = new Date(booking.start).getHours();
+      return bookingHour === hour;
+    });
+  };
+
   const handleDaySelect = (dayName: string, times: number[]) => {
     setSelectedDayName(dayName);
     setAvailableTimes(times);
 
-    // Auto-select first time if available
-    if (times.length > 0 && !selectedDuration) {
-      setSelectedDuration({
-        start: times[0],
-        end: times[0] + 1
-      });
+    if (times.length > 0 && !selectedDuration && selectedDate) {
+      const firstAvailableTime = times.find(time =>
+        !isTimeBooked(selectedDate, time)
+      );
+
+      if (firstAvailableTime !== undefined) {
+        setSelectedDuration({
+          start: firstAvailableTime,
+          end: firstAvailableTime + 1
+        });
+      }
     }
   };
-
 
 
 
@@ -186,7 +218,6 @@ const SessionPage = () => {
                 onDaySelect={handleDaySelect}
               />
 
-              {/* Time slot selection moved here */}
               {selectedDate && (
                 <div className="bg-[#0E0E0E] p-4 rounded-lg border border-[#2D2C2C] mt-4">
                   {availableTimes.length > 0 ? (
@@ -195,22 +226,30 @@ const SessionPage = () => {
                         Available times for {selectedDayName}:
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {availableTimes.map((time) => (
-                          <button
-                            type="button"
-                            key={time}
-                            onClick={() => setSelectedDuration({
-                              start: time,
-                              end: time + 1
-                            })}
-                            className={`px-4 cursor-pointer py-2 rounded-lg border ${selectedDuration?.start === time
-                                ? "bg-[#D9C9AE] text-[#151515] border-[#D9C9AE]"
-                                : "border-[#2D2C2C] text-[#BABABA] hover:bg-[#2D2C2C]"
-                              }`}
-                          >
-                            {time.toString().padStart(2, '0')}:00
-                          </button>
-                        ))}
+                        {availableTimes.map((time) => {
+                          const isBooked = isTimeBooked(selectedDate, time);
+
+                          return (
+                            <button
+                              type="button"
+                              key={time}
+                              onClick={() => !isBooked && setSelectedDuration({
+                                start: time,
+                                end: time + 1
+                              })}
+                              disabled={isBooked}
+                              className={`px-8 py-2 rounded-lg border ${selectedDuration?.start === time
+                                  ? "bg-[#D9C9AE] text-[#151515] border-[#D9C9AE]"
+                                  : isBooked
+                                    ? "border-[#2D2C2C] text-[#2D2C2C] cursor-not-allowed"
+                                    : "border-[#2D2C2C] cursor-pointer text-[#BABABA] hover:bg-[#2D2C2C]"
+                                }`}
+                            >
+                              {time.toString().padStart(2, '0')}:00
+                              {isBooked && <span className="text-xs block">Booked</span>}
+                            </button>
+                          );
+                        })}
                       </div>
                     </>
                   ) : (

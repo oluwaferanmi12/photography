@@ -12,7 +12,9 @@ instance.interceptors.request.use(
   (config) => {
     // get token from localStorage
     let details: { token: string } = { token: "" };
-    const isGalleryRef = window.location.pathname.includes("gallery");
+    const isGalleryRef =
+      window.location.pathname.includes("gallery") &&
+      !window.location.pathname.includes("admin");
     try {
       // details = JSON.parse(localStorage.getItem("userDetails")!);
       details = isGalleryRef

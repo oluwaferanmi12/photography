@@ -38,12 +38,14 @@ export interface CreateBookingInterface {
 const SessionPage = () => {
   const [selectedService, setSelectedService] = useState("");
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
-  const [showTerms , setShowTerms] = useState(false)
+  const [showTerms, setShowTerms] = useState(false)
   const [slots, setSlots] = useState<BookingCalendar[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<BookingCalendar>();
   const [packages, setPackages] = useState();
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [bookedSlots, setBookedSlots] = useState<BookedSlotInterface[]>([])
+  const [availableTimes, setAvailableTimes] = useState<number[]>([]);
+  const [selectedDayName, setSelectedDayName] = useState("");
   const [payload, setPayload] = useState({
     slotId: "",
     start: "",
@@ -64,21 +66,21 @@ const SessionPage = () => {
     setIsThankYouModalOpen(true); // Open the thank you modal
   };
 
-  const getBookingSlots = async () => {
-    try {
-      const result = await apiCall("get", "/Bookings/Calendar");
-      setSlots(result.data);
-      setBookedSlots(result.data.bookedSlots)
-      const defaultObject = result.data.find(
-        (item) => item.id === "f59418e8-441f-4e3a-a362-a92082555497"
-      );
-      setSelectedSlot(defaultObject);
-    } catch (e) {}
+  // New handler for day selection
+  const handleDaySelect = (dayName: string, times: number[]) => {
+    setSelectedDayName(dayName);
+    setAvailableTimes(times);
+
+    // Auto-select first time if available
+    if (times.length > 0 && !selectedDuration) {
+      setSelectedDuration({
+        start: times[0],
+        end: times[0] + 1
+      });
+    }
   };
 
-  useEffect(() => {
-    getBookingSlots();
-  }, []);
+
 
 
 
@@ -92,33 +94,56 @@ const SessionPage = () => {
     return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
   }
 
+
+
+
+  const getBookingSlots = async () => {
+    try {
+      const result = await apiCall("get", "/Bookings/Calendar");
+      console.log("API Response:", result.data);
+
+      // Make sure we're accessing calendar property correctly
+      if (result.data?.calendar) {
+        setSlots([result.data.calendar]); // Wrap in array to match expected type
+        setBookedSlots(result.data.bookedSlots || []);
+        setSelectedSlot(result.data.calendar);
+      }
+    } catch (e) {
+      console.error("Error fetching booking slots:", e);
+    }
+  };
+
+  useEffect(() => {
+    getBookingSlots();
+  }, []);
+
+  // Update the handleBookSession function to use calendar data
   const handleBookSession = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const dateObject = new Date(selectedDate!);
-    const startTimestamp = dateObject.setHours(
-      selectedDuration?.start ?? 0,
-      0,
-      0,
-      0
-    );
-    const endTimestamp = dateObject.setHours(
-      selectedDuration?.end ?? 0,
-      0,
-      0,
-      0
-    );
-    const expectedPayload = { ...payload };
-    expectedPayload.timezone = moment.tz.guess();
-    expectedPayload.slotId = selectedSlot?.id ?? "";
-    expectedPayload.start = toLocalISOString(new Date(startTimestamp));
-    expectedPayload.end = toLocalISOString(new Date(endTimestamp));
+    if (!selectedDate || !selectedDuration) {
+      toast.error("Please select a date and time");
+      return;
+    }
 
     try {
-      // Modify the payload to look like what is expected in the backend
-      const result = await apiCall("post", "/Bookings", expectedPayload);
+      const dateObj = new Date(selectedDate);
+      dateObj.setHours(selectedDuration.start, 0, 0, 0);
+
+      const payloads = {
+        ...payload,
+        slotId: selectedSlot?.id || "",
+        start: toLocalISOString(dateObj),
+        end: toLocalISOString(new Date(dateObj.setHours(selectedDuration.end, 0, 0, 0))),
+        timezone: moment.tz.guess()
+      };
+
+      const result = await apiCall("post", "/Bookings", payloads);
       toast.success("Reservation successful");
       setIsThankYouModalOpen(true);
-    } catch (e) {}
+    } catch (error) {
+      toast.error("Booking failed");
+      console.error("Booking error:", error);
+    }
   };
 
 
@@ -126,7 +151,7 @@ const SessionPage = () => {
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
-        <div className="px-5 lg:px-14 3xl:!px-28 flex flex-col gap-14">
+        <div className="px-5 lg:px-14 3xl:!px-28 py-14 flex flex-col gap-14">
           <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
             <div className="flex flex-col gap-8 lg:w-1/2">
               <h2 className="text-7xl">Book a</h2>
@@ -154,47 +179,49 @@ const SessionPage = () => {
           {/* Next Section */}
           <Row gutter={[24, 24]} className="mb-14">
             <Col xs={24} md={12}>
-              {/* Now show the sessions available  */}
-              {selectedSlot ? (
-                <UserCalendar
-                  setSelectedDuration={setSelectedDuration}
-                  selectedDuration={selectedDuration!}
-                  selectedDate={selectedDate}
-                  setSelectedDate={setSelectedDate}
-                  slot={selectedSlot}
-                />
-              ) : (
-                <div className="bg-[#0E0E0E] p-4 rounded-lg min-h-[200px] border border-[#2D2C2C]">
-                  <p className="text-2xl text-[#F5F5F5] font-grotesk-semi-bold">
-                    Choose Meeting duration
-                  </p>
-                  <div className="flex flex-wrap gap-2 items-center mt-4">
-                    {/* {slots && slots.map((item) => {
-                      return (
-                        <span
-                          key={item.id}
-                          onClick={() => {
-                            setSelectedSlot(item);
-                          }}
-                          className="border cursor-pointer border-[#2D2C2C] text-[#BABABA] rounded-full px-4 py-2"
-                        >
-                          {item.availability} min
-                        </span>
-                      );
-                    })} */}
-                  </div>
+              <UserCalendar
+                slot={selectedSlot}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                onDaySelect={handleDaySelect}
+              />
 
-                  <div></div>
+              {/* Time slot selection moved here */}
+              {selectedDate && (
+                <div className="bg-[#0E0E0E] p-4 rounded-lg border border-[#2D2C2C] mt-4">
+                  {availableTimes.length > 0 ? (
+                    <>
+                      <h3 className="text-lg font-medium mb-2 text-[#F5F5F5]">
+                        Available times for {selectedDayName}:
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {availableTimes.map((time) => (
+                          <button
+                            type="button"
+                            key={time}
+                            onClick={() => setSelectedDuration({
+                              start: time,
+                              end: time + 1
+                            })}
+                            className={`px-4 cursor-pointer py-2 rounded-lg border ${selectedDuration?.start === time
+                                ? "bg-[#D9C9AE] text-[#151515] border-[#D9C9AE]"
+                                : "border-[#2D2C2C] text-[#BABABA] hover:bg-[#2D2C2C]"
+                              }`}
+                          >
+                            {time.toString().padStart(2, '0')}:00
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-[#BABABA]">
+                      {selectedDayName
+                        ? `No available times for ${selectedDayName}`
+                        : "Please select a date"}
+                    </p>
+                  )}
                 </div>
               )}
-
-              {/* <span>
-                <Image
-                  src={calendar}
-                  className="w-full lg:w-[90%]"
-                  alt="calendar template"
-                />
-              </span> */}
             </Col>
             <Col xs={24} md={12}>
               <ContactFrom

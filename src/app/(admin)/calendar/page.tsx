@@ -159,30 +159,35 @@ export default function AdminCalendar() {
     setBookingCalendars(splittedObject);
   };
 
-  // const handleEditBooking = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const payload = {
-  //     ...selectedBookingCalendar,
-  //     dates: editScheduleDate
-  //       .filter((item) => item.included)
-  //       .map((item) => ({
-  //         day: item.day,
-  //         timeSchedule: [
-  //           { start: item.timeSchedule.from, end: item.timeSchedule.end },
-  //         ],
-  //       })),
-  //   };
-  //   // Now w etry to update the slot
-  //   try {
-  //     const result = await apiCall(
-  //       "post",
-  //       `/Bookings/UpdateSlot/${selectedBookingCalendar?.id}`,
-  //       payload
-  //     );
-  //     getBookingCalender();
-  //     toast.success("Slot updated");
-  //   } catch (e) {}
-  // };
+  const handleEditBooking = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const payload = {
+      title: bookingCalendars?.title,
+      description: bookingCalendars?.description,
+      availability: bookingCalendars?.availability,
+      dateAvailability: bookingCalendars?.dateAvailability,
+      dates: bookingCalendars?.dateAndTime.map((item) => ({
+        day: item.day,
+        timeSchedule: [
+          { start: item.timeSchedule[0].start, end: item.timeSchedule[0].end },
+        ],
+      })),
+      dailyLimits: bookingCalendars?.dailyLimits,
+      timezone: bookingCalendars?.timezone,
+      properties: "",
+      autoConfirm: bookingCalendars?.autoConfirm,
+    };
+    // Now w etry to update the slot
+    try {
+      const result = await apiCall(
+        "post",
+        `/Bookings/UpdateSlot/${bookingCalendars?.id}`,
+        payload
+      );
+      getBookingCalender();
+      toast.success("Slot updated");
+    } catch (e) {}
+  };
 
   const handleCreateCalendar = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -386,7 +391,7 @@ export default function AdminCalendar() {
         }}
       >
         <div className="pb-14">
-          <form onSubmit={handleCreateCalendar}>
+          <form onSubmit={handleEditBooking}>
             {/* <div className="flex flex-col">
               <p className="text-[#344054] text-base mb-1 font-grotesk-medium">
                 Title
@@ -427,7 +432,7 @@ export default function AdminCalendar() {
             </div>
 
             <div className="mt-5">
-              <AdminSubmitButton text="Create availability" />
+              <AdminSubmitButton text="Edit Availability" />
             </div>
           </form>
         </div>

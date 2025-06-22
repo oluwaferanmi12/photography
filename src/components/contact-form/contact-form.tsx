@@ -288,7 +288,7 @@ export const ContactFrom = ({
               <span
                 className="text-white cursor-pointer"
                 onClick={() => {
-                  setShowTerms && setShowTerms(true);
+                  if(setShowTerms) setShowTerms(true);
                 }}
               >
                 Read here

@@ -47,9 +47,6 @@ const AdminPortfolio = () => {
 
   const router = useRouter();
 
-
-
-
   const columns: TableColumn<PortfolioProps>[] = [
     {
       name: "Portfolio name",
@@ -195,7 +192,7 @@ const AdminPortfolio = () => {
       setThumbnail(null);
       setSelectedAttachedService("");
       setOpenCreatePortfolio(false);
-      setResetCounter(prev => prev + 1);
+      setResetCounter((prev) => prev + 1);
       fetchPortfolio();
     } catch (error) {
       console.log(error);
@@ -203,6 +200,10 @@ const AdminPortfolio = () => {
     } finally {
       setCreatePortfolioLoading(false);
     }
+  };
+
+  const handleUpdatePortfolio = async () => {
+    
   };
 
   const fetchServices = async () => {

@@ -44,6 +44,9 @@ export type UpdateType = "start" | "end" | "checked";
 
 export default function AdminCalendar() {
   const [openCalendarDetails, setOpenCalendarDetails] = useState(false);
+  const userTimezone = moment.tz.guess();
+  const userTimezoneOffset = moment.tz(userTimezone).utcOffset();
+  const userTimezoneOffsetInHours = userTimezoneOffset/60
   const [activeTab, setActiveTab] = useState("calendar-view");
   const days: DaysType[] = [
     "Saturday",

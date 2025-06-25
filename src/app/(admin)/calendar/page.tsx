@@ -46,7 +46,7 @@ export default function AdminCalendar() {
   const [openCalendarDetails, setOpenCalendarDetails] = useState(false);
   const userTimezone = moment.tz.guess();
   const userTimezoneOffset = moment.tz(userTimezone).utcOffset();
-  const userTimezoneOffsetInHours = userTimezoneOffset/60
+  const userTimezoneOffsetInHours = userTimezoneOffset / 60;
   const [activeTab, setActiveTab] = useState("calendar-view");
   const days: DaysType[] = [
     "Saturday",
@@ -99,7 +99,19 @@ export default function AdminCalendar() {
     try {
       setCalendarLoading(true);
       const result = await apiCall("get", "/Bookings/Calendar");
-      setBookingCalendars(result.data.calendar);
+      const calendarVal = result.data.calendar;
+      const calenadarVal_ = calendarVal.dateAndTime;
+      calendarVal.dateAndTime = calenadarVal_.map((item) => ({
+        day: item.day,
+        timeSchedule: [
+          {
+            start: item.timeSchedule[0].start + userTimezoneOffsetInHours,
+            end: item.timeSchedule[0].start + userTimezoneOffsetInHours,
+          },
+        ],
+      }));
+
+      setBookingCalendars(calendarVal);
       // arrange scheudle
     } catch (e) {
     } finally {
@@ -418,6 +430,7 @@ export default function AdminCalendar() {
                   {bookingCalendars?.dateAndTime.map((item, index, root) => {
                     return (
                       <TimeSchedule
+                        offsetInHours={userTimezoneOffsetInHours}
                         handleCanResolveNext={handleCanResolveNext}
                         handleRemove={handleRemove}
                         handleUpdate={handleUpdateObject}

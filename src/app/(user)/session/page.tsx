@@ -38,14 +38,17 @@ export interface CreateBookingInterface {
 const SessionPage = () => {
   const [selectedService, setSelectedService] = useState("");
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
-  const [showTerms, setShowTerms] = useState(false)
+  const [showTerms, setShowTerms] = useState(false);
   const [slots, setSlots] = useState<BookingCalendar[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<BookingCalendar>();
   const [packages, setPackages] = useState();
   const [selectedDate, setSelectedDate] = useState<Date>();
-  const [bookedSlots, setBookedSlots] = useState<BookedSlotInterface[]>([])
+  const [bookedSlots, setBookedSlots] = useState<BookedSlotInterface[]>([]);
   const [availableTimes, setAvailableTimes] = useState<number[]>([]);
   const [selectedDayName, setSelectedDayName] = useState("");
+  const userTimezone = moment.tz.guess();
+  const userTimezoneOffset = moment.tz(userTimezone).utcOffset();
+  const userTimezoneOffsetInHours = userTimezoneOffset / 60;
   const [payload, setPayload] = useState({
     slotId: "",
     start: "",
@@ -80,16 +83,19 @@ const SessionPage = () => {
   //   }
   // };
 
-
   const isTimeBooked = (date: Date, hour: number): boolean => {
     if (!bookedSlots.length) return false;
 
-    const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-    const bookingsForDate = bookedSlots.find(slot => slot.date === dateString);
+    const dateString = `${
+      date.getMonth() + 1
+    }/${date.getDate()}/${date.getFullYear()}`;
+    const bookingsForDate = bookedSlots.find(
+      (slot) => slot.date === dateString
+    );
 
     if (!bookingsForDate) return false;
 
-    return bookingsForDate.bookings.some(booking => {
+    return bookingsForDate.bookings.some((booking) => {
       const bookingHour = new Date(booking.start).getHours();
       return bookingHour === hour;
     });
@@ -100,21 +106,18 @@ const SessionPage = () => {
     setAvailableTimes(times);
 
     if (times.length > 0 && !selectedDuration && selectedDate) {
-      const firstAvailableTime = times.find(time =>
-        !isTimeBooked(selectedDate, time)
+      const firstAvailableTime = times.find(
+        (time) => !isTimeBooked(selectedDate, time)
       );
 
       if (firstAvailableTime !== undefined) {
         setSelectedDuration({
           start: firstAvailableTime,
-          end: firstAvailableTime + 1
+          end: firstAvailableTime + 1,
         });
       }
     }
   };
-
-
-
 
   function toLocalISOString(date: Date): string {
     const year = date.getFullYear();
@@ -125,9 +128,6 @@ const SessionPage = () => {
     const second = String(date.getSeconds()).padStart(2, "0");
     return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
   }
-
-
-
 
   const getBookingSlots = async () => {
     try {
@@ -159,14 +159,28 @@ const SessionPage = () => {
 
     try {
       const dateObj = new Date(selectedDate);
-      dateObj.setHours(selectedDuration.start, 0, 0, 0);
+      dateObj.setHours(
+        selectedDuration.start + userTimezoneOffsetInHours,
+        0,
+        0,
+        0
+      );
 
       const payloads = {
         ...payload,
         slotId: selectedSlot?.id || "",
         start: toLocalISOString(dateObj),
-        end: toLocalISOString(new Date(dateObj.setHours(selectedDuration.end, 0, 0, 0))),
-        timezone: moment.tz.guess()
+        end: toLocalISOString(
+          new Date(
+            dateObj.setHours(
+              selectedDuration.end + userTimezoneOffsetInHours,
+              0,
+              0,
+              0
+            )
+          )
+        ),
+        timezone: moment.tz.guess(),
       };
 
       const result = await apiCall("post", "/Bookings", payloads);
@@ -177,8 +191,6 @@ const SessionPage = () => {
       console.error("Booking error:", error);
     }
   };
-
-
 
   return (
     <div>
@@ -223,7 +235,7 @@ const SessionPage = () => {
                   {availableTimes.length > 0 ? (
                     <>
                       <h3 className="text-lg font-medium mb-2 text-[#F5F5F5]">
-                        Available times for {selectedDayName}:
+                        Available times for {selectedDayName}({userTimezone}):
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {availableTimes.map((time) => {
@@ -233,20 +245,29 @@ const SessionPage = () => {
                             <button
                               type="button"
                               key={time}
-                              onClick={() => !isBooked && setSelectedDuration({
-                                start: time,
-                                end: time + 1
-                              })}
+                              onClick={() =>
+                                !isBooked &&
+                                setSelectedDuration({
+                                  start: time,
+                                  end: time + 1,
+                                })
+                              }
                               disabled={isBooked}
-                              className={`px-8 py-2 rounded-lg border ${selectedDuration?.start === time
+                              className={`px-8 py-2 rounded-lg border ${
+                                selectedDuration?.start === time
                                   ? "bg-[#D9C9AE] text-[#151515] border-[#D9C9AE]"
                                   : isBooked
-                                    ? "border-[#2D2C2C] text-[#2D2C2C] cursor-not-allowed"
-                                    : "border-[#2D2C2C] cursor-pointer text-[#BABABA] hover:bg-[#2D2C2C]"
-                                }`}
+                                  ? "border-[#2D2C2C] text-[#2D2C2C] cursor-not-allowed"
+                                  : "border-[#2D2C2C] cursor-pointer text-[#BABABA] hover:bg-[#2D2C2C]"
+                              }`}
                             >
-                              {time.toString().padStart(2, '0')}:00
-                              {isBooked && <span className="text-xs block">Booked</span>}
+                              {(time + userTimezoneOffsetInHours)
+                                .toString()
+                                .padStart(2, "0")}
+                              :00
+                              {isBooked && (
+                                <span className="text-xs block">Booked</span>
+                              )}
                             </button>
                           );
                         })}

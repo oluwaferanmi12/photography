@@ -19,9 +19,11 @@ export const TimeSchedule = ({
   updateType,
   bookingCalendars,
   handleCanResolveNext,
+  offsetInHours,
 }: {
   handleAddNextObject: (day: DaysType, val: number, val_2?: boolean) => void;
   index: number;
+  offsetInHours: number;
   schedule: Scheduletype;
   objectLength: number;
   handleUpdate: (

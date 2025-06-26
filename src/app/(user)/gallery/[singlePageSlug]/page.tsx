@@ -3,12 +3,16 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Footer } from "@/components/footer/footer";
-import { Row, Col } from "antd";
+import { Row, Col, Modal } from "antd";
 import { useParams, useSearchParams } from "next/navigation";
 import { apiCall } from "@/axios/axios";
 import { baseUrl } from "@/lib/base-url";
 import Button from "@/components/button/button";
 import { toast } from "sonner";
+import selectedIcon from "@/assets/svgs/selectedIcon.svg";
+import downloadIcon from "@/assets/svgs/downloadIcon.svg";
+import selectedIconActive from "@/assets/svgs/selectedIconActive.svg";
+import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
 
 interface ImagesProps {
   id: string;
@@ -25,12 +29,18 @@ const GallerySinglePage = () => {
   const singlePageSlug = params?.singlePageSlug as string;
   const pageName = singlePageSlug.replace(/-/g, " ");
   const id = searchParams.get("id");
+  const imageCount = searchParams.get("imageNo");
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [showSelectedImages, setShowSelectedImages] = useState(false);
+  const [galleryDetails, setGalleryDetails] = useState();
+  const [canNotSelect, setCanNotSelect] = useState(false);
 
   const fetchClient = async () => {
     try {
       const clientRes = await apiCall("get", `/Gallery/${id}`);
+
       setGalleryData(clientRes.data);
+      setSelectedImages(clientRes.data.filter((item) => item.selected));
     } catch (error) {
       console.error("Error fetching services:", error);
     }
@@ -59,8 +69,28 @@ const GallerySinglePage = () => {
     setSelectedImages(selectedImageCopy);
   };
 
+  useEffect(() => {
+    if (imageCount && selectedImages.length > +imageCount) {
+      setCanNotSelect(true);
+      toast.error("You can not select more images");
+    } else {
+      setCanNotSelect(false);
+    }
+  }, [selectedImages]);
+
+  const handleRemoveImageFromSelection = (id: string) => {
+    const findIndex = selectedImages.findIndex((item) => item.id === id);
+    const spreadImages = [...selectedImages];
+    spreadImages.splice(findIndex, 1);
+    setSelectedImages([...spreadImages]);
+  };
+
   const handleSubmitSelectedImages = async () => {
     try {
+      if (canNotSelect) {
+        toast.error("Too many images selected");
+        return;
+      }
       if (!selectedImages.length) {
         toast.error("Kindly select some images");
         return;
@@ -75,6 +105,7 @@ const GallerySinglePage = () => {
         `/Gallery/SelectImages/${id}`,
         payload
       );
+      setShowSelectedImages(false);
       toast.success("Selections submitted successfully");
     } catch (e) {
     } finally {
@@ -84,6 +115,70 @@ const GallerySinglePage = () => {
 
   return (
     <div>
+      <Modal
+        open={showSelectedImages}
+        onCancel={() => setShowSelectedImages(false)}
+        footer={null}
+        className="sessionForm_modal custom-scroll-modal"
+        closeIcon={null}
+        width={900}
+        centered={true}
+      >
+        <div className="py-8 px-10 w-full relative z-50">
+          <div className="flex justify-between items-start w-full">
+            <div className="flex flex-col gap-2">
+              <span>
+                <Image src={bas_thanks} alt="bas" />
+              </span>
+              <h3 className="font-playfair text-3xl text-white">
+                Please confirm the selected images
+              </h3>
+            </div>
+          </div>
+          <div className="cursor-pointer">
+            <Row gutter={24} justify={"center"} className="">
+              {selectedImages.map((item) => {
+                return (
+                  <Col key={item.id} xs={12} className="mb-4">
+                    <Image
+                      src={`${baseUrl + item.imageUrl}`}
+                      className="w-full h-[300px] min-h-[300px] object-cover"
+                      alt="img"
+                      width={300}
+                      height={300}
+                    />
+                  </Col>
+                );
+              })}
+            </Row>
+          </div>
+          <div>
+            <p className="text-[#D9C9AE]">
+              {`Once you confirm it’s an irreversible action, additional image
+              edit costs extra $20 per image.`}
+            </p>
+          </div>
+          <div className="flex items-center gap-2 mt-4">
+            <button
+              onClick={() => {
+                setShowSelectedImages(false);
+              }}
+              className="border border-[#D9C9AE] px-4 py-2 rounded-full text-[#D9C9AE] cursor-pointer"
+            >
+              Go back
+            </button>
+            <button
+              disabled={submitLoading}
+              className="bg-[#C5B79E] px-4 py-2 rounded-full text-[#151515] cursor-pointer"
+              onClick={handleSubmitSelectedImages}
+            >
+              {submitLoading
+                ? "Loading..."
+                : `Submit ${selectedImages.length} image(s)`}
+            </button>
+          </div>
+        </div>
+      </Modal>
       <div className="flex flex-col gap-14 justify-center items-center">
         <div className="flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28 py-28">
           <Row gutter={[16, 16]}>
@@ -105,6 +200,18 @@ const GallerySinglePage = () => {
                     experience.
                   </p>
                 </div>
+                <div className="mt-4 flex justify-center w-full">
+                  <Button
+                    onClick={() => {
+                      setShowSelectedImages(true);
+                    }}
+                    loading={submitLoading}
+                    variant="filled"
+                    size="large"
+                    text={`Submit ${selectedImages.length} image(s) for Edit`}
+                    widthFull
+                  />
+                </div>
               </div>
             </Col>
 
@@ -119,9 +226,36 @@ const GallerySinglePage = () => {
                           ? "8px solid white"
                           : "",
                       }}
-                      className="cursor-pointer"
-                      onClick={() => handleSelectedImages(item)}
+                      className="cursor-pointer relative"
+                      onClick={() => {
+                        if (
+                          selectedImages.find(
+                            (imageVal) => imageVal.id === item.id
+                          )
+                        ) {
+                          handleRemoveImageFromSelection(item.id);
+                          return;
+                        }
+                        handleSelectedImages(item);
+                      }}
                     >
+                      <div className="flex items-center gap-2 absolute top-4 left-4">
+                        <span>
+                          <Image
+                            src={
+                              selectedImages.some(
+                                (slectedImage) => slectedImage.id === item.id
+                              )
+                                ? selectedIconActive
+                                : selectedIcon
+                            }
+                            alt=""
+                          />
+                        </span>
+                        <span>
+                          <Image src={downloadIcon} alt="" />
+                        </span>
+                      </div>
                       <Image
                         src={`${baseUrl + item.imageUrl}`}
                         className="w-full h-[500px] min-h-[500px] object-cover"
@@ -133,15 +267,6 @@ const GallerySinglePage = () => {
                   </Col>
                 ))}
               </Row>
-              <div className="mt-4 flex justify-end w-full">
-                <Button
-                  onClick={() => handleSubmitSelectedImages()}
-                  loading={submitLoading}
-                  variant="filled"
-                  size="large"
-                  text="Send"
-                />
-              </div>
             </Col>
           </Row>
         </div>

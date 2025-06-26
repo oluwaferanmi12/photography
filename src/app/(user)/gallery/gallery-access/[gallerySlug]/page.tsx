@@ -19,6 +19,7 @@ const GalleryAccessPage = () => {
   const gallerySlug = params?.gallerySlug as string;
   const imgSrc = searchParams.get("imgSrc");
   const id = searchParams.get("id");
+  const imageCount = searchParams.get("imageNo");
   const pageName = gallerySlug.replace(/-/g, " ");
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -26,8 +27,6 @@ const GalleryAccessPage = () => {
   const [buttonLoading, setButtonLoading] = useState(false);
   const { useBreakpoint } = Grid;
   const screens = useBreakpoint();
-
-
 
   const handleAccessLogin = async () => {
     // do validation
@@ -45,9 +44,12 @@ const GalleryAccessPage = () => {
         pageName.toLowerCase().replace(/ /g, "-")
       );
       const encodedId = encodeURIComponent(id || "");
+      const encodedCound = encodeURIComponent(imageCount || "")
 
-      router.push(`/gallery/${singlePageSlug}?id=${encodedId}`);
-    } catch (e) { }
+      router.push(
+        `/gallery/${singlePageSlug}?id=${encodedId}&imageNo=${encodedCound}`
+      );
+    } catch (e) {}
   };
 
   return (
@@ -55,7 +57,7 @@ const GalleryAccessPage = () => {
       <div className="flex flex-col gap-14 justify-center items-center ">
         <div className="flex flex-col gap-28 w-full px-5 lg:px-14 3xl:!px-28 !py-28">
           <div className="my-14 relative w-full">
-            <Row align={screens.lg ? 'middle' : 'top'} gutter={[32, 32]}>
+            <Row align={screens.lg ? "middle" : "top"} gutter={[32, 32]}>
               <Col xs={{ span: 24, order: 2 }} lg={{ span: 10, order: 1 }}>
                 <div>
                   <Image

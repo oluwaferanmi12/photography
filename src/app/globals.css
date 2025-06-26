@@ -592,6 +592,18 @@ a {
   /* padding: 20px 24px; */
 }
 
+/* Override AntD modal to allow full height scrolling */
+.custom-scroll-modal .ant-modal-content {
+  max-height: 90vh; /* or 100vh minus some padding */
+  overflow-y: auto;
+}
+
+/* Optional: allow inner layout to scroll if needed */
+.custom-scroll-modal .ant-modal-body {
+  max-height: calc(90vh - 56px); /* adjust if header/footer exist */
+  overflow-y: auto;
+}
+
 
 /* CUSTOM DATE PICKER */
 /* datepicker.css */

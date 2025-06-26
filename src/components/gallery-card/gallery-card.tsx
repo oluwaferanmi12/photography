@@ -29,9 +29,10 @@ export const GalleryCard = ({
     const encodedImgSrc = encodeURIComponent(imgSrc);
     const encodedId = encodeURIComponent(cardId);
     router.push(
-      `/gallery/gallery-access/${gallerySlug}?imgSrc=${encodedImgSrc}&id=${encodedId}`
+      `/gallery/gallery-access/${gallerySlug}?imgSrc=${encodedImgSrc}&id=${encodedId}&imageNo=${no_of_photos}`
     );
   };
+  console.log(no_of_photos, "No of photos")
 
   return (
     <div

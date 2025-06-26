@@ -58,7 +58,6 @@ const Gallery = () => {
       );
       setClientData(formattedData);
     } catch (error) {
-      console.error("Error fetching services:", error);
       toast.error("Failed to load services");
     } finally {
       setLoading(false);

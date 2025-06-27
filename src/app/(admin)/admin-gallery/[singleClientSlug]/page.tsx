@@ -190,7 +190,8 @@ export default function SingleAdminGallery() {
                 ) : (
                   <div>
                     {!loading ? (
-                      singleClientData.length ? (
+                      singleClientData.filter((item) => item.selected)
+                        .length ? (
                         <Row gutter={[32, 32]}>
                           {singleClientData
                             .filter((item) => item.selected)
@@ -214,8 +215,8 @@ export default function SingleAdminGallery() {
                             ))}
                         </Row>
                       ) : (
-                        <p className="text-lg text-red-500">
-                          No Image(s) uploaded
+                        <p className="text-lg text-red-500 text-center">
+                          No Image(s) selected by client
                         </p>
                       )
                     ) : (

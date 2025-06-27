@@ -188,7 +188,7 @@ export default function AdminCalendar() {
         ],
       })),
       dailyLimits: bookingCalendars?.dailyLimits,
-      timezone: bookingCalendars?.timezone,
+      timezone: userTimezone,
       properties: "",
       autoConfirm: bookingCalendars?.autoConfirm,
     };

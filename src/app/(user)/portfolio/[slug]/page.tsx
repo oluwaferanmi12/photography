@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import InfiniteCarousel from "@/components/unending-carousel/unending-carousel";
 import { Banner } from "@/components/banner/banner";
 import Button from "@/components/button/button";
@@ -22,6 +22,7 @@ interface PortfolioProps {
   // noOfPictures: string;
   // status: boolean;
   thumbnail: string;
+  serviceId: string;
 }
 
 interface PortfolioImage {
@@ -40,6 +41,7 @@ const SinglePackages = () => {
   const [attachedServices, setAttachedServices] = useState<
     { label: string; value: string }[]
   >([]);
+  const router = useRouter();
 
   const { slug } = useParams();
 
@@ -54,6 +56,7 @@ const SinglePackages = () => {
           description: item.description,
           thumbnail: item.thumbnail,
           service: item.service,
+          serviceId: item.serviceId,
         })
       );
       setPortfolioData(formattedData);
@@ -130,7 +133,6 @@ const SinglePackages = () => {
     fetchServices();
     GetSinglePortfolioImages();
   }, []);
-
   // Safely access the current portfolio info
   const [singlePortfolioInfo] = portfolioData.filter(
     (info) => info.id === slug
@@ -151,6 +153,11 @@ const SinglePackages = () => {
         <div className="flex items-center justify-between mt-8">
           <div className="flex flex-wrap gap-y-5 gap-3">
             <Button
+              onClick={() => {
+                router.push(
+                  `/session?serviceId=${singlePortfolioInfo.serviceId}`
+                );
+              }}
               variant="filled"
               text={`Book ${
                 /^[aeiou]/i.test(singlePortfolioInfo?.service || "")

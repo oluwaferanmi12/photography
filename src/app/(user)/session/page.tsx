@@ -132,7 +132,6 @@ const SessionPage = () => {
   const getBookingSlots = async () => {
     try {
       const result = await apiCall("get", "/Bookings/Calendar");
-      console.log("API Response:", result.data);
 
       // Make sure we're accessing calendar property correctly
       if (result.data?.calendar) {

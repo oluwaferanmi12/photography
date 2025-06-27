@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import mail from "@/assets/svgs/mail.svg";
 import arrowRight from "@/assets/svgs/footer-send-arrow.svg";

@@ -106,7 +106,7 @@ export default function AdminCalendar() {
         timeSchedule: [
           {
             start: item.timeSchedule[0].start + userTimezoneOffsetInHours,
-            end: item.timeSchedule[0].start + userTimezoneOffsetInHours,
+            end: item.timeSchedule[0].end + userTimezoneOffsetInHours,
           },
         ],
       }));

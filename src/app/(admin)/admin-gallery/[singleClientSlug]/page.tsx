@@ -25,7 +25,9 @@ export default function SingleAdminGallery() {
   const clientId = searchParams.get("clientId");
   const [uploadClientLoading, setUploadClientLoading] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [singleClientData, setSingleClientData] = useState([]);
+  const [singleClientData, setSingleClientData] = useState<
+    { galleryId: string; selected: boolean; id: string; imageUrl: string }[]
+  >([]);
   const [thumbnails, setThumbnails] = useState<File[]>([]);
   const [thumbnailError, setThumbnailError] = useState("");
   const [activeTab, setActiveTab] = useState("uploads");
@@ -157,12 +159,42 @@ export default function SingleAdminGallery() {
                     {!loading ? (
                       singleClientData.length ? (
                         <Row gutter={[32, 32]}>
-                          {singleClientData.map(
-                            (image: {
-                              clientId: string;
-                              imageUrl: string;
-                              id: string;
-                            }) => (
+                          {singleClientData.map((image) => (
+                            <Col key={image.id} xs={24} md={12} lg={8}>
+                              <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
+                                <img
+                                  src={` ${baseUrl + image.imageUrl}`}
+                                  alt="client image"
+                                  className="rounded-3xl object-cover w-full h-full"
+                                />
+                                <span className="absolute right-14 bottom-14">
+                                  <Image
+                                    src={trashBin}
+                                    className="cursor-pointer"
+                                    alt="bin"
+                                  />
+                                </span>
+                              </div>
+                            </Col>
+                          ))}
+                        </Row>
+                      ) : (
+                        <p className="text-lg text-red-500">
+                          No Image(s) uploaded
+                        </p>
+                      )
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {!loading ? (
+                      singleClientData.length ? (
+                        <Row gutter={[32, 32]}>
+                          {singleClientData
+                            .filter((item) => item.selected)
+                            .map((image) => (
                               <Col key={image.id} xs={24} md={12} lg={8}>
                                 <div className="border h-[260px] 3xl:h-[400px] rounded-3xl p-4 bg-[#EFEEEE] overflow-hidden relative">
                                   <img
@@ -179,8 +211,7 @@ export default function SingleAdminGallery() {
                                   </span>
                                 </div>
                               </Col>
-                            )
-                          )}
+                            ))}
                         </Row>
                       ) : (
                         <p className="text-lg text-red-500">
@@ -190,12 +221,6 @@ export default function SingleAdminGallery() {
                     ) : (
                       ""
                     )}
-                  </div>
-                ) : (
-                  <div>
-                    <h3 className="text-5xl text-amber-600">
-                      Client Selections
-                    </h3>
                   </div>
                 )}
               </div>

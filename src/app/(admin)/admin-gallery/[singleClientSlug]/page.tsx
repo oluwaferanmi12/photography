@@ -103,6 +103,11 @@ export default function SingleAdminGallery() {
     }
   };
 
+  const handleGetImageName = (val_: string) => {
+    const splitImage = val_.split("/");
+    return splitImage[splitImage.length - 1]
+  }
+
   return (
     <AdminPageLayout
       showFilters={false}
@@ -175,6 +180,10 @@ export default function SingleAdminGallery() {
                                   />
                                 </span>
                               </div>
+                              <p>
+                                {handleGetImageName(image.imageUrl)}
+                              </p>
+                      
                             </Col>
                           ))}
                         </Row>

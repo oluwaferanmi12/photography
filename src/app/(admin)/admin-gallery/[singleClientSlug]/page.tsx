@@ -39,7 +39,6 @@ export default function SingleAdminGallery() {
     setLoading(true);
     try {
       const response = await apiCall("get", `Gallery/${clientId}`);
-      console.log(response);
       setSingleClientData(response.data);
     } catch (error) {
       console.log(error);
@@ -70,27 +69,25 @@ export default function SingleAdminGallery() {
       return;
     }
 
-    try {
-      const formData = new FormData();
+    if (!clientId) {
+      toast.error("Client ID is missing.");
+      setUploadClientLoading(false);
+      return;
+    }
 
-      // Ensure clientId is a string
-      if (!clientId) {
-        toast.error("Client ID is missing.");
-        return;
+    try {
+      for (const file of thumbnails) {
+        const formData = new FormData();
+        formData.append("GalleryId", clientId);
+        formData.append("HasWatermark", hasWatermark.toString());
+        formData.append("Images", file);
+
+        await apiCall("post", "/Gallery/Images", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
       }
 
-      formData.append("GalleryId", clientId);
-      formData.append("HasWatermark", hasWatermark.toString());
-
-      thumbnails.forEach((file) => {
-        formData.append("Images", file);
-      });
-
-      await apiCall("post", "/Gallery/Images", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      toast.success("Upload successful");
+      toast.success("All images uploaded successfully");
       setThumbnails([]);
       setOpenUploadClient(false);
       setResetCounter((prev) => prev + 1);
@@ -103,6 +100,16 @@ export default function SingleAdminGallery() {
     }
   };
 
+  const handleDeleteImage = async (imageId: string) => {
+    try {
+      const result = await apiCall(
+        "post",
+        `/Gallery/Images/Remove/${clientId}/${imageId}`
+      );
+      toast.success("Removed successfully");
+      singleUploadClient();
+    } catch (e) {}
+  };
   return (
     <AdminPageLayout
       showFilters={false}
@@ -169,6 +176,9 @@ export default function SingleAdminGallery() {
                                 />
                                 <span className="absolute right-14 bottom-14">
                                   <Image
+                                    onClick={() => {
+                                      handleDeleteImage(image.id);
+                                    }}
                                     src={trashBin}
                                     className="cursor-pointer"
                                     alt="bin"
@@ -205,6 +215,9 @@ export default function SingleAdminGallery() {
                                   />
                                   <span className="absolute right-14 bottom-14">
                                     <Image
+                                      onClick={() => {
+                                        handleDeleteImage(image.id);
+                                      }}
                                       src={trashBin}
                                       className="cursor-pointer"
                                       alt="bin"

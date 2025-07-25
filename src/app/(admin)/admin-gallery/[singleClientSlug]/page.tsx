@@ -100,6 +100,11 @@ export default function SingleAdminGallery() {
     }
   };
 
+  const handleGetImageName = (val_: string) => {
+    const splitImage = val_.split("/");
+    return splitImage[splitImage.length - 1];
+  };
+
   const handleDeleteImage = async (imageId: string) => {
     try {
       const result = await apiCall(
@@ -185,6 +190,7 @@ export default function SingleAdminGallery() {
                                   />
                                 </span>
                               </div>
+                              <p>{handleGetImageName(image.imageUrl)}</p>
                             </Col>
                           ))}
                         </Row>
@@ -223,6 +229,7 @@ export default function SingleAdminGallery() {
                                       alt="bin"
                                     />
                                   </span>
+                                  <p>{handleGetImageName(image.imageUrl)}</p>
                                 </div>
                               </Col>
                             ))}

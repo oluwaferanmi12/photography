@@ -112,6 +112,10 @@ const GallerySinglePage = () => {
       setSubmitLoading(false);
     }
   };
+    const handleGetImageName = (val_: string) => {
+    const splitImage = val_.split("/");
+    return splitImage[splitImage.length - 1]
+  }
 
   return (
     <div>
@@ -147,6 +151,7 @@ const GallerySinglePage = () => {
                       width={300}
                       height={300}
                     />
+                    {handleGetImageName(item.imageUrl)}
                   </Col>
                 );
               })}
@@ -264,6 +269,7 @@ const GallerySinglePage = () => {
                         height={500}
                       />
                     </div>
+                    {handleGetImageName(item.imageUrl)}
                   </Col>
                 ))}
               </Row>

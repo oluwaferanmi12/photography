@@ -106,7 +106,7 @@ export default function AdminCalendar() {
         timeSchedule: [
           {
             start: item.timeSchedule[0].start + userTimezoneOffsetInHours,
-            end: item.timeSchedule[0].start + userTimezoneOffsetInHours,
+            end: item.timeSchedule[0].end + userTimezoneOffsetInHours,
           },
         ],
       }));
@@ -188,7 +188,7 @@ export default function AdminCalendar() {
         ],
       })),
       dailyLimits: bookingCalendars?.dailyLimits,
-      timezone: bookingCalendars?.timezone,
+      timezone: userTimezone,
       properties: "",
       autoConfirm: bookingCalendars?.autoConfirm,
     };

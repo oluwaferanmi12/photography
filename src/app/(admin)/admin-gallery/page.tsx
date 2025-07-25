@@ -15,6 +15,7 @@ import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
+import trashBin from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
 
 interface ClientProps {
   id: string;
@@ -47,6 +48,14 @@ const AdminGallery = () => {
   const [resetCounter, setResetCounter] = useState(0);
 
   const router = useRouter();
+
+  const handleDeleteGallery = async (id) => {
+    try {
+      const result = await apiCall("post", `/Gallery/Remove/${id}`);
+      toast.success("Deleted successfully");
+      fetchClient();
+    } catch (e) {}
+  };
 
   const columns: TableColumn<ClientProps>[] = [
     {
@@ -106,23 +115,36 @@ const AdminGallery = () => {
     {
       name: "",
       cell: (row) => (
-        <button
-          className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
-          onClick={() =>
-            router.push(
-              `/admin-gallery/${encodeURIComponent(
-                row.clientName
-              )}?&description=${encodeURIComponent(
-                row.description
-              )}&clientId=${encodeURIComponent(row.id)}`
-            )
-          }
-        >
-          <span>
-            <Image src={eyeIcon} alt="img" />
-          </span>
-          Details
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
+            onClick={() =>
+              router.push(
+                `/admin-gallery/${encodeURIComponent(
+                  row.clientName
+                )}?&description=${encodeURIComponent(
+                  row.description
+                )}&clientId=${encodeURIComponent(row.id)}`
+              )
+            }
+          >
+            <span>
+              <Image className="w-5 aspect-square" src={eyeIcon} alt="img" />
+            </span>
+          </button>
+          <button className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50">
+            <span>
+              <Image
+                src={trashBin}
+                onClick={() => {
+                  handleDeleteGallery(row.id);
+                }}
+                alt="img"
+                className="w-5 aspect-square"
+              />
+            </span>
+          </button>
+        </div>
       ),
       right: true,
       grow: 1,
@@ -133,7 +155,6 @@ const AdminGallery = () => {
   const fetchClient = async () => {
     try {
       const clientRes = await apiCall("get", "/Gallery");
-      console.log(clientRes);
 
       const formattedData: ClientProps[] = clientRes.data.data.gallery.map(
         (item: any) => ({
@@ -220,7 +241,6 @@ const AdminGallery = () => {
 
       fetchClient();
     } catch (error) {
-      console.log(error);
       toast.error("An error occurred while creating the client");
     } finally {
       setCreateGalleryLoading(false);

@@ -29,7 +29,7 @@ const navData = [
     navLink: "/admin-portfolio",
     navTitle: "Portfolio",
   },
-   {
+  {
     icon: portfolioIcon,
     navLink: "/admin-gallery",
     navTitle: "Gallery",
@@ -48,16 +48,6 @@ const navData = [
     icon: homeOutline,
     navLink: "/booking",
     navTitle: "Booking",
-  },
-  {
-    icon: dollarSign,
-    navLink: "/admin-transaction",
-    navTitle: "Transaction",
-  },
-  {
-    icon: dollarSign,
-    navLink: "/admin-links",
-    navTitle: "Links",
   },
 ];
 

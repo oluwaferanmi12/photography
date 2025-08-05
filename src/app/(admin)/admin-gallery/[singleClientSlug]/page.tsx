@@ -33,6 +33,7 @@ export default function SingleAdminGallery() {
   const [activeTab, setActiveTab] = useState("uploads");
   const [resetCounter, setResetCounter] = useState(0);
   const [hasWatermark, setHasWaterMark] = useState(true);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   // SINGLE PACKAGES
   const singleUploadClient = async () => {
@@ -56,13 +57,17 @@ export default function SingleAdminGallery() {
   const handleUploadImages = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setUploadClientLoading(true);
+    setUploadProgress(0); // reset progress at the start
 
     let isError = false;
 
+    // Validate thumbnails
     if (thumbnails.length === 0) {
       setThumbnailError("Please upload at least one image");
       isError = true;
-    } else setThumbnailError("");
+    } else {
+      setThumbnailError("");
+    }
 
     if (isError) {
       setUploadClientLoading(false);
@@ -76,6 +81,8 @@ export default function SingleAdminGallery() {
     }
 
     try {
+      let uploadedCount = 0;
+
       for (const file of thumbnails) {
         const formData = new FormData();
         formData.append("GalleryId", clientId);
@@ -84,7 +91,23 @@ export default function SingleAdminGallery() {
 
         await apiCall("post", "/Gallery/Images", formData, {
           headers: { "Content-Type": "multipart/form-data" },
+
+          // Optional real-time per-file progress if supported
+          onUploadProgress: (progressEvent: ProgressEvent) => {
+            if (progressEvent.total) {
+              const fileProgress = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              console.log(`File ${file.name} uploading: ${fileProgress}%`);
+            }
+          },
         });
+
+        // Update progress bar after each file finishes
+        uploadedCount++;
+        setUploadProgress(
+          Math.round((uploadedCount / thumbnails.length) * 100)
+        );
       }
 
       toast.success("All images uploaded successfully");
@@ -280,6 +303,20 @@ export default function SingleAdminGallery() {
                   </div>
                 </div>
               </div>
+
+              {uploadProgress > 0 && (
+                <div className="my-4">
+                  <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div
+                      className="bg-black h-2.5 rounded-full transition-all duration-300"
+                      style={{ width: `${uploadProgress}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {uploadProgress}%
+                  </p>
+                </div>
+              )}
 
               <div className="mt-5">
                 <AdminSubmitButton

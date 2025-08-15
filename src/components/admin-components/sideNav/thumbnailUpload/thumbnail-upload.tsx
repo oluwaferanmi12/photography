@@ -99,7 +99,6 @@ export default function ThumbnailUpload({
         )}
         <input
           type="file"
-          accept="image/png, image/jpeg, image/gif"
           multiple={multiple}
           ref={fileInputRef}
           onChange={handleFileChange}

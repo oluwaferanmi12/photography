@@ -35,13 +35,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
           <Col xs={24} lg={12}>
             <div className="h-full">
               <div className="p-6">
-                <span>
-                  <Image
-                    src={dummyIcon}
-                    className="w-20 h-20 md:h-auto md:w-auto"
-                    alt="dummy_icon"
-                  />
-                </span>
+                
                 <p className="text-3xl lg:text-5xl font-bold text-[#F8F8F8F2]/95">
                   {title}
                 </p>
@@ -131,9 +125,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
       <Row align={"stretch"} gutter={[32, 32]}>
         <Col xs={24} lg={8}>
           <div className="p-6 h-full">
-            <span>
-              <Image src={dummyIcon} alt="dummy_icon" />
-            </span>
+            
             <p className="text-3xl lg:text-5xl font-bold mt-4 text-[#F8F8F8F2]/95">
               {title}
             </p>

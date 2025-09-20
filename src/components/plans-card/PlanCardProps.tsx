@@ -15,6 +15,7 @@ type planCardInterface = {
   variant?: "user" | "admin";
   planActiveness?: boolean;
   packages?: any;
+  editClicked?: () => void;
 };
 
 export const PlanCardProps: React.FC<planCardInterface> = ({
@@ -24,6 +25,7 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   planActiveness,
   variant = "user",
   packages,
+  editClicked,
 }) => {
   const router = useRouter();
   return (
@@ -45,7 +47,6 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
               <Switch
                 defaultChecked={planActiveness}
                 checked={planActiveness}
-                // onChange={() => setIsPlanActive(!isPlanActive)}
                 className="custom_switch"
               />
             </div>
@@ -67,7 +68,6 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
             }  `}
           >
             $ {planAmount}
-            {variant === "user" ? "/ hr" : ""}
           </div>
         )}
 
@@ -111,7 +111,14 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
             </button>
           </div>
         ) : (
-          <button className="rounded-full cursor-pointer mt-5 text-[#BABABA]  border  border-off-white py-2 px-6 flex justify-center items-center gap-3">
+          <button
+            onClick={() => {
+              if (editClicked) {
+                editClicked();
+              }
+            }}
+            className="rounded-full cursor-pointer mt-5 text-[#BABABA]  border  border-off-white py-2 px-6 flex justify-center items-center gap-3"
+          >
             <p>Edit package</p>
             <span>
               <Image src={arrowRight} alt="arrow-icon" />

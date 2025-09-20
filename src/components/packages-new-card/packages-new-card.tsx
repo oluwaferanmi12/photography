@@ -5,6 +5,7 @@ import dummyIcon from "@/assets/svgs/dummy-packages-icon.svg";
 import stoneDot from "@/assets/svgs/stone-dots.svg";
 import { PlanCardProps } from "../plans-card/PlanCardProps";
 import { baseUrl } from "@/lib/base-url";
+import { useRouter } from "next/navigation";
 
 interface ImageType {
   serviceId: string;
@@ -27,7 +28,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
   packages,
   service,
 }) => {
-  // console.log(service, "Service value hereee");
+  const router = useRouter();
   return (
     <UserPackagesLayout>
       <div>
@@ -35,7 +36,6 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
           <Col xs={24} lg={12}>
             <div className="h-full">
               <div className="p-6">
-                
                 <p className="text-3xl lg:text-5xl font-bold text-[#F8F8F8F2]/95">
                   {title}
                 </p>
@@ -43,34 +43,44 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                   {description}
                 </p>
                 {/*  */}
+                {service.id !== "82861419-2349-4274-b64e-6f2c782c62de" && (
+                  <div>
+                    {packages.map((pkg, idx) => (
+                      <p
+                        className="text-[#D9C9AE] font-light  text-5xl"
+                        key={idx}
+                      >
+                        {" "}
+                        ${pkg.price}{" "}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                {service.id === "82861419-2349-4274-b64e-6f2c782c62de" && (
+                  <div className="relative mt-5 inline-block p-[1.5px] rounded-full bg-gradient-to-br from-white/40 via-white/5 to-white/10 shadow-[0px_2px_16px_0px_rgba(248,248,248,0.06)]">
+                    <a href={"mailto:bookings@shotbyportable.com"}>
+                      <button className="px-6 py-2 rounded-full bg-black/30 backdrop-blur-md text-white font-semibold h-full">
+                        Contact us
+                      </button>
+                    </a>
+                  </div>
+                )}
+              </div>
+              {service.id !== "82861419-2349-4274-b64e-6f2c782c62de" && (
                 <div>
-                  {packages.map((pkg, idx) => (
-                    <p
-                      className="text-[#D9C9AE] font-light  text-5xl"
-                      key={idx}
-                    >
-                      {" "}
-                      ${pkg.price}{" "}
-                    </p>
-                  ))}
+                  <Row gutter={[32, 32]}>
+                    {packages.map((pkg, idx) => (
+                      <Col xs={24} key={idx}>
+                        <PlanCardProps
+                          variant="user"
+                          planDescription={pkg.description}
+                          packages={pkg}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
                 </div>
-              </div>
-
-              <div>
-                <Row gutter={[32, 32]}>
-                  {packages.map((pkg, idx) => (
-                    <Col xs={24} key={idx}>
-                      <PlanCardProps
-                        variant="user"
-                        // planType={pkg.name}
-                        // planAmount={pkg.price}
-                        planDescription={pkg.description}
-                        packages={pkg}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </div>
+              )}
             </div>
           </Col>
           <Col xs={24} lg={12}>
@@ -119,17 +129,26 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
   description,
   images,
   packages,
+  service,
 }) => {
   return (
     <UserPackagesLayout>
       <Row align={"stretch"} gutter={[32, 32]}>
         <Col xs={24} lg={8}>
           <div className="p-6 h-full">
-            
             <p className="text-3xl lg:text-5xl font-bold mt-4 text-[#F8F8F8F2]/95">
               {title}
             </p>
             <p className="text-sm text-[#F8F8F8B2]/70 my-2">{description}</p>
+            {service.id === "82861419-2349-4274-b64e-6f2c782c62de" && (
+              <div className="relative mt-5 inline-block p-[1.5px] rounded-full bg-gradient-to-br from-white/40 via-white/5 to-white/10 shadow-[0px_2px_16px_0px_rgba(248,248,248,0.06)]">
+                <a href={"mailto:bookings@shotbyportable.com"}>
+                  <button className="px-6 py-2 rounded-full bg-black/30 backdrop-blur-md text-white font-semibold h-full">
+                    Contact us
+                  </button>
+                </a>
+              </div>
+            )}
           </div>
         </Col>
         <Col xs={0} md={24} lg={16} className="">
@@ -151,21 +170,24 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
           </div>
         </Col>
       </Row>
-      <div className="lg:mt-14">
-        <Row gutter={[32, 32]}>
-          {packages.map((pkg, idx) => (
-            <Col xs={24} lg={8} key={idx}>
-              <PlanCardProps
-                variant="user"
-                planType={pkg.name}
-                planAmount={pkg.price}
-                planDescription={pkg.description}
-                packages={pkg}
-              />
-            </Col>
-          ))}
-        </Row>
-      </div>
+      {service.id !== "82861419-2349-4274-b64e-6f2c782c62de" && (
+        <div className="lg:mt-14">
+          <Row gutter={[32, 32]}>
+            {packages.map((pkg, idx) => (
+              <Col xs={24} lg={8} key={idx}>
+                <PlanCardProps
+                  variant="user"
+                  planType={pkg.name}
+                  planAmount={pkg.price}
+                  planDescription={pkg.description}
+                  packages={pkg}
+                />
+              </Col>
+            ))}
+          </Row>
+        </div>
+      )}
+
       <div className="mt-10 lg:hidden">
         <Col xs={24} lg={0}>
           <div className="flex scrollbar gap-5 relative w-full h-full overflow-x-scroll">

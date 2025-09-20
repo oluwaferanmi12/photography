@@ -2,7 +2,7 @@
 
 import AdminPageLayout from "@/adminLayouts/admin-page-layout";
 import BaseDataTable from "@/components/data-table/data-table";
-import { Switch } from "antd";
+import { Popconfirm, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import { TableColumn } from "react-data-table-component";
 import eyeIcon from "@/assets/svgs/eyeIcon.svg";
@@ -15,6 +15,7 @@ import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
+import trashIcon from "@/assets/svgs/Admin_svgs/light-bg-trash-bin.svg";
 
 interface PortfolioProps {
   id: string;
@@ -44,6 +45,12 @@ const AdminPortfolio = () => {
     { label: string; value: string }[]
   >([]);
   const [resetCounter, setResetCounter] = useState(0);
+  const handleDeletePortfolio = async (id: string) => {
+    try {
+      const result = apiCall("post", `/Portfolio/Remove/${id}`);
+      fetchPortfolio();
+    } catch (e) {}
+  };
 
   const router = useRouter();
 
@@ -52,15 +59,6 @@ const AdminPortfolio = () => {
       name: "Portfolio name",
       cell: (row) => (
         <div className="flex items-center gap-3">
-          {/* <div className="h-10 w-10 rounded-full overflow-hidden bg-[#f2f2f2]">
-            <Image
-              src={`https://olaitanakinlade.com/${row.thumbnail}`} // Adjust the path if necessary
-              alt={row.portfolioName}
-              width={40}
-              height={40}
-              className="object-cover h-full w-full"
-            />
-          </div> */}
           <div>
             <div className="font-medium text-[#292D32]">
               {row.portfolioName}
@@ -96,23 +94,39 @@ const AdminPortfolio = () => {
     {
       name: "",
       cell: (row) => (
-        <button
-          className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
-          onClick={() =>
-            router.push(
-              `/admin-portfolio/${encodeURIComponent(
-                row.portfolioName
-              )}?&description=${encodeURIComponent(
-                row.description
-              )}&portfolioId=${encodeURIComponent(row.id)}`
-            )
-          }
-        >
-          <span>
-            <Image src={eyeIcon} alt="img" />
-          </span>
-          Details
-        </button>
+        <div className="flex items-center gap-2">
+          <Popconfirm
+            title="Delete the portfolio"
+            description="Are you sure to delete this portfolio?"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => {
+              handleDeletePortfolio(row.id);
+            }}
+          >
+            <button>
+              <Image src={trashIcon} alt="" />
+            </button>
+          </Popconfirm>
+
+          <button
+            className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
+            onClick={() =>
+              router.push(
+                `/admin-portfolio/${encodeURIComponent(
+                  row.portfolioName
+                )}?&description=${encodeURIComponent(
+                  row.description
+                )}&portfolioId=${encodeURIComponent(row.id)}`
+              )
+            }
+          >
+            <span>
+              <Image src={eyeIcon} alt="img" />
+            </span>
+            Details
+          </button>
+        </div>
       ),
       right: true,
       grow: 1,
@@ -202,9 +216,7 @@ const AdminPortfolio = () => {
     }
   };
 
-  const handleUpdatePortfolio = async () => {
-    
-  };
+  const handleUpdatePortfolio = async () => {};
 
   const fetchServices = async () => {
     try {

@@ -31,38 +31,7 @@ interface Service {
   description: string;
 }
 
-// const services: Service[] = [
-//   {
-//     serviceName: "Weddings",
-//     packages: [
-//       { name: "Basic", price: "200" },
-//       { name: "Classic", price: "200" },
-//       { name: "Premium", price: "200" },
-//     ],
-//     status: true,
-//     lastUpdated: "Today",
-//   },
-//   {
-//     serviceName: "Birthdays",
-//     packages: [
-//       { name: "Basic", price: "200" },
-//       { name: "Classic", price: "200" },
-//       { name: "Premium", price: "200" },
-//     ],
-//     status: true,
-//     lastUpdated: "Today",
-//   },
-//   {
-//     serviceName: "Kids",
-//     packages: [
-//       { name: "Basic", price: "200" },
-//       { name: "Classic", price: "200" },
-//       { name: "Premium", price: "200" },
-//     ],
-//     status: false,
-//     lastUpdated: "Today",
-//   },
-// ];
+
 
 export default function Services() {
   const [openCreateService, setOpenCreateService] = useState(false);

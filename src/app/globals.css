@@ -69,6 +69,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-playfair: var(--font-play-fair);
+  --font-manrope: var(--font-manrope);
 
   /* Fonts  */
   --font-grotesk-light: grotesk-light;
@@ -91,23 +92,23 @@
   --color-darker-grey: #151515;
   --color-dark-grey: #2d2d2c;
   --color-admin-grey: #878787;
-  --color-admin-black-100: #292D32;
+  --color-admin-black-100: #292d32;
   --color-admin-grey-300: #667085;
-  --color-white-100: #F5F5F5;
-  --color-yellow-50: #FBFAF7;
-  --color-neutral-light: #E5E5E5;
+  --color-white-100: #f5f5f5;
+  --color-yellow-50: #fbfaf7;
+  --color-neutral-light: #e5e5e5;
   --color-admin-black-150: #101010;
-  --color-admin-light-50: #EFEEEE;
-  --color-admin-light-50: #EFEEEE;
-  --color-bayfi-grey: #DCDCDC;
-  --color-bayfi-grey-300: #F6F6F6;
-  --color-grayish-500: #4B5563;
-  --color-grayish-700: #C3C3C2;
-  --color-white-200: #ECECEB;
+  --color-admin-light-50: #efeeee;
+  --color-admin-light-50: #efeeee;
+  --color-bayfi-grey: #dcdcdc;
+  --color-bayfi-grey-300: #f6f6f6;
+  --color-grayish-500: #4b5563;
+  --color-grayish-700: #c3c3c2;
+  --color-white-200: #ececeb;
 
-  --color-purple-secondary-600: #5900D9;
-  --color-purple-secondary-500: #6200EE;
-  --color-badges-color2: #F7F8FA;
+  --color-purple-secondary-600: #5900d9;
+  --color-purple-secondary-500: #6200ee;
+  --color-badges-color2: #f7f8fa;
   --color-calendar-gray: #212121;
 
   --color-gray-500: #757575;
@@ -181,7 +182,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-
 body {
   font-family: "grotesk-medium", sans-serif;
   background-color: #101010;
@@ -249,7 +249,6 @@ a {
   }
 }
 
-
 .aboutLandingBG::before,
 .catalogueBG::before,
 .contactBG::before {
@@ -307,7 +306,6 @@ a {
   min-height: 500px;
   height: 500px;
 }
-
 
 .parallax-bg {
   position: relative;
@@ -379,7 +377,6 @@ a {
   }
 }
 
-
 .loginBackgroundImage {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("../assets/images/ladyAuthImage.png");
@@ -392,15 +389,13 @@ a {
 
 .custom-switch.ant-switch-checked,
 .custom_switch.ant-switch-checked {
-  background-color: #D9C9AE !important;
+  background-color: #d9c9ae !important;
 }
-
 
 /* Style when switch is NOT checked (OFF) */
 .custom_switch:not(.ant-switch-checked) {
   background-color: grey !important;
 }
-
 
 @media (min-width: 1400px) {
   .footer {
@@ -497,7 +492,6 @@ a {
   scrollbar-width: none;
 }
 
-
 /* Packages scroll */
 .scroller {
   max-width: 80vw;
@@ -505,8 +499,6 @@ a {
   overflow: hidden;
   padding-block: 0.2rem;
 }
-
-
 
 .about-scroller {
   max-width: 90vw !important;
@@ -531,11 +523,13 @@ a {
 
 .scroller {
   overflow: hidden;
-  -webkit-mask: linear-gradient(90deg,
-      transparent,
-      white 20%,
-      white 80%,
-      transparent);
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
   mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
 }
 
@@ -579,14 +573,14 @@ a {
   gap: 10px !important;
 }
 
-
 .sessionForm_modal .ant-modal-content {
   position: relative;
   background-color: #282824 !important;
   background-clip: padding-box;
   border: 0;
   border-radius: 20px !important;
-  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   pointer-events: auto;
   padding: 0 !important;
   /* padding: 20px 24px; */
@@ -604,12 +598,11 @@ a {
   overflow-y: auto;
 }
 
-
 /* CUSTOM DATE PICKER */
 /* datepicker.css */
 .react-datepicker {
   background-color: #1a1a1a !important;
-  color: #BABABA;
+  color: #bababa;
   border: 1px solid #575252;
   border-radius: 0.75rem;
 }
@@ -624,7 +617,6 @@ a {
 .react-datepicker__time-list-item--selected {
   background-color: #333 !important;
 }
-
 
 .reveal-text {
   perspective: 1000px;
@@ -655,7 +647,6 @@ a {
   }
 }
 
-
 .scrollbar {
   scrollbar-width: none;
 }
@@ -666,7 +657,13 @@ a {
 
 .gradient-border-button {
   border: 2px solid transparent;
-  border-image: linear-gradient(to right, #FFFFFF66 40%, #FFFFFF00 0.01%, #FFFFFF00 0.01%, #FFFFFF1A 10%);
+  border-image: linear-gradient(
+    to right,
+    #ffffff66 40%,
+    #ffffff00 0.01%,
+    #ffffff00 0.01%,
+    #ffffff1a 10%
+  );
   border-image-slice: 1;
 }
 
@@ -678,7 +675,6 @@ a {
   height: 900px;
 } */
 
-
 /* EVENT VIEW */
 
 .sx-react-calendar-wrapper {
@@ -688,19 +684,17 @@ a {
   max-height: 90vh;
 }
 
-
-.sx__calendar-header{
+.sx__calendar-header {
   display: none !important;
 }
 
-.sx__time-grid-event{
+.sx__time-grid-event {
   cursor: pointer !important;
 }
 
-.sx__time-grid-event-title{
+.sx__time-grid-event-title {
   font-size: 16px !important;
 }
-
 
 .calendar-wrapper {
   background: #0d0d0d;
@@ -708,7 +702,7 @@ a {
   border-radius: 16px;
   padding: 24px;
   width: fit-content;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .calendar-title {
@@ -782,7 +776,6 @@ a {
 .booked-legend {
   background-color: orange;
 }
-
 
 /* Variables declaration */
 /* prettier-ignore */
@@ -1233,4 +1226,56 @@ a {
 .rdp-caption_before_exit {
   animation: rdp-fade_out var(--rdp-animation_duration)
     var(--rdp-animation_timing) forwards;
+}
+
+.studio-bg {
+  background-image: linear-gradient(180deg, rgb(123, 96, 67, 0.2), #0d150b),
+    url("../assets/svgs/studio-bg-img.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.glass-nav {
+  background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.15)
+      )
+      padding-box,
+    linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.1) 25%,
+        rgba(255, 255, 255, 0.55) 60%,
+        rgba(255, 255, 255, 0.1) 100%
+      )
+      border-box;
+  border: 1px solid transparent;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Glass card: fill (white/15%) + gradient border + blur 20 */
+.scroll-card {
+  /* Layer 1: inner fill clipped to padding box */
+  /* Layer 2: gradient border clipped to border box */
+  background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.15)
+      )
+      padding-box,
+    linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.1) 35%,
+        rgba(255, 255, 255, 0.55) 70%,
+        rgba(255, 255, 255, 0.1) 100%
+      )
+      border-box;
+
+  border: 1px solid transparent; /* reveals the border gradient */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px); /* Safari */
 }

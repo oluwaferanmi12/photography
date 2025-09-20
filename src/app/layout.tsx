@@ -1,6 +1,7 @@
 "use client";
 // import type { Metadata } from "next";
-import { Geist_Mono, Playfair } from "next/font/google";
+import { Geist_Mono, Playfair, Manrope } from "next/font/google";
+
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Lenis from "@studio-freight/lenis";
@@ -15,6 +16,10 @@ const geistMono = Geist_Mono({
 
 const playFair = Playfair({
   variable: "--font-play-fair",
+  subsets: ["latin"],
+});
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
@@ -38,7 +43,7 @@ export default function RootLayout({
     // <ViewTransitions>
       <html lang="en">
         <body
-          className={`antialiased ${geistMono.variable} ${playFair.variable} `}
+          className={`antialiased ${geistMono.variable} ${playFair.variable} ${manrope.variable}`}
         >
           <AntdRegistry>{children}</AntdRegistry>
           <Toaster richColors />

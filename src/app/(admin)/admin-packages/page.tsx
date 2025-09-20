@@ -29,9 +29,13 @@ interface Service {
   status: boolean;
   lastUpdated: string;
   description: string;
+  tags: string;
+  images: {
+    id: string;
+    imageUrl: string;
+    serviceId: string;
+  }[];
 }
-
-
 
 export default function Services() {
   const [openCreateService, setOpenCreateService] = useState(false);
@@ -50,9 +54,11 @@ export default function Services() {
   const [idSelected, setIdSelected] = useState("");
   const [modalActive, setModalActive] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [serviceId, setServiceId] = useState("");
+  const [imagesPreview, setImagePreview] = useState<string[]>([]);
   const router = useRouter();
 
-  // Fetch services and their packages
+
   const fetchServices = async () => {
     try {
       const serviceRes = await apiCall("get", "/Admin/Services");
@@ -77,17 +83,20 @@ export default function Services() {
                 name: pkg.title,
                 price: pkg.price,
               })),
-              status: true, // Or derive from API if available
+              tags: service.tags,
+              status: true,
               lastUpdated: new Date(service.lastModified).toDateString(),
+              images: service.images,
             };
           } catch (err) {
-            console.error("Error fetching packages:", err);
             return {
               id: service.id,
+              tags: service.tags,
               serviceName: service.title,
               description: service.description,
               packages: [],
               status: true,
+              images: service.images,
               lastUpdated: new Date(service.lastModified).toDateString(),
             };
           }
@@ -105,6 +114,7 @@ export default function Services() {
   useEffect(() => {
     fetchServices();
   }, []);
+
 
   // CREATE SERVICES
   const handleCreateService = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -134,7 +144,7 @@ export default function Services() {
       setTagsError("");
     }
 
-    if (thumbnails.length === 0) {
+    if (thumbnails.length === 0 && !imagesPreview.length) {
       setThumbnailError("Please upload at least one image");
       hasError = true;
     } else setThumbnailError("");
@@ -149,7 +159,9 @@ export default function Services() {
       formData.append("Title", serviceName);
       formData.append("Description", description);
       formData.append("Tags", tags);
-
+      if (serviceId) {
+        formData.append("Id", serviceId);
+      }
       thumbnails.forEach((file) => {
         formData.append("Images", file);
       });
@@ -167,7 +179,6 @@ export default function Services() {
       setOpenCreateService(false);
       fetchServices();
     } catch (error) {
-      console.log(error);
       toast.error("An error occured while creating service");
     } finally {
       setCreateServiceLoading(false);
@@ -235,7 +246,24 @@ export default function Services() {
       cell: (row) => (
         <div className="flex items-center gap-2">
           <button
-            className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
+            onClick={() => {
+              setServiceName(row.serviceName);
+              setServiceId(row.id);
+              setTags(row.tags);
+              setOpenCreateService(true);
+              setImagePreview((prev) =>
+                row.images.map(
+                  (item) => `${process.env.NEXT_PUBLIC_API_URL + item.imageUrl}`
+                )
+              );
+              setDescription(row.description);
+            }}
+            className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] rounded-md text-sm text-[#615F5F] hover:bg-gray-50 whitespace-nowrap"
+          >
+            Edit
+          </button>
+          <button
+            className="flex items-center cursor-pointer gap-2 px-4 py-3 border border-[#EFEEEE] whitespace-nowrap rounded-md text-sm text-[#615F5F] hover:bg-gray-50"
             onClick={() =>
               router.push(
                 `/admin-packages/${encodeURIComponent(
@@ -256,7 +284,7 @@ export default function Services() {
               setModalActive(true);
               setIdSelected(row.id);
             }}
-            className="text-[red] cursor-pointer"
+            className="text-[red] cursor-pointer whitespace-nowrap"
           >
             Delete
           </p>
@@ -265,6 +293,7 @@ export default function Services() {
       right: true,
     },
   ];
+  console.log(imagesPreview, "Images preview");
 
   return (
     <AdminPageLayout
@@ -391,6 +420,7 @@ export default function Services() {
                     error={thumbnailError}
                     multiple={true}
                     resetTrigger={resetCounter}
+                    imagesPreview={imagesPreview}
                   />
                 </div>
 
@@ -399,7 +429,7 @@ export default function Services() {
               <div className="mt-5">
                 <AdminSubmitButton
                   loading={createServiceLoading}
-                  text="Create Service"
+                  text={serviceId ? "Edit service" : "Create Service"}
                 />
               </div>
             </form>

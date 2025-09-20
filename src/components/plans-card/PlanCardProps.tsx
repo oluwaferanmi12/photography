@@ -45,7 +45,6 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
               <Switch
                 defaultChecked={planActiveness}
                 checked={planActiveness}
-                // onChange={() => setIsPlanActive(!isPlanActive)}
                 className="custom_switch"
               />
             </div>
@@ -67,7 +66,6 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
             }  `}
           >
             $ {planAmount}
-            {variant === "user" ? "/ hr" : ""}
           </div>
         )}
 

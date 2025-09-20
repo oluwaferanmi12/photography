@@ -11,6 +11,7 @@ type ThumbnailUploadProps = {
   multiple?: boolean; // new prop
   labelTitle?: string;
   resetTrigger?: number;
+  imagesPreview?: string[];
 };
 
 export default function ThumbnailUpload({
@@ -19,9 +20,12 @@ export default function ThumbnailUpload({
   multiple = false,
   labelTitle = "Thumbnail",
   resetTrigger,
+  imagesPreview,
 }: ThumbnailUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previews, setPreviews] = useState<string[]>([]);
+  const [previews, setPreviews] = useState<string[]>(
+    imagesPreview?.length ? imagesPreview : []
+  );
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
@@ -46,6 +50,10 @@ export default function ThumbnailUpload({
       previews.forEach((url) => URL.revokeObjectURL(url));
     };
   }, [previews]);
+
+  useEffect(() => {
+    setPreviews(imagesPreview && imagesPreview.length ? imagesPreview : []);
+  }, [imagesPreview]);
 
   // 👇 Reset previews when resetTrigger changes
   useEffect(() => {
@@ -97,6 +105,7 @@ export default function ThumbnailUpload({
             ))}
           </div>
         )}
+
         <input
           type="file"
           multiple={multiple}
@@ -105,6 +114,19 @@ export default function ThumbnailUpload({
           className="hidden"
         />
       </div>
+
+      {imagesPreview?.length && (
+        <div className="grid grid-cols-2 gap-4 w-full">
+          {imagesPreview.map((url, i) => (
+            <img
+              key={i}
+              src={url}
+              alt={`preview-${i}`}
+              className="h-32 rounded-md object-contain"
+            />
+          ))}
+        </div>
+      )}
 
       {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
     </div>

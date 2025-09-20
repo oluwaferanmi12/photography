@@ -11,6 +11,7 @@ import { PlanCardProps } from "@/components/plans-card/PlanCardProps";
 import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
 import { SinglePageTopHeader } from "@/components/admin-components/sideNav/singlepage-top-header/singlepage-top-header";
+import { PackageInterface } from "../../../../../interface/interface";
 
 export default function SinglePackage() {
   const [openAddPackage, setOpenAddPackage] = useState(false);
@@ -28,19 +29,16 @@ export default function SinglePackage() {
   const [createPackageLoading, setCreatePackageLoading] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [packageData, setPackageData] = useState([]);
-
-  // const planBenefit = [
-  //   "Consultation call",
-  //   "60 min. session",
-  //   "1 - 2 outfit",
-  //   "max 4 people",
-  //   "10 images professional edited and delivered in an online gallery",
-  //   "$20 per additional image",
-  //   "$50 per additional person",
-  //   "$125 per additional hour",
-  // ];
-
-  // SINGLE PACKAGES
+  const [packagePayload, setPackagePayload] = useState<PackageInterface>({
+    active: true,
+    description: "",
+    details: "",
+    id: "",
+    lastModified: "",
+    price: 0,
+    serviceId: "",
+    title: "",
+  });
 
   const singlePackage = async () => {
     setLoading(true);
@@ -62,20 +60,19 @@ export default function SinglePackage() {
     singlePackage();
   }, []);
 
-  // CREATE SERVICES
   const handleCreatePackages = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCreatePackageLoading(true);
 
     let isError = false;
 
-    if (!packageName.trim()) {
+    if (!packagePayload.title.trim()) {
       setPackageNameError("Please enter package name");
       isError = true;
     } else {
       setPackageNameError("");
     }
-    if (!packageDescription.trim()) {
+    if (!packagePayload.description.trim()) {
       setPackageDescriptionError("Please enter package description");
       isError = true;
     } else {
@@ -87,7 +84,6 @@ export default function SinglePackage() {
     } else {
       setPackagePriceError("");
     }
-
     if (isError) {
       setCreatePackageLoading(false);
       return;
@@ -96,11 +92,11 @@ export default function SinglePackage() {
     try {
       await apiCall("post", "/Admin/Services/packages", {
         serviceId: serviceId,
-        title: packageName,
-        description: packageDescription,
+        title: packagePayload.title,
+        description: packagePayload.description,
         active: true,
         details: "",
-        price: packagePrice,
+        price: packagePayload.price,
       });
       toast.success("Package Created Successfully");
       setPackageName("");
@@ -109,8 +105,35 @@ export default function SinglePackage() {
       setOpenAddPackage(false);
       singlePackage();
     } catch (error) {
-      console.log(error);
       toast.error("An error occured while creating package");
+    } finally {
+      setCreatePackageLoading(false);
+    }
+  };
+
+  const handleEditPackage = async (e: React.FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      setCreatePackageLoading(true);
+      const { id, ...rest } = packagePayload;
+      const result = await apiCall(
+        "post",
+        `/Admin/Services/packages/update/${packagePayload.id}`,
+        rest
+      );
+      setPackagePayload({
+        active: true,
+        description: "",
+        details: "",
+        id: "",
+        lastModified: "",
+        price: 0,
+        serviceId: "",
+        title: "",
+      });
+      setOpenAddPackage(false);
+      singlePackage();
+    } catch (e) {
     } finally {
       setCreatePackageLoading(false);
     }
@@ -150,6 +173,10 @@ export default function SinglePackage() {
                           planDescription={pkg.description}
                           planActiveness={pkg.active}
                           packages={pkg}
+                          editClicked={() => {
+                            setOpenAddPackage(true);
+                            setPackagePayload(pkg);
+                          }}
                         />
                       </Col>
                     ))}
@@ -170,10 +197,26 @@ export default function SinglePackage() {
         <ResponsiveDrawer
           title="Add a package"
           open={openAddPackage}
-          onClose={() => setOpenAddPackage(false)}
+          onClose={() => {
+            setOpenAddPackage(false);
+            setPackagePayload({
+              active: true,
+              description: "",
+              details: "",
+              id: "",
+              lastModified: "",
+              price: 0,
+              serviceId: "",
+              title: "",
+            });
+          }}
         >
           <div className="pb-14">
-            <form onSubmit={handleCreatePackages}>
+            <form
+              onSubmit={
+                packagePayload.id ? handleEditPackage : handleCreatePackages
+              }
+            >
               <div className="flex flex-col gap-4">
                 <div className="w-full flex flex-col gap-3">
                   <label
@@ -183,10 +226,18 @@ export default function SinglePackage() {
                     Package name
                   </label>
                   <Input
-                    value={packageName}
+                    value={packagePayload.title}
                     onChangeInput={(e) => {
-                      setPackageName(e.target.value);
-                      if (packageNameError) setPackageNameError("");
+                      setPackagePayload((prev) => ({
+                        ...prev,
+                        title: e.target.value,
+                      }));
+                      if (packageNameError) {
+                        setPackagePayload((prev) => ({
+                          ...prev,
+                          title: "",
+                        }));
+                      }
                     }}
                     variant="admin"
                     placeholder="Basic"
@@ -203,12 +254,21 @@ export default function SinglePackage() {
                     Price
                   </label>
                   <Input
-                    value={packagePrice?.toString() || ""}
+                    value={String(packagePayload.price)}
                     type="number"
                     onChangeInput={(e) => {
                       const value = parseFloat(e.target.value);
-                      setPackagePrice(isNaN(value) ? undefined : value);
-                      if (packagePriceError) setPackagePriceError("");
+                      setPackagePayload((prev) => ({
+                        ...prev,
+                        price: value,
+                      }));
+                      if (packagePriceError) {
+                        setPackagePriceError("");
+                        setPackagePayload((prev) => ({
+                          ...prev,
+                          price: 0,
+                        }));
+                      }
                     }}
                     variant="admin"
                     placeholder="100"
@@ -226,12 +286,18 @@ export default function SinglePackage() {
                   </label>
                   <div className="border-bayfi-grey text-[#868D96] placeholder:text-[#868D96] border py-4 px-3 rounded-lg bg-bayfi-grey-300">
                     <textarea
-                      value={packageDescription}
+                      value={packagePayload.description}
                       placeholder="Package description"
                       onChange={(e) => {
-                        setPackageDescription(e.target.value);
+                        setPackagePayload((prev) => ({
+                          ...prev,
+                          description: e.target.value,
+                        }));
                         if (packageDescriptionError)
-                          setPackageDescriptionError("");
+                          setPackagePayload((prev) => ({
+                            ...prev,
+                            description: "",
+                          }));
                       }}
                       className="bg-transparent placeholder:text-sm  focus:outline-0  w-full"
                       rows={3}
@@ -247,7 +313,7 @@ export default function SinglePackage() {
               <div className="mt-5">
                 <AdminSubmitButton
                   loading={createPackageLoading}
-                  text="Create a package"
+                  text={packagePayload.id ? "Edit package" : "Create a package"}
                 />
               </div>
             </form>

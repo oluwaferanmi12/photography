@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import InfiniteCarousel from "@/components/unending-carousel/unending-carousel";
 import { Banner } from "@/components/banner/banner";
@@ -37,6 +37,7 @@ const SinglePackages = () => {
     PortfolioImage[]
   >([]);
   const [portfolioData, setPortfolioData] = useState<PortfolioProps[]>([]);
+  const pricingRef = useRef<HTMLDivElement | null>(null);
   const [packageData, setPackageData] = useState([]);
   const [attachedServices, setAttachedServices] = useState<
     { label: string; value: string }[]
@@ -44,6 +45,13 @@ const SinglePackages = () => {
   const router = useRouter();
 
   const { slug } = useParams();
+
+  const scrollToPricing = () => {
+    // If you have a fixed header, prefer scroll-margin (see below).
+    pricingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Optional a11y: move focus so keyboard/screen readers land here too
+    pricingRef.current?.focus?.();
+  };
 
   // Fetch all portfolios
   const fetchPortfolio = async () => {
@@ -98,8 +106,6 @@ const SinglePackages = () => {
   useEffect(() => {
     if (attachedServices.length > 0 && portfolioData.length > 0 && slug) {
       const matchedPortfolio = portfolioData.find((info) => info.id === slug);
-      console.log("i am matched port ", matchedPortfolio);
-
       if (matchedPortfolio) {
         const matchedService = attachedServices.find(
           (s) => s.label === matchedPortfolio.service
@@ -171,6 +177,9 @@ const SinglePackages = () => {
               textColor="text-white"
               borderVariant="light"
               text={`See pricing`}
+              onClick={() => {
+                scrollToPricing()
+              }}
             />
           </div>
           <span className="hidden lg:flex">
@@ -198,7 +207,7 @@ const SinglePackages = () => {
             <h3 className=" text-5xl lg:text-7xl capitalize ">
               {singlePortfolioInfo?.portfolioName} Packages
             </h3>
-            <div className="mt-10">
+            <div className="mt-10" ref={pricingRef}>
               {!loading ? (
                 packageData.length ? (
                   <Row gutter={[32, 32]}>

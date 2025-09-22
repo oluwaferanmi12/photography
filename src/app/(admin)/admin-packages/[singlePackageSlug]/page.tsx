@@ -78,7 +78,7 @@ export default function SinglePackage() {
     } else {
       setPackageDescriptionError("");
     }
-    if (!packagePrice) {
+    if (!packagePayload.price) {
       setPackagePriceError("Please enter package price");
       isError = true;
     } else {

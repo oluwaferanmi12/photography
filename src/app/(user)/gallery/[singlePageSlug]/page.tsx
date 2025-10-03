@@ -32,7 +32,6 @@ const GallerySinglePage = () => {
   const imageCount = searchParams.get("imageNo");
   const [submitLoading, setSubmitLoading] = useState(false);
   const [showSelectedImages, setShowSelectedImages] = useState(false);
-  const [galleryDetails, setGalleryDetails] = useState();
   const [canNotSelect, setCanNotSelect] = useState(false);
 
   const fetchClient = async () => {
@@ -112,10 +111,36 @@ const GallerySinglePage = () => {
       setSubmitLoading(false);
     }
   };
-    const handleGetImageName = (val_: string) => {
+  const handleGetImageName = (val_: string) => {
     const splitImage = val_.split("/");
-    return splitImage[splitImage.length - 1]
-  }
+    return splitImage[splitImage.length - 1];
+  };
+
+  const handleDownloadImage = async (rawUrl: string, fileName: string) => {
+    try {
+      // encode spaces and other unsafe chars in the *full* URL
+      const encodedUrl = encodeURI(rawUrl);
+
+      const res = await fetch(encodedUrl, { credentials: "include" });
+      if (!res.ok) throw new Error(`Failed to fetch image: ${res.status}`);
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download =
+        fileName || encodedUrl.split("/").pop()?.split("?")[0] || "image.png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error(err);
+      toast.error("Could not download the image.");
+    }
+  };
 
   return (
     <div>
@@ -244,7 +269,7 @@ const GallerySinglePage = () => {
                         handleSelectedImages(item);
                       }}
                     >
-                      <div className="flex items-center gap-2 absolute top-4 left-4">
+                      <div className="flex items-center gap-2 absolute bottom-4 left-4 z-40">
                         <span>
                           <Image
                             src={
@@ -257,7 +282,16 @@ const GallerySinglePage = () => {
                             alt=""
                           />
                         </span>
-                        <span>
+                        <span
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const imageName = handleGetImageName(item.imageUrl);
+                            handleDownloadImage(
+                              `${baseUrl + item.imageUrl}`,
+                              imageName
+                            );
+                          }}
+                        >
                           <Image src={downloadIcon} alt="" />
                         </span>
                       </div>

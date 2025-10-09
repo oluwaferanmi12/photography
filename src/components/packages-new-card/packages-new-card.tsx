@@ -136,7 +136,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
       <Row align={"stretch"} gutter={[32, 32]}>
         <Col xs={24} lg={8}>
           <div className="p-6 h-full">
-            <p className="text-3xl lg:text-5xl font-bold mt-4 text-[#F8F8F8F2]/95">
+            <p className="text-3xl lg:text-5xl font-bold mt-4  text-[#F8F8F8F2]/95">
               {title}
             </p>
             <p className="text-sm text-[#F8F8F8B2]/70 my-2">{description}</p>
@@ -181,6 +181,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
                   planAmount={pkg.price}
                   planDescription={pkg.description}
                   packages={pkg}
+                  title={title}
                 />
               </Col>
             ))}

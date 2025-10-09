@@ -16,6 +16,7 @@ type planCardInterface = {
   planActiveness?: boolean;
   packages?: any;
   editClicked?: () => void;
+  title?: string
 };
 
 export const PlanCardProps: React.FC<planCardInterface> = ({
@@ -26,8 +27,10 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   variant = "user",
   packages,
   editClicked,
+  title
 }) => {
   const router = useRouter();
+
   return (
     <div>
       <div
@@ -67,7 +70,7 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
                 : "border border-[#E9EBF8] mt-5"
             }  `}
           >
-            $ {planAmount}
+            $ {planAmount} {title === "Events" && "/hr"}
           </div>
         )}
 

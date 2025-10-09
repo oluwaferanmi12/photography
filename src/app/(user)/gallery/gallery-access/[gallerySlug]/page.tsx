@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Footer } from "@/components/footer/footer";
 import { Row, Col, Grid } from "antd";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -12,12 +12,14 @@ import Button from "@/components/button/button";
 import { toast } from "sonner";
 import { apiCall } from "@/axios/axios";
 import { baseUrl } from "@/lib/base-url";
+import { validate, version } from "uuid";
+import { GalleryItem } from "../../../../../../interface/interface";
 
 const GalleryAccessPage = () => {
   const params = useParams();
   const searchParams = useSearchParams();
   const gallerySlug = params?.gallerySlug as string;
-  const imgSrc = searchParams.get("imgSrc");
+  const [imgSrc, setImgSrc] = useState(searchParams.get("imgSrc"));
   const id = searchParams.get("id");
   const imageCount = searchParams.get("imageNo");
   const pageName = gallerySlug.replace(/-/g, " ");
@@ -27,6 +29,16 @@ const GalleryAccessPage = () => {
   const [buttonLoading, setButtonLoading] = useState(false);
   const { useBreakpoint } = Grid;
   const screens = useBreakpoint();
+  const [galleryDetails, setGalleryDetails] = useState<GalleryItem>();
+
+  const getGallery = async () => {
+    try {
+      const result = await apiCall("get", `/Gallery/${gallerySlug}`);
+
+      setGalleryDetails(result.data[0]);
+      setImgSrc(result.data[0].imageUrl);
+    } catch (e) {}
+  };
 
   const handleAccessLogin = async () => {
     // do validation
@@ -44,13 +56,19 @@ const GalleryAccessPage = () => {
         pageName.toLowerCase().replace(/ /g, "-")
       );
       const encodedId = encodeURIComponent(id || "");
-      const encodedCound = encodeURIComponent(imageCount || "")
+      const encodedCound = encodeURIComponent(imageCount || "");
 
       router.push(
         `/gallery/${singlePageSlug}?id=${encodedId}&imageNo=${encodedCound}`
       );
     } catch (e) {}
   };
+
+  useEffect(() => {
+    if (gallerySlug && validate(gallerySlug)) {
+      getGallery();
+    }
+  }, [gallerySlug]);
 
   return (
     <div>
@@ -75,10 +93,13 @@ const GalleryAccessPage = () => {
               </Col>
               <Col xs={{ span: 24, order: 1 }} lg={{ span: 14, order: 2 }}>
                 <div>
-                  <h3 className="font-playfair text-4xl mb-8 capitalize">
-                    {" "}
-                    {pageName}{" "}
-                  </h3>
+                  {!!validate(pageName) && (
+                    <h3 className="font-playfair text-4xl mb-8 capitalize">
+                      {" "}
+                      {pageName}{" "}
+                    </h3>
+                  )}
+
                   <div className="py-8 px-10 w-full lg:w-[80%] rounded-[20px] bg-[#282824]">
                     <div className="flex gap-3 place-items-center">
                       <span>

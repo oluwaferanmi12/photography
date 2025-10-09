@@ -77,3 +77,11 @@ export interface PackageInterface {
   serviceId: string;
   title: string;
 }
+
+export interface GalleryItem {
+  galleryId: string;
+  selected: boolean;
+  imageUrl: string;
+  finalImage: boolean;
+  id: string;
+}

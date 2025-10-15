@@ -40,7 +40,7 @@ export default function SingleAdminGallery() {
     setLoading(true);
     try {
       const response = await apiCall("get", `Gallery/${clientId}`);
-      setSingleClientData(response.data);
+      setSingleClientData(response.data.images);
     } catch (error) {
       console.log(error);
       toast.error("An error occured while loading data");

@@ -38,7 +38,7 @@ const GallerySinglePage = () => {
     try {
       const clientRes = await apiCall("get", `/Gallery/${id}`);
 
-      setGalleryData(clientRes.data);
+      setGalleryData(clientRes.data.images);
       setSelectedImages(clientRes.data.filter((item) => item.selected));
     } catch (error) {
       console.error("Error fetching services:", error);

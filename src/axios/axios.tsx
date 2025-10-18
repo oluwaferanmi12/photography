@@ -44,7 +44,9 @@ instance.interceptors.response.use(
       toast.error("Unexpected error ocurred!");
     }
     if (error.response?.status == 401 || error.response?.status == 403) {
-      window.location.href = "/login";
+      if (!window.location.pathname.includes("gallery")) {
+        window.location.href = "/login";
+      }
     }
     return Promise.reject(error);
   }

@@ -51,6 +51,7 @@ const GalleryAccessPage = () => {
         password,
         userName: email,
       });
+      console.log(result, "Result for login here")
       localStorage.setItem("user-gallery-detail", JSON.stringify(result.data));
       const singlePageSlug = encodeURIComponent(
         pageName.toLowerCase().replace(/ /g, "-")
@@ -61,12 +62,14 @@ const GalleryAccessPage = () => {
       router.push(
         `/gallery/${singlePageSlug}?id=${encodedId}&imageNo=${encodedCound}`
       );
-    } catch (e) {}
+    } catch (e) {
+      console.log(e, "Error here")
+    }
   };
 
   useEffect(() => {
     if (gallerySlug && validate(gallerySlug)) {
-      getGallery();
+      // getGallery();
     }
   }, [gallerySlug]);
 

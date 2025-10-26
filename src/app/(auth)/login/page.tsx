@@ -23,11 +23,15 @@ export default function Login() {
         password,
       });
 
-      localStorage.setItem("userDetails", JSON.stringify(response.data));
-      toast.success("Authorized Successfully");
-      router.push("/booking");
+      if (!response.data.roles) {
+        router.push("/");
+      } else {
+        localStorage.setItem("userDetails", JSON.stringify(response.data));
+        toast.success("Authorized Successfully");
+        router.push("/booking");
+      }
     } catch (error) {
-      toast.error("Something went wrong")
+      toast.error("Something went wrong");
       console.log(error);
     } finally {
       setLoading(false);

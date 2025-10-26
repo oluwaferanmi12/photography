@@ -23,7 +23,7 @@ export default function Login() {
         password,
       });
 
-      if (!response.data.role) {
+      if (!response.data.roles) {
         router.push("/");
       } else {
         localStorage.setItem("userDetails", JSON.stringify(response.data));

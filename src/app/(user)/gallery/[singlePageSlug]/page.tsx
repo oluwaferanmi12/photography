@@ -13,6 +13,7 @@ import selectedIcon from "@/assets/svgs/selectedIcon.svg";
 import downloadIcon from "@/assets/svgs/downloadIcon.svg";
 import selectedIconActive from "@/assets/svgs/selectedIconActive.svg";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
+import moment from "moment";
 
 interface ImagesProps {
   id: string;
@@ -23,11 +24,12 @@ interface ImagesProps {
 
 const GallerySinglePage = () => {
   const [galleryData, setGalleryData] = useState<ImagesProps[]>([]);
+  const [galleryInfo, setGalleryInfo] = useState<any>();
   const [selectedImages, setSelectedImages] = useState<ImagesProps[]>([]);
   const params = useParams();
   const searchParams = useSearchParams();
   const singlePageSlug = params?.singlePageSlug as string;
-  const pageName = singlePageSlug.replace(/-/g, " ");
+  const [pageName, setPageName] = useState("");
   const id = searchParams.get("id");
   const imageCount = searchParams.get("imageNo");
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -36,8 +38,12 @@ const GallerySinglePage = () => {
 
   const fetchClient = async () => {
     try {
-      const clientRes = await apiCall("get", `/Gallery/${id}`);
-
+      const clientRes = await apiCall(
+        "get",
+        `/Gallery/${id ? id : singlePageSlug}`
+      );
+      console.log(clientRes, "Client res");
+      setGalleryInfo(clientRes.data.gallery);
       setGalleryData(clientRes.data.images);
       setSelectedImages(clientRes.data.filter((item) => item.selected));
     } catch (error) {
@@ -69,7 +75,7 @@ const GallerySinglePage = () => {
   };
 
   useEffect(() => {
-    if (imageCount && selectedImages.length > +imageCount) {
+    if ((galleryInfo?.imageCount ?? 0 )&& selectedImages.length > +(galleryInfo?.imageCount ?? 0 )) {
       setCanNotSelect(true);
       toast.error("You can not select more images");
     } else {
@@ -216,10 +222,12 @@ const GallerySinglePage = () => {
             <Col xs={24} lg={8}>
               <div className="sticky top-28  self-start">
                 <h3 className="font-playfair text-5xl mb-8 capitalize">
-                  {pageName}
+                  {galleryInfo?.name}
                 </h3>
                 <span className="text-light-brown rounded-md font-medium text-[12px] border border-light-brown bg-[#252426ED]/93 py-1 px-2">
-                  15 January 2025
+                  {moment(galleryInfo?.dateModified ?? "").format(
+                    "D MMMM YYYY"
+                  )}
                 </span>
                 <div className="mt-5">
                   <p className="text-lg text-[#E2E2E2]">

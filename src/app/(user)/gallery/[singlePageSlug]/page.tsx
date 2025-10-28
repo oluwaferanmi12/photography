@@ -75,7 +75,10 @@ const GallerySinglePage = () => {
   };
 
   useEffect(() => {
-    if ((galleryInfo?.imageCount ?? 0 )&& selectedImages.length > +(galleryInfo?.imageCount ?? 0 )) {
+    if (
+      (galleryInfo?.imageCount ?? 0) &&
+      selectedImages.length > +(galleryInfo?.imageCount ?? 0)
+    ) {
       setCanNotSelect(true);
       toast.error("You can not select more images");
     } else {
@@ -107,7 +110,7 @@ const GallerySinglePage = () => {
       setSubmitLoading(true);
       const result = await apiCall(
         "post",
-        `/Gallery/SelectImages/${id}`,
+        `/Gallery/SelectImages/${id ? id : singlePageSlug}`,
         payload
       );
       setShowSelectedImages(false);

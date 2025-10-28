@@ -391,7 +391,7 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
                 //   `/session?serviceId=${packages.serviceId}&packageId=${packages.id}`
                 // );
               }}
-              className="px-6 py-2 rounded-full bg-black/30 backdrop-blur-md text-white font-semibold h-full border border-[red]"
+              className="px-6 py-2 rounded-full bg-black/30 backdrop-blur-md text-white font-semibold h-full"
             >
               Book now
             </button>

@@ -18,6 +18,8 @@ export const ContactFrom = ({
   setCreatePayload,
   handleCreateBooking,
   setShowTerms,
+  variant2,
+  package_,
 }: {
   onSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedService: string;
@@ -26,6 +28,8 @@ export const ContactFrom = ({
   setCreatePayload?: (val: CreateBookingInterface) => void;
   handleCreateBooking?: (e: React.FormEvent<HTMLFormElement>) => void;
   setShowTerms?: (val: boolean) => void;
+  variant2?: boolean;
+  package_?: any;
 }) => {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -75,6 +79,13 @@ export const ContactFrom = ({
       setPackageSelected(packageId ?? "");
     }
   }, [apiPackages, apiServices]);
+
+  useEffect(() => {
+    if (package_ && setCreatePayload && createPayload) {
+      setCreatePayload({ ...createPayload, packageId: package_.id });
+      setApiServiceSelected(package_.serviceId);
+    }
+  }, [package_]);
 
   useEffect(() => {
     if (apiServiceSelected) {
@@ -129,11 +140,20 @@ export const ContactFrom = ({
           <Image src={rollingImage} className="w-20 h-20" alt="rollingImage" />
         </span>
       </div>
+      {package_ && (
+        <div className="mb-6 flex items-center gap-2">
+          <p className="text-white font-grotesk-medium text-4xl">
+            {package_.name}
+          </p>
+          <p className="text-[#D9C9AE] text-5xl">${package_.price}/hr</p>
+        </div>
+      )}
+
       <div className="forms text-[#BABABA]">
         <form onSubmit={handleCreateBooking}>
           <div className="flex flex-col gap-4">
             <div className="flex gap-5">
-              <div className="w-1/2 flex flex-col gap-3">
+              <div className="w-full flex flex-col gap-3">
                 <label htmlFor="firstname">Full Name</label>
                 <Input
                   onChangeInput={(e) => {
@@ -181,67 +201,72 @@ export const ContactFrom = ({
                 placeholder="+1 999-999-999"
               />
             </div>
-            {/* Services */}
-            <div className="w-full flex flex-col gap-3">
-              <label htmlFor="phone">Select Services</label>
-              <div>
-                <select
-                  onChange={(e) => {
-                    setApiServiceSelected(e.target.value);
-                    // setCreatePayload({
-                    //   ...createPayload,
-                    //   : e.target.value,
-                    // });
-                  }}
-                  value={apiServiceSelected}
-                  className="w-full border border-[#575252] text-left text-[#BABABA] px-5 py-2 rounded-xl bg-transparent flex justify-between items-center"
-                >
-                  <option value={""}>Select Services</option>
-                  {apiServices.map((item) => {
-                    return (
-                      <option value={item.id} key={item.id}>
-                        {item.title}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
-            {/* Package */}
-            <div className="w-full flex flex-col gap-3">
-              <label htmlFor="phone">Select package</label>
-              <div>
-                <select
-                  onChange={(e) => {
-                    setPackageSelected(e.target.value);
-                    if (setCreatePayload && createPayload) {
-                      setCreatePayload({
-                        ...createPayload,
-                        packageId: e.target.value,
-                      });
-                    }
-                  }}
-                  value={packageSelected}
-                  className="w-full border border-[#575252] text-left text-[#BABABA] px-5 py-2 rounded-xl bg-transparent flex justify-between items-center"
-                >
-                  <option value={""}>Select package</option>
-                  {apiPackages.map((item) => {
-                    return (
-                      <option value={item.id} key={item.id}>
-                        {item.title}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-              {/* <CustomSelect
+            {!variant2 && (
+              <>
+                {/* Services */}
+                <div className="w-full flex flex-col gap-3">
+                  <label htmlFor="phone">Select Services</label>
+                  <div>
+                    <select
+                      onChange={(e) => {
+                        setApiServiceSelected(e.target.value);
+                        // setCreatePayload({
+                        //   ...createPayload,
+                        //   : e.target.value,
+                        // });
+                      }}
+                      value={apiServiceSelected}
+                      className="w-full border border-[#575252] text-left text-[#BABABA] px-5 py-2 rounded-xl bg-transparent flex justify-between items-center"
+                    >
+                      <option value={""}>Select Services</option>
+                      {apiServices.map((item) => {
+                        return (
+                          <option value={item.id} key={item.id}>
+                            {item.title}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </div>
+                {/* Package */}
+                <div className="w-full flex flex-col gap-3">
+                  <label htmlFor="phone">Select package</label>
+                  <div>
+                    <select
+                      onChange={(e) => {
+                        setPackageSelected(e.target.value);
+                        if (setCreatePayload && createPayload) {
+                          setCreatePayload({
+                            ...createPayload,
+                            packageId: e.target.value,
+                          });
+                        }
+                      }}
+                      value={packageSelected}
+                      className="w-full border border-[#575252] text-left text-[#BABABA] px-5 py-2 rounded-xl bg-transparent flex justify-between items-center"
+                    >
+                      <option value={""}>Select package</option>
+                      {apiPackages.map((item) => {
+                        return (
+                          <option value={item.id} key={item.id}>
+                            {item.title}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                  {/* <CustomSelect
                 variant="user"
                 selectValue={selectedPackage}
                 setSelectedValue={setSelectedPackage}
                 defaultOption="Select package"
                 selectData={packages}
               /> */}
-            </div>
+                </div>
+              </>
+            )}
+
             {/* DATE AND PREFERRED TIME */}
             <div className="flex gap-5">
               {/* Location */}
@@ -288,7 +313,7 @@ export const ContactFrom = ({
               <span
                 className="text-white cursor-pointer"
                 onClick={() => {
-                  if(setShowTerms) setShowTerms(true);
+                  if (setShowTerms) setShowTerms(true);
                 }}
               >
                 Read here

@@ -46,7 +46,7 @@ interface Service {
   images: ImageType[];
 }
 
-const Portfolio = () => {
+const PromoPackages = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [isSessionFormModalOpen, setIsSessionFormModalOpen] = useState(false);
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
@@ -123,6 +123,7 @@ const Portfolio = () => {
               "get",
               `/Admin/Services/packages/${service.id}`
             );
+
             const packages = packageRes?.data?.data?.packages || [];
 
             return {
@@ -156,11 +157,12 @@ const Portfolio = () => {
 
       const filteredVal = enrichedServices.filter(
         (item) =>
-          item.id !== "eab46de3-0f30-4e4c-9ddd-f795244bfd77" &&
-          item.id !== "6f9537e0-0d08-4f48-bf55-0e898aa0c224"
+          item.id == "eab46de3-0f30-4e4c-9ddd-f795244bfd77" ||
+          item.id == "6f9537e0-0d08-4f48-bf55-0e898aa0c224"
       );
       setServices(filteredVal);
     } catch (error) {
+      console.error("Error fetching services:", error);
     } finally {
       setLoading(false);
     }
@@ -334,4 +336,4 @@ const Portfolio = () => {
   );
 };
 
-export default Portfolio;
+export default PromoPackages;

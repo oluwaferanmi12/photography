@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import HS4 from "@/assets/images/HS4.png";
+import HS4 from "@/assets/images/new-Hs4.jpeg";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
 import { Modal } from "antd";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
@@ -197,7 +197,7 @@ const PromoPackages = () => {
               </p>
             </div>
           </div>
-          <div className="scroller !py-14 lg:!py-28" ref={scrollerRef}>
+          {/* <div className="scroller !py-14 lg:!py-28" ref={scrollerRef}>
             <ul
               className={` scroller__inner ${
                 isSessionFormModalOpen || isThankYouModalOpen
@@ -240,7 +240,7 @@ const PromoPackages = () => {
                 );
               })}
             </ul>
-          </div>
+          </div> */}
 
           {/* NEW CARDS */}
           <div className="pb-20 lg:pb-36 flex flex-col gap-20 ">

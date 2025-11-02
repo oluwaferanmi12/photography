@@ -177,7 +177,7 @@ const PromoPackages = () => {
         <div className="px-5 lg:px-14 3xl:!px-28">
           <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
             <div className="flex flex-col gap-8 lg:w-1/2">
-              <h2 className="text-5xl lg:text-7xl">Explore my</h2>
+              <h2 className="text-5xl lg:text-7xl">Christmas</h2>
               <div className="flex gap-5 items-center">
                 <span>
                   <Image
@@ -186,15 +186,14 @@ const PromoPackages = () => {
                     alt="img"
                   />
                 </span>
-                <h2 className=" italic text-5xl lg:text-7xl ">Packages</h2>
+                <h2 className=" italic text-5xl lg:text-7xl ">Photo Special</h2>
               </div>
             </div>
             <div className="lg:w-[70%] text-xl text-light-brown">
               <p>
-                From polished headshots to soulful lifestyle captures, I craft
-                images that do more than just “look good” . They speak volumes.
-                Whether for personal branding, professional needs, or intimate
-                memories, every photo session is a curated experience.
+                Celebrate the season with a simple, stress-free mini session
+                that captures the warmth of your holiday story. Perfect for
+                cards, gifts, and memories you will love to revisit.
               </p>
             </div>
           </div>

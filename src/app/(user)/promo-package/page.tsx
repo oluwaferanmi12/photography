@@ -13,7 +13,6 @@ import makeup_icon from "@/assets/svgs/makeup_icon.svg";
 import birthday_icon from "@/assets/svgs/birthday_icon.svg";
 import family_icon from "@/assets/svgs/makeup_icon.svg";
 import bas_thanks from "@/assets/svgs/BAS_thanks_modal_icon.svg";
-import { ContactBanner } from "@/components/banner/contact-banner";
 import { ContactFrom } from "@/components/contact-form/contact-form";
 import { apiCall } from "@/axios/axios";
 import {
@@ -158,7 +157,7 @@ const PromoPackages = () => {
       const filteredVal = enrichedServices.filter(
         (item) =>
           item.id == "eab46de3-0f30-4e4c-9ddd-f795244bfd77" ||
-          item.id == "6f9537e0-0d08-4f48-bf55-0e898aa0c224"
+          item.id == "eb80aaf9-c9bd-4476-9490-1d42767377aa"
       );
       setServices(filteredVal);
     } catch (error) {

@@ -242,7 +242,7 @@ const PromoPackages = () => {
           </div> */}
 
           {/* NEW CARDS */}
-          <div className="pb-20 lg:pb-36 flex flex-col gap-20 ">
+          <div className="pb-20 lg:pb-36 flex flex-col gap-20 mt-20 ">
             {services.map((service) =>
               service.packages.length <= 1 ? (
                 <PackageCardWithOneImage

@@ -154,11 +154,13 @@ const Portfolio = () => {
         })
       );
 
+      console.log(enrichedServices, "Enriched Services")
       const filteredVal = enrichedServices.filter(
         (item) =>
           item.id !== "eab46de3-0f30-4e4c-9ddd-f795244bfd77" &&
-          item.id !== "6f9537e0-0d08-4f48-bf55-0e898aa0c224"
+          item.id !== "eb80aaf9-c9bd-4476-9490-1d42767377aa"
       );
+      console.log(filteredVal, "Filtered VAl");
       setServices(filteredVal);
     } catch (error) {
     } finally {

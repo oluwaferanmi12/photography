@@ -12,6 +12,7 @@ interface ButtonTypes {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   textColor?: string;
   loading?: boolean;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -25,6 +26,7 @@ const Button = ({
   textColor,
   onClick,
   loading,
+  disabled,
 }: ButtonTypes) => {
   const baseStyles = `px-6 py-2 ${
     widthFull ? "w-full" : "w-auto"
@@ -51,9 +53,11 @@ const Button = ({
 
   const ButtonComponent = (
     <button
-      disabled={loading}
+      disabled={loading || disabled}
       onClick={onClick}
-      className={`${baseStyles} ${textColor}   ${sizeStyles[size]} ${variantStyles[variant]} `}
+      className={`${baseStyles} ${textColor} ${disabled && "opacity-55"}   ${
+        sizeStyles[size]
+      } ${variantStyles[variant]} `}
     >
       {loading ? "Loading..." : text}
       {children}

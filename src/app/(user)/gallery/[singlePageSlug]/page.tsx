@@ -125,49 +125,12 @@ const GallerySinglePage = () => {
     return splitImage[splitImage.length - 1];
   };
 
-  const handleDownloadImage = async (rawUrl: string, fileName: string) => {
+  const handleDownload = async (id: string) => {
     try {
-      // encode spaces and other unsafe chars in the *full* URL
-
-      const encodedUrl = encodeURI(rawUrl);
-
-      const res = await fetch(encodedUrl, {
-        credentials: "omit",
-        mode: "cors",
-      });
-      if (!res.ok) throw new Error(`Failed to fetch image: ${res.status}`);
-
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download =
-        fileName || encodedUrl.split("/").pop()?.split("?")[0] || "image.png";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error(err);
-      toast.error("Could not download the image.");
-    }
+      const result = await apiCall("get", `/Gallery/Images/Download/${id}`);
+      console.log(result, "Result for the api call");
+    } catch (e) {}
   };
-
-  // const handleDownloadImage = (rawUrl: string, fileName?: string) => {
-  //   try {
-  //     console.log("Got right in here");
-  //     const link = document.createElement("a");
-  //     link.href = rawUrl;
-  //     link.download = fileName || rawUrl.split("/").pop() || "image.jpg";
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     document.body.removeChild(link);
-  //   } catch (err) {
-  //     console.error(err);
-  //     toast.error("Could not download the image.");
-  //   }
-  // };
 
   return (
     <div>
@@ -311,26 +274,13 @@ const GallerySinglePage = () => {
                             alt=""
                           />
                         </span>
-                        <a
-                          href={baseUrl + item.imageUrl}
-                          download={true}
-                          target="blank"
+                        <span
+                          onClick={(e) => {
+                            handleDownload(item.id);
+                          }}
                         >
-                          <span
-                          // onClick={(e) => {
-                          //   e.preventDefault();
-                          //   const imageName = handleGetImageName(
-                          //     item.imageUrl
-                          //   );
-                          //   handleDownloadImage(
-                          //     `${baseUrl + item.imageUrl}`,
-                          //     imageName
-                          //   );
-                          // }}
-                          >
-                            <Image src={downloadIcon} alt="" />
-                          </span>
-                        </a>
+                          <Image src={downloadIcon} alt="" />
+                        </span>
                       </div>
                       <Image
                         src={`${baseUrl + item.imageUrl}`}

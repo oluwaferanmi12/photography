@@ -4,11 +4,12 @@ import rollingImage from "@/assets/svgs/rollingImage.svg";
 import bas from "@/assets/svgs/BAS_modal_icon.svg";
 import { Input } from "@/components/inputs/input";
 import Button from "@/components/button/button";
-import CustomSelect from "../inputs/custom-select/custom-select";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { apiCall } from "@/axios/axios";
 import { CreateBookingInterface } from "@/app/(user)/session/page";
+import { useTermsStore } from "@/store/useTermsStore";
+import checkedIcon from "@/assets/svgs/ticked-icon.svg";
+import uncheckedIcon from "@/assets/svgs/empty-check.svg";
 
 export const ContactFrom = ({
   onSubmit,
@@ -43,8 +44,15 @@ export const ContactFrom = ({
   const [apiServices, setApiServices] = useState<
     { id: string; title: string }[]
   >([]);
+  const [termsAgreed, setTermsAgreed] = useState(false);
   const [apiServiceSelected, setApiServiceSelected] = useState("");
   const [packageSelected, setPackageSelected] = useState("");
+  const {
+    photoshootTermsAccepted,
+    termsAndConditionsAccepted,
+    setPhotoshootTermsAccepted,
+    setTermsAndConditionsAccepted,
+  } = useTermsStore();
 
   const fetchServices = async () => {
     try {
@@ -210,10 +218,6 @@ export const ContactFrom = ({
                     <select
                       onChange={(e) => {
                         setApiServiceSelected(e.target.value);
-                        // setCreatePayload({
-                        //   ...createPayload,
-                        //   : e.target.value,
-                        // });
                       }}
                       value={apiServiceSelected}
                       className="w-full border border-[#575252] text-left text-[#BABABA] px-5 py-2 rounded-xl bg-transparent flex justify-between items-center"
@@ -256,13 +260,6 @@ export const ContactFrom = ({
                       })}
                     </select>
                   </div>
-                  {/* <CustomSelect
-                variant="user"
-                selectValue={selectedPackage}
-                setSelectedValue={setSelectedPackage}
-                defaultOption="Select package"
-                selectData={packages}
-              /> */}
                 </div>
               </>
             )}
@@ -307,24 +304,45 @@ export const ContactFrom = ({
                 />
               </div>
             </div>
-            <p className="text-[#D9C9AE]">
-              By reserving a spot, you agree to our service terms regarding
-              cancellations, deposits, and late arrivals.{" "}
+            <div className="flex items-center gap-2">
               <span
-                className="text-white cursor-pointer"
                 onClick={() => {
-                  if (setShowTerms) setShowTerms(true);
+                  setTermsAgreed((prev) => !prev);
                 }}
               >
-                Read here
+                <Image
+                  src={termsAgreed ? checkedIcon : uncheckedIcon}
+                  alt="checked"
+                />
               </span>
-            </p>
+              <p className="text-[#D9C9AE]">
+                By reserving a spot, you agree to our service terms regarding{" "}
+                <span
+                  onClick={() => {
+                    setPhotoshootTermsAccepted(true);
+                  }}
+                  className="text-white underline cursor-pointer"
+                >
+                  Consent Agreement
+                </span>{" "}
+                cancellations, deposits, and late arrivals.{" "}
+                <span
+                  onClick={() => {
+                    setTermsAndConditionsAccepted(true);
+                  }}
+                  className="text-white cursor-pointer underline"
+                >
+                  Agreement
+                </span>
+              </p>
+            </div>
           </div>
           <div className="mt-8 lg:w-1/2">
             <Button
               variant="filled"
               widthFull
               size="large"
+              disabled={!termsAgreed}
               text="Reserve a spot"
               // onClick={onSubmit}
             />

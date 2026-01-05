@@ -16,7 +16,7 @@ export const CustomModal = ({
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="bg-[#282824] rounded-lg p-4"
+        className="bg-[#282824] rounded-lg p-4 border border-[red] "
       >
         {children}
       </div>

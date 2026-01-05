@@ -32,9 +32,6 @@ export const ContactFrom = ({
   variant2?: boolean;
   package_?: any;
 }) => {
-  const [selectedPackage, setSelectedPackage] = useState("");
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedTime, setSelectedTime] = useState<Date | null>(null);
   const [services, setServices] = useState<{ label: string; value: string }[]>(
     []
   );

@@ -127,9 +127,39 @@ const GallerySinglePage = () => {
 
   const handleDownload = async (id: string) => {
     try {
-      const result = await apiCall("get", `/Gallery/Images/Download/${id}`);
-      console.log(result, "Result for the api call");
-    } catch (e) {}
+      const res = await apiCall(
+        "get",
+        `/Gallery/Images/Download/${id}`,
+        undefined,
+        {
+          responseType: "blob",
+        }
+      );
+
+      // Try to get filename from Content-Disposition (if your backend sends it)
+      const disposition = res.headers?.["content-disposition"] as
+        | string
+        | undefined;
+      const match = disposition?.match(
+        /filename\*=UTF-8''(.+)|filename="?([^"]+)"?/
+      );
+      const filename = decodeURIComponent(
+        match?.[1] || match?.[2] || `image-${id}.jpg`
+      );
+
+      const blob = res.data as Blob;
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (e) {
+      // your interceptor will toast; you can add extra handling if you want
+    }
   };
 
   return (

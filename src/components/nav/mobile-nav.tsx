@@ -85,7 +85,7 @@ export const MobileNav = () => {
               ))}
             </div>
           </div>
-          <div className="w-full mt-28">
+          <div className="w-full absolute bottom-2 left-0 px-4">
             <Link href={"/packages"}>
               <button
                 onClick={onClose}

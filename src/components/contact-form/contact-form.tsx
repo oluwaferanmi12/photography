@@ -103,23 +103,7 @@ export const ContactFrom = ({
   }, []);
 
 
-  const packages = [
-    { label: "Basic", value: "Basic ($400 plus tax)" },
-    { label: "Premium", value: "Premium ($900 plus tax)" },
-    { label: "Pro+", value: "Pro+ ($1500 plus tax)" },
-  ];
 
-  const locations = [
-    { label: "Montreal", value: "Basic ($400 plus tax)" },
-    { label: "Ottawa", value: "Premium ($900 plus tax)" },
-    { label: "Whistler+", value: "Pro+ ($1500 plus tax)" },
-    { label: "Calgary", value: "Pro+ ($1500 plus tax)" },
-    { label: "Toronto", value: "Pro+ ($1500 plus tax)" },
-    { label: "Banff", value: "Pro+ ($1500 plus tax)" },
-    { label: "Victoria", value: "Pro+ ($1500 plus tax)" },
-    { label: "Halifax", value: "Pro+ ($1500 plus tax)" },
-    { label: "Churchchill", value: "Pro+ ($1500 plus tax)" },
-  ];
 
   return (
     <div className="py-8 lg:px-10  w-full rounded-[20px] bg-[#282824]">

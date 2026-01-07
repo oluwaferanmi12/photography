@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import brandLogo from "@/assets/svgs/brand-logo.svg";
 import hamburger from "@/assets/svgs/hamburger.svg";
 import navDot from "@/assets/svgs/nav-active-dot.svg";
@@ -28,6 +28,15 @@ export const MobileNav = () => {
     { name: "Portfolio", path: "/portfolio" },
     { name: "Gallery", path: "/gallery" },
   ];
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <div className="w-full z-10000! fixed top-0 py-12 px-5 ">

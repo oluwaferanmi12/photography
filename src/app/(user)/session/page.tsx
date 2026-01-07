@@ -70,20 +70,6 @@ const SessionPage = () => {
     setIsThankYouModalOpen(true); // Open the thank you modal
   };
 
-  // New handler for day selection
-  // const handleDaySelect = (dayName: string, times: number[]) => {
-  //   setSelectedDayName(dayName);
-  //   setAvailableTimes(times);
-
-  //   // Auto-select first time if available
-  //   if (times.length > 0 && !selectedDuration) {
-  //     setSelectedDuration({
-  //       start: times[0],
-  //       end: times[0] + 1
-  //     });
-  //   }
-  // };
-
   const {
     photoshootTermsAccepted,
     termsAndConditionsAccepted,
@@ -155,9 +141,8 @@ const SessionPage = () => {
   useEffect(() => {
     getBookingSlots();
   }, []);
-
-  // Update the handleBookSession function to use calendar data
   const handleBookSession = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("Heres's it is");
     e.preventDefault();
     if (!selectedDate || !selectedDuration) {
       toast.error("Please select a date and time");
@@ -202,7 +187,7 @@ const SessionPage = () => {
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
-        <div className="px-5 lg:px-14 3xl:!px-28 py-14 flex flex-col gap-14">
+        <div className="px-5 lg:px-14 3xl:px-28! py-14 flex flex-col gap-14">
           <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
             <div className="flex flex-col gap-8 lg:w-1/2">
               <h2 className="text-7xl">Book a</h2>
@@ -210,7 +195,7 @@ const SessionPage = () => {
                 <span>
                   <Image
                     src={HS4}
-                    className="rounded-full object-cover w-[150px] h-[80px]"
+                    className="rounded-full object-cover w-37.5 h-20"
                     alt="img"
                   />
                 </span>
@@ -354,8 +339,6 @@ const SessionPage = () => {
           </div>
         </div>
       </Modal>
-
-      
     </div>
   );
 };

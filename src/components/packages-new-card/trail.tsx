@@ -94,13 +94,7 @@ export const Trail: React.FC<TrailProps> = ({
                     />
                   </div>
                 ))}
-                {/* <div className="overflow-hidden">
-                  <Image
-                    src={image1}
-                    className="w-full h-auto object-cover"
-                    alt="image"
-                  />
-                </div> */}
+            
               </Col>
             </Row>
           </div>

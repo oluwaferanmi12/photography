@@ -51,6 +51,8 @@ export const ContactFrom = ({
     setTermsAndConditionsAccepted,
   } = useTermsStore();
 
+  
+
   const fetchServices = async () => {
     try {
       const res = await apiCall("get", "/Admin/Services");

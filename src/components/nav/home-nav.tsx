@@ -14,7 +14,6 @@ import instagramIcon from "@/assets/svgs/instagramIcon.svg";
 import facebookIcon from "@/assets/svgs/facebookIcon.svg";
 import Button from "../button/button";
 
-
 export const HomeNav = () => {
   const pathname = usePathname();
 
@@ -31,10 +30,7 @@ export const HomeNav = () => {
       navTitle: "Portfolio",
       navLink: "/portfolio",
     },
-    {
-      navTitle: "Packages",
-      navLink: "/packages",
-    },
+
     {
       navTitle: "Gallery",
       navLink: "/gallery",
@@ -45,7 +41,7 @@ export const HomeNav = () => {
     // },
   ];
   return (
-    <div className="w-full !z-[10000] fixed top-0 py-12 px-5 lg:px-14 3xl:!px-44">
+    <div className="w-full z-10000! fixed top-0 py-12 px-5 lg:px-14 3xl:px-44!">
       <div className="flex justify-between items-center w-full ">
         <span>
           <Image src={brandLogo} alt="logo" />
@@ -57,10 +53,11 @@ export const HomeNav = () => {
                 <div className="relative" key={item.navTitle}>
                   <Link href={item.navLink}>
                     <p
-                      className={`cursor-pointer font-grotesk-medium text-base ${pathname.startsWith(item.navLink)
+                      className={`cursor-pointer font-grotesk-medium text-base ${
+                        pathname.startsWith(item.navLink)
                           ? "text-white font-bold"
                           : "text-[#FAFAFA]"
-                        }`}
+                      }`}
                     >
                       {item.navTitle}
                     </p>
@@ -75,28 +72,36 @@ export const HomeNav = () => {
               );
             })}
           </div>
-          <div className="min-w-[200px] flex justify-end">
-            <Button variant="filled" link="/session" text="Book a session" />
+          <div className="min-w-50 flex justify-end">
+            <Button
+              variant="filled"
+              link="/packages"
+              text="Explore my packages"
+            />
           </div>
         </div>
         <div className="flex gap-3 items-center">
-          <Link href='https://www.youtube.com/@Shotbyportable'>
-            <Image className="cursor-pointer" src={youtubeIcon} alt="social_links" />
+          <Link href="https://www.youtube.com/@Shotbyportable">
+            <Image
+              className="cursor-pointer"
+              src={youtubeIcon}
+              alt="social_links"
+            />
           </Link>
-          <Link href='https://www.tiktok.com/@shotbyportable'>
-            <Image className="cursor-pointer" src={tiktokIcon} alt="social_links" />
+          <Link href="https://www.tiktok.com/@shotbyportable">
+            <Image
+              className="cursor-pointer"
+              src={tiktokIcon}
+              alt="social_links"
+            />
           </Link>
-          <Link href='https://www.linkedin.com/in/victoria-akinade-402944175/'>
-            <Image className="cursor-pointer" src={linkedinIcon} alt="social_links" />
+          <Link href="https://www.linkedin.com/in/victoria-akinade-402944175/">
+            <Image
+              className="cursor-pointer"
+              src={linkedinIcon}
+              alt="social_links"
+            />
           </Link>
-          <Link href='https://www.instagram.com/shotbyportable/'>
-            <Image className="cursor-pointer" src={instagramIcon} alt="social_links" />
-          </Link>
-          <Link href='https://www.facebook.com/victhoria.hajarlah'>
-            <Image className="cursor-pointer" src={facebookIcon} alt="social_links" />
-          </Link>
-        </div>
-        {/* <div className="flex gap-8 items-center">
           <Link href="https://www.instagram.com/shotbyportable/">
             <Image
               className="cursor-pointer"
@@ -111,14 +116,7 @@ export const HomeNav = () => {
               alt="social_links"
             />
           </Link>
-          <Link href="https://www.tiktok.com/@shotbyportable">
-            <Image
-              className="cursor-pointer"
-              src={tiktokIcon}
-              alt="social_links"
-            />
-          </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );

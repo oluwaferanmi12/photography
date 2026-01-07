@@ -102,15 +102,6 @@ export const ContactFrom = ({
     fetchServices();
   }, []);
 
-  // const services = [
-  //   { label: "Weddings", value: "wedding" },
-  //   { label: "Birthdays", value: "birthday" },
-  //   { label: "Videography", value: "videography" },
-  //   { label: "Kids & infants", value: "kids" },
-  //   { label: "Lifestyle & events", value: "lifestyle" },
-  //   { label: "Make up & Gele", value: "makeup" },
-  //   { label: "Family", value: "family" },
-  // ];
 
   const packages = [
     { label: "Basic", value: "Basic ($400 plus tax)" },

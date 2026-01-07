@@ -12,6 +12,7 @@ import { apiCall } from "@/axios/axios";
 import { toast } from "sonner";
 import { SinglePageTopHeader } from "@/components/admin-components/sideNav/singlepage-top-header/singlepage-top-header";
 import { PackageInterface } from "../../../../../interface/interface";
+import ThumbnailUpload from "@/components/admin-components/sideNav/thumbnailUpload/thumbnail-upload";
 
 export default function SinglePackage() {
   const [openAddPackage, setOpenAddPackage] = useState(false);
@@ -29,6 +30,8 @@ export default function SinglePackage() {
   const [createPackageLoading, setCreatePackageLoading] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [packageData, setPackageData] = useState([]);
+  const [thumbnail, setThumbnail] = useState<File | null>(null);
+  const [thumbnailError, setThumbnailError] = useState("");
   const [packagePayload, setPackagePayload] = useState<PackageInterface>({
     active: true,
     description: "",
@@ -62,7 +65,6 @@ export default function SinglePackage() {
 
   const handleCreatePackages = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCreatePackageLoading(true);
 
     let isError = false;
 
@@ -89,16 +91,17 @@ export default function SinglePackage() {
       return;
     }
 
+    setCreatePackageLoading(true);
+    const fd = new FormData();
+    fd.append("ServiceId", serviceId ?? "");
+    fd.append("Title", packagePayload.title);
+    fd.append("Description", packagePayload.description);
+    fd.append("Active", "true");
+    fd.append("Price", String(packagePayload.price));
+    fd.append("Thumbnail", thumbnail!);
+
     try {
-      await apiCall("post", "/Admin/Services/packages", {
-        serviceId: serviceId,
-        title: packagePayload.title,
-        description: packagePayload.description,
-        active: true,
-        details: "",
-        price: packagePayload.price,
-      });
-      toast.success("Package Created Successfully");
+      await apiCall("post", "/Admin/Services/packages", fd);
       setPackageName("");
       setPackageDescription("");
       setPackagePrice(undefined);
@@ -309,6 +312,17 @@ export default function SinglePackage() {
                 </div>
 
                 {/*  */}
+              </div>
+
+              <div className="w-full flex flex-col gap-3 mt-3">
+                <ThumbnailUpload
+                  onFileSelect={(files) => {
+                    setThumbnail(files[0] || null);
+                    setThumbnailError("");
+                  }}
+                  error={thumbnailError}
+                  // resetTrigger={resetCounter}
+                />
               </div>
               <div className="mt-5">
                 <AdminSubmitButton

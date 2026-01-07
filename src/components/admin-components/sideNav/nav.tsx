@@ -4,7 +4,6 @@ import logo from "@/assets/svgs/brand-logo.svg";
 import Image from "next/image";
 import layoutLine from "@/assets/svgs/layout_left_line.svg";
 import homeOutline from "@/assets/svgs/home_1_line.svg";
-import dollarSign from "@/assets/svgs/Admin_svgs/dollar_icon.svg";
 import calenderIcon from "@/assets/svgs/Admin_svgs/calender_icon.svg";
 import multiselectionIcon from "@/assets/svgs/Admin_svgs/multiselection_icon.svg";
 import portfolioIcon from "@/assets/svgs/Admin_svgs/portfolio-navIcon.svg";
@@ -55,7 +54,7 @@ export const Nav = () => {
   const pathname = usePathname();
 
   return (
-    <div className="h-screen min-h-screen w-[300px] max-h-screen flex flex-col justify-between p-4">
+    <div className="h-screen min-h-screen w-75 max-h-screen flex flex-col justify-between p-4">
       <div>
         <div className="bg-[#1D1C1C] rounded-lg p-4 flex items-center justify-between">
           <Image src={logo} alt="" />
@@ -83,9 +82,9 @@ export const Nav = () => {
         className="flex items-center justify-between p-4 rounded-lg"
       >
         <div className="flex items-center gap-2 font-mono-medium">
-          <div className="w-[40px] h-[40px] rounded-full bg-[#D9D9D9]"></div>
+          <div className="w-10 h-10 rounded-full bg-[#D9D9D9]"></div>
           <div>
-            <p className="text-[#101010]">John Doe</p>
+            <p className="text-admin-black-150">John Doe</p>
             <p className="text-[#615F5F] text-xs">johndoe@gmail.com</p>
           </div>
         </div>

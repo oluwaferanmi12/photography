@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import brandLogo from "@/assets/svgs/brand-logo.svg";
 import hamburger from "@/assets/svgs/hamburger.svg";
 import navDot from "@/assets/svgs/nav-active-dot.svg";
@@ -26,12 +26,11 @@ export const MobileNav = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Portfolio", path: "/portfolio" },
-    { name: "Packages", path: "/packages" },
     { name: "Gallery", path: "/gallery" },
   ];
 
   return (
-    <div className="w-full !z-[10000] fixed top-0 py-12 px-5 ">
+    <div className="w-full z-10000! fixed top-0 py-12 px-5 ">
       <div className="flex justify-between items-center w-full ">
         <span>
           <Image src={brandLogo} alt="logo" />
@@ -43,7 +42,7 @@ export const MobileNav = () => {
           >
             <p>Menu</p>
             <span>
-              <Image src={hamburger} className="!z-50" alt="hamburger" />
+              <Image src={hamburger} className="z-50!" alt="hamburger" />
             </span>
           </button>
         </div>
@@ -52,7 +51,7 @@ export const MobileNav = () => {
           closable={false}
           onClose={onClose}
           open={open}
-          className="!bg-[#282824] text-white"
+          className="bg-[#282824]! text-white"
         >
           <div>
             <div className="flex justify-between items-center">
@@ -71,7 +70,7 @@ export const MobileNav = () => {
                   href={path}
                   onClick={onClose}
                   className={`${
-                   pathname.startsWith(path)
+                    pathname.startsWith(path)
                       ? "text-5xl font-semibold text-[#D9C9AE] flex gap-2 items-center"
                       : "text-3xl font-light text-[#F3EEE6]"
                   } font-playfair transition-all duration-200`}
@@ -87,12 +86,12 @@ export const MobileNav = () => {
             </div>
           </div>
           <div className="w-full mt-28">
-            <Link href={"/session"}>
+            <Link href={"/packages"}>
               <button
                 onClick={onClose}
                 className="bg-light-brown w-full p-6 rounded-full font-semibold text-darker-grey"
               >
-                Book a session
+                Explore my packages
               </button>
             </Link>
           </div>

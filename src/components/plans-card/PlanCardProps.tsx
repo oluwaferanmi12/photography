@@ -93,6 +93,7 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
       toast.error("Please select a date and time");
       return;
     }
+
     try {
       const dateObj = new Date(selectedDate);
       dateObj.setHours(
@@ -117,6 +118,12 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
         ),
         timezone: moment.tz.guess(),
       };
+
+      const { email, address, description, name, phone } = payload;
+      if (!email || !address || !description || !name || !phone) {
+        toast.error("All fields are required");
+        return;
+      }
       const result = await apiCall("post", "/Bookings", payloads);
       toast.success("Reservation successful");
       setShowModal(false);
@@ -148,7 +155,6 @@ export const PlanCardProps: React.FC<planCardInterface> = ({
   const handleDaySelect = (dayName: string, times: number[]) => {
     setSelectedDayName(dayName);
     setAvailableTimes(times);
-    console.log("Fixes here, and testing here");
     if (times.length > 0 && !selectedDuration && selectedDate) {
       const firstAvailableTime = times.find(
         (time) => !isTimeBooked(selectedDate, time)

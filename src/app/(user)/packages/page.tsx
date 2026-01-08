@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import HS4 from "@/assets/images/HS4.png";
 import rollingImage from "@/assets/svgs/rollingImage.svg";
-import { Modal } from "antd";
+import { Col, Modal, Row } from "antd";
 import wedding_icon from "@/assets/svgs/wedding_icon.svg";
 import kids_icon from "@/assets/svgs/kids_icon.svg";
 import lifestyle_icon from "@/assets/svgs/lifestyle_icon.svg";
@@ -23,6 +23,8 @@ import {
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
+import { ServiceCard } from "@/components/cascade-card/service-card";
+import { NewServiceCard } from "@/components/packages-new-card/service-card";
 
 interface PackageOption {
   name: string;
@@ -36,13 +38,13 @@ interface ImageType {
   id: string;
 }
 
-interface Service {
+export interface Service {
   id: string;
-  serviceName: string;
-  packages: PackageOption[];
-  status: boolean;
-  lastUpdated: string;
+  title: string;
   description: string;
+  tags: string;
+  lastModified: string;
+  imageCount: number;
   images: ImageType[];
 }
 
@@ -98,70 +100,58 @@ const Portfolio = () => {
     },
   ];
 
-  const planBenefit = [
-    "Consultation call",
-    "60 min. session",
-    "1 - 2 outfit",
-    "max 4 people",
-    "10 images professional edited and delivered in an online gallery",
-    "$20 per additional image",
-    "$50 per additional person",
-    "$125 per additional hour",
-  ];
-
   // Fetch services and their packages
   const fetchServices = async () => {
     try {
       const serviceRes = await apiCall("get", "/Admin/Services");
       const servicesData = serviceRes.data;
+      // // Fetch packages for all services concurrently
+      // const enrichedServices = await Promise.all(
+      //   servicesData.map(async (service: any) => {
+      //     try {
+      //       const packageRes = await apiCall(
+      //         "get",
+      //         `/Admin/Services/packages/${service.id}`
+      //       );
+      //       const packages = packageRes?.data?.data?.packages || [];
 
-      // Fetch packages for all services concurrently
-      const enrichedServices = await Promise.all(
-        servicesData.map(async (service: any) => {
-          try {
-            const packageRes = await apiCall(
-              "get",
-              `/Admin/Services/packages/${service.id}`
-            );
-            const packages = packageRes?.data?.data?.packages || [];
+      //       return {
+      //         id: service.id,
+      //         serviceName: service.title,
+      //         description: service.description,
+      //         packages: packages.map((pkg: any) => ({
+      //           name: pkg.title,
+      //           price: pkg.price,
+      //           description: pkg.description,
+      //           id: pkg.id,
+      //           serviceId: pkg.serviceId,
+      //         })),
+      //         status: true,
+      //         lastUpdated: new Date(service.lastModified).toDateString(),
+      //         images: service.images || [],
+      //       };
+      //     } catch (err) {
+      //       return {
+      //         id: service.id,
+      //         serviceName: service.title,
+      //         description: service.description,
+      //         packages: [],
+      //         images: [],
+      //         status: true,
+      //         lastUpdated: new Date(service.lastModified).toDateString(),
+      //       };
+      //     }
+      //   })
+      // );
 
-            return {
-              id: service.id,
-              serviceName: service.title,
-              description: service.description,
-              packages: packages.map((pkg: any) => ({
-                name: pkg.title,
-                price: pkg.price,
-                description: pkg.description,
-                id: pkg.id,
-                serviceId: pkg.serviceId,
-              })),
-              status: true,
-              lastUpdated: new Date(service.lastModified).toDateString(),
-              images: service.images || [],
-            };
-          } catch (err) {
-            return {
-              id: service.id,
-              serviceName: service.title,
-              description: service.description,
-              packages: [],
-              images: [],
-              status: true,
-              lastUpdated: new Date(service.lastModified).toDateString(),
-            };
-          }
-        })
-      );
-
-      console.log(enrichedServices, "Enriched Services")
-      const filteredVal = enrichedServices.filter(
-        (item) =>
-          item.id !== "eab46de3-0f30-4e4c-9ddd-f795244bfd77" &&
-          item.id !== "eb80aaf9-c9bd-4476-9490-1d42767377aa"
-      );
-      console.log(filteredVal, "Filtered VAl");
-      setServices(filteredVal);
+      // console.log(enrichedServices, "Enriched Services");
+      // const filteredVal = enrichedServices.filter(
+      //   (item) =>
+      //     item.id !== "eab46de3-0f30-4e4c-9ddd-f795244bfd77" &&
+      //     item.id !== "eb80aaf9-c9bd-4476-9490-1d42767377aa"
+      // );
+      // console.log(filteredVal, "Filtered VAl");
+      setServices(servicesData);
     } catch (error) {
     } finally {
       setLoading(false);
@@ -171,10 +161,12 @@ const Portfolio = () => {
     fetchServices();
   }, []);
 
+  console.log(services, "services");
+
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
-        <div className="px-5 lg:px-14 3xl:!px-28">
+        <div className="px-5 lg:px-14 3xl:px-28!">
           <div className="flex flex-col mt-28 lg:mt-48 gap-8 lg:gap-0 lg:flex-row justify-between w-full lg:items-center">
             <div className="flex flex-col gap-8 lg:w-1/2">
               <h2 className="text-5xl lg:text-7xl">Explore my</h2>
@@ -182,7 +174,7 @@ const Portfolio = () => {
                 <span>
                   <Image
                     src={HS4}
-                    className="rounded-full object-cover w-[150px] h-[80px]"
+                    className="rounded-full object-cover w-37.5 h-20"
                     alt="img"
                   />
                 </span>
@@ -216,13 +208,13 @@ const Portfolio = () => {
                 ...services,
                 ...services,
               ].map((service, index) => {
-                const iconKey = service.serviceName.toLowerCase();
+                const iconKey = service.title.toLowerCase();
                 const icon = serviceIcons[iconKey];
 
                 return (
                   <li
-                    key={`${service.serviceName}-${index}`}
-                    onClick={() => showModal(service.serviceName)}
+                    key={`${service.title}-${index}`}
+                    onClick={() => showModal(service.title)}
                     className="rounded-3xl cursor-pointer border border-off-white py-3 px-6 flex gap-3 items-center"
                   >
                     {icon && (
@@ -234,9 +226,7 @@ const Portfolio = () => {
                         />
                       </span>
                     )}
-                    <p className="text-white-100 text-xl">
-                      {service.serviceName}
-                    </p>
+                    <p className="text-white-100 text-xl">{service.title}</p>
                   </li>
                 );
               })}
@@ -245,7 +235,16 @@ const Portfolio = () => {
 
           {/* NEW CARDS */}
           <div className="pb-20 lg:pb-36 flex flex-col gap-20 ">
-            {services.map((service) =>
+            <Row gutter={12}>
+              {services.map((item) => {
+                return (
+                  <Col key={item.id} xs={24} lg={12}>
+                    <NewServiceCard item={item} />
+                  </Col>
+                );
+              })}
+            </Row>
+            {/* {services.map((service) =>
               service.packages.length <= 1 ? (
                 <PackageCardWithOneImage
                   key={service.id}
@@ -265,7 +264,11 @@ const Portfolio = () => {
                   service={service}
                 />
               )
-            )}
+            )} */}
+
+            {/* {services.map((item) => {
+              return <div>{item.serviceName}</div>;
+            })} */}
           </div>
         </div>
       </div>

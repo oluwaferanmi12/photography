@@ -83,7 +83,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
               )}
             </div>
           </Col>
-          <Col xs={24} lg={12}>
+          {/* <Col xs={24} lg={12}>
             <div className="h-full rounded-xl">
               {images.length > 1 ? (
                 <div className="flex scrollbar gap-5 relative w-full h-full overflow-x-scroll">
@@ -117,7 +117,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                 </>
               )}
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     </UserPackagesLayout>

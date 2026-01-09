@@ -76,6 +76,7 @@ export interface PackageInterface {
   price: number;
   serviceId: string;
   title: string;
+  thumbnail: string;
 }
 
 export interface GalleryItem {

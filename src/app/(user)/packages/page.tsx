@@ -161,8 +161,6 @@ const Portfolio = () => {
     fetchServices();
   }, []);
 
-  console.log(services, "services");
-
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">

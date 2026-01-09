@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import { ParallaxScrollax } from "@/components/parallax-scrollax-banner/parallax-scrollax";
 import { FooterImages } from "@/components/footer-images/footer-images";
 import { Footer } from "@/components/footer/footer";
+import { baseUrl } from "@/lib/base-url";
 
 function PackageDetail() {
   const params = useParams();
@@ -407,7 +408,7 @@ function PackageDetail() {
                             <Image
                               layout="fill"
                               alt=""
-                              src={item?.thumbnail ?? ""}
+                              src={baseUrl + item?.thumbnail}
                             />
                           </div>
                         </Col>

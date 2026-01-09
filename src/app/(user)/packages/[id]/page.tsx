@@ -406,6 +406,7 @@ function PackageDetail() {
                         <Col lg={12} xs={24}>
                           <div className="h-120 relative">
                             <Image
+                              className="object-cover"
                               layout="fill"
                               alt=""
                               src={baseUrl + item?.thumbnail}

@@ -404,7 +404,11 @@ function PackageDetail() {
                         </Col>
                         <Col lg={12} xs={24}>
                           <div className="h-120 relative">
-                            <Image layout="fill" alt="" src={item.thumbnail} />
+                            <Image
+                              layout="fill"
+                              alt=""
+                              src={item?.thumbnail ?? ""}
+                            />
                           </div>
                         </Col>
                       </Row>

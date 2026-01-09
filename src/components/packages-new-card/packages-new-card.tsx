@@ -213,7 +213,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
   );
 };
 
-const UserPackagesLayout = ({ children }) => {
+export const UserPackagesLayout = ({ children }) => {
   return (
     <div className="relative w-full border-[1.5px] border-white/10 rounded-[48px] lg:p-4 p-2 overflow-hidden">
       {/* Top-left partial gradient overlay */}

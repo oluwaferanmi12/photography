@@ -119,10 +119,20 @@ export default function SinglePackage() {
       e.preventDefault();
       setCreatePackageLoading(true);
       const { id, ...rest } = packagePayload;
+      setCreatePackageLoading(true);
+      const fd = new FormData();
+      fd.append("ServiceId", serviceId ?? "");
+      fd.append("Title", packagePayload.title);
+      fd.append("Description", packagePayload.description);
+      fd.append("Active", "true");
+      fd.append("Price", String(packagePayload.price));
+      if (thumbnail) {
+        fd.append("Thumbnail", thumbnail!);
+      }
       const result = await apiCall(
         "post",
         `/Admin/Services/packages/update/${packagePayload.id}`,
-        rest
+        fd
       );
       setPackagePayload({
         active: true,

@@ -85,73 +85,33 @@ const Portfolio = () => {
     // }, 3000);
   };
 
-  const packages = [
-    {
-      name: "Basic",
-      price: 600,
-    },
-    {
-      name: "Classic",
-      price: 600,
-    },
-    {
-      name: "Premium",
-      price: 600,
-    },
-  ];
-
-  // Fetch services and their packages
   const fetchServices = async () => {
     try {
       const serviceRes = await apiCall("get", "/Admin/Services");
       const servicesData = serviceRes.data;
-      // // Fetch packages for all services concurrently
-      // const enrichedServices = await Promise.all(
-      //   servicesData.map(async (service: any) => {
-      //     try {
-      //       const packageRes = await apiCall(
-      //         "get",
-      //         `/Admin/Services/packages/${service.id}`
-      //       );
-      //       const packages = packageRes?.data?.data?.packages || [];
+      console.log(servicesData, "Services data here");
+      // Reorder based on priority
+      const order = [ 'wedding' ,"portrait", "maternity", "kids", "event", "brand"];
 
-      //       return {
-      //         id: service.id,
-      //         serviceName: service.title,
-      //         description: service.description,
-      //         packages: packages.map((pkg: any) => ({
-      //           name: pkg.title,
-      //           price: pkg.price,
-      //           description: pkg.description,
-      //           id: pkg.id,
-      //           serviceId: pkg.serviceId,
-      //         })),
-      //         status: true,
-      //         lastUpdated: new Date(service.lastModified).toDateString(),
-      //         images: service.images || [],
-      //       };
-      //     } catch (err) {
-      //       return {
-      //         id: service.id,
-      //         serviceName: service.title,
-      //         description: service.description,
-      //         packages: [],
-      //         images: [],
-      //         status: true,
-      //         lastUpdated: new Date(service.lastModified).toDateString(),
-      //       };
-      //     }
-      //   })
-      // );
+      const orderedServices = servicesData.sort((a, b) => {
+        const aIndex = order.indexOf(a.tags.toLowerCase());
+        const bIndex = order.indexOf(b.tags.toLowerCase());
 
-      // console.log(enrichedServices, "Enriched Services");
-      // const filteredVal = enrichedServices.filter(
-      //   (item) =>
-      //     item.id !== "eab46de3-0f30-4e4c-9ddd-f795244bfd77" &&
-      //     item.id !== "eb80aaf9-c9bd-4476-9490-1d42767377aa"
-      // );
-      // console.log(filteredVal, "Filtered VAl");
-      setServices(servicesData);
+        // If both tags exist in the order, sort by their position in the order
+        if (aIndex !== -1 && bIndex !== -1) {
+          return aIndex - bIndex;
+        }
+
+        // If one or both tags are not found, move them to the end
+        if (aIndex === -1 && bIndex !== -1) {
+          return 1;
+        } else if (aIndex !== -1 && bIndex === -1) {
+          return -1;
+        }
+
+        return 0; // If both are not in the order, leave them as is
+      });
+      setServices(orderedServices);
     } catch (error) {
     } finally {
       setLoading(false);
@@ -242,38 +202,12 @@ const Portfolio = () => {
                 );
               })}
             </Row>
-            {/* {services.map((service) =>
-              service.packages.length <= 1 ? (
-                <PackageCardWithOneImage
-                  key={service.id}
-                  title={service.serviceName}
-                  description={service.description}
-                  images={service.images || []}
-                  packages={service.packages}
-                  service={service}
-                />
-              ) : (
-                <PackageCardWithMultipleImages
-                  key={service.id}
-                  title={service.serviceName}
-                  description={service.description}
-                  images={service.images || []}
-                  packages={service.packages}
-                  service={service}
-                />
-              )
-            )} */}
-
-            {/* {services.map((item) => {
-              return <div>{item.serviceName}</div>;
-            })} */}
           </div>
         </div>
       </div>
       <ParallaxScrollax />
       <FooterImages />
       <Footer />
-      {/* MODAL */}
       <Modal
         open={isSessionFormModalOpen}
         onCancel={handleCancel}
@@ -289,7 +223,6 @@ const Portfolio = () => {
           setSelectedService={setSelectedService}
         />
       </Modal>
-      {/* AFTER FORM FILLING MODAL */}
       <Modal
         open={isThankYouModalOpen}
         onCancel={() => setIsThankYouModalOpen(false)}

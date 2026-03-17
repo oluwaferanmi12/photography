@@ -21,7 +21,7 @@ export const AboutPortfolioCard = () => {
         </Col>
         <Col xs={24} lg={12}>
           <div className="overflow-hidden h-full  max-h-[350px] w-full">
-           <Image src={MI6} className="w-full object-cover" alt="testifier" />
+           <Image src={MI6} className="w-full object-cover object-top" alt="testifier" />
           </div>
         </Col>
       </Row>

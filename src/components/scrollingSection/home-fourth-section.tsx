@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
-import { useRef } from "react";
 // import Image from "next/image";
 import Button from "../button/button";
 import { ServiceCard } from "@/components/cascade-card/service-card";
@@ -24,15 +23,29 @@ export const FourthSectionScroll = () => {
   const container = useRef<HTMLDivElement | null>(null);
   const [portfolioData, setPortfolioData] = useState<PortfolioProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [hasMobileContainer, setHasMobileContainer] = useState(false);
+  const [hasDesktopTarget, setHasDesktopTarget] = useState(false);
 
-  const mobileScroll = useScroll({
-    target: container,
-    offset: ["start start", "end end"],
-  });
+  const setMobileContainerRef = useCallback((node: HTMLDivElement | null) => {
+    container.current = node;
+    setHasMobileContainer(Boolean(node));
+  }, []);
 
-  const desktopScroll = useScroll({
-    target: targetRef,
-  });
+  const setDesktopTargetRef = useCallback((node: HTMLDivElement | null) => {
+    targetRef.current = node;
+    setHasDesktopTarget(Boolean(node));
+  }, []);
+
+  const mobileScroll = useScroll(
+    hasMobileContainer
+      ? {
+          target: container,
+          offset: ["start start", "end end"],
+        }
+      : {}
+  );
+
+  const desktopScroll = useScroll(hasDesktopTarget ? { target: targetRef } : {});
 
   // Default scroll percentage (for desktop)
   let scrollPercentage = "-25%";
@@ -87,7 +100,7 @@ export const FourthSectionScroll = () => {
       <h2 className="text-6xl lg:hidden px-5 mt-14 lg:mb-0 lg:mt-10 font-grotesk-bold font-semibold mb-14 text-white whitespace-nowrap lg:pr-6">
         My Services
       </h2>
-      <div ref={container} className="lg:hidden">
+      <div ref={setMobileContainerRef} className="lg:hidden">
         {portfolioData.slice(0, 4).map((service, index) => {
           const targetScale = 1 - (portfolioData.length - index) * 0.05;
           return (
@@ -104,7 +117,7 @@ export const FourthSectionScroll = () => {
       </div>
       {/* Desktop */}
       <section
-        ref={targetRef}
+        ref={setDesktopTargetRef}
         className="relative hidden lg:block h-[300vh] py-10 "
       >
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
@@ -127,15 +140,15 @@ export const FourthSectionScroll = () => {
             {portfolioData.map((service, i) => (
               <div
                 key={i}
-                className="w-full relative h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full flex-shrink-0 p-6 shadow-md"
+                className="relative aspect-4/5 min-w-[320px] lg:min-w-90 xl:min-w-105 max-w-[560px] flex-shrink-0 overflow-hidden rounded-[28px] bg-[#181818] shadow-md"
               >
                 <img
                   src={`${baseUrl + service.image}`}
                   alt={CreateSlug(service.title)}
-                  className="object-cover absolute inset-0 w-full h-full"
+                  className="absolute inset-0 h-full w-full object-cover object-top"
                 />
 
-                <div className="absolute left-0 bottom-0 w-full p-4 backdrop-blur-md bg-black/10">
+                <div className="absolute inset-x-0 bottom-0 w-full bg-linear-to-t from-black/55 via-black/10 to-transparent p-5 backdrop-blur-[2px]">
                   <div className="mix-blend-exclusion">
                     {/* Text container with blend mode */}
                     <div className="mix-blend-exclusion">

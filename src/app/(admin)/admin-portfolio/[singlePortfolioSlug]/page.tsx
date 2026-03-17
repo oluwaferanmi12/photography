@@ -104,7 +104,7 @@ export default function SingleUploadPortfolio() {
     try {
       await apiCall(
         "post",
-        `/Portfolio/Images/Remove/${portfolioId}/${imageId}`
+        `/Portfolio/Images/Remove/${portfolioId}/${imageId}`,
       );
 
       toast.success("Image Deleted successfully");
@@ -173,7 +173,7 @@ export default function SingleUploadPortfolio() {
                             <img
                               src={`${baseUrl + image.imageUrl}`}
                               alt="portfolio image"
-                              className="rounded-3xl object-cover w-full h-full"
+                              className="rounded-3xl object-cover object-top w-full h-full"
                             />
                             <span className="absolute right-14 bottom-14">
                               <Image
@@ -185,7 +185,7 @@ export default function SingleUploadPortfolio() {
                             </span>
                           </div>
                         </Col>
-                      )
+                      ),
                     )}
                   </Row>
                 ) : (
@@ -312,10 +312,7 @@ export default function SingleUploadPortfolio() {
                 {/*  */}
               </div>
               <div className="mt-5">
-                <AdminSubmitButton
-                  loading={updateLoading}
-                  text="Edit"
-                />
+                <AdminSubmitButton loading={updateLoading} text="Edit" />
               </div>
             </form>
           </div>

@@ -58,7 +58,7 @@ export default function ImageMasonry() {
                       src={src}
                       alt={`Image ${idx}`}
                       fill
-                      className={`object-cover ${
+                      className={`object-cover object-top ${
                         shouldApplyGrayscale ? "grayscale" : ""
                       }`}
                       quality={90}

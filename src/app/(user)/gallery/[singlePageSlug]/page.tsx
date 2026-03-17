@@ -191,7 +191,7 @@ const GallerySinglePage = () => {
                   <Col key={item.id} xs={12} className="mb-4">
                     <Image
                       src={`${baseUrl + item.imageUrl}`}
-                      className="w-full h-[300px] min-h-[300px] object-cover"
+                      className="w-full h-auto aspect-[4/5] sm:aspect-square object-cover object-top"
                       alt="img"
                       width={300}
                       height={300}
@@ -314,7 +314,7 @@ const GallerySinglePage = () => {
                       </div>
                       <Image
                         src={`${baseUrl + item.imageUrl}`}
-                        className="w-full h-[500px] min-h-[500px] object-cover"
+                        className="w-full h-auto aspect-[4/5] md:aspect-[5/4] object-cover object-top"
                         alt="img"
                         width={500}
                         height={500}

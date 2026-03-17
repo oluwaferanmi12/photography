@@ -144,14 +144,14 @@ const Portfolio = () => {
                 {/* <div className="overflow-hidden rounded-full w-20 h-20 lg:w-[200px] lg:h-[100px]">
                   <Image
                     src={short_img}
-                    className=" object-cover w-full "
+                    className=" object-cover object-top w-full "
                     alt="img"
                   />
                 </div> */}
                 <span>
                   <Image
                     src={short_img}
-                    className="rounded-full object-cover w-[150px] h-[80px]"
+                    className="h-14 w-24 rounded-full object-cover object-top sm:h-16 sm:w-28 lg:h-20 lg:w-[150px]"
                     alt="img"
                   />
                 </span>
@@ -175,14 +175,14 @@ const Portfolio = () => {
                   .map((portfolio, i) => (
                     <div
                       key={`left-${i}`}
-                      className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] min-h-[400px] max-h-[600px] w-full cursor-pointer "
+                      className="flex w-full cursor-pointer flex-col justify-between overflow-hidden rounded-xl p-4 shadow-lg transition-transform duration-300 hover:scale-[1.01]"
                       style={{ backgroundColor: "#EFFBF9" }}
                     >
-                      <span className="w-full overflow-hidden rounded-xl mb-4">
+                      <span className="mb-4 block w-full overflow-hidden rounded-xl aspect-[5/4] bg-[#dfe9e7]">
                         <img
                           src={`${baseUrl + portfolio.thumbnail}`}
                           alt={portfolio.portfolioName}
-                          className="w-full object-cover"
+                          className="h-full w-full object-cover object-center"
                         />
                       </span>
                       <div className="flex flex-col justify-between flex-1">
@@ -213,14 +213,14 @@ const Portfolio = () => {
                   .map((portfolio, i) => (
                     <div
                       key={`left-${i}`}
-                      className="flex flex-col justify-between rounded-xl shadow-lg overflow-hidden p-4 transition-transform duration-300 hover:scale-[1.01] min-h-[400px] max-h-[600px] w-full"
+                      className="flex w-full flex-col justify-between overflow-hidden rounded-xl p-4 shadow-lg transition-transform duration-300 hover:scale-[1.01]"
                       style={{ backgroundColor: "#EFFBF9" }}
                     >
-                      <span className="w-full overflow-hidden rounded-xl mb-4">
+                      <span className="mb-4 block w-full overflow-hidden rounded-xl aspect-[5/4] bg-[#dfe9e7]">
                         <img
                           src={`${baseUrl + portfolio.thumbnail}`}
                           alt={portfolio.portfolioName}
-                          className="w-full object-cover"
+                          className="h-full w-full object-cover object-center"
                         />
                       </span>
                       <div className="flex flex-col justify-between flex-1">

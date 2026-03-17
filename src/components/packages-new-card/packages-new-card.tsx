@@ -95,7 +95,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                       <img
                         src={`${baseUrl + img.imageUrl}`}
                         alt={`${title}_image_${idx}`}
-                        className="w-full rounded-[48px] lg:rounded-4xl object-cover"
+                        className="w-full rounded-[48px] lg:rounded-4xl object-cover object-top"
                       />
                     </div>
                   ))}
@@ -110,7 +110,7 @@ export const PackageCardWithOneImage: React.FC<PackagesProps> = ({
                       <img
                         src={`${baseUrl + img.imageUrl}`}
                         alt={`${title}_image_${idx}`}
-                        className="w-full h-full object-cover rounded-4xl"
+                        className="w-full h-full object-cover object-top rounded-4xl"
                       />
                     </div>
                   ))}
@@ -163,7 +163,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
                   alt={`${title}_image_${idx}`}
                   width={500}
                   height={500}
-                  className="w-full rounded-xl object-cover"
+                  className="w-full rounded-xl object-cover object-top"
                 />
               </div>
             ))}
@@ -202,7 +202,7 @@ export const PackageCardWithMultipleImages: React.FC<PackagesProps> = ({
                   alt={`${title}_image_${idx}`}
                   width={500}
                   height={500}
-                  className="w-full h-full rounded-xl object-cover"
+                  className="w-full h-full rounded-xl object-cover object-top"
                 />
               </div>
             ))}

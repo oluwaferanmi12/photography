@@ -12,7 +12,7 @@ export const NewServiceCard = ({ item }: { item: Service }) => {
       <div className="h-100 w-full relative">
         <Image
           layout="fill"
-          className="object-cover rounded-2xl"
+          className="object-cover object-top rounded-2xl"
           src={`${baseUrl + item.images[0].imageUrl}`}
           alt=""
         />

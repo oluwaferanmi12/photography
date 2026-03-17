@@ -90,7 +90,7 @@ export const Trail: React.FC<TrailProps> = ({
                       alt={`${title}_image_${idx}`}
                       width={500}
                       height={500}
-                      className="w-full h-full object-cover rounded-2xl"
+                      className="w-full h-full object-cover object-top rounded-2xl"
                     />
                   </div>
                 ))}

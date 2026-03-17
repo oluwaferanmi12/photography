@@ -1,7 +1,7 @@
 "use client";
 
 import { Col, Row } from "antd";
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import headerImage from "@/assets/images/about__header.jpg";
 import Image from "next/image";
 import { AboutExpectationCard } from "@/components/about-cards/about-expectation-card";
@@ -19,23 +19,48 @@ import Link from "next/link";
 
 const About = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const aboutTextRef = useRef<HTMLDivElement>(null);
+  const journeyTextRef = useRef<HTMLDivElement>(null);
+  const [hasAboutTextTarget, setHasAboutTextTarget] = useState(false);
+  const [hasJourneyTextTarget, setHasJourneyTextTarget] = useState(false);
   const defaultColor = "#2A2A2A80";
   const changeColor = "#FFFFFFCC";
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef, // Ref to the scrollable container
-    offset: ["start end", "end start"], // This helps map scroll from start to end
-  });
+  const setAboutTextTargetRef = useCallback((node: HTMLDivElement | null) => {
+    aboutTextRef.current = node;
+    setHasAboutTextTarget(Boolean(node));
+  }, []);
+
+  const setJourneyTextTargetRef = useCallback((node: HTMLDivElement | null) => {
+    journeyTextRef.current = node;
+    setHasJourneyTextTarget(Boolean(node));
+  }, []);
+
+  const { scrollYProgress: aboutScrollYProgress } = useScroll(
+    hasAboutTextTarget
+      ? {
+          target: aboutTextRef,
+          offset: ["start end", "end start"],
+        }
+      : {}
+  );
+
+  const { scrollYProgress: journeyScrollYProgress } = useScroll(
+    hasJourneyTextTarget
+      ? {
+          target: journeyTextRef,
+          offset: ["start end", "end start"],
+        }
+      : {}
+  );
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((latest) => {
+    const unsubscribe = aboutScrollYProgress.onChange((latest) => {
       console.log("Current scrollYProgress:", latest);
     });
 
-    // Cleanup the subscription when the component unmounts
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [aboutScrollYProgress]);
   return (
     <div>
       <div className="flex justify-center items-center relative bg-transparent ">
@@ -51,7 +76,10 @@ const About = () => {
                     <h3 className="uppercase text-3xl lg:text-5xl ">
                       Victoria akinade
                     </h3>
-                    <div ref={containerRef} className="flex flex-col gap-4">
+                    <div
+                      ref={setAboutTextTargetRef}
+                      className="flex flex-col gap-4"
+                    >
                       <motion.div className="text-lg lg:text-xl">
                         {`I’m a proud wife, a mother to three amazing girls, and a
                         portrait and lifestyle photographer based in Toronto,
@@ -65,7 +93,7 @@ const About = () => {
                           .split("")
                           .map((item, index, root) => {
                             const color = transform(
-                              scrollYProgress,
+                              aboutScrollYProgress,
                               [0, (index + 1) / root.length],
                               [changeColor, changeColor]
                             );
@@ -97,7 +125,7 @@ const About = () => {
                   <div className="overflow-hidden lg:h-[700px] flex justify-end rounded-xl w-full">
                     <Image
                       src={headerImage}
-                      className="object-cover rounded-xl w-full"
+                      className="object-cover object-top rounded-xl w-full"
                       alt="owner"
                     />
                   </div>
@@ -163,7 +191,7 @@ const About = () => {
                   <div className="overflow-hidden lg:h-[700px] flex justify-end rounded-xl w-full">
                     <Image
                       src={headerImage}
-                      className="object-cover rounded-xl w-full"
+                      className="object-cover object-top rounded-xl w-full"
                       alt="owner"
                     />
                   </div>
@@ -173,7 +201,10 @@ const About = () => {
                     <h3 className="uppercase text-3xl lg:text-5xl ">
                       My journey
                     </h3>
-                    <div ref={containerRef} className="flex flex-col gap-4">
+                    <div
+                      ref={setJourneyTextTargetRef}
+                      className="flex flex-col gap-4"
+                    >
                       <motion.div className="text-lg lg:text-xl leading-relaxed">
                         {`My journey began as a makeup artist, where I mastered
                         the art of enhancing beauty and paying attention to the
@@ -193,7 +224,7 @@ const About = () => {
                           .split("")
                           .map((item, index, root) => {
                             const color = transform(
-                              scrollYProgress,
+                              journeyScrollYProgress,
                               [0, (index + 1) / root.length],
                               [defaultColor, changeColor]
                             );

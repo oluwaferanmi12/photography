@@ -87,7 +87,7 @@ const GalleryAccessPage = () => {
                         ? `${baseUrl + decodeURIComponent(imgSrc)}`
                         : famImg
                     }
-                    className="h-[700px] rounded-3xl object-cover"
+                    className="h-auto w-full aspect-[4/5] lg:aspect-square rounded-3xl object-cover object-top"
                     alt=""
                     width={700}
                     height={700}

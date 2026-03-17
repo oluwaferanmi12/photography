@@ -132,7 +132,7 @@ const Portfolio = () => {
                 <span>
                   <Image
                     src={HS4}
-                    className="rounded-full object-cover w-37.5 h-20"
+                    className="rounded-full object-cover object-top w-37.5 h-20"
                     alt="img"
                   />
                 </span>

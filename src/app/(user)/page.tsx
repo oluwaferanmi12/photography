@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Row, Col } from "antd";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import image2 from "@/assets/svgs/home-image-2.svg";
 import image3 from "@/assets/svgs/home-image-3.svg";
 import image4 from "@/assets/svgs/home-image-4.svg";
@@ -43,15 +43,6 @@ import { Footer } from "@/components/footer/footer";
 import footerBrand from "@/assets/svgs/footer-brand-icon.svg";
 import { ImagesSliderDemo } from "@/components/header-images-carousel/images-slider";
 
-
-
-
-
-
-
-
-
-
 export default function Home() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
@@ -59,6 +50,7 @@ export default function Home() {
   const [currentBg, setCurrentBg] = useState(headerImg1);
   const [currentProfileImg, setCurrentProfileImg] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [hasCascadeContainer, setHasCascadeContainer] = useState(false);
   const nextSectionRef = useRef<HTMLDivElement>(null);
 
   // SCROLLING EFFECT ON HEADER
@@ -77,11 +69,19 @@ export default function Home() {
 
   // CASCADE CARDS
   const container = useRef<HTMLDivElement | null>(null);
+  const setCascadeContainerRef = useCallback((node: HTMLDivElement | null) => {
+    container.current = node;
+    setHasCascadeContainer(Boolean(node));
+  }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start start", "end end"],
-  });
+  const { scrollYProgress } = useScroll(
+    hasCascadeContainer
+      ? {
+          target: container,
+          offset: ["start start", "end end"],
+        }
+      : {},
+  );
 
   const cardData = [cascadeImage1, cascadeImage2, cascadeImage3, cascadeImage4];
 
@@ -93,7 +93,7 @@ export default function Home() {
       { thumbnail: image3, background: headerImg3 },
       { thumbnail: image4, background: headerImg4 },
     ],
-    []
+    [],
   );
 
   // Auto-rotate background every 5 seconds
@@ -111,11 +111,6 @@ export default function Home() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 10);
   });
-
-  // const handleImageClick = (bgImg: StaticImageData, index: number) => {
-  //   setCurrentBg(bgImg);
-  //   setActiveIndex(index);
-  // };
 
   const images = [victoria, victoria2, victoria3];
 
@@ -233,7 +228,7 @@ export default function Home() {
         <FourthSectionScroll />
 
         {/* Card cascade   */}
-        <div className="hidden">
+        <div ref={setCascadeContainerRef} className="hidden">
           {cardData.map((item, index) => {
             const targetScale = 1 - (cardData.length - index) * 0.05;
             return (
@@ -274,7 +269,7 @@ export default function Home() {
                   <Image
                     src={images[currentProfileImg]}
                     alt={`victoria-${currentProfileImg}`}
-                    className="w-full relative transition-all duration-300 h-[300px] min-w-[400px] lg:h-[350px] object-cover rounded-2xl"
+                    className="relative h-auto w-full aspect-[4/5] sm:aspect-[5/4] lg:aspect-[6/5] transition-all duration-300 object-cover object-top rounded-2xl"
                   />
 
                   {/* Dots */}
@@ -299,7 +294,7 @@ export default function Home() {
               </div>
             </div>
 
-            <p className="lg:w-[450px] text-light-brown text-2xl">
+            <p className="lg:w-112.5 text-light-brown text-2xl">
               From polished headshots to soulful lifestyle captures, I craft
               images that do more than just “look good”. They speak volumes.
               Whether for personal branding, professional needs, or intimate
@@ -364,8 +359,8 @@ export default function Home() {
               <Compare
                 firstImage={beforeImage}
                 secondImage={afterImage}
-                firstImageClassName="object-cover w-full"
-                secondImageClassname="object-cover w-full"
+                firstImageClassName="object-cover object-top w-full"
+                secondImageClassname="object-cover object-top w-full"
                 className="w-full h-full"
                 slideMode="hover"
                 autoplay={true}
@@ -375,12 +370,9 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Seventh Section */}
-      {/* <GalleryBox /> */}
       <ParallaxScrollax />
       <FooterImages />
       <Footer />
-      {/* <Footer /> */}
     </div>
   );
 }

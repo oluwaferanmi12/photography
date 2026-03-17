@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Col, Row } from "antd";
 import Image, { StaticImageData } from "next/image";
@@ -52,7 +52,7 @@ const ParallaxImage = ({
       className="cursor-pointer"
       style={{ willChange: "transform" }}
     >
-      <Image className="w-full h-auto object-cover" src={src} alt={alt} />
+      <Image className="w-full h-auto object-cover object-top" src={src} alt={alt} />
     </motion.div>
   );
 };
@@ -60,13 +60,22 @@ const ParallaxImage = ({
 export const GalleryBox = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [imagesVisible, setImagesVisible] = useState(false);
+  const [hasScrollTarget, setHasScrollTarget] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const setScrollTargetRef = useCallback((node: HTMLDivElement | null) => {
+    scrollRef.current = node;
+    setHasScrollTarget(Boolean(node));
+  }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ["start end", "end start"],
-  });
+  const { scrollYProgress } = useScroll(
+    hasScrollTarget
+      ? {
+          target: scrollRef,
+          offset: ["start end", "end start"],
+        }
+      : {}
+  );
 
   // Container width animation (80% to 100%)
   const containerWidth = useTransform(
@@ -99,7 +108,10 @@ export const GalleryBox = () => {
   }, [imageAppearProgress]);
 
   return (
-    <div ref={scrollRef} className="flex justify-center mt-20 overflow-hidden">
+    <div
+      ref={setScrollTargetRef}
+      className="flex justify-center mt-20 overflow-hidden"
+    >
       <motion.div
         ref={containerRef}
         onMouseMove={handleMouseMove}

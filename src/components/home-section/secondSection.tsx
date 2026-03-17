@@ -1,5 +1,7 @@
+"use client";
+
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 
 import sImage1 from "@/assets/svgs/second-section-img-1.svg";
@@ -10,11 +12,20 @@ import photography from "@/assets/svgs/base-photography.svg";
 import photography2 from "@/assets/svgs/base-photography-2.svg";
 
 export default function HomeSecondSection() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [hasSection, setHasSection] = useState(false);
+  const setSectionRef = useCallback((node: HTMLDivElement | null) => {
+    sectionRef.current = node;
+    setHasSection(Boolean(node));
+  }, []);
+  const { scrollYProgress } = useScroll(
+    hasSection
+      ? {
+          target: sectionRef,
+          offset: ["start end", "end start"],
+        }
+      : {}
+  );
 
   // Define animations for each image (moving to center)
   const positions = [
@@ -27,7 +38,10 @@ export default function HomeSecondSection() {
   const scales = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   return (
-    <div ref={sectionRef} className="mt-0 pt-7 px-7 h-[150vh] min-h-screen relative flex flex-col justify-center items-center">
+    <div
+      ref={setSectionRef}
+      className="mt-0 pt-7 px-7 h-[150vh] min-h-screen relative flex flex-col justify-center items-center"
+    >
       {/* Centered text */}
       <div className="text-4xl text-center text-[#635E5E] z-0 relative">
         <p>BRANDING PHOTOS</p>

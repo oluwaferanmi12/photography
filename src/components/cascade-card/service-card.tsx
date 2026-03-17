@@ -51,10 +51,9 @@ export const ServiceCard = ({
           description: item.description,
           image: item.thumbnail,
           service: item.service,
-        })
+        }),
       );
       setPortfolioData(formattedData);
-      console.log("Image", portfolioRes);
     } catch (error) {
       console.error("Error fetching services:", error);
     } finally {
@@ -78,21 +77,21 @@ export const ServiceCard = ({
       <Row justify={"center"}>
         <Col xs={24}>
           <motion.div
-            className="w-full  min-w-full min-h-[500px]"
+            className="w-full min-w-full"
             style={{
               scale: newScale,
               position: "relative",
               top: `calc(-5vh + ${currentIndex * 25}px)`,
             }}
           >
-            <div className="w-full relative h-[600px] md:min-w-[280px] lg:min-w-[280px] max-w-[500px] 3xl:w-full flex-shrink-0  shadow-md">
+            <div className="relative w-full max-w-[500px] flex-shrink-0 overflow-hidden rounded-2xl bg-[#181818] shadow-md aspect-[4/5]">
               <img
                 src={`${baseUrl + service.image}`}
                 alt={service.title}
-                className="object-cover absolute rounded-2xl inset-0 w-full h-full"
+                className="absolute inset-0 h-full w-full rounded-2xl object-cover object-top"
               />
 
-              <div className="absolute left-0 bottom-0 w-full p-4 backdrop-blur-md bg-black/10 rounded-b-2xl">
+              <div className="absolute inset-x-0 bottom-0 w-full rounded-b-2xl bg-gradient-to-t from-black/55 via-black/10 to-transparent p-4 backdrop-blur-[2px]">
                 <div className="mix-blend-exclusion">
                   {/* Text container with blend mode */}
                   <div className="mix-blend-exclusion">

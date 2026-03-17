@@ -39,10 +39,10 @@ export const GalleryCard = ({
       className="bg-white p-3 w-full rounded-3xl flex flex-col gap-4 cursor-pointer"
       onClick={handleCardClick}
     >
-      <div className="relative h-[250px] rounded-[20px]">
+      <div className="relative aspect-[6/7] sm:aspect-[4/5] md:aspect-[5/4] overflow-hidden rounded-[20px] bg-[#e8e6df]">
         <img
           src={`${baseUrl + imgSrc}`}
-          className="min-w-full  object-cover max-h-[250px] rounded-[20px]"
+          className="block h-full w-full object-cover object-[center_18%] sm:object-[center_20%] md:object-center rounded-[20px]"
           alt="gallery_img"
         />
         <div className="absolute top-2 left-2">

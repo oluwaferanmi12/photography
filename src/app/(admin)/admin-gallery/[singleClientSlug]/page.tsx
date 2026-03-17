@@ -200,7 +200,7 @@ export default function SingleAdminGallery() {
                                 <img
                                   src={` ${baseUrl + image.imageUrl}`}
                                   alt="client image"
-                                  className="rounded-3xl object-cover w-full h-full"
+                                  className="rounded-3xl object-cover object-top w-full h-full"
                                 />
                                 <span className="absolute right-14 bottom-14">
                                   <Image
@@ -240,7 +240,7 @@ export default function SingleAdminGallery() {
                                   <img
                                     src={` ${baseUrl + image.imageUrl}`}
                                     alt="client image"
-                                    className="rounded-3xl object-cover w-full h-full"
+                                    className="rounded-3xl object-cover object-top w-full h-full"
                                   />
                                   <span className="absolute right-14 bottom-14">
                                     <Image

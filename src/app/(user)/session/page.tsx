@@ -195,7 +195,7 @@ const SessionPage = () => {
                 <span>
                   <Image
                     src={HS4}
-                    className="rounded-full object-cover w-37.5 h-20"
+                    className="h-14 w-24 rounded-full object-cover object-top sm:h-16 sm:w-28 lg:h-20 lg:w-37.5"
                     alt="img"
                   />
                 </span>

@@ -181,7 +181,7 @@ const PromoPackages = () => {
                 <span>
                   <Image
                     src={HS4}
-                    className="rounded-full object-cover w-[150px] h-[80px]"
+                    className="h-14 w-24 rounded-full object-cover object-top sm:h-16 sm:w-28 lg:h-20 lg:w-[150px]"
                     alt="img"
                   />
                 </span>

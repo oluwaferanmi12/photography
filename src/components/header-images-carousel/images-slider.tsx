@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { ImagesSlider } from "@/components/ui/images-slider";
 import headerImg1 from "@/assets/images/home_header/img1.svg";
@@ -24,10 +24,15 @@ export function ImagesSliderDemo() {
 
   const [scrolled, setScrolled] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [hasContainer, setHasContainer] = useState(false);
   const nextSectionRef = useRef<HTMLDivElement>(null);
 
   const container = useRef<HTMLDivElement | null>(null);
-  const { scrollY } = useScroll({ target: container });
+  const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+    container.current = node;
+    setHasContainer(Boolean(node));
+  }, []);
+  const { scrollY } = useScroll(hasContainer ? { target: container } : {});
 
   // Detect scroll
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -54,7 +59,7 @@ export function ImagesSliderDemo() {
         animate={{
           padding: isDesktop && scrolled ? "28px" : "0px",
         }}
-        ref={container}
+        ref={setContainerRef}
       >
         <motion.div
           className="h-full min-h-full w-full z-50 flex justify-center lg:items-center relative overflow-hidden"

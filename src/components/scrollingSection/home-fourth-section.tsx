@@ -148,7 +148,7 @@ export const FourthSectionScroll = () => {
                   className="absolute inset-0 h-full w-full object-cover object-top"
                 />
 
-                <div className="absolute inset-x-0 bottom-0 w-full bg-gradient-to-t from-black/55 via-black/10 to-transparent p-5 backdrop-blur-[2px]">
+                <div className="absolute inset-x-0 bottom-0 w-full bg-linear-to-t from-black/55 via-black/10 to-transparent p-5 backdrop-blur-[2px]">
                   <div className="mix-blend-exclusion">
                     {/* Text container with blend mode */}
                     <div className="mix-blend-exclusion">
